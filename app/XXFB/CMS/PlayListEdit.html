@@ -1,0 +1,120 @@
+<legend>
+    编辑播放条目
+</legend>
+
+<form name="entityForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="ok();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" >
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <a class="btn btn-sm btn-default" ng-href="#/XXFB.CMS.PlayList/{{cmsId}}/{{width}}/{{height}}">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">播放内容</label>
+    <div class="col-sm-10"
+      ng-class="{'has-error': entityForm.content.$invalid}">
+      <!-- 必选 required -->
+      <textarea class="form-control" rows="3" placeholder="播放内容, 必须!" ng-model="record.content" required></textarea>
+    </div>
+  </div>
+  
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">字体</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.font.$invalid}">
+      <select class="form-control"
+        ng-options="c.code as c.name for c in fonts"
+        ng-model="record.font.code"></select>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">字体大小</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.fontSize.$invalid}">
+      <input name="fontSize" type="text" class="form-control input-sm"
+        placeholder="字体大小, 必须! " ng-model="record.fontSize" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">字体颜色</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.fontColor.$invalid}">
+      <select class="form-control"
+        ng-options="c.code as c.name for c in fontColors"
+        ng-model="record.fontColor.code"></select>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">显示风格</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.showStyle.$invalid}">
+      <select class="form-control"
+        ng-options="c.code as c.name for c in showStyles"
+        ng-model="record.showStyle.code"></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">显示速度</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.showSpeed.$invalid}">
+      <!-- 必选 required -->
+      <input name="showSpeed" type="text" class="form-control input-sm"
+        placeholder="显示速度, 必须!" ng-model="record.showSpeed" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">显示时长</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.showTime.$invalid}">
+      <!-- 必选 required -->
+      <input name="showTime" type="text" class="form-control input-sm"
+        placeholder="显示时长, 必须!" ng-model="record.showTime" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">起始星期</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.startWeekday.$invalid}">
+      <input name="startWeekday" type="text" class="form-control input-sm"
+        placeholder="起始星期, 必须! " ng-model="record.startWeekday" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">终止星期</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.endWeekday.$invalid}">
+      <input name="endWeekday" type="text" class="form-control input-sm"
+        placeholder="终止星期, 必须! " ng-model="record.endWeekday" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">开始时间</label>
+    <div class="col-sm-4"  style="padding-left:15px;padding-right:15px;float:left;"
+      ng-class="{'has-error': entityForm.startTime.$invalid}">
+      <datetimepicker placeholder="开始时间" ng-model="record.startTime" format="yyyy-MM-dd hh:mm:ss"></datetimepicker>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">结束时间</label>
+    <div class="col-sm-4"  style="padding-left:15px;padding-right:15px;float:left;"
+      ng-class="{'has-error': entityForm.endTime.$invalid}">
+      <datetimepicker start-date="record.startTime" placeholder="结束时间" ng-model="record.endTime" format="yyyy-MM-dd hh:mm:ss" required></datetimepicker>
+    </div>
+  </div>
+  
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">播放序列</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.index.$invalid}">
+      <!-- 必选 required -->
+      <input name="index" type="text" class="form-control input-sm"
+        placeholder="播放序列, 必须!" ng-model="record.index" required>
+    </div>
+  </div>
+  
+</form>

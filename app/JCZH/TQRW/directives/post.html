@@ -1,0 +1,61 @@
+<div class="alert alert-success my-box-shdow">
+  <button ng-click="close()" type="button" class="close">&times;</button>
+  <a class="alert-link pointer" tooltip="点击添加警力" ng-click="selectPolices(data);">
+    岗位({{data.polices.length}})
+  </a>
+  <a class="alert-link pointer" ng-click="showDetail();">
+    详细
+  </a>
+  <br>
+  <div ng-hide="ifDetail">
+      <a map-center geometry="data.geometry" lng="data.geometry.lng" lat="data.geometry.lat">
+        位置{{data.geometry.lng}}
+      </a>
+      <a>
+        {{data.area.properties.NAME}}
+      </a>
+  </div>
+
+  <div ng-show="ifDetail">
+    <table class="table table-hover table-condensed">
+      <tbody>
+        <tr ng-repeat="record in data.polices|paginator:page:size">
+          <td style="width:20px;">{{$index + 1}}</td>
+          </td>
+          <td style="width:60px;">
+            <a ng-click="itemClick(record);" map-center lng="record.lng" lat="record.lat">
+              {{record.policeName}}
+            </a>
+          </td>
+          <td>
+            <a>{{record.phone}}</a>
+            <a class="pull-right" map-center lng="record.lng" lat="record.lat">
+              {{record.distance.toFixed(0)}}米
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-sm-12">
+        <div pagination 
+          total-items="total" 
+          items-per-page="size"
+          page="page" 
+          max-size="maxSize"
+          class="pagination-sm pull-right" 
+          boundary-links="true" 
+          rotate="false" 
+          previous-text="&lsaquo;" 
+          next-text="&rsaquo;" 
+          first-text="&laquo;" 
+          last-text="&raquo;">
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+
+</div>
+

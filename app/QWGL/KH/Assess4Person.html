@@ -1,0 +1,47 @@
+<legend>个人考核</legend>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        <div class="input-group col-md-9 pull-right">
+            <!-- 检索框 -->
+            <input type="text" ng-model="Q.Title" class="form-control input-sm" ng-hide="showAdvance">
+            <!-- 条件检索 -->
+            <div ng-show="showAdvance" class="pull-right">
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon">时间维度</span>
+                    <select class="form-control">
+                        <option>周</option>
+                        <option>月</option>
+                        <option>年</option>
+                    </select>
+                </div>
+                <div class="col-md-4 input-group">
+                    <span class="input-group-addon">统计时段</span>
+                    <input type="text" class="form-control" datetimepicker>
+                </div> 
+                <div class="col-md-4 input-group padLR0">
+                    <span class="input-group-addon">警员选择</span>
+                    <input type="text" class="form-control" ng-model="queryParam.date">
+                </div>
+            </div>
+
+            <span class="input-group-btn">
+              <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+                  <i class="fa fa-search" tooltip="查询"></i>
+              </button>
+                <button class="btn btn-primary btn-sm" type="button" ng-click="advance()" ng-hide="showAdvance">
+                    <span>条件检索</span>
+                </button>
+                <button class="btn btn-primary btn-sm" type="button" ng-click="advance()" ng-show="showAdvance">
+                    <span>模糊检索</span>
+                </button>
+                <button class="btn btn-sm btn-success" ng-click="export();">
+                     <i class="fa fa-download"> 导出</i>
+                </button>            
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div yhte-table="gridOptions"></div>

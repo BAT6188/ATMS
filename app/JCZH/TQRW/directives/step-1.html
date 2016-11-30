@@ -1,0 +1,12 @@
+<div>
+  <div class="row">
+    <div class="col-sm-12">
+      <input class="form-control" type="text" ng-model="name" placeholder="请输入任务名称">
+    </div>
+  </div>
+  <div class="row" ng-show="name.length>0">
+    <div class="col-sm-12">
+      <button class="btn btn-sm btn-primary pull-right" ng-click="nextClick();">下一步</button>
+    </div>
+  </div>
+</div>

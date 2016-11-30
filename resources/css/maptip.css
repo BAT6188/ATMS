@@ -1,0 +1,98 @@
+
+#popup_contentDiv {
+    /*overflow: hidden;*/
+}
+
+
+@charset "utf-8";
+/* CSS Document */
+
+*{ padding:0px; margin:0px;}
+img{ border:0px;}
+a{ text-decoration:none}
+/*html, body
+{
+    height:100%;
+    overflow:hidden
+}*/
+.polic_ico
+{
+    position:absolute;
+    left:590px;
+    top:150px;
+    z-index:2;
+}
+.police_main
+{
+    /*width:230px;*/
+    /*min-height:50px;*/
+    /*height:270px;*/
+    /*background-color:#f4f7fd;
+    border:1px solid #cbd5e8;*/
+    /*z-index:1;*/
+    /*position:absolute;*/
+    /*left:610px;
+    top:170px;*/
+    /*z-index:1;*/
+    /*-moz-box-shadow:1px 0 3px rgba(235, 233, 231, 1);
+    -webkit-box-shadow:1px 0 3px rgba(235, 233, 231, 1);
+    box-shadow:1px 0 3px rgba(235, 233, 231, 1);
+    -moz-border-radius:.3em;
+    -webkit-border-radius:.3em;
+    border-radius:.3em;*/
+    color:#4c4c4c;
+}
+.police_main_table tr td
+{
+    text-indent:10px;
+    font-size:13px;
+    line-height:22px;
+    font-family:"微软雅黑";
+}
+.police_main_table tr td .mapico
+{
+    margin-left:8px;
+    margin-bottom:10px;
+    margin-top:10px;
+    width:24px;
+    height:24px;
+    display:block;
+    cursor:pointer;
+    float:left;
+    margin-right:4px;
+}
+.police_main_table tr td .mapico01{ background:url(../img/mapico_01.png) no-repeat left top;}
+.police_main_table tr td .mapico02{ background:url(../img/mapico_02.png) no-repeat left top;}
+.police_main_table tr td .mapico03{ background:url(../img/mapico_03.png) no-repeat left top;}
+.police_main_table tr td .mapico04{ background:url(../img/mapico_04.png) no-repeat left top;}
+.police_main_table tr td .mapico05{ background:url(../img/mapico_05.png) no-repeat left top;}
+.police_main_table tr td .mapico06{ background:url(../img/mapico_06.png) no-repeat left top;}
+.police_main_table tr td .mapico07{ background:url(../img/mapico_07.png) no-repeat left top;}
+.police_main_table tr td .mapico08{ background:url(../img/mapico_08.png) no-repeat left top;}
+.police_main_table tr td .mapico09{ background:url(../img/mapico_09.png) no-repeat left top;}
+
+
+
+
+#popup_contentDiv {
+    overflow: hidden;
+    width: 250px !important;
+    height: 280px !important;
+}
+
+/*#popup_GroupDiv {
+    height:339px !important;
+    width:298px !important;
+}
+
+#popup_FrameDecorationDiv_1 {
+    display: none !important;
+}
+
+#popup_FrameDecorationDiv_2 {
+    display: none !important;
+}
+
+#popup_FrameDecorationDiv_3 {
+    display: none !important;
+}*/

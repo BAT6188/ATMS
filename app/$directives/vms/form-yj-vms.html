@@ -1,0 +1,172 @@
+<div class="form-yj-vms animate-show my-box-shdow" style="background: #fff;">
+    <div class="row">
+        &nbsp&nbsp&nbsp&nbsp
+    </div>
+
+    <button style="position: absolute; top: 20px; left: 520px;" class="close"
+
+            ng-click="onCancel()" type="button" title="关闭">x
+    </button>
+    <div class="row" ng-show="insertTitleShow">
+        <h4 class="ng-binding">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp新增播放条目</h4>
+    </div>
+
+    <div class="row" ng-show="!insertTitleShow">
+        <h4 class="ng-binding">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp编辑播放条目</h4>
+    </div>
+
+    <div class="row" style="padding:3px;">
+        <form class="form-horizontal col-sm-12" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label input-sm">节目内容</label>
+
+                <div class="col-sm-10">
+                    <textarea class="form-control input-sm" rows="2" ng-model="model.content"></textarea>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal col-sm-6" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">开始时间</label>
+
+                <div class="col-sm-8">
+                    <div datetimepicker
+                         ng-model="model.startTime"
+                         format="yyyy-MM-dd hh:mm:ss">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">节目字体</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.font"
+                            ng-options="e.value as e.label for e in fonts">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">字体颜色</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.fontColor"
+                            ng-options="e.value as e.label for e in fontColors">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">进入方式</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.enterType"
+                            ng-options="e.value as e.label for e in enters">
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+              <label class="col-sm-4 control-label input-sm">动画时间</label>
+              <div class="col-sm-8">
+                <select class="form-control input-sm"
+                  ng-model="model.moveTime"
+                  ng-options="e for e in stays">
+                </select>
+              </div>
+            </div> -->
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">是否居中</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.isMiddle"
+                            ng-options="e.value as e.label for e in centeres">
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <form class="form-horizontal col-sm-6" role="form">
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">结束时间</label>
+
+                <div class="col-sm-8">
+                    <div datetimepicker
+                         ng-model="model.endTime"
+                         format="yyyy-MM-dd hh:mm:ss">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">字体大小</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.fontSize"
+                            ng-options="e.value as e.label for e in fontSizes">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">播放速度</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.speed"
+                            ng-options="e for e in speeds">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">停留时间</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.stayTime"
+                            ng-options="e for e in stays">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label input-sm">行间距</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control input-sm"
+                            ng-model="model.lineSpace"
+                            ng-options="e.value as e.label for e in lineSpaces">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onSubmit();" ng-show="isAdd">发布
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onEdit();" ng-show="!isAdd">修改
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onSubmit();" ng-show="!isAdd"
+                            tooltip="按照此模板新增">新增
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onNewPreview();" ng-show="isAdd">预览
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onEditPreview();" ng-show="!isAdd">
+                        预览
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onNewReal();" ng-show="false">实时
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" ng-click="onEditReal();" ng-show="false">实时
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="onDelete();" ng-show="!isAdd">删除
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" ng-click="onCancel();">取消</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>

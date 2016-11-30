@@ -1,0 +1,68 @@
+<div class="atms-free-polices">
+
+  <div class="row" ng-show="ifbfrs">
+    <div class="col-sm-12" style="padding-left:15px;padding-right:15px;float:left;">
+      <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
+        <label ng-repeat="rad in radiuss" class="btn btn-default" ng-class="rad===500?'active':''" ng-click="onRadClick($event,rad);">
+          <input type="radio" name="options">{{rad}}</input>
+        </label>
+      </div>
+    </div>
+  </div> 
+
+  <div class="input-group">
+    <input type="text" class="form-control input-sm" ng-model="userName" placeholder="按姓名查询">
+    <span class="input-group-btn">
+      <button class="btn btn-primary btn-sm" ng-click="query();">
+        <i class="fa fa-search" tooltip="查询"></i>
+      </button> </span>
+  </div>
+  <span ng-show="!data.length">暂无数据</span>
+  <table class="table table-hover table-condensed">
+    <tbody>
+      <tr ng-repeat="record in data|paginator:page:size">
+        <td style="width:20px;">{{$index + 1}}</td>
+        <td style="width:10px;" privilege="指挥调度_大队" effect="hide" when="ptaskTypeIsMajor();">
+          <i class="fa fa-1 fa-check-circle"
+            ng-class="{'yhte-ico-success': record.checked, 'yhte-ico-grey': !record.checked}" 
+            ng-click="select(record);">
+          </i>
+        </td>
+        <td style="width:60px;">
+          <a ng-click="itemClick(record);">
+            {{record.userName}}
+          </a>
+        </td>
+        <td>
+          <a>{{record.phone}}</a>
+          <a>
+            <span class="glyphicon glyphicon-phone-alt" ng-click="callOutPhone($event, record.phone);"></span>
+          </a>
+          <a class="pull-right" map-center lng="record.lng" lat="record.lat">
+            {{record.distance.toFixed(0)}}米
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div pagination 
+        total-items="total" 
+        items-per-page="size"
+        page="page" 
+        max-size="maxSize"
+        class="pagination-sm pull-right" 
+        boundary-links="true" 
+        rotate="false" 
+        previous-text="&lsaquo;" 
+        next-text="&rsaquo;" 
+        first-text="&laquo;" 
+        last-text="&raquo;">
+      </div>
+    </div>
+  </div>
+
+
+</div>

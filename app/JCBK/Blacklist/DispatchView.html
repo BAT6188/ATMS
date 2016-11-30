@@ -1,0 +1,105 @@
+<div class="modal-header">
+    <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">
+        <b>查看黑名单布控</b>
+    </h4>
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+  <div class="col-sm-8">
+    <form name="iForm">
+      <div class="col-sm-12">
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">黑名单类型</label>
+          <div class="col-sm-9" style="padding-left: 0px;" ng-class="{'has-error': iForm.dispType.$invalid}">
+              <input type="text" ng-model="record.type.name" class="form-control input-sm" readonly>
+              </input>
+          </div>
+        </div>
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">车牌号码</label>
+          <div class="col-sm-4" style="padding-right: 0px; padding-left: 0px;"
+               ng-class="{'has-error': iForm.plateColor.$invalid}">
+              <input type="text" ng-model="record.plateColor.name" class="form-control input-sm" readonly>
+              </input>
+          </div>
+          <div class="col-sm-5" style="padding-left:0px">
+             <input name="plateNo" type="text" ng-model="record.plateNo" class="form-control input-sm" readonly>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-12">
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">匹配精度</label>
+          <div class="col-sm-9" style="padding-left: 0px;">
+            <input type="text" ng-model="record.matchLevel.name" class="form-control input-sm" readonly>
+              </input>
+          </div>
+        </div>
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">匹配号码</label>
+          <div class="col-sm-9" style="padding-left: 0px;">
+              <input id="matchPlateNo" type="text" class="form-control input-sm"  ng-model="record.matchPlateNo" readonly>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-12">
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">联系电话</label>
+          <div class="col-sm-9" style="padding-left: 0px;">
+              <input name="tel" type="text" class="form-control input-sm" ng-model="record.tel" readonly>
+          </div>
+        </div>
+        <div class="col-sm-6" style="padding-left: 0px;">
+          <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">报警有效期</label>
+          <div class="col-sm-9" style="padding-left: 0px;" ng-class="{'has-error': iForm.dispEndTime.$invalid}">
+              <input id="dispEndTime" type="text" class="form-control input-sm" ng-model="record.alarmEndDate" readonly/>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-12">
+          <div class="col-sm-6" style="padding-left: 0px;">
+            <label style="padding-right: 0px;" class="col-sm-3 control-label input-sm font14">布控状态</label>
+            <div class="col-sm-4" style="padding-left: 0px;">
+                <label>
+                <input type="radio" name="pass" checked="checked" value="1" ng-model="record.status.code"> {{statuses[1].name}}
+              </label>
+            </div>
+            <div class="col-sm-4" style="padding-left: 0px;">
+              <label>
+                <input type="radio" name="pass" value="0" ng-model="record.status.code"> {{statuses[0].name}}
+              </label>
+            </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-12">
+          <label style="width: 70px;padding-right: 0px;" class="col-sm-2 control-label input-sm font14">黑名单原因</label>
+          <div class="col-sm-10" style="margin-left: 0px; padding-left: 0px; padding-right: 0px;">
+               <textarea rows="2" cols="50" class="form-control input-sm" ng-model="record.reason" readonly></textarea>
+          </div>
+      </div>
+      
+      <div class="col-sm-12" style="padding-top: 5px;">
+          <label style="width: 70px;padding-right: 0px;" class="col-sm-2 control-label input-sm font14">拦截说明</label>
+          <div class="col-sm-10" style="margin-left: 0px; padding-left: 0px; padding-right: 0px;">
+               <textarea rows="2" cols="50" class="form-control input-sm" ng-model="record.desc" readonly></textarea>
+          </div>
+      </div>
+      
+    </form>
+  </div>
+  <div id="imgContent" class="col-sm-4" style="border: 1px solid rgb(66, 139, 202); height: 320px; padding-left: 0px; width: 320px;">
+  </div>
+</div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-sm" ng-click="close()">关闭</button>
+</div>

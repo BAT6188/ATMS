@@ -1,0 +1,83 @@
+<div class="tq-info-read">
+  <div class="row">
+    <div class="col-sm-6">
+      <button class="btn btn-xs btn-link" ng-click="reload();" tooltip="刷新数据">
+        <span class="glyphicon glyphicon-refresh"></span> 刷新
+        <span class="label label-danger" ng-show="error">{{error}}</span>
+      </button>
+    </div>
+
+    <div class="col-sm-6">
+       
+      <a x-ng-click="apply();" class="btn btn-xs btn-primary pull-right"
+        ng-if="record.status.code!=='12'"
+        ng-show="record.staskPoints.length>0&&record.dutyId">
+        <span class="glyphicon glyphicon-saved"></span> 部署完毕.提交
+      </a>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-condensed">
+        <tbody>
+          <tr>
+            <th>任务名称</th>
+            <td>{{record.name}}</td>
+          </tr>
+          <tr>
+            <th>任务级别</th>
+            <td>{{record.level.name}}</td>
+          </tr>
+          <tr>
+            <th>出发地点</th>
+            <td>{{record.startPoint}}</td>
+          </tr>
+          <tr>
+            <th>目的地点</th>
+            <td>{{record.endPoint}}</td>
+          </tr>
+          <tr ng-show="record.lineMap">
+            <th>任务路线</th>
+            <td>
+              <a ng-click="viewRoute();">查看</a>
+            </td>
+          </tr>
+          <tr>
+            <th>开始时间</th>
+            <td>{{record.startTime}}</td>
+          </tr>
+          <tr>
+            <th>结束时间</th>
+            <td>{{record.endTime}}</td>
+          </tr>
+          <tr>
+            <th style="width: 80px;">任务描述</th>
+            <td>{{record.desc}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- <div class="col-sm-12">
+      <button class="btn btn-sm btn-link btn-primary pull-right"
+        ng-click="execute();">
+        {{label}}
+      </button>
+    </div> -->
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <span class="label label-success" ng-show="record.staskPoints.length>0">设</span>
+      <!-- 开关勤务面板 -->
+      <a ng-click="dutyIconClick();">
+        <span class="label label-success" ng-show="record.dutyId" style="cursor:pointer;">勤</span>
+      </a>
+      <label class="label label-info" ng-if="record.status.code === '12'">已提交</label>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="alert my-box-shdow">
+  <h5>
+    已选警员
+    <a ng-click="sendDX()">
+      <span class="glyphicon glyphicon-envelope pull-right" tooltip="短信" style="padding-right: 10px; cursor: pointer;"></span>
+    </a>
+    <a ng-click="sendJWT()">
+      <span class="glyphicon glyphicon-phone pull-right" tooltip="警务通" style="padding-right: 10px; cursor: pointer;"></span>
+    </a>
+  </h5>
+      
+  <table class="table table-hover table-condensed">
+    <tbody>
+      <tr ng-repeat = "record in polices" hover-show>
+        <td style="width:10px;">
+          {{$index+1}}
+        </td>
+        <td style="cursor:pointer;">
+          <a ng-click="detail(record)">
+            {{record.userName}} 
+            <span class="fa fa-exclamation-circle yhte-ico-danger" ng-show="record.distance && record.distance.toFixed(0)<=20"></span>
+            <span class="hover-show-item">({{record.dept.deptName.replace('徐州支队','')}})</span>
+          </a>
+          <a class="hover-show-item">
+              (<span>{{record.phone}}</span>
+              <span class="glyphicon glyphicon-phone-alt" ng-click="callOutPhone($event, record.phone);"></span>)
+          </a>
+          <a class="pull-right" map-center lng="record.lng" lat="record.lat">
+            {{record.distance.toFixed(0)|| '?'}} 米
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+          <button class="btn btn-sm btn-default" ng-click="setPolice();" ng-disabled="!polices.length || notChange() || ptask.status.code==='3'" privilege="指挥调度_大队" effect="disabled" when="ptaskTypeIsMajor();">确认派警</button> 
+          <button class="btn btn-sm btn-default" ng-click="reSetPolice();" ng-disabled="ptask.status.code!='2'" privilege="指挥调度_大队" effect="disabled" when="ptaskTypeIsMajor();">重新派警</button>
+          <button class="btn btn-sm btn-default" ng-click="cancle();" ng-disabled="notChange() || ptask.status.code==='3'" privilege="指挥调度_大队" effect="disabled" when="ptaskTypeIsMajor();">取消</button> 
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <div pagination
+      ng-show="total>size"
+      total-items="total" 
+      items-per-page="size"
+      page="page" 
+      max-size="maxSize"
+      class="pagination-sm pull-right" 
+      boundary-links="true" 
+      rotate="false" 
+      previous-text="&lsaquo;" 
+      next-text="&rsaquo;" 
+      first-text="&laquo;" 
+      last-text="&raquo;">
+    </div>
+  </div>
+</div>

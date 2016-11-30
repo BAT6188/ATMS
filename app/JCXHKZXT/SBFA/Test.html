@@ -1,0 +1,165 @@
+<style>
+    .sd-sd {
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 -15px 15px;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+        background-color: #fff;
+        border-width: 1px;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+    }
+
+    .sd-sd:after {
+        content: ";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .sd-sdb {
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 -15px 15px;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+        background-color: #fff;
+        border-width: 1px;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+    }
+
+    .sd-sdb:after {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+<div class="sd-sd" style="margin-left: 20px; margin-right: 20px;">
+<div class="row">
+	<div class="col-sm-12 text-center">
+		<label class="control-label input-sm font14">眉山信号（区域）/孤立路口/一环南蓬莱路（路口）</label>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">选择查看路口：</label>
+	</div>
+	<div class="col-sm-9">
+		<select ng-model="entry.xhj" ng-options="xhj.no as xhj.name for xhj in xhjs"></select>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">区域号：</label>
+	</div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.qyh" disabled="disabled"></div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">区域路口号：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.qylkh" disabled="disabled"></div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">路口名称：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.lkmc" disabled="disabled"></div>
+</div>
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">联机状态：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.ljzt" disabled="disabled"></div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">控制方式：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.kzfs" disabled="disabled"></div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">信号机厂家：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.xhjcj" disabled="disabled"></div>
+</div>
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">路口时间：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.lksj" disabled="disabled"></div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">服务器时间：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.fwqsj" disabled="disabled"></div>
+	<div class="col-sm-2"></div>
+</div>
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">上周期长：</label></div>
+	<div class="col-sm-2"><input type="text" ng-model="entry.szqc" disabled="disabled"></div>
+</div>
+<div class="row">
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">本周期运行时间：</label></div>
+	<div class="col-sm-2">
+		<input type="text" ng-model="entry.bzqyxsj" disabled="disabled">
+	</div>
+	<div class="col-sm-2 text-right">
+		<label class="control-label input-sm font14">色步表号：</label></div>
+	<div class="col-sm-2">
+		<input type="text" ng-model="entry.sbbh" disabled="disabled">
+	</div>
+	<div class="col-sm-4">
+		<input type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;锁相&nbsp;&nbsp;&nbsp;&nbsp;"></input>
+		<input id="auto" ng-click="auto()" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;手动控制&nbsp;&nbsp;&nbsp;&nbsp;"></input>
+		<input id="cancel" ng-click="cancel()" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;取消控制&nbsp;&nbsp;&nbsp;&nbsp;" style="display:none"></input>
+		<input type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;下一步阶&nbsp;&nbsp;&nbsp;&nbsp;"></input>
+	</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+  	<div style="overflow:auto; width: 100%;border:solid 2px #f1f1f1;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th  style="text-align: center;min-width: 100px">阶段/步序号</th>
+            <th style="text-align: center;"  ng-repeat="bh in fa.bhs">{{bh.bh}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th  style="text-align: center;width: 100px">时间点</th>
+          	<td ng-repeat="bh in fa.bhs" style="text-align: center;">{{bh.value}}</td>
+          </tr>
+          <tr>
+            <th  style="text-align: center;width: 100px">长度</th>
+          	<td ng-repeat="s in sj" style="text-align: right;min-width: 150">{{s}}</td>
+          </tr>
+          <tr ng-repeat="dz in sb.dzs">
+            <th  style="text-align: center;width: 100px">
+            	<img ng-src="{{dz.img}}" style="width: 18px;height: 18px">
+            	灯组{{dz.dz}}
+            </th>
+            <td ng-repeat="bh in dz.bhs">
+              <a><img ng-src="{{bh.sbId | colorFilter : colors}}" style="width: 60px"/></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

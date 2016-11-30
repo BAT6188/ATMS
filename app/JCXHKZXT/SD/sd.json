@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "name": "时段1",
+        "startTime": "06:00",
+        "control": "单点多时段",
+        "plan": "1",
+        "phaseDiff": "40"
+    }, {
+        "id": "2",
+        "name": "时段2",
+        "startTime": "09:00",
+        "control": "单点多时段",
+        "plan": "1",
+        "phaseDiff": "40"
+    }
+]

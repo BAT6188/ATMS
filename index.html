@@ -1,0 +1,151 @@
+<!doctype html>
+<meta charset="utf-8">
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE8"> -->
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="libs/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen">
+<link href="libs/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+<link href="libs/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+<link href="libs/ngTable/ng-table.css" rel="stylesheet" media="screen">
+<link href="libs/switch/bootstrap-switch.css" rel="stylesheet" media="screen">
+<link href="libs/fullcalendar/fullcalendar.css" rel="stylesheet" media="screen">
+<link href="libs/ztree/3.5/zTreeStyle/zTreeStyle.css" rel="stylesheet" media="screen">
+<link href="libs/angular-loading-bar/0.3.0/loading-bar.css" rel="stylesheet" media="all" />
+<link href="libs/OpenLayers/2.13-rc5/theme/default.css" rel="stylesheet" media="screen">
+<link href="resources/css/core.css" rel="stylesheet" media="screen">
+<link href="resources/css/info.css" rel="stylesheet" media="screen">
+<link href="resources/css/maptip.css" rel="stylesheet" media="screen">
+<link href="resources/css/animation.css" rel="stylesheet" media="screen">
+<link href="libs/uploadify/uploadify.css" rel="stylesheet" media="screen">
+
+<link href="libs/bootstrap/bootstrap-select.min.css" rel="stylesheet" media="screen">
+<link href="libs/jquery.datetimepicker.css" rel="stylesheet" media="screen">
+
+<link href="libs/messenger/css/messenger.css" rel="stylesheet" media="screen">
+<link href="libs/messenger/css/messenger-theme-flat.css" rel="stylesheet" media="screen">
+<link href="libs/jqzoom/jquery.jqzoom.css" rel="stylesheet" media="screen">
+
+<title> XXX测试 </title>
+
+<body>
+
+<!-- 标题栏 -->
+<div app-navbar></div>
+
+<div id="container" class="viewport default" ng-view></div>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="libs/bootstrap/html5shiv.min.js"></script>
+    <script src="libs/bootstrap/respond.min.js"></script>
+<![endif]-->
+
+<script src="libs/underscore/1.5.2/underscore-min.js"></script>
+<script src="libs/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+<script src="libs/uploadify/jquery.uploadify.min.js"></script>
+<script src="libs/mousewheel/jquery.mousewheel.js"></script>
+<script src="libs/websocket/socket.io/socket.io.js"></script>
+<script src="libs/websocket/moment.min.js"></script>
+
+<!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+
+<script src="libs/OpenLayers/2.13-rc5/OpenLayers.debug.js"></script>
+<script src="libs/OpenLayers/yhte/ExDyLayer2.js"></script>
+<script src="libs/OpenLayers/yhte/ExMeasure.js"></script>
+<script src="libs/OpenLayers/yhte/ExPanel.js"></script>
+<script src="libs/OpenLayers/yhte/ExSelectFeature2.js"></script>
+<script src="libs/OpenLayers/yhte/ExVector.js"></script>
+<script src="libs/OpenLayers/yhte/GetCoordinate.js"></script>
+<script src="libs/OpenLayers/yhte/GMapLayer.js"></script>
+<script src="libs/OpenLayers/yhte/LinearFunc.js"></script>
+<script src="libs/OpenLayers/yhte/PathTrack.js"></script>
+<script src="libs/OpenLayers/yhte/PGisLayer.js"></script>
+<script src="libs/OpenLayers/yhte/iMap.js"></script>
+<script src="libs/OpenLayers/yhte/geoSetup.js"></script>
+<script src="libs/OpenLayers/yhte/ExStyles.js"></script>
+<script src="libs/OpenLayers/yhte/ExDrawPath.js"></script>
+
+<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap/bootstrap-select.min.js"></script>
+
+<script src="libs/ztree/3.5/jquery.ztree.all-3.5.js"></script>
+
+<script src="libs/angular/1.2.15/angular.js"></script>
+<script src="libs/angular/1.2.15/angular-resource.min.js"></script>
+<script src="libs/angular/1.2.15/angular-route.min.js"></script>
+<script src="libs/angular/1.2.15/angular-animate.min.js"></script>
+<script src="libs/angular/1.2.15/angular-cookies.js"></script>
+<script src="libs/restangular.min.js"></script>
+
+<script src="libs/angular-loading-bar/0.3.0/loading-bar.min.js"></script>
+<script src="libs/ui-bootstrap/0.10.0/ui-bootstrap-tpls-0.10.0.min.js"></script>
+
+<script src="libs/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
+<script src="libs/bootstrap-datetimepicker-0.0.11/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+<script src="libs/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="libs/smalot-bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script src="libs/angular/datetimepicker.js"></script>
+
+<script src="libs/highcharts/highcharts.js"></script>
+<!-- <script src="libs/highcharts/exporting.js"></script> -->
+<script src="libs/ngTable/ng-table.js"></script>
+<script src="libs/switch/bootstrap-switch.js"></script>
+<script src="libs/fullcalendar/jquery-ui.custom.min.js"></script>
+<script src="libs/jquery/position.js"></script>
+<script src="libs/fullcalendar/fullcalendar.min.js"></script>
+<script src="libs/jquery.datetimepicker.js"></script>
+
+<script src="libs/messenger/js/messenger.min.js"></script>
+<script src="libs/messenger/js/messenger-theme-flat.js"></script>
+
+<script src="libs/ajaxFileUpload/ajaxfileupload.js"></script>
+
+
+<script src="libs/sea-modules/seajs/seajs/2.1.1/sea.js" id="seajsnode"></script>
+<script src="libs/ocx/activex.js"></script>
+
+<script src="config/validation.js"></script>
+<script src="config/system.js"></script>
+<script src="config/privilegeConfig.js"></script>
+<script src="libs/validate/angular-validator.js"></script>
+<script src="libs/validate/angular-validator-rules.js"></script>
+<script src="libs/phone/xg_call.js"></script>
+<script src="libs/jqzoom/jqzoom-core.js"></script>
+
+<script src="config/mapConfig.js"></script>
+
+<script>
+  var socketIp = systemConfig.getSystemValue('WEBSOCKET_SERVER_IP');
+  var socketPort = systemConfig.getSystemValue('WEBSOCKET_SERVER_PORT');
+  var socketUrl = 'http://' + socketIp + ':' + socketPort;
+  var socket =  io.connect(socketUrl);
+
+  try{
+    console.log;
+  }catch(e){
+    console = {log: function(){}};
+  }
+  
+  seajs.config({
+    base: '/atms',
+    preload:[]
+  });
+
+  seajs.use('app/$main', function(main) {
+    main.init();
+  });
+
+  $(window).load(function(){
+	setTimeout(function(){
+		window.document.title = '海口市公安局交通警察支队交通诱导系统';
+	}, 1000);
+  });
+
+</script>
+</body>

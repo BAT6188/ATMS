@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">
+        <b>布控报警</b>
+    </h4>
+</div>
+<div class="modal-body">
+  <!-- 工具栏 -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-sm-7">
+            <div class="input-group">
+                <span class="input-group-addon">报警时间</span>
+              <input id="startDate" calendar type="text" class="form-control input-sm" ng-model="entity.startDate"/>
+                <span class="input-group-addon">—</span>
+              <input id="endDate" calendar type="text" class="form-control input-sm" ng-model="entity.endDate"/>
+            </div>
+      </div>
+      
+      <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon">处理标记</span>
+                    <select class="form-control input-sm" ng-model="entity.status" ng-options="d.code as d.name for d in statuses">
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+      
+      <div class="col-sm-2 pull-right" style="padding-right:0px;">
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-sm pull-right" type="button" ng-click="smartQuery()">
+                     <i class="fa fa-wrench"> 处理</i>
+                 </button>
+          <button class="btn btn-primary btn-sm pull-right" type="button"
+            ng-click="query();">
+            <i class="fa fa-search"> 查询</i>
+          </button>
+            </div>
+      </div>
+      
+    </div>
+  </div>
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="xtable" ng-table="tableParams">
+        <col width="30px" />
+              <col width="100px"/>
+              <col  />
+              <col width="180px"/>
+              <col width="90px"/>
+              <col width="50px"/>
+        <tr ng-repeat="record in records">
+                  <td width="30" style="text-align: center; " header="'ng-table/headers/checkbox.html'">
+                      <input type="checkbox" ng-model="checkboxes.items[$index]" />
+                  </td>
+                  <td data-title="'号牌号码'" style="text-align: center; padding: 0px 5px;" ><div ng-class="{'0':'whitePlate', '1': 'yellowPlate', '2': 'bluePlate', '3': 'blackPlate', '4': 'otherPlate'}['{{record.plateColor.code}}']">{{record.plateNo}}</div></td>
+                  <td data-title="'报警点位'">{{record.pointName}}</td> 
+                  <td data-title="'报警时间'" style="text-align: center;">{{record.alarmTime}}</td>
+                  <td data-title="'处理标记'" style="text-align: center;">{{record.mark | dictFilterByCode : statuses}}</td>
+          <td data-title="'操作'" style="text-align: center;">
+            <a href="" tooltip="详细信息"><i class="fa fa-eye" ng-click="alarmInfoModal(record)"></i></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-sm" ng-click="close()">关闭</button>
+</div>

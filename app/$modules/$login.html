@@ -1,0 +1,83 @@
+<h1 style="text-align:center;color:#20558b;font-weight:900;font-size:50px;font-family:'Times New Roman',Georgia,Serif;margin-top:-30px;margin-bottom:60px">
+  海口市公安局交通警察支队交通诱导系统
+</h1>
+<!-- 
+<div class="col-sm-7" id="signin-info">
+  <div class="col-sm-3">
+      <div class="panel panel-default padLR0">
+            <div class="panel-heading font14" style="background-color:#c14150;border:none">
+              <a style="color:#fff">缓堵保畅</a>
+            </div>
+          <div class="panel-body" style="background:#f25b6c;">
+             <i style="font-size:5em;color:#c14150;margin-top:20px" class="fa fa-car"></i>
+             <div style="color:#f6e1dc;">
+             建设先进的交通指挥中心集成平台,制定实时有效的交通管理措施和控制方案,科学合理地诱导出行,避免拥堵,提高道路节点通行能力.
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-3">
+      <div class="panel panel-default padLR0">
+            <div class="panel-heading font14" style="background-color:#d8407b;border:none">
+              <a style="color:#fff">治安防控</a>
+            </div>
+          <div class="panel-body" style="background:#f86fa5;">
+             <i style="font-size:5em;color:#d8407b;margin-top:20px" class="fa fa-exclamation-triangle"></i>
+             <div style="color:#f6e1dc;">
+              集成公安机关各专用系统资源,协调联动,全方位控制和预防社会治安态势的，建立一定规模的智能联动防控体系，更有效、更广泛地为全社会提供治安防控服务。
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-3">
+      <div class="panel panel-default padLR0">
+            <div class="panel-heading font14" style="background-color:#1e88ba;border:none">
+              <a style="color:#fff">警力管控</a>
+            </div>
+          <div class="panel-body" style="background:#3eafe7;">
+             <i class="yhte-iconfont iconfont-police"  style="font-size:5em;color:#1e88ba;margin-top:20px" ></i>
+             <div style="color:#f6e1dc;">
+            实时监控管理的警车、巡逻车和事故处理车的运行路线及位置，方便指挥调度人员随时掌握我局机动警力的布控情况及运行路线，根据实际情况进行调度部署。
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-3">
+      <div class="panel panel-default padLR0">
+            <div class="panel-heading font14" style="background-color:#869400;border:none">
+              <a style="color:#fff">可视化</a>
+            </div>
+          <div class="panel-body" style="background:#b0c100;">
+             <i style="font-size:5em;color:#869400;margin-top:20px" class="fa fa-eye"></i>
+             <div style="color:#f6e1dc;">
+              实时采集与交通管理相关的信息(如交通流信息、警员分布信息、车辆信息),通过GIS地图展示,使得实时信息有更更具实效的展示方式。此外地图还提供了丰富事务性操作。
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+ -->
+ <div class="col-sm-4">
+ </div>
+<div class="col-sm-5">
+  <form role="form" class="form-signin " style="">
+    <h3 class="form-signin-heading" style="text-align:center;margin-top:10px;margin-bottom:20px;color:#0066CC">用户登录</h3>
+   <!--  <alert type="danger" ng-show="error" close="closeError()">{{error}}</alert> -->
+     <div class="form-group">
+       <div class="input-group">
+            <input type="text" class="form-control" placeholder="用户名"  ng-model="user.userCode" autofocus="true" style="border-right:0px">
+            <div class="input-group-addon" style="background-color:#fff"><i class="fa fa-user fa-1-5 yhte-ico-grey"></i></div>
+        </div>
+      </div>
+      <div class="form-group">
+       <div class="input-group" style="margin-top:15px">
+            <input type="password" class="form-control" placeholder="密码"  ng-model="user.password" autofocus="true" style="border-right:0px">
+            <div class="input-group-addon" style="background-color:#fff"><i class="fa fa-globe fa-1-5 yhte-ico-grey" ></i></div>
+        </div>
+      </div>
+    <!--<i class="fa fa-square-o" ng-click="remember = !remember" ng-show="!remember"> 记住密码</i> -->
+    <!--<i class="fa fa-check-square-o" ng-click="remember = !remember" ng-show="remember"> 记住密码</i>-->
+
+    <button ng-click="login()" class="btn btn-lg btn-success btn-block" style="margin-top:5px"><i class="fa fa-check"></i></button>
+  </form>
+</div>

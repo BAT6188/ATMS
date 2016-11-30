@@ -1,0 +1,41 @@
+<legend>【{{name}}】-灯组冲突表 </legend>
+
+<div class="row" >
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-sm-12">
+          <!--<div class="row">-->
+              <!--<div class="btn-group pull-left" style="left:15px;">-->
+                  <!--<a class="btn btn-sm btn-success" ng-href="#/JCXHKZXT.DZSZ.DzList">-->
+                      <!--<i class="fa fa-align-justify"> 返回</i>-->
+                  <!--</a>-->
+              <!--</div>-->
+          <!--</div>-->
+          <table class="table table-hover table-bordered" style="text-align: center">
+          <thead>
+            <tr>
+              <th  style="text-align: center;width: 200px">{{fa.title.type}}</th>
+              <th style="text-align: center"  ng-repeat="record in fa.title.dzs">{{record.title}}</th>
+            </tr>
+          </thead>
+          <tbody>
+      	    <tr ng-repeat="record in fa.records">
+        	  <th style="text-align: center;width: 200px"><img ng-src="{{record.img}}" style="width: 18px;height: 18px">&nbsp;&nbsp;&nbsp;&nbsp;{{record.type}}</th>
+        	  <td ng-repeat="dz in record.dzs">
+                  <label class="label" style="cursor: pointer" ng-click="send(dz)"
+                         ng-class="{ 'label-danger': dz.dz == '冲突'}">
+                      {{dz.dz}}
+                  </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>	 
+    </div>
+  </div>
+</div>
+
+    
+
+  
+

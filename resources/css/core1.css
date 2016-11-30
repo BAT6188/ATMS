@@ -1,0 +1,742 @@
+
+  height:100%;
+}
+body {
+  /*background: url(image/wood.jpg) top left;*/
+  /*background-color: #6C9F43;*/
+  /*background:url(../img/login_bg.png) no-repeat fixed left top;background-size:100% 100%;*/
+  /*padding-top: 60px;*/
+  height:100%;
+  overflow: auto;
+}
+/*------特殊文字设置开始------*/
+@font-face {font-family: 'iconfont';
+    src: url('iconfont.eot'); /* IE9*/
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont{
+  font-family:"iconfont";
+  font-style:normal;
+  display: inline-block;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------菜单栏样式------------------------------------ */
+.navbar{
+  /*background: url(image/nav.jpg);*/
+  background-color: #3372a7;
+  border-color: #47A447;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0;
+}
+
+.navbar-default .navbar-nav > li > a ,.navbar-default .navbar-brand{
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: #47A447;
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > .dropdown > a .caret{
+  border-bottom-color: #FFF;
+  border-top-color: #FFF;
+}
+
+.map-content-iframe{
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------viewport------------------------- */
+.viewport {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.viewport .row {
+  margin-bottom: 10px;
+}
+
+.viewport .pagination{
+  margin: 0;
+}
+
+.viewport.map-full-screen {
+  top: 0;
+  padding: 0;
+}
+
+.default{
+  position: static;
+  margin-top: 50px;
+}
+
+.viewport .col-100-auto{
+  height: 100%;
+  overflow: auto;
+}
+/*--------------------折叠的布局，即不显示---------*/
+.layout-collapsd {
+  display: none;
+}
+
+.precial-duty-welcome{
+  background: url(../img/banner_kstq.png) repeat;
+  background-size:100% 100%;
+}
+
+/*----------------------pannel-------------------------------*/
+.panel-primary .panel-heading a{
+  color: #fff;
+}
+
+.panel-heading a{
+  cursor: pointer;
+}
+
+/*-----------------通用-------------------------*/
+.text-overflow {
+  display:block;/*内联对象需加*/
+  width:31em;word-break:keep-all;/* 不换行 */
+  white-space:nowrap;/* 不换行 */
+  overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+  text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+td a{
+  cursor: pointer;
+}
+
+.marginTB0{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.marginLR0{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.pad0{
+  padding: 0px;
+}
+.padTB0{
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.padLR0{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.padLR15{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.marginTB15{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.marginB5{
+  margin-top: 5px;
+}
+
+.margin0{
+  margin: 0px;
+}
+legend.title{
+  padding: 15px 0  15px 0px;
+  background-color: #EEEEEE;
+  border-color: #EEE;
+  /*color: #428BCA;*/
+  margin: 0;
+  text-indent:15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+legend .legendActive{
+  color:#999999;
+}
+.monitor-screen{
+  background: url(../img/jctssp.png);
+}
+
+.snc-screen{
+  background: url(../img/Snip20131201_48.png) no-repeat center center;
+}
+
+.cms-screen{
+ background: url(../img/Snip20131201_49.png) no-repeat center center; 
+}
+
+.screen-shot{
+  height:150px;
+  margin:5px;
+  border:solid 1px #428BCA;
+}
+
+.my-box-shdow{
+  border: solid 1px #DDDDDD;
+  border-radius: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.my-box-shdow-black{
+  border: solid 1px #DDDDDD;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px #000;
+}
+.table-condensed-deepen{
+    font-size: 11px;
+    line-height: 1;
+}
+.font11{ font-size:11px;  font-family:"微软雅黑"}
+.font14{ font-size:14.8px; color:#666666; font-family:"微软雅黑"}
+.font13{ font-size:13.8px; color:#666666; font-family:"微软雅黑"}
+
+.table.table-th-grey th{
+  background:#F7F5FA;
+}
+
+/*------------------------------------grid 样式------------------------------*/
+.table{
+  margin-bottom: 10px;
+}
+
+.table thead{
+  /*background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);*/
+  background-color: #F5F5F5;
+  border-color: #DDDDDD;
+  color: #333333;
+}
+
+.table .check, .table .remove{
+  width: 20px;
+}
+
+.table .no{
+  width: 40px;
+  text-align: center;
+}
+
+/*.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+  padding: 5px 8px;
+}*/
+/*------------------图标-----------------------*/
+a:hover {
+  text-decoration:none;
+}
+.fa{
+  cursor: pointer;
+}
+.fa.fa-1{
+   font-size: 1.2em;
+}
+.fa.fa-1-5{
+   font-size: 1.5em;
+}
+.fa.fa-2{
+   font-size: 2em;
+}
+.fa.fa-3{
+   font-size: 3em;
+}
+.fa.fa-4{
+   font-size: 4em;
+}
+.fa.fa-5{
+   font-size: 5em;
+}
+.fa-6{
+   font-size: 6em;
+}
+.yhte-ico-primary{
+  color: #3276B1;
+}
+.yhte-ico-success{
+  color: #47A447; 
+}
+.yhte-ico-info{
+  color: #39B3D7;
+}
+.yhte-ico-warning{
+  color: #F0AD4E;
+}
+.yhte-ico-danger{
+  color: #D2321D;
+}
+.yhte-ico-grey{
+  color: #DDD;
+}
+
+.label-reversal{
+  background-color: #333333;
+}
+
+.badge.badge-primary{
+  background: #3276B1;
+}
+.badge.badge-success{
+  background: #47A447; 
+}
+.badge.badge-info{
+  background: #39B3D7;
+}
+.badge.badge-warning{
+  background: #F0AD4E;
+}
+.badge.badge-danger{
+  background: #D2321D;
+}
+
+.background-primary{
+  background: #3276B1;
+}
+.badge.badge01{position:relative; left:0%; top:-34px; z-index:2000;}
+.badge.badge02{position:relative; left:20%; top:-34px; margin-left:-62px;  z-index:2000;}
+.badge.badge03{position:relative; left:40%; top:-34px; margin-left:-62px; z-index:2000;}
+.badge.badge04{position:relative; left:60%; top:-34px; margin-left:-63px; z-index:2000;}
+.badge.badge05{position:relative; left:80%; top:-34px; margin-left:-63px; z-index:2000;}
+.badge.badge06{position:relative; left:100%; top:-34px; margin-left:-50px; z-index:2000;}
+
+
+
+/*------------------map Modal-----------------------*/
+#mapModal #map .mapPanel{
+ margin:0px;
+}
+
+#mapModal #map .mapPanel .panel-heading{
+ display: none;
+}
+/*------------------临时-----------------------*/
+.tempPrint{
+  background: url(../img/print.jpg) no-repeat center center;
+}
+
+
+.tempImg{
+  background: url(../img/imgTemp.jpg) repeat;
+}
+.tempUser{
+   background: url(../img/user.jpg) repeat;
+}
+.temp-dispatch{
+  background: url(../img/temp-dispatch.png) repeat;
+}
+.nav1{
+  background: url(../img/nav01.png);
+}
+.nav2{
+  background: url(../img/nav02.png);
+}
+.nav3{
+  background: url(../img/nav03.png);
+}
+.nav4{
+  background: url(../img/nav04.png);
+}
+.nav5{
+  background: url(../img/nav05.png);
+}
+.nav6{
+  background: url(../img/nav06.png);
+}
+
+
+.inlineTxt {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.maxWidth2 {
+  max-width: 140px;
+}
+/*------自定义蓝色导航栏开始------*/
+.navbar-blue
+{
+  background:rgba(56, 122, 180, 1);
+  border-color: #3372a7;
+}
+.navbar-blue .navbar-brand { color: #ffffff; }
+.navbar-blue .navbar-brand:hover, .navbar-blue .navbar-brand:focus
+{
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-blue .navbar-text { color: #ffffff; }
+.navbar-blue .navbar-nav > li > a { color: #ffffff; }
+.navbar-blue .navbar-nav > li > a:hover, .navbar-blue .navbar-nav > li > a:focus
+{
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-blue .navbar-nav > .active > a, .navbar-blue .navbar-nav > .active > a:hover, .navbar-blue .navbar-nav > .active > a:focus
+{
+  color: #ffffff;
+  background-color: #3272a8;
+}
+.navbar-blue .navbar-nav > .disabled > a, .navbar-blue .navbar-nav > .disabled > a:hover, .navbar-blue .navbar-nav > .disabled > a:focus
+{
+  color: #444444;
+  background-color: transparent;
+}
+.navbar-blue .navbar-toggle { border-color: #333333; }
+.navbar-blue .navbar-toggle:hover, .navbar-blue .navbar-toggle:focus { background-color: #333333; }
+.navbar-blue .navbar-toggle .icon-bar { background-color: #ffffff; }
+.navbar-blue .navbar-collapse, .navbar-blue .navbar-form { border-color: #101010; }
+.navbar-blue .navbar-nav > .open > a, .navbar-blue .navbar-nav > .open > a:hover, .navbar-blue .navbar-nav > .open > a:focus
+{
+  color: #ffffff;
+  background-color: #3372a8;
+}
+.navbar-blue .navbar-nav > .dropdown > a:hover .caret
+{
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.navbar-blue .navbar-nav > .dropdown > a .caret
+{
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+.navbar-blue .navbar-nav > .open > a .caret, .navbar-blue .navbar-nav > .open > a:hover .caret, .navbar-blue .navbar-nav > .open > a:focus .caret
+{
+  border-top-color: #ffffff;
+  border-bottom-color: #ffffff;
+}
+ @media (max-width: 767px) {
+ .navbar-blue .navbar-nav .open .dropdown-menu > .dropdown-header {
+ border-color: #54ac56;
+}
+ .navbar-blue .navbar-nav .open .dropdown-menu > li > a {
+ color: #ffffff;
+}
+ .navbar-blue .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-blue .navbar-nav .open .dropdown-menu > li > a:focus {
+ color: #ffffff;
+ background-color: transparent;
+}
+ .navbar-blue .navbar-nav .open .dropdown-menu > .active > a, .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-blue .navbar-nav .open .dropdown-menu > .active > a:focus {
+ color: #ffffff;
+ background-color: #54ac56;
+}
+ .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-blue .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+ color: #444444;
+ background-color: transparent;
+}
+}
+.navbar-blue .navbar-link { color: #ffffff; }
+.navbar-blue .navbar-link:hover { color: #ffffff; }
+.navbar-blue .navbar-brand, .navbar-nav > li > a
+{
+  text-shadow: 0 0px 0 rgba(255, 255, 255, 0.25);
+  font-size:15px;
+  font-family:"微软雅黑";
+}
+.navbar-blue .dropdown-menu > li > a
+{
+  font-family:"微软雅黑";
+  font-size:14px
+}
+/*------自定义蓝色导航栏结束------*/
+legend{ font-family:"微软雅黑"; font-size:18px; color:#828485;border-bottom:1px solid #c8ccc7}
+.table{ background-color:#ffffff;}
+/*------登录页面------*/
+.login_main{ width:380px; height:364px; position:absolute; top:50%; left:50%; margin-left:-190px; margin-top:-182px;}
+.login_main p{ margin-bottom:25px;}
+.login_main .login_text{ color:#387ab4; font-size:36px; font-family:"微软雅黑"; text-align:center}
+.login_main .login_input{ width:374px; height:57px; background:url(../img/login_admin.png) no-repeat left top; border:0px; text-indent:80px; color:#555555; font-size:13px;}
+.login_main .login_psd{ width:374px; height:57px; background:url(../img/login_pwd.png) no-repeat left top; border:0px; text-indent:80px; color:#555555; font-size:13px;}
+.login_main .login_checkbox{ width:18px; height:18px;  border:0px; float:left; margin-left:58px; margin-right:10px; }
+.login_main .login_enter{ width:240px; height:44px; background:url(../img/login_enter.png) no-repeat left top; border:0px; float:left; margin-left:58px;  }
+/*------table 去除th的双边框------*/
+.table thead tr th{ border-bottom:0px;}
+/*------form 美化------*/
+.form_bg{background-color:#e4f4fe; padding:10px 0px; margin:10px 0px; border-radius:5px;}
+.form_bg_s{background-color:#e4f4fe; padding:5px 0px; margin:5px 0px; border-radius:5px;}
+/*.panel-body .input-sm{
+  height: 25px;
+}*/
+
+.panel-body label{
+  margin-bottom: 0;
+}
+
+.panel-body .alert{
+  margin-bottom: 0;
+}
+
+.tabbable .tab-content{
+  position:relative;
+}
+
+
+.atms-free-polices ul{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+/*------设置table不换行------*/
+.table_noline{
+table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+.table_noline td{
+word-break:keep-all;/* 不换行 */
+white-space:nowrap;/* 不换行 */
+overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.modal-content .panel{
+  margin-bottom: 0;
+}
+
+.modal-content .panel .panel-body{
+  padding: 0;
+}
+
+.alert{
+  margin-bottom: 5px;
+}
+.alert-default {
+  background-color: #FFF;
+  border-color: #DDD;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.list-group-item .row{
+  margin-bottom: 0;
+}
+
+.col-100-auto .with-map{
+  position:absolute;top:10px;left:25px;right:25px;z-index:1000;
+}
+
+/*.icon_lists .iconfont:hover{
+    font-size: 100px;
+}*/
+
+
+ul.ztree {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    height: 360px;
+    margin-top: 10px;
+    overflow-x: auto;
+    overflow-y: scroll;
+    width: 220px;
+}
+
+.whitePlate{
+  color:#000000;
+}
+.yellowPlate{
+  background-color: #FFCC00;
+}
+.bluePlate{
+  background-color: #3300CC;
+}
+.blackPlate{
+  background-color: #000000;
+}
+.otherPlate{
+  background-color: #B6B6B6;
+}
+.formMarginB10 .form-group{
+  margin-bottom: 10px;
+}
+
+.btn-zz{
+  background-color:#EBEBEB; 
+}
+.btn-group-primary .btn-default:active,.btn-group-primary .btn-default:focus,.btn-group-primary .btn-default:hover{
+  /*background-color: #428BCA;*/
+}
+
+
+
+.dropdown-submenu{
+    position:relative;
+}
+
+.dropdown-submenu > .dropdown-menu
+{
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    -webkit-border-radius:0 6px 6px 6px;
+    -moz-border-radius:0 6px 6px 6px;
+    border-radius:0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu{
+    display:block;
+}
+
+
+/*.dropdown-submenu > a:after{
+    display:block;
+    content:" ";
+    float:right;
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#cccccc;
+    margin-top:5px;
+    margin-right:-10px;
+}*/
+
+.dropdown-submenu:hover > a:after{
+    border-left-color:#ffffff;
+}
+
+.dropdown-submenu .pull-left{
+    float:none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu{
+    left:-100%;
+    margin-left:10px;
+    -webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;
+    border-radius:6px 0 6px 6px;
+}
+
+.signal-map-border{
+  border:5px solid red;
+}
+
+
+
+
+.form-signin {
+  max-width: 400px;
+  padding: 15px 40px 50px;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input.user-code {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/*.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}*/
+.ng-invalid {
+  border-color: #f8b9b7;
+}
+
+.background-blue{
+  background-color:#006699;
+  /*background:url(../img/login.jpg) center center;*/
+}
+
+.carTrackColor1{
+  background-color: #FFFF00;
+}
+
+.carTrackColor2{
+  background-color: #FF9999;
+}
+
+.carTrackColor3{
+  background-color: #FF3399;
+}
+
+.carTrackColor4{
+  background-color: #CC33FF;
+}
+
+.carTrackColor5{
+  background-color: #99FF00;
+}
+
+.carTrackColor5{
+  background-color: #6699FF;
+}
+
+.policeTrackColor1{
+  background-color: #0000CC;
+}
+
+.policeTrackColor2{
+  background-color: #330033;
+}
+
+.policeTrackColor3{
+  background-color: #330033;
+}
+
+.policeTrackColor4{
+  background-color: #CC0000;
+}
+
+.policeTrackColor5{
+  background-color: #FF6600;
+}
+
+.policeTrackColor6{
+  background-color: #333333;
+}
+
+.iconfont.iconfont-police:before{
+ content: "\f0002";
+}
+
+.iconfont.iconfont-camera:before{
+ content: "\f0001";
+}
+
+.iconfont.iconfont-signal:before{
+ content: "\f0003";
+}
+
+.iconfont.iconfont-cms:before{
+ content: "\f0004";
+}
+
+

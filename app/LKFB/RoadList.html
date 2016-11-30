@@ -1,0 +1,182 @@
+<legend>
+    路段管理
+</legend>
+<!--<div class="row">
+
+    <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon">道路名称</span>
+            <input type="text" class="form-control input-sm" ng-model="Q.roadName">
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+            <i class="fa fa-search"> 查询</i>
+        </button>
+    </div>
+</div>-->
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-10">
+        <div class="row">
+            <a class="btn btn-sm btn-default col-sm-6 col-sm-offset-3" ng-href="#LKFB.CmsList">
+                <i class="fa fa-align-justify">返回列表</i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th class="col-sm-4">道路名称</th>
+                <th class="col-sm-4">关联路段名称</th>
+                <th class="col-sm-4 text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="record in records">
+                <td class="col-sm-4">{{record.roadName}}</td>
+                <td class="col-sm-4">{{record.roadSectionName}}</td>
+               <!-- 把道路状态添加到道路查询列表中-->
+                <td class="col-sm-4 ">
+                    <span class="text-center dropdown ">
+                        <a class="dropdown-toggle">
+                            <label class="label"
+                                   ng-class="{'1': 'label-success', '4': 'label-danger', '3': 'label-warning'}['{{record.state}}']">
+                                {{record.state
+                                || 'null'|StateFilter}}</label>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="sta in status" ng-click="changeStatus(record,sta);">
+                                <a>{{sta.label}}</a>
+                            </li>
+                            <!--<li ng-click="changeStatus(record,status[0]);">
+                                <a>畅通</a>
+                            </li>
+                            <li ng-click="changeStatus(record,status[1]);">
+                                <a>正常</a>
+                            </li>
+                            <li ng-click="changeStatus(record,status[2]);">
+                                <a>拥堵</a>
+                            </li>-->
+                        </ul>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div  class="col-sm-4">
+        <div class="row" style="height: 280px;">
+            <div id="cmsPic"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 dropdown">
+                <a class="dropdown-toggle">
+          <span class="label label-default">
+           {{overdueMinName || '持续时间'}}
+          </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-click="overdueMinName='持续时间';overdueMin=0;changeStatus1(overdueMin);">
+                        <a>持续时间</a>
+                    </li>
+                    <li ng-click="overdueMinName='5分钟';overdueMin=5;changeStatus1(overdueMin);">
+                        <a>5分钟</a>
+                    </li>
+                    <li ng-click="overdueMinName='10分钟';overdueMin=10;changeStatus1(overdueMin);">
+                        <a>10分钟</a>
+                    </li>
+                    <li ng-click="overdueMinName='半小时';overdueMin=30;changeStatus1(overdueMin);">
+                        <a>半小时</a>
+                    </li>
+                    <li ng-click="overdueMinName='1小时';overdueMin=60;changeStatus1(overdueMin);">
+                        <a>1小时</a>
+                    </li>
+                    <li ng-click="overdueMinName='2小时';overdueMin=120;changeStatus1(overdueMin);">
+                        <a>2小时</a>
+                    </li>
+                    <li ng-click="overdueMinName='10小时';overdueMin=600;changeStatus1(overdueMin);">
+                        <a>10小时</a>
+                    </li>
+                    <li ng-click="overdueMinName='24小时';overdueMin=1440;changeStatus1(overdueMin);">
+                        <a>24小时</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-2 dropdown">
+                <a class="dropdown-toggle">
+          <span class="label label-default">
+           {{stayTimeName || '显示时长'}}
+          </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-click="stayTimeName='显示时长';stayTimeSec=5;changeStayTime(stayTimeSec);">
+                        <a>显示时长</a>
+                    </li>
+                    <li ng-click="stayTimeName='5秒';stayTimeSec=5;changeStayTime(stayTimeSec);">
+                        <a>5秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='10秒';stayTimeSec=10;changeStayTime(stayTimeSec);">
+                        <a>10秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='30秒';stayTimeSec=30;changeStayTime(stayTimeSec);">
+                        <a>30秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='1分钟';stayTimeSec=60;changeStayTime(stayTimeSec);">
+                        <a>1分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='2分钟';stayTimeSec=120;changeStayTime(stayTimeSec);">
+                        <a>2分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='3分钟';stayTimeSec=180;changeStayTime(stayTimeSec);">
+                        <a>3分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='4分钟';stayTimeSec=240;changeStayTime(stayTimeSec);">
+                        <a>4分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='5分钟';stayTimeSec=255;changeStayTime(stayTimeSec);">
+                        <a>5分钟</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-4" style="text-align:center;">
+                <span class="label label-primary" style="cursor: pointer;" ng-click="release();">发布 </span>
+            </div>
+            <div class="col-sm-4" style="text-align:center;">
+                <span class="label label-primary" style="cursor: pointer;" ng-click="cancel();">取消发布 </span>
+            </div>
+            <div class="col-sm-4" style="padding-top: 20px" ng-show="ShowTime">路况发布时段</div>
+            <div class="col-sm-4" style="padding-top: 20px" ng-show="ShowTime" >
+                <span>开始时间 {{start}}</span>
+            </div>
+            <div class="col-sm-4" style="padding-top: 20px" ng-show="ShowTime">
+                <span>结束时间 {{end}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+        <div pagination class="pagination-sm pull-left" boundary-links="true"
+             rotate="false" total-items="total" page="Q.page"
+             items-per-page="Q.pageSize" max-size="Q.maxSize"
+             on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+             last-text="最后一页" first-text="最前一页">
+        </div>
+    </div>
+</div>
+<div id="jqscreen" style="position: absolute; top: -240px; left: -530px;"
+     atms-jq-screen
+     type="edit"
+     is-edit="progEditShow"
+     active-x="activeX"
+     data="data2"
+     ocx-width="448px"
+     ocx-height="320px"></div>
+</div>
+</div>

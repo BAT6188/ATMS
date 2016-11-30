@@ -1,0 +1,38 @@
+<form class="form-horizontal" role="form">
+  <legend>创建特勤特务</legend>
+  <div class="col-md-2">
+      <div class="list-group">
+          <a class="list-group-item ">基本信息及线路</a>
+          <a class="list-group-item" ng-click="toStep2()">编辑信号机预置位</a>
+          <a class="list-group-item active" ng-click="toStep3()">配置岗位</a>
+          <a class="list-group-item" ng-click="distribute()" ng-show="record.dutyId">下发任务</a>
+      </div>
+  </div>
+  <div class="col-md-10">
+      <div class="col-100-auto col-sm-12">
+        <div class="pull-left">
+          <button type="submit" class="btn btn-primary" ng-click="toStep2();" style="margin-left:10px;">上一步</button>
+        </div>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary" ng-click="savePosts();" >保存岗位</button>
+        </div>
+      </div>
+      <div class="col-100-auto col-sm-9" style="margin-top:15px;">
+        <div yhte-map inst="postMap" style="height:400px;border: 1px solid #ccc;border-radius: 4px;"></div>
+      </div>
+      <div class="col-100-auto col-sm-3" style="margin-top:15px;">
+        <ul class="list-group" style="height:400px;overflow-y:auto;overflow-x:hidden;">
+          <a class="list-group-item active" ng-click="addPosts();">
+            添加岗位
+          </a>
+          <li class="list-group-item" ng-repeat="point in points">
+            <a class="pointer" map-center geometry="point.geometry">
+              <span class="badge badge-success">{{$index+1}}</span> {{point.geometry.x.toFixed(2)}},{{point.geometry.y.toFixed(2)}}
+            </a>
+            <button ng-click="removePost(point)" type="button" class="close pull-right">&times;</button>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+</form>

@@ -1,0 +1,226 @@
+<legend>
+    新增角色
+</legend>
+
+<form name="entityForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="ok();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" >
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <a class="btn btn-sm btn-default" ng-href="#/XTGL.PRI.RoleList">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+<div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">角色编码</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.code.$invalid}">
+      <!-- 必选 required -->
+      <input name="code" type="text" class="form-control input-sm"
+        placeholder="角色编号, 必须!" ng-model="record.code" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">角色名称</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.name.$invalid}">
+      <input name="name" type="text" class="form-control input-sm"
+        placeholder="角色名称, 必须! " ng-model="record.name" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">备注</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.remark.$invalid}">
+      <input name="remark" type="text" class="form-control input-sm"
+        ng-model="record.remark">
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">有效性</label>
+    <div class="col-sm-1">
+      <div class="radio">
+        <label> <input type="radio" name="status"
+          ng-model="record.status.code" value="1"> 有效 </label>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="radio">
+        <label> <input type="radio" name="status"
+          ng-model="record.status.code" value="0"> 无效 </label>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+  <tabset class="col-sm-offset-1">
+    <tab heading="分配权限 ">
+      <div class="row marginLR0">
+        <div class="col-sm-5 input-group">
+            <input type="text" class="form-control input-sm" ng-model="RoadQ.priName" placeholder="权限名称">
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-sm" type="button" ng-click="query()">
+                    <i class="fa fa-search" tooltip="查询"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    
+    <div class="row marginLR0">
+        <!-- 所有列表 -->
+        <div class="col-md-5">
+          
+          <div class="row">
+            <table ng-table="tableParams" class="table table-bordered table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" ng-model="allChecked" ng-change="selectAll();"></th>
+                  <th>编码</th>
+                  <th>名称</th>
+                  <th>类型</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="record in records">
+                  <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+                  <td>{{record.priCode}}</td>
+                  <td>{{record.priName}}</td>
+                  <td>{{record.status.name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    
+        <div style="text-align: center; padding-top: 80px" class="col-md-1">
+          <div class="row">
+              <button title="选择添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPost()">
+                  <i class="fa fa-angle-right"></i>
+              </button>
+          </div>
+          <!-- 
+          <div class="row">
+              <button title="全部添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPost(true)">
+                  <i class="fa fa-angle-double-right"></i>
+              </button>
+          </div>
+        -->
+          <div class="row">
+              <button title="全部删除" data-placement="right" data-toggle="tooltip" class="btn  btn-success btn-sm" ng-click="dropPost(true)">
+                  <i class="fa fa-angle-double-left"></i>
+              </button>
+          </div>
+        </div>
+        <!-- 已有数据列表 -->
+        <div class="col-md-5">
+            <div class="row">
+              <table class="table  table-condensed">
+                 <thead>
+                  <tr>
+                    <th>删除</th>
+                    <th>编号</th>
+                    <th>名称</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="record in selecteds">
+                    <td>
+                      <i class="fa fa-times" ng-click="dropPost($index)"></i>
+                    </td>
+                    <td>{{record.priCode}}</td>
+                    <td style="width: 100px;">{{record.priName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+  </tab>
+    <tab heading="分配菜单">
+      <div class="row marginLR0">
+        <div class="col-sm-5 input-group">
+            <input type="text" class="form-control input-sm" ng-model="RoadQ.menuName" placeholder="菜单名称">
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-sm" type="button" ng-click="menuQuery()">
+                    <i class="fa fa-search" tooltip="查询"></i>
+                </button>
+            </span>
+        </div>
+      </div>
+    
+    <div class="row marginLR0">
+        <!-- 所有列表 -->
+        <div class="col-md-5">
+          
+          <div class="row">
+            <table ng-table="menuTableParams" class="table table-bordered table-hover table-condensed">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" ng-model="menuAllChecked" ng-change="menuSelectAll();"></th>
+                  <th>菜单名称</th>
+                  <th>菜单序号</th>
+                  <th>路径</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="record in menuRecords">
+                  <td class="check"><input type="checkbox" ng-model="menuChecks[$index]" ng-click="menuSelect($index);"></td>
+                  <td>{{record.menuName}}</td>
+                  <td>{{record.seq}}</td>
+                  <td>{{record.path}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    
+        <div style="text-align: center; padding-top: 80px" class="col-md-1">
+          <div class="row">
+              <button title="选择添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getMenu()">
+                  <i class="fa fa-angle-right"></i>
+              </button>
+          </div>
+          <div class="row">
+              <button title="全部删除" data-placement="right" data-toggle="tooltip" class="btn  btn-success btn-sm" ng-click="dropMenu(true)">
+                  <i class="fa fa-angle-double-left"></i>
+              </button>
+          </div>
+        </div>
+        <!-- 已有数据列表 -->
+        <div class="col-md-5">
+            <div class="row">
+              <table class="table  table-condensed">
+                 <thead>
+                  <tr>
+                    <th>删除</th>
+                    <th>菜单名称</th>
+                    <th style="width: 100px;">菜单序号</th>
+                    <th>路径</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="record in menuSelecteds">
+                    <td>
+                      <i class="fa fa-times" ng-click="dropMenu($index)"></i>
+                    </td>
+                    <td>{{record.menuName}}</td>
+                    <td>{{record.seq}}</td>
+                    <td>{{record.path}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </div>
+  </tab>
+    
+  </tabset>
+</div>
+  
+</form>

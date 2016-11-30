@@ -1,0 +1,78 @@
+<textarea>
+package {{packagePath}}.dao;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import {{packagePath}}.{{javaClass}}QB;
+import {{packagePath}}.{{javaClass}};
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+@Service("{{lowerCase javaClass}}Dao")
+public class {{javaClass}}Dao {
+
+	@Autowired
+	@Qualifier("sqlSessionTemplate")
+	private SqlSessionTemplate sessionTemplate;
+	
+	public String insert({{javaClass}} record) throws RemoteException{
+		try {
+			this.sessionTemplate.insert("{{javaClass}}XML.insertOne", record);
+			return record.getId();
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+		
+	}
+	
+	public void update({{javaClass}} record) throws RemoteException{
+		try {
+			sessionTemplate.update("{{javaClass}}XML.updateOne", record);		
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+		
+	}
+	
+	public void delete(String[] ids) throws RemoteException{
+		try {
+			sessionTemplate.delete("{{javaClass}}XML.deleteByIds", ids);		
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public {{javaClass}} selectOne(String id) throws RemoteException{
+		try{
+			{{javaClass}} obj = ({{javaClass}}) sessionTemplate.selectOne("{javaClass}}XML.selectOne",id);
+			return obj;
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+	}
+	
+	public List<{{javaClass}}> selectList({{javaClass}}QB qb) throws RemoteException{
+		try{
+			List<{{javaClass}}> objList = sessionTemplate.selectList("{{javaClass}}XML.selectList",qb);
+			return objList;
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public Integer selectCount({{javaClass}}QB qb) throws RemoteException{
+		try{
+			Integer c = 0;
+			c = sessionTemplate.selectOne("{{javaClass}}XML.selectCount",qb);
+			return c;
+		} catch (Exception e) {
+			throw new RemoteException(e.getMessage());
+		}
+		
+	}
+}
+</textarea>

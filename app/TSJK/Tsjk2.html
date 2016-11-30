@@ -1,0 +1,166 @@
+<!-- 地图 -->
+<div style="position:absolute;top:0;bottom:0;left:0;right:0px;">
+  <div yhte-map class="row" inst="map" style="height:100%;">
+  </div>
+</div>
+
+<div class="blackStyle layer-icon" ng-show="!rightToolShow" ng-click="rightToolShow = true"
+  style="z-index:999;position: absolute;top: 40%;right: 1px;padding-top:10px;padding-left:5px">
+  <i class="fa fa-angle-double-left"></i>
+</div>
+<div class="blackStyle layer-icon"  ng-show="rightToolShow" ng-click="rightToolShow = false"
+  style="z-index:999;position: absolute;top: 40%;right: 266px;padding-top:10px;padding-left:5px">
+  <i class="fa fa-angle-double-right"></i>
+</div>
+<!-- 右侧工具栏 -->
+<div  class="icollapseone blackStyle"  style="z-index:999;position: absolute;top: 0px;right: 0px;width:266px;bottom:0px;" ng-show="rightToolShow">
+  <!-- 时间天气 -->
+  <div class="panel panel-default"  style="margin-bottom:0px;height:130px">
+    <div class="panel-body" style="padding:0px">
+        <div
+        class="col-sm-12  pointer" style="margin-bottom:0px;"></div>
+    </div>
+  </div>
+  <!-- 图层面板 -->
+  <div class="panel panel-default mainPanel" style="margin-bottom:0px" ng-hide="!layersSwitcher">
+    <div class="panel-body" ng-show="layersSwitcher" style="padding:0px 5px">
+      <div layers-switcher 
+        class="col-sm-12"
+        style="height:360px;margin-bottom:0px;padding:15px 5px"
+        data="config"
+        map="map"
+        layers="layers"
+        filter="text"
+        placeholder="placeholder"
+        on-item-click="onLayerSwitchClick();"
+        >
+      </div>
+    </div>
+  </div>
+  <!-- 轨迹 -->
+  <div class="panel panel-default"  style="margin-bottom:0px"  ng-hide="!layersSwitcher && !showTrack">
+    <div class="panel-heading"
+      ng-show="layersSwitcher"
+      ng-click="showTrack = true;layersSwitcher =!layersSwitcher">
+        轨迹: 
+        <span>警员{{policeTrackFeatures.length || 0}}</span>
+        <span>警车{{carTrackFeatures.length || 0}}</span>
+        <i class="fa fa-angle-double-up pull-right"></i
+>    </div> 
+    <div class="panel-body"
+    ng-show="showTrack && layersSwitcher === false" style="min-height:360px">
+      <div atms-track
+        map = "map"
+        police-track-features = "policeTrackFeatures"
+        car-track-features = "carTrackFeatures">
+      </div>
+    </div>
+  </div>
+  <!-- 路况报警 -->
+  <div class="panel panel-default"  style="margin-bottom:0px"  ng-hide="!layersSwitcher && !showRoadAlarm">
+    <div class="panel-heading"
+     ng-show="layersSwitcher"
+      ng-click="showRoadAlarm = true;layersSwitcher =!layersSwitcher">
+     路况报警: {{flowInfo.length || 0}}
+        <i class="fa fa-exclamation-circle yhte-ico-danger" ng-show="flowInfo.length > 0"></i>
+        <i class="fa fa-angle-double-up pull-right"></i>
+    </div>
+    <div class="panel-body"  ng-show="showRoadAlarm && layersSwitcher === false" style="min-height:360px">
+        <div class="col-sm-12 padLR0"
+          style="margin-bottom:0px">
+          <div class="row marginLR0">
+            <div atms-road-alarm
+                data = "flowInfo"
+                layer="layers"
+                on-item-transport="onRoadAlarmTransport($features);"
+                on-item-click="onRoadAlarmClick($feature, $featureTipVisible, $tsListVisible);"
+                road-alarm-length = "raLength">
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- 布控报警 -->
+  <div class="panel panel-default" style="margin-bottom:0px" ng-hide="!layersSwitcher && !showBKAlarm">
+    <div class="panel-heading" 
+      ng-show="layersSwitcher"
+      ng-click="showBKAlarm = true;layersSwitcher =!layersSwitcher">
+     布控报警: {{bkInfos.length || 0}}
+        <i class="fa fa-exclamation-circle yhte-ico-danger" ng-show="bkInfos.length > 0"></i>
+        <i class="fa fa-angle-double-up pull-right"></i>
+    </div>
+    <div class="panel-body"
+    ng-show="showBKAlarm && layersSwitcher === false" style="min-height:360px">
+      <div atms-bk-alarm
+      data = "bkInfos">
+      </div>
+    </div>
+  </div>
+  <!-- 返回 -->
+  <div class="panel panel-default" style="margin-bottom:0px">
+    <div class="panel-heading" 
+        ng-click="layersSwitcher = true;showTrack = false;showBKAlarm = false;showRoadAlarm = false;"
+        ng-show="!layersSwitcher">
+        返回: 
+        <i class="fa fa-angle-double-down">
+        </i>
+    </div>
+  </div>
+</div>
+
+
+<!-- 查询 -->
+<div class=" layer-attrs-grid" 
+  style="z-index:999;position: absolute;top: 3px;left: 32px;width:300px;">
+
+  <!-- 搜索框 -->
+  <div id = "keyboard" class="input-group">
+    <input type="text" class="form-control" 
+      ng-model="text"  ng-keypress="enter($event)"
+      ng-init="placeholder='输入查询条件:'"
+      placeholder="{{placeholder}}">
+    <span class="input-group-btn">
+      <button class="btn btn-primary searchbutton" type="button">
+        <span class="glyphicon glyphicon-search" style="color:#fff;"></span>
+      </button>
+    </span>
+  </div>
+   
+  <!-- features list -->
+  <div class="ts-list" style="margin:5px 0 0;" ng-hide="!tsListVisible"
+    data="features" 
+    on-item-click="onTsListItemClick($feature);"
+    on-close="onTsListClean();"
+    on-fetch="onTsListFetch();"
+    cur-Layer="cur_layer">
+  </div>
+
+  <!-- feature tip -->
+  <div style="margin-top:5px;" 
+    feature-tip
+    ng-hide="!featureTipVisible"
+    map="map"
+    feature="feature"
+    on-show="onFeatureTipShow();"
+    on-close="onFeatureTipClose();">
+  </div>
+
+  <div msg-sender 
+    ng-hide="!msgSenderVisible"
+    style="margin-top:5px;"
+    on-close="msgSenderVisible=false;"
+    on-call="msgSenderVisible=true;">
+  </div>
+</div>
+
+<div class=" layer-attrs-grid" 
+  style="z-index:999;position: absolute;top: 40px;left: 400px;width:300px;">
+
+  <div atms-wechat-sender 
+    ng-hide="!msgSenderVisible1"
+    on-close="msgSenderVisible1=false;"
+    on-call="msgSenderVisible1=true;">
+  </div>
+
+</div>
+

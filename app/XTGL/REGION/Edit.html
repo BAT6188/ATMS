@@ -1,0 +1,57 @@
+<div class="col-100-auto col-sm-4">
+  <legend class="col-sm-12">辖区管理</legend>
+  
+  <div class="hide" ng-show="record">
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="text" class="form-control" disabled ng-model="record.name" placeholder="部门名称：鼓楼大队">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="text" class="form-control" disabled ng-model="record.deptCode"  placeholder="部门代码：320302000000">
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- <button class="btn btn-sm btn-default" ng-hide="record.fid" ng-click="addRegion();">新增</button>
+        <button class="btn btn-sm btn-primary" ng-show="record.fid" ng-click="">修改</button>
+        <button class="btn btn-sm btn-danger" ng-show="record.fid" ng-click="removeRegion(record);">删除</button> -->
+        <button class="btn btn-sm btn-default" ng-click="cancel();">取消</button>
+        <div class="btn-group pull-right">
+          <button class="btn btn-sm btn-danger" ng-show="record.wkt" ng-click="cleanWkt(record);">清除区域</button>
+          <!-- <button class="btn btn-sm btn-default" ng-show="record.wkt" ng-click="editWkt(record);">编辑区域</button> -->
+          <!-- <button class="btn btn-sm btn-default" ng-hide="record.wkt" ng-click="draw(record);">绘制区域</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-danger" ng-if="error">
+        {{error}}
+        <br><br>
+        <button class="btn btn-success btn-xs" ng-click="loadRegions();">刷新</button>
+      </div>
+      <table class="table table-bordered table-condensed" ng-if="!error">
+        <tbody>
+          <tr ng-repeat="region in regions">
+            <td class="no">{{$index+1}}</td>
+            <td style="background: {{region.color}}; width: 10px;"></td>
+            <td><a ng-click="selectRegion(region);">{{region.name}}</a></td>
+            <td>{{region.deptCode}}</td>
+            <td><a ng-click="cleanWkt(region);" ng-show="region.wkt">清除区域</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-8">
+  <div yhte-map inst="map" class="my-box-shdow" style="height:100%;">
+  </yhte-map>
+</div>

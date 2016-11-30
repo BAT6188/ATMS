@@ -1,0 +1,29 @@
+
+.body-background-img {
+  text-align: center;
+  position:relative;/*ie7 bug*/
+  font-family: Times,sans-serif;
+  overflow: hidden;
+  background: #075597 url('../img/lgn_body.png') left center repeat-x;
+  /*ie6涓� body overflow鐨勯儴鍒嗚櫧鐒惰缃负hidden,浣哹ody鑳屾櫙鍥剧殑灞呬腑瀵归綈center渚濇棫浼氳绠楄闅愯棌鐨勯偅閮ㄥ垎楂樺害銆傝缃産ackground-attachment: fixed 鍥哄畾鑳屾櫙*/
+  background-attachment: fixed;
+}
+
+#loginContainer{
+	height: 610px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 1024px;
+}
+
+#loginContainer .center{
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 340px;/*1024 - 328 - 414*/
+	height: 150px;/*610 - 318 - 217*/
+	background: url('../img/lgn_body_c_320500_g.png') no-repeat;
+	padding:230px 342px 230px 342px;
+}
+

@@ -1,0 +1,59 @@
+<legend>执行特勤：{{record.name}}</legend>
+<div class="col-100-auto col-sm-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5>
+        {{selected.name}} 周边50米视频
+      </h5>
+    </div>
+    <div class="panel-body">
+      <div>
+        <p ng-show="selected.config.videos.length === 0">周边无视频</p>
+        <div class="row" ng-repeat="video in selected.config.videos | paginator:page:size">
+          <div class="col-sm-12 pointer" ng-click="openVideo(video)">
+            <span class="badge badge-success pull-left">
+              {{(page-1)*size+$index+1}}
+            </span>
+            <span class="inlineTxt pull-left" style="max-width: 250px;" title="{{video.name}}">
+              {{video.name || 'XXX'}}
+            </span>
+          </div>
+     <!--      <div class="col-sm-2">
+            <div class="hover-show-item pull-right" style="padding:0 5px;">
+              <a tooltip="设置预置位">
+                <span class="fa fa-wrench"></span>
+              </a>
+            </div>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pagination-sm pull-right"
+              ng-show="total>size"
+              pagination 
+              boundary-links="true" 
+              total-items="total" 
+              page="page"
+              items-per-page="size"
+              max-size="5" 
+              previous-text="&lsaquo;" 
+              next-text="&rsaquo;" 
+              first-text="&laquo;" 
+              last-text="&raquo;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-100-auto col-sm-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">视频查看</h3>
+    </div>
+    <div class="panel-body">
+      <div atms-jq-video data="roadVideos" ocx-height='310px' style="height: 360px;" ng-hide="isHideVideo"></div>    
+    </div>
+  </div>
+</div>

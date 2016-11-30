@@ -1,0 +1,13 @@
+<ul class="nav nav-pills" id="myTab">
+    <!-- <li><a href="" data-toggle="pill" ng-click="entryTab(1)">勤务信息</a></li> -->
+    <li class="active"><a href="" data-toggle="pill" ng-click="entryTab(2)">勤务考核</a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane" id="info">
+        <div ng-include="'../static/vqd/src/QWGL/KH/Assess4TaskNew.1.html'"></div>
+    </div>
+    <div class="tab-pane active" id="assess">
+        <div ng-include="'../static/vqd/src/QWGL/KH/Assess4TaskNew.2.html'"></div>
+    </div>
+</div>

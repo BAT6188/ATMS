@@ -1,0 +1,109 @@
+<legend>诱导屏</legend>
+<div class="col-md-3">
+  <div class="list-group">
+      <a href="#/SBGL.DeviceRegistDevice" class="list-group-item">基础设备管理</a>
+      <a href="#/SBGL.DeviceRegistFacility" class="list-group-item">基础设施管理</a>
+      <a href="#/ZHGL.TrafficSigns" class="list-group-item">标志标牌管理</a>
+      <a href="#/XXFB.CMS.CmsList" class="list-group-item active">诱导屏管理</a>
+      <a ng-href="#/SBGL.KK.List" class="list-group-item">卡口点位管理</a>
+  </div>
+</div>
+<div class="col-sm-9">
+  <!-- 工具栏 -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="col-sm-9 padLR0">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <a class="btn btn-sm btn-success" tooltip="新增诱导屏" ng-href="#/XXFB.CMS.CmsNew">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        </span>
+        <input type="text" class="form-control input-sm" placeholder="输入诱导屏名称..." ng-model="Q.name">
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <span class="input-group-addon">类型</span>
+        <select class="form-control input-sm"
+          ng-options="c.code as c.name for c in types"
+          ng-model="Q.typeCode">
+        </select>
+      </div>
+    </div>
+    <button class="col-sm-1 btn btn-sm btn-primary" type="button"
+      ng-click="query();">
+      <i class="fa fa-search"> 查询</i>
+    </button>
+  </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-sm-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <th class="no">编号</th>
+          <th style="width:200px;">诱导屏名称</th>
+          <th>地址</th>
+          <th style="width:400px;">描述</th>
+          <th style="width:50px;">
+            操作
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td style="text-align:center;">
+            <span class="badge" 
+              ng-class="{'badge-success': record.connected.code ==='1'}"
+              tooltip="{{record.connected.name||'未连接'}}" tooltip-placement="right">
+              {{record.id}}
+            </span>
+          </td>
+          <td>
+            <a ng-href="#/XXFB.CMS.CmsEdit/{{record.id}}">
+              {{record.name}}
+            </a>
+          </td>
+          <td>{{record.address}}</td>
+          <td>{{record.remark}}</td>
+          <td>
+            <a ng-href="#/XXFB.ROAD.PostSelector/{{record.id}}" tooltip="{{record.name}}">
+              <span class="fa fa-wrench"></span>
+            </a>
+          </td>
+          <!-- <td class="text-center">
+            <a ng-href="#/XXFB.ROAD.PostSelector/{{record.id}}">
+                <i class="fa fa-pencil yhte-ico-primary" > 匹配路段</i>
+            </a>
+            <a ng-href="#/XXFB.CMS.PlayList/{{record.id}}/{{record.weight}}/{{record.height}}">
+                <i class="fa fa-list-alt yhte-ico-primary" > 播放列表</i>
+            </a>
+            <a styel="margin-left:45px">
+              <i class="fa fa-video-camera" ng-click="preview(record);"> 预览</i>
+            </a>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-sm-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,117 @@
+<!-- 某个岗位信息 -->
+<div class="row" ng-show="state === 'postDetail'">
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-book"> 岗位信息</i></h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <tbody>
+                    <tr><th>岗位名称</th><td>{{selectPost.name}}</td></tr>
+                    <tr><th>开始时间</th><td>{{selectPost.planStartTime}}</td></tr>
+                    <tr><th>结束时间</th><td>{{selectPost.planEndTime}}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="input-group">
+        <input type="text" class="form-control input-sm" ng-model="Q.name" placeholder="警员姓名">
+        <span class="input-group-btn">
+          <button class="btn btn-primary btn-sm" type="button" ng-click="query()">
+              <i class="fa fa-search" tooltip="查询"></i>
+          </button>
+          <button class="btn btn-danger btn-sm" ng-click="removePost()">
+            <i class="fa fa-times"> 删除岗位</i> 
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row marginLR0">
+        <a ng-click="editViewChange()" ng-hide="editView" style="cursor:pointer">点击这里增删警员数据...</a>
+        <a ng-click="editViewChange()" ng-show="editView" style="cursor:pointer">退出警员数据编辑...</a>
+      </div>
+      <!-- 所有列表 -->
+      <div class="col-md-5" ng-show="editView" >
+        <div class="row">
+          <table class="table table-bordered table-hover table-condensed">
+            <thead>
+              <tr>
+                <th><input type="checkbox" ng-model="allChecked" ng-change="selectAll();"></th>
+                <th>编号</th>
+                <th>名称</th>
+                <th>类型</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="record in policeList">
+                <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+                <td>{{record.userId}}</td>
+                <td><a>{{record.userName}}</a></td>
+                <td>{{record.dept.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false"
+                      total-items="total"
+                      page="Q.page"
+                      items-per-page="Q.pageSize"
+                      max-size="Q.maxSize"
+                      on-select-page="pChange(page)"
+                      previous-text="上一页"
+                      next-text="下一页"
+                      last-text=">>"
+                      first-text="<<">
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding-top: 60px" class="col-md-2" ng-show="editView">
+        <div class="row">
+            <button title="选择添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPolice()">
+                <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
+        <div class="row">
+            <button title="全部添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPolice(true)">
+                <i class="fa fa-angle-double-right"></i>
+            </button>
+        </div>
+
+        <div class="row">
+            <button title="全部删除" data-placement="right" data-toggle="tooltip" class="btn  btn-success btn-sm" ng-click="dropPolice(true)">
+                <i class="fa fa-angle-double-left"></i>
+            </button>
+        </div>
+      </div>
+      <!-- 已有数据列表 -->
+      <div class="col-md-12" id="pList">
+        <div class="row">
+          <table class="table  table-condensed">
+            <tbody>
+              <tr ng-repeat="record in selectPost.polices">
+                <td>
+                  <i class="fa fa-times" ng-click="dropPolice($index)"></i>
+                </td>
+                <td>{{record.userId}}</td>
+                <td>{{record.userName}}</td>
+                <td>{{record.dept.name}}</td>
+                <td>
+                  <span ng-show="record.actualStartTime"> <strong>到岗时间:</strong>{{record.actualStartTime}}</span>
+                  <span style="margin-left:15px" ng-show="record.actualEndTime && record.actualEndTime"> <strong>离岗时间:</strong>{{record.actualEndTime}}</span>
+                </td>
+                <td>
+                  <i class="fa fa-check yhte-ico-primary" ng-show="!record.actualStartTime" ng-click="confirmStart(record)"> 确认到岗</i>
+                  <i class="fa fa-times yhte-ico-primary" ng-show="!record.actualEndTime && record.actualStartTime" ng-click="confirmEnd(record)"> 确认离岗</i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

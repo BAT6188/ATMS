@@ -1,0 +1,35 @@
+<legend>执行特勤：{{record.name}}</legend>
+<div class="col-100-auto col-sm-12" style="margin-bottom:15px;">
+  <button class="btn btn-default" ng-click="openVideoPage();">
+    <span class="glyphicon glyphicon-facetime-video">
+      新页面查看关联视频
+    </span>
+  </button>
+  <button type="submit" class="btn btn-primary pull-right" ng-click="finish()">
+    <span class="glyphicon glyphicon-ok">结束特勤</span>
+  </button> 
+</div>
+
+<div class="col-100-auto col-sm-3" ng-repeat="snc in sncs">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <span class="badge badge-success pull-left">
+          {{$index+1}}
+        </span>
+        {{snc.name}}
+        <a class="pointer pull-right alert-link" ng-click="showVideos(snc);" tooltip="查看关联视频">
+          <span class="glyphicon glyphicon-facetime-video">
+          </span>
+        </a>
+      </h3>
+    </div>
+    <div class="panel-body" style="text-align:center;">
+      <div signal-map
+        inter-id="snc.id"
+        image-size="[280,280]"
+        lane-width="20">
+      </div>  
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<!-- 地图 -->
+<div style="position:absolute;top:0;bottom:0;left:0;right:0px;">
+  <div yhte-map class="row" inst="map" style="height:100%;">
+  </div>
+</div>
+
+<!-- 查询 -->
+<div class=" layer-attrs-grid" 
+  style="z-index:999;position: absolute;top: 58px;left: 32px;width:548px;">
+    <div class="col-sm-12">
+      <div class="input-group"> 
+          <span class="input-group-addon">时间</span>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="选择日期"
+            ng-model="Q.startTime"
+            format="'yyyy-mm-dd hh:mm:ss'"
+            min-view="hh"
+            start-view="dd">
+          </div>
+          <span class="input-group-addon">到</span>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="选择日期"
+            ng-model="Q.endTime"
+            format="'yyyy-mm-dd hh:mm:ss'"
+            min-view="hh"
+            start-view="dd"
+            start-date="Q.startTime">
+          </div>
+          <span class="input-group-addon">
+             <i class="fa fa-search" ng-click="query()"> 查看轨迹</i>
+
+          </span>
+          <span class="input-group-addon">
+             <i class="fa fa-location-arrow" ng-click="reDraw()" ng-hide="reDrawing"> 回放</i>
+             <i class="fa fa-location-arrow" ng-click="cancelReDraw()" ng-show="reDrawing"> 取消回放</i>
+          </span>
+          <span class="input-group-addon">
+             <a ng-href="#/TSJK.Tsjk2" style="color:#000"><i class="fa fa-arrow-left"> 返回</i></a>
+          </span>
+      </div>
+    </div>
+</div>
+
+<div class="alert alert-default my-box-shdow"
+style="z-index:999;position: absolute;top: 58px;right: 32px;width:200px;">
+  <h2>{{feature.attributes.NAME}} </h2>
+  编号: {{feature.attributes.POLICE_NO}} <br>
+  部门: {{feature.attributes.DEPT_NAME}} <br>
+  联系电话: {{feature.attributes.POLICE_PHONE}} <br>
+  警务通: {{feature.attributes.POLICE_NO}}<br>
+  驾乘车辆: {{feature.attributes.EQUIP_CODE}}  <br>
+  状态：{{['离线','在线','越界'][feature.attributes.STATUS] || '未定义'}}  <br>
+</div>

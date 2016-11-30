@@ -1,0 +1,36 @@
+<div class="tq-positions">
+  <div class="row">
+    <div class="col-sm-6">
+      <button class="btn btn-xs btn-link btn-success"
+        ng-click="addPositionFromMap();">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <a class="btn btn-xs btn-primary pull-right" 
+        ng-click="pushDevices();"
+        ng-disabled="!positions.length">
+        <span class="glyphicon glyphicon-saved"></span> 保存
+      </a>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-condensed">
+    <tbody>
+      <tr ng-repeat="position in positions">
+        <td style="width:10px;">{{$index + 1}}</td>
+        <td ng-click="itemClick(position);" hover-show>
+          <a>位置 {{$index + 1}}: {{position.distance.toFixed(1)}}m</a>
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="remove(position);">
+            <i class="glyphicon glyphicon-remove yhte-ico-danger"></i>
+          </button>
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="mapCenter(position);">
+            <i class="fa fa-map-marker"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

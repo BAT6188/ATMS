@@ -1,0 +1,124 @@
+<div class="modal-header">
+	<button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+	<h4 class="modal-title">
+		<b>新增灯组</b>
+	</h4>
+</div>
+
+<div class="modal-body">
+
+	<div class="row">
+		<div class="col-sm-12">
+			<form name="iForm" class="form-horizontal">
+				<div class="row">
+					<label for="" class="col-sm-2 control-label input-sm font14">类型</label>
+					<div class="col-sm-8">
+						<select name="type.code" type="text"
+							class="form-control input-sm"
+							ng-options="c.name for c in types"
+							ng-model="record.type"></select>
+					</div>
+				</div>
+				<div class="row">
+					<label for="" class="col-sm-2 control-label input-sm font14">放行方向</label>
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-2">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="0" ng-init="record.direction.code='0'"> 北 </label>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+					</div>
+					<div class="col-sm-2">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="7"> 西北 </label>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="1"> 东北 </label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+					</div>
+					<div class="col-sm-3">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="6"> 西 </label>
+						</div>
+					</div>
+					<div class="col-sm-1">
+					</div>
+					<div class="col-sm-3">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="2"> 东 </label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+					</div>
+					<div class="col-sm-2">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="5"> 西南 </label>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="3"> 东南 </label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+					</div>
+					<div class="col-sm-2">
+						<div class="radio">
+							<label> <input type="radio" name="direction"
+								ng-model="record.direction.code" value="4"> 南 </label>
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<label for="" class="col-sm-2 control-label input-sm font14">端口号</label>
+					<div class="col-sm-8">
+						<select name="port.code" type="text"
+							class="form-control input-sm"
+							ng-options="c.name for c in ports"
+							ng-model="record.port"></select>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="menuContent1" class="treeview-back"
+		style="display: none; position: absolute; z-index: 10000; max-height: 170px; background-color: #ffffff;">
+		<ul id="userTree" class="ztree" style="margin-top: 0; width: 160px;"></ul>
+	</div>
+
+	<div id="menuContent2" class="treeview-back"
+		style="display: none; position: absolute; z-index: 10000; max-height: 169px; background-color: #ffffff;">
+		<ul id="pointTree" class="ztree" style="margin-top: 0; width: 160px;"></ul>
+	</div>
+
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-default btn-sm" ng-click="close()">取消</button>
+	<a class="btn btn-primary btn-sm" ng-click="save()"
+		ng-disabled="iForm.$invalid">保存</a>
+</div>

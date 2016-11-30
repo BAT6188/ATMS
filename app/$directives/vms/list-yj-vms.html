@@ -1,0 +1,76 @@
+<div class="list-yj-vms" style="height: 300px; overflow-y: auto;">
+    <div id="msgDiv" class="text-danger"></div>
+    <div class="row" ng-init="init()">
+        <div class="btn-group pull-right">
+            <button class="btn btn-xs btn-link" ng-click="synchronizationClick();" is-show="isLogin">
+                <span class="fa fa-spinner"></span>同步
+            </button>
+            <button class="btn btn-xs btn-link" ng-click="onSearch();" is-show="isLogin">
+                <span class="fa fa-eye"></span>查看
+            </button>
+            <button class="btn btn-xs btn-link" ng-click="newClick();" is-show="isLogin">
+                <span class="glyphicon glyphicon-plus"></span>新增
+            </button>
+            <button class="btn btn-xs btn-link" ng-click="youclose();" ng-show="isclose!=-1">
+                <span class="fa fa-times"></span>关屏
+            </button>
+            <button class="btn btn-xs btn-link" ng-click="kaip();" ng-show="isclose==-1">
+                <span class="fa fa-check"></span>开屏
+            </button>
+            <!-- <button type="button" class="btn btn-link btn-xs" ng-click="getImgFromLed();">
+                抓屏
+              </button> -->
+        </div>
+    </div>
+    <div class="row" ng-repeat="prog in progs">
+        <div class="col-md-6">
+            <a style="cursor:pointer;"  ng-click="itemClick(prog)">
+                <span class="badge badge-success">{{$index + 1}}</span>
+                {{prog.content}}
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="hover-show-item pull-right" style="padding:0 5px;">
+                <a ng-click="itemTop(prog)" tooltip="置顶" ng-show="prog.listIndex>0">
+                    <i class="fa fa-caret-square-o-up"></i>
+                </a>
+                <a ng-click="itemUp(prog)" tooltip="向上移动" ng-show="prog.listIndex>0">
+                    <i class="fa fa-arrow-circle-up"></i>
+                </a>
+                <a ng-click="itemDown(prog)" tooltip="向下移动" ng-show="prog.listIndex<progs.length-1">
+                    <i class="fa fa-arrow-circle-down"></i>
+                </a>
+                <a ng-click="itemBottom(prog)" tooltip="置底" ng-show="prog.listIndex<progs.length-1">
+                    <i class="fa fa-caret-square-o-down"></i>
+                </a>
+                <a ng-click="setDisable(prog);" tooltip="设为失效">
+                    <i class="fa fa-times-circle"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    以下为失效条目：
+
+    </div>
+
+    <div class="row" ng-repeat="noprog in noprogs">
+        <div class="col-md-6">
+
+                <span class="badge badge-danger">{{$index + 1}}</span>
+               <span class="text-muted">{{noprog.content}}</span>
+
+        </div>
+        <div class="col-md-6">
+            <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a ng-click="setEnable(noprog);" tooltip="设为有效">
+                <i class="fa fa-check-circle"></i>
+            </a>
+                </div>
+        </div>
+    </div>
+
+
+
+</div>

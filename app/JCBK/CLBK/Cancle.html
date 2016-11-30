@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title">
+    <b>撤控</b>
+  </h4>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-2 control-label input-sm font14">撤控原因:</label>
+      <div class="col-sm-9 padLR0" style="margin-left: -5px">
+        <textarea class="form-control" ng-model="cdispReason"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-2 control-label input-sm font14">撤控人:</label>
+      <div class="col-sm-9 padLR0" style="margin-top: 5px">
+        {{user.userName || '暂缺'}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-2 control-label input-sm font14">审核单位:</label>
+      <div class="col-sm-9 padLR0" style="margin-top: 5px">
+        {{user.deptName || '暂缺'}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-2 control-label input-sm font14">证件号码:</label>
+      <div class="col-sm-9 padLR0" style="margin-top: 5px">
+        {{user.idCard || '暂缺'}}</div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-sm" ng-click="close()">取消</button>
+  <button type="button" class="btn btn-primary btn-sm"
+    ng-disabled="quickForm.$invalid" ng-click="cancle()">确认</button>
+</div>

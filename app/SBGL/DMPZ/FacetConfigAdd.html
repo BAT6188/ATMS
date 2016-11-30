@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <button type="button btm-sm" class="close" ng-click="close()">
+        &times;
+    </button>
+    <h4 class="modal-title"><b>断面添加</b></h4>
+</div>
+<div class="modal-body">
+    <form name="recordForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">断面ID</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.facetId.$invalid}">
+                    <input name="facetId" type="text" class="form-control input-sm" ng-model="record.facetId" required>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">断面名称</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.facetName.$invalid}">
+                    <div class="input-group">
+                        <input type="text" name="facetName" class="form-control input-sm" ng-model="record.facetName" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-sm" type="button" ng-click="locate();">
+                                <i class="fa fa-map-marker fa-1"></i>
+                            </button> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">经度</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.lng.$invalid}">
+                    <input name="lng" type="text" class="form-control input-sm" ng-model="record.lng" disabled required>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">纬度</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.lat.$invalid}">
+                    <input name="lat" type="text" class="form-control input-sm" ng-model="record.lat" disabled required>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">车道数量</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.laneCount.$invalid}">
+                    <input name="laneCount" type="text" class="form-control input-sm" ng-model="record.laneCount" required>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">是否使用</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.inUse.$invalid}">
+                    <select name="inUse" type="text" ng-model="record.inUse" class="form-control input-sm" required>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">备注</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control input-sm" ng-model="record.remark">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">畅通速度</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.trafficSmoothSpeed.$invalid}">
+                    <input name="trafficSmoothSpeed" type="text" class="form-control input-sm" ng-model="record.trafficSmoothSpeed" required>
+                </div>
+            </div>
+            <!-- <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">正常速度</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.trafficCommonSpeed.$invalid}">
+                    <input name="trafficCommonSpeed" type="text" class="form-control input-sm" ng-model="record.trafficCommonSpeed" required>
+                </div>
+            </div> -->
+            <div class="col-sm-6">
+                <label for="" class="col-sm-4 control-label input-sm font14">拥堵速度</label>
+                <div class="col-sm-8" ng-class="{'has-error': recordForm.trafficJamSpeed.$invalid}">
+                    <input name="trafficJamSpeed" type="text" class="form-control input-sm" ng-model="record.trafficJamSpeed" required>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default btn-sm" ng-click="close();">
+            取消
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" ng-disabled="recordForm.$invalid" ng-click="save();">
+            确认
+        </button>
+    </div>
+</div>

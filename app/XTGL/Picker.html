@@ -1,0 +1,134 @@
+<legend class="col-sm-12">
+  Bootstrap-select 
+  <a style="font-size:14px;" href="http://silviomoreto.github.io/bootstrap-select/3/">
+    http://silviomoreto.github.io/bootstrap-select/3/
+  </a> 
+</legend>
+
+<div class="row">
+  <div class="col-sm-6">
+    <select class="selectpicker show-tick form-control" 
+      ng-model="facet" 
+      ng-options="facet.facetName for facet in facets"
+      options="facets"
+      title="选择断面"
+      data-live-search="true"
+      data-subtext="laneCount"
+      multiple>
+    </select>
+  </div>
+  <div class="col-sm-6">
+    <select class="selectpicker show-tick form-control" 
+      ng-model="deptCode" 
+      ng-options="dept.deptCode as dept.deptName group by dept.pid for dept in depts"
+      options="depts"
+      title="选择部门"
+      data-live-search="true"
+      data-subtext="laneCount">
+    </select>
+  </div>
+</div>
+
+<legend class="col-sm-12">
+  Datetimepicker 
+  <a style="font-size:14px;" href="">
+    
+  </a> 
+</legend>
+
+<div class="row">
+  <form name="" class="">
+    <div class="row marginLR0">
+      <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">开始时间</label>
+      <div class="col-sm-4">
+        <div datetimepicker
+          placeholder="开始时间"
+          ng-model="start"
+          format="yyyy/MM/dd hh:mm:ss">
+        </div>
+      </div>
+      <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">结束时间</label>
+      <div class="col-sm-4">
+        <div datetimepicker
+          placeholder="结束时间"
+          ng-model="end"
+          start-date="start"
+          language="zh-CN">
+        </div>
+      </div>
+    </div>
+
+    <div class="row marginLR0">
+      <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">日期</label>
+      <div class="col-sm-4">
+        <div datetimepicker
+          placeholder="只可选择日期，不能选择时刻"
+          ng-model="date"
+          end-date="start"
+          pick-time="false">
+        </div>
+      </div>
+      <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">时刻</label>
+      <div class="col-sm-4">
+        <div datetimepicker
+          placeholder="只能选择当天的时刻"
+          format="hh:mm:ss"
+          ng-model="time"
+          pick-date="false"
+          pick-twelve-hour-format="true">
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<legend class="col-sm-12">
+  上传测试 
+  <a style="font-size:14px;" href="">
+    
+  </a> 
+</legend>
+
+<div class="row">
+  <div class="col-sm-6">
+    <input type="file" name="file_upload" id="file_upload" />
+  </div>
+  <div class="col-sm-6">
+    <button class="btn btn-success btn-sm" ng-click="upload();">上传</button>
+  </div>
+</div>
+
+
+<!-- 有以下一系列参数： -->
+<!-- <datetimepicker
+  placeholder="结束时间"
+  ng-model="endTime"
+  format="dd/MM/yyyy hh:mm:ss"
+  language="pt-BR"
+  pick-seconds="true"
+  pick-time="true"
+  pick-twelve-hour-format="true"
+  pick-date="true"
+  start-date="startTime"
+  end-date="end"
+  mask-input="false">
+</datetimepicker> -->
+
+<!-- 默认值如下
+$.fn.datetimepicker.defaults = {
+  maskInput: true,           // disables the text input mask
+  pickDate: true,            // disables the date picker
+  pickTime: true,            // disables de time picker
+  pick12HourFormat: false,   // enables the 12-hour format time picker
+  pickSeconds: true,         // disables seconds in the time picker
+  startDate: -Infinity,      // set a minimum date
+  endDate: Infinity          // set a maximum date
+}; -->
+
+<!-- 几种普遍的日期格式：
+2014-02-04 10:45:42
+2014.02.04 10:45:42
+2014/02/04 10:45:42 -->
+
+

@@ -1,0 +1,18 @@
+<textarea>
+package {{packagePath}};
+
+public class {{javaClass}}QB extends BaseQueryBean {
+{{#joinNew fields}}{{#if this.isQuery}}
+	/**
+	 * {{this.dataDesc}}
+	 */
+	private {{this.dataType}} {{this.dataName}};
+	
+	public  {{this.dataType}} get{{upperFirstCase this.dataName}}() {
+		return {{this.dataName}};
+	}
+	public void set{{upperFirstCase this.dataName}}({{this.dataType}} {{this.dataName}}) {
+		this.{{this.dataName}} = {{this.dataName}};
+	}{{/if}}{{/joinNew}}
+}
+</textarea>

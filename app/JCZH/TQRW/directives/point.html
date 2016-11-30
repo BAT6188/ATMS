@@ -1,0 +1,10 @@
+<div class="alert alert-warning my-box-shdow">
+  <button ng-click="close()" type="button" class="close">&times;</button>
+  <a class="alert-link pointer" tooltip="点击添加设备">
+    调度点
+    <br>
+    <a map-center geometry="data.geometry" lng="data.geometry.lng" lat="data.geometry.lat">
+      {{data.attributes.distance.toFixed(0)}}米
+    </a>
+  </a>
+</div>

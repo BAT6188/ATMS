@@ -1,0 +1,203 @@
+<div>
+  <div class="row" ng-show="cur_layer">
+    <div class="col-sm-12">
+      <span style="margin: 0 5px 0 0;"
+        class="pointer label label-default"
+        ng-class="{'1':'label-warning','2':'label-success','3':'label-info','4':'label-primary','5':'label-danger'}['{{stat.icon}}']||'btn-default'"
+        ng-click="statusClick(stat);" ng-if="stat.statusName!='关屏'&&stat.statusName!='关屏断开'"
+        ng-repeat="stat in cur_layer.status">{{stat.statusName}} {{stat.statusNum}}</span>
+      <span class="pointer label label-default" ng-click="statusClick(null);">全部</span>
+    </div>
+  </div>
+
+  <div class="alert my-box-shdow" ng-class="{'alert-warning': mapSelecting, 'alert-default': !mapSelecting}">
+    <div class="col-sm-12">
+      <div class="row">
+        <button type="button" class="close" ng-click="close();">&times;</button>    
+      </div>
+    </div>
+    <div class="row" >
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-11">
+        <button class="btn btn-sm btn-info" ng-if="data[0].attributes.DEVICE_TYPE == '3'" ng-click="shuaxing()">刷新</button>
+        </div>
+    </div>
+
+    <div class="row" ng-repeat="feature in data | paginator:data.length>size?page:1:size">
+
+      <div ng-if="feature.attributes.POLICE_NO" hover-show>
+        <div class="col-sm-3 pointer" ng-click="itemClick(feature)">
+          <span
+            class="badge" 
+            ng-class="{'0':'badge-info','1':'badge-success','2':'badge-warning'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['离线','在线','越界'][feature.attributes.STATUS]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <div class="col-sm-3">
+            {{feature.attributes.DEPT_NAME}}
+        </div>
+        <div class="col-sm-2">
+            {{feature.attributes.MOVING=='1'?'移动中':'未移动'}}
+        </div>
+        <div class="col-sm-4">
+          {{feature.attributes.POLICE_PHONE}}
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y" icon="/atms/resources/img/map-center.png">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a tip-event event-name="'jwt:feature'" event-data="feature">
+              <span class="glyphicon glyphicon-phone" style="cursor: pointer;"></span>
+            </a>
+          </div>
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+                <a tip-event event-name="'trackPolice'", event-data="feature" style="margin-right:10px">
+                  <span class="fa fa-location-arrow" ng-if="!feature.onTrack"></span>
+                </a>
+          </div>
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a>
+              <span class="glyphicon glyphicon-phone-alt" ng-click="callOutPhone($event, feature.attributes.POLICE_PHONE);" style="cursor: pointer;"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="feature.attributes.CAR_NO" hover-show>
+        <div class="col-sm-4 pointer" ng-click="itemClick(feature)">
+          <span
+            class="badge" 
+            ng-class="{'0':'badge-info','1':'badge-success','2':'badge-warning'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['离线','在线','越界'][feature.attributes.STATUS]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <div class="col-sm-4">
+            {{feature.attributes.DEPT_NAME}}
+        </div>
+        <div class="col-sm-2">
+            {{feature.attributes.MOVING=='1'?'移动中':'未移动'}}
+        </div>
+        <div class="col-sm-2">
+          <a class="pointer">
+            {{feature.attributes.PHONE}}
+          </a>
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y" icon="/atms/resources/img/map-center.png">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a tip-event event-name="'trackCar'", event-data="feature" style="margin-right:10px">
+              <i class="fa fa-location-arrow" ng-if="!feature.onTrack"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="feature.attributes.GID !== undefined" hover-show>
+        <div class="col-sm-10 pointer" ng-click="itemClick(feature)">
+          <span
+            class="badge" 
+            ng-class="{'1':'badge-success','3':'badge-warning','4':'badge-danger'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['','畅通','','正常','拥堵'][feature.attributes.STATUS]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <div class="col-sm-2">
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a>
+              <span class="glyphicon glyphicon-map-marker" map-center geometry="feature.geometry"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="feature.attributes.PTASK_NAME" hover-show>
+        <div class="col-sm-10 pointer" ng-click="itemClick(feature)">
+          <span
+            class="badge" 
+            ng-class="{'1':'badge-danger','2':'badge-warning','3':'badge-success'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['未调度','已调度','已处置'][feature.attributes.STATUS-1]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <div class="col-sm-2">
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div ng-if="feature.attributes.DEVICE_TYPE == '3'" hover-show>
+        <div class="col-sm-10 pointer" ng-click="itemClick(feature)">
+          <span 
+            class="badge" 
+            ng-class="{'1':'badge-success','2':'badge-danger','-2':'badge-danger'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['连接','未连接'][feature.attributes.STATUS-1]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <!-- <div class="col-sm-6">
+            {{feature.attributes.ADDRESS}}
+        </div> -->
+        <div class="col-sm-2">
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--  
+      <div ng-if="feature.attributes.NAME" hover-show>
+        <div class="col-sm-10 pointer" ng-click="itemClick(feature)">
+          <span
+            class="badge" 
+            ng-class="{'1':'badge-success','2':'badge-danger','3':'badge-primary','4':'badge-warning','5':'badge-info'}['{{feature.attributes.STATUS}}']||'badge-default'"
+            tooltip="{{['正常','故障','维修中','已移除','已报废'][feature.attributes.STATUS-1]}}">
+            {{(page-1)*size+$index+1}}
+          </span>
+          {{feature.attributes.NAME || 'XXX'}}
+        </div>
+        <div class="col-sm-2">
+          <div class="hover-show-item pull-right" style="padding:0 5px;">
+            <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+     -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="pagination-sm pull-right"
+        ng-show="total>size"
+        pagination 
+        on-select-page="pageFunc(page)"
+        boundary-links="true" 
+        total-items="total" 
+        page="page"
+        items-per-page="size"
+        max-size="6" 
+        previous-text="&lsaquo;" 
+        next-text="&rsaquo;" 
+        first-text="&laquo;" 
+        last-text="&raquo;">
+      </div>
+    </div>
+  </div>
+</div>

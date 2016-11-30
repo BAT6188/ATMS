@@ -1,0 +1,124 @@
+<div class="modal-header">
+  <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title">
+    <b>新增黑名单布控</b>
+  </h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col-sm-8">
+      <form name="iForm" class="form-horizontal">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">黑名单类型</label>
+              <div class="col-md-8"
+                ng-class="{'has-error': iForm.dispType.$invalid}">
+                <select type="text" ng-model="record.type.code"
+                  class="form-control"
+                  ng-options="d.code as d.name for d in types">
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">车牌号码</label>
+              <div class="col-md-4"
+                ng-class="{'has-error': iForm.plateColor.$invalid}">
+                <select type="text" ng-model="record.plateColor.code"
+                  class="form-control"
+                  ng-options="d.code as d.name for d in plateColors">
+                </select>
+              </div>
+              <div class="col-md-4">
+                <input name="plateNo" type="text" ng-model="record.plateNo"
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">匹配精度</label>
+              <div class="col-md-8">
+                <select type="text" ng-model="record.matchLevel.code"
+                  class="form-control"
+                  ng-change="selChange(record.matchLevel.code)"
+                  ng-options="d.code as d.name for d in matchLevels" required>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">匹配号码</label>
+              <div class="col-md-8">
+                <input id="matchPlateNo" type="text" class="form-control"
+                  ng-model="record.matchPlateNo">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">联系电话</label>
+              <div class="col-md-8">
+                <input name="tel" type="text" class="form-control"
+                  ng-model="record.tel">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-md-4 control-label">报警有效期</label>
+              <div class="col-md-8"
+                ng-class="{'has-error': iForm.dispEndTime.$invalid}">
+                <input id="dispEndTime" calendar time="false" type="text"
+                  class="form-control" ng-model="record.alarmEndDate" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">黑名单原因</label>
+          <div class="col-md-10">
+            <textarea rows="2" cols="50" class="form-control"
+              ng-model="record.reason"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label">拦截说明</label>
+          <div class="col-md-10">
+            <textarea rows="2" cols="50" class="form-control"
+              ng-model="record.desc"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-2 control-label">车辆照片</label>
+          <div class="col-md-8">
+            <input id="fileToUpload" type="file" name="fileToUpload" size="45">
+          </div>
+          <button class="btn btn-primary btn-sm col-md-1"
+            ng-click="ajaxFileUpload()">
+            <i class="fa fa-upload">上传</i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div id="imgContent" class="col-md-4"
+      style="border: 1px solid rgb(66, 139, 202); height: 320px;"></div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-sm" ng-click="close()">取消</button>
+  <a class="btn btn-primary btn-sm" ng-click="save()"
+    ng-disabled="iForm.$invalid"> <i class="fa fa-check"></i> 保存 </a>
+</div>

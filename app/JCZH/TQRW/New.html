@@ -1,0 +1,95 @@
+<div yhte-map style="height:100%;">
+</div>
+
+<div class="alert alert-default my-box-shdow" 
+  style="z-index:999;position: absolute;top:15px;left:15px;">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- <h4 ng-if="step===0">一、输入新任务名称:</h4>
+      <h4 ng-if="step===1">二、绘制路线:</h4>
+      <h4 ng-if="step===2">三、配置岗位:</h4> -->
+      <ol class="breadcrumb" style="margin-bottom:0;">
+        <li ng-class="{active: step !== 0}">1、输入名称</li>
+        <li ng-class="{active: step !== 1}">2、绘制路线</li>
+        <li ng-class="{active: step !== 2}">3、配置岗位</li>
+        <li ng-class="{active: step !== 3}">4、配置设备</li>
+      </ol>
+    </div>
+  </div>
+
+  <div tq-create-step1
+    ng-show="step===0"
+    on-next-click="step=1"
+
+    name="record.name">
+  </div>
+
+  <div tq-create-step2
+    ng-show="step===1"
+    on-next-click="step=2"
+    on-prev-click="step=0"
+    active="step===1"
+    
+    layer="routeLayer"
+
+    start-point="record.startPoint"
+    end-point="record.endPoint"
+    line-desc="record.lineDesc"
+    line-length="record.lineLength"
+    areas="areas">
+  </div>
+
+  <div tq-create-step3
+    ng-show="step===2"
+    on-next-click="step=3"
+    on-prev-click="step=1"
+    active="step===2"
+
+    layer="postLayer">
+  </div>
+  
+  <div tq-create-step4
+    ng-show="step===3"
+    on-save-click="onSaveClick();"
+    on-prev-click="step=2"
+    active="step===3"
+
+    target-layer="routeLayer"
+    
+    layer="pointLayer">
+  </div>
+</div>
+
+<div style="z-index:999;position: absolute;right:5px;top:10px;bottom:15px;padding: 0 5px;overflow-y:auto;overflow-x:hidden;"
+  class="yhte-tq-posts"
+  layer="postLayer"
+  police-show="$parent.policeShow"
+  checks="$parent.checks"
+  current-post="currentPost">
+</div>
+
+<!-- <div style="z-index:999;position: absolute;left:12px;bottom:15px;right:10px;padding: 5px 5px 0 0;">
+  <div style="overflow-x:auto;overflow-y:hidden;">
+    <div style="width:9999px;">
+      <div ng-repeat="pnt in record.points"
+        style="float:left;width:200px;padding:2px;margin:3px;"
+        class="yhte-tq-point alert alert-warning my-box-shdow"
+        data="pnt">
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div style="z-index:999;position: absolute;left:12px;bottom:15px;right:10px;padding: 5px 5px 0 0;"
+  class="yhte-tq-points"
+  layer="pointLayer">
+</div>
+
+
+<div ng-show="$parent.policeShow"
+    style="z-index:999;position: absolute;right:260px;top:10px;padding: 15px;overflow-y:auto;overflow-x:hidden;width:350px;"
+  class="tq-polices"
+  police-show="$parent.policeShow"
+  checks="$parent.checks"
+  post="currentPost">
+</div>

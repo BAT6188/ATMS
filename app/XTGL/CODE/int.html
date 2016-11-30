@@ -1,0 +1,57 @@
+		<textarea>
+package {{packagePath}};
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import {{packagePath}}.{{javaClass}}QB;
+import {{packagePath}}.{{javaClass}};
+
+import org.springframework.stereotype.Repository;
+
+/**
+ * {{desc}}接口
+ * @author mli
+ *
+ */
+@Repository
+public interface I{{javaClass}} {
+
+	/**
+	 * 新增{{desc}}
+	 * @param {{javaClass}}
+	 * @return
+	 */
+	public String insert({{javaClass}} record) throws RemoteException; 
+	/**
+	 * 修改{{desc}}
+	 * @param {{javaClass}}
+	 */
+	public void update({{javaClass}} record) throws RemoteException; 
+	/**
+	 * 删除{{desc}}
+	 * @param ids
+	 */
+	public void delete(String[] ids) throws RemoteException; 	
+	/**
+	 * 选择单个{{desc}}
+	 * @param id 设备编号
+	 * @return
+	 */
+	public {{javaClass}} selectOne(String id) throws RemoteException;
+	/**
+	 * 查询{{desc}}列表
+	 * @param {{javaClass}}QB 查询条件
+	 * @return
+	 */
+	public List<{{javaClass}}> selectList({{javaClass}}QB qb) throws RemoteException;
+	/**
+	 * 查询{{desc}}总数
+	 * @param {javaClass}}QB 查询条件
+	 * @return
+	 * @throws RemoteException 
+	 */
+	public Integer selectCount({{javaClass}}QB qb) throws RemoteException;
+	
+}
+		</textarea>

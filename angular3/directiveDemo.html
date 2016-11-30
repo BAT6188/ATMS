@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>directive demo</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        .ui-state-highlight{
+            background-color: #EEEEEE;
+        }
+    </style>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp">
+    <div ng-controller="Ctrl">
+        <div class="page-header">
+            <h1>AngularJs sticky Notes</h1>
+        </div>
+
+        <div class="form-actions">
+            <div class="input-append">
+                <form ng-submit="addNote(noteTitle);resetForm();">
+                   <input class="span3" ng-model="noteTitle "  size="16" type="text"
+                   placeholder="Add a note"/>
+
+                    <button class="btn btn-success" type="button"
+                            ng-disabled="!noteTitle" ng-click="addNote(noteTitle);
+                            resetForm();"></button>
+
+
+                </form>
+            </div>
+        </div>
+        <my-notebook notes="getNotes()" ondelete="deleteNote(id);"></my-notebook>
+    </div>
+</div>
+</body>
+</html>

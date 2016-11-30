@@ -1,0 +1,85 @@
+  <legend>【{{name}}】-配时方案 </legend>
+  
+<div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-sm-offset-6 col-sm-6">
+            <div class="btn-group pull-right">
+                <button ng-click="upload();" class="btn btn-sm btn-warning">
+                    <i class="fa fa-upload"></i> 上传
+                </button>
+                <button ng-click="download();" class="btn btn-sm btn-primary">
+                    <i class="fa fa-download"></i> 下载
+                </button>
+            </div>
+        </div>
+    </div>
+
+<div class="row" >
+  <div class="col-sm-8">
+    <div class="row" >		
+      <div class="col-sm-4 btn-group">
+        <div class=" input-group">
+          <span class="input-group-addon">配时方案编号</span>
+          <select class="form-control input-sm" ng-model="fa.bh" ng-options="c.bh as c.bh for c in fas" ng-change="chagne()"></select>
+        </div>
+      </div>
+      <div class="col-sm-4 btn-group">
+  	    <div class=" input-group">
+          <span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;相位数</span>
+          <input type="text" class="form-control input-sm" ng-model="fa.xws" disabled="disabled">
+        </div>
+      </div>
+      <div class="col-sm-4 btn-group">
+  	    <div class=" input-group">
+          <span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;周期时间</span>
+          <input type="text" class="form-control input-sm" ng-model="fa.zqsj">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 btn-group">
+        <div class="input-group">
+          <span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;相序表编号</span>
+          <select class="form-control input-sm" ng-model="fa.xxbh" ng-options="c.id as c.state for c in xx" disabled="disabled"></select>
+          <a class="input-group-addon" ng-href="#/JCXHKZXT.XX.PhaseSequenceConfig/{{fa.xxbh}}"><i class="fa fa-eye"></i>查看</a>
+        </div>
+      </div>
+      <div class="col-sm-4 btn-group">
+  	    <div class=" input-group">
+          <span class="input-group-addon">基准方向</span>
+          <select class="form-control input-sm" ng-model="fa.jzfx" ng-options="c.code as c.name for c in jzfx" disabled="disabled"></select>
+        </div>
+      </div>
+      <div class="col-sm-4 btn-group">
+  	    <div class=" input-group">
+          <span class="input-group-addon">相位差时间</span>
+          <input type="text" class="form-control input-sm" ng-model="fa.xwcsj" disabled="disabled">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-hover table-bordered" style="text-align: center">
+          <thead>
+            <tr>
+              <th  style="text-align: center;width: 200px">{{fa.title.type}}</th>
+              <th style="text-align: center"  ng-repeat="record in fa.title.xws">{{record.title}}</th>
+            </tr>
+          </thead>
+          <tbody>
+      	    <tr ng-repeat="record in fa.records">
+        	  <th  style="text-align: center;width: 200px">{{record.type}}</th>
+        	  <td ng-repeat="xw in record.xws">{{xw.xw}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>	 
+    </div>
+  </div>
+  <div class="col-sm-4">
+  	<div style="overflow:auto; height: 600px; width: 420px">
+  	<div ng-repeat="url in fa.xx.url" style="width:200px;height: 200px;float:left;border:solid 1px #f1f1f1;padding: 2px;clear:{{image.clear}}">
+  		<img ng-src="{{url.path}}" style="width: 194px;height: 194px">
+  	</div>
+  	</div>
+  </div>
+</div>

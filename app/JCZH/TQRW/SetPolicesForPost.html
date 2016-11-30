@@ -1,0 +1,135 @@
+<div class="col-100-auto col-sm-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-success my-box-shdow">
+        <div class="panel-heading">
+          特勤任务单基本信息 
+        </div>
+        <div class="panel-body">
+          任务名称：{{record.name}}<br>
+          开始时间：{{record.startTime}}<br>
+          前导车：{{record.carNo}}<br>
+          联系人：{{record.contact}}<br>
+          联系电话：{{record.contactTel}}<br>
+          工作要求：{{record.requirements}}<br>
+        </div>
+      </div>
+      <div class="panel panel-success my-box-shdow">
+        <div class="panel-heading">
+          岗位配置警员 
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon">选择警员</span>
+                <select class="selectpicker  show-tick form-control col-sm-12"
+                  id="policeQuery" 
+                  opts="polices"
+                  showname = "userName"
+                  title="选择警员"
+                  data-live-search="true"
+                  objs="selectedPolice">
+                </select>
+              </div>
+              <div class="col-sm-12" style="height:20px;">
+                <i ng-hide="ifLoaded" class="glyphicon glyphicon-refresh"></i>
+              </div>
+              
+
+              
+
+           <!--    <input type="text" ng-model="queryPoliceByName" typeahead="police as police.userName for police in getPolicesByName($viewValue)" typeahead-loading="loadingPolicesByName" class="form-control input-sm" placeholder="请输入警员姓名检索" typeahead-on-select="onQuerySelectName()" typeahead-append-to-body="false">
+              <i ng-show="loadingPolicesByName" class="glyphicon glyphicon-refresh"></i> -->
+            </div>
+            <div class="col-sm-12">
+              <div class="btn btn-group pull-right" style="padding:0;">
+                <button class="btn btn-default" type="button" ng-click="addPolice()" >添加</button>
+                <button class="btn btn-default" type="button" ng-click="save()" >保存</button>
+                <button class="btn btn-default" type="button" ng-click="changeStatus()" class="pull-right">配备就绪</button>
+              </div>
+              <!-- <input type="text" ng-model="queryPoliceByNo" typeahead="police as police.policeNo for police in getPolicesByNo($viewValue)" typeahead-loading="loadingPolicesByNo" class="form-control input-sm" placeholder="请输入警员编号检索" typeahead-on-select="onQuerySelectNo()" typeahead-append-to-body="false" typeahead-wait-ms="1000">
+              <i ng-show="loadingPolicesByNo" class="glyphicon glyphicon-refresh"></i> -->
+            </div>
+
+      <!--       <div class="col-sm-12">
+              <div class="btn btn-group pull-right">
+                <button class="btn btn-default" type="button" ng-click="save()">保存</button>
+                <button class="btn btn-default" type="button" ng-click="changeStatus()" class="pull-right">配备就绪</button>
+              </div>
+            </div> -->
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <li class="list-group-item" ng-repeat="post in ddposts">
+                <a class="pointer" map-center lng="post.lng" lat="post.lat">
+                  <span class="badge badge-success">{{$index+1}}</span> 岗位({{post.polices.length}})
+                </a>
+
+                <a class="pointer" tooltip="当前选中岗位" ng-show="selected.pid===post.pid">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <a class="alert-link pointer pull-right" ng-click="showDetail(post);">
+                  详细
+                </a>
+                <div ng-show="post.ifDetail" style="margin:15px;">
+                  <table class="table table-hover table-condensed">
+                    <tbody>
+                      <tr class="warning" ng-repeat="police in post.polices|paginator:page:size">
+                        <td style="width:20px;">{{$index + 1}}</td>
+                        </td>
+                        <td >
+                          <a map-center lng="police.lng" lat="police.lat">
+                            {{police.userName}}
+                          </a>
+                        </td>
+                        <td >
+                          <a ng-click="" map-center>
+                            {{police.policeNo}}
+                          </a>
+                        </td>
+                        <td>
+                          <a>{{police.phone}}</a>
+                        </td>
+                        <!-- <td>
+                          <a>{{record.distance.toFixed(0)}}米</a>
+                        </td> -->
+                        <td>
+                          <a class="pull-right" ng-click="removePolice(police);">
+                            <i class="fa fa-times"tooltip="删除"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row" ng-show="post.polices.length>5">
+                    <div class="col-sm-12">
+                      <div pagination 
+                        total-items="post.polices.length" 
+                        items-per-page="5"
+                        page="page" 
+                        max-size="3"
+                        class="pagination-sm pull-right" 
+                        boundary-links="true" 
+                        rotate="false" 
+                        previous-text="&lsaquo;" 
+                        next-text="&rsaquo;" 
+                        first-text="&laquo;" 
+                        last-text="&raquo;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-8" >
+  <div class="my-box-shdow" yhte-map inst="map" style="height:600px;">
+  </div>
+</div>

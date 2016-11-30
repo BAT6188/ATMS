@@ -1,0 +1,98 @@
+<legend>用户管理</legend>
+
+<!-- 工具栏 -->
+<div class="row">
+  <div class="col-sm-2 btn-group">
+    <!-- x-go-new 添加href属性，值为 当前页面url + 'New' -->
+    <!-- <a class="btn btn-success btn-sm" ng-href="#XTGL.DICT.New"> -->
+    <a class="btn btn-success btn-sm" ng-href="#XTGL.USER.UserNew"> <span
+      class="glyphicon glyphicon-plus"></span> 新增 </a>
+    <button class="btn btn-danger btn-sm" ng-click="remove();">
+      <span class="glyphicon glyphicon-minus"></span> 删除
+    </button>
+  </div>
+
+  <div class="col-sm-10">
+    <!-- <div class="row"> -->
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon">用户名</span>
+              <input type="text" class="form-control input-sm" ng-model="Q.userName">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon">身份证件号码</span>
+              <input type="text" class="form-control input-sm" ng-model="Q.certNo">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon">所属部门</span> 
+              <select
+              name="deptments.deptId" type="text"
+              class="form-control input-sm"
+              ng-options="c.deptId as c.deptName for c in deptments"
+              ng-model="Q.deptId"></select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="col-sm-1 btn btn-primary btn-sm" type="button"
+        ng-click="query();">
+        <i class="fa fa-search"> 查询</i>
+      </button>
+    <!-- </div> -->
+  </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-sm-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <!-- <th class="remove"></th> -->
+          <!-- <th class="no">序号</th> -->
+          <th>用户名</th>
+          <th>警员编号</th>
+          <th>身份证件号码</th>
+          <th>部门</th>
+          <th>电话</th>
+          <th>有效性</th>
+          <th>过期时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td><a ng-href="#XTGL.USER.User/{{record.userId}}/Edit">{{record.userName}}</a>
+          </td>
+          <td>{{record.policeNo}}</td>
+          <td>{{record.certNo}}</td>
+          <td>{{record.dept.deptName}}</td>
+          <td>{{record.phone}}</td>
+          <td>{{record.status.name}}</td>
+          <td>{{record.expireDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-sm-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>

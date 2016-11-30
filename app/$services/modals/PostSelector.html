@@ -1,0 +1,107 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">选择岗位</h4>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <!-- 所有列表 -->
+    <div class="col-md-5">
+      <div class="row">
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" ng-model="Q.name" placeholder="岗位名称">
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-sm" type="button" ng-click="query()">
+                    <i class="fa fa-search" tooltip="查询"></i>
+                </button>
+            </span>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table table-bordered table-hover table-condensed">
+          <thead>
+            <tr>
+              <th><input type="checkbox" ng-model="allChecked" ng-change="selectAll();"></th>
+              <th>编号</th>
+              <th style="width: 100px;">名称</th>
+              <th>类型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="record in records">
+              <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+              <td>{{record.id}}</td>
+              <td><a ng-href="#QWGL.GW.Post/{{record.id}}/Edit">{{record.name}}</a></td>
+              <td>{{record.type.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false"
+                    total-items="total"
+                    page="Q.page"
+                    items-per-page="Q.pageSize"
+                    max-size="Q.maxSize"
+                    on-select-page="pChange(page)"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    last-text=">>"
+                    first-text="<<">
+        </div>
+      </div>
+    </div>
+
+    <!-- llll -->
+    <div style="text-align: center; padding-top: 80px" class="col-md-2">
+      <div class="row">
+          <button title="选择添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPost()">
+              <i class="fa fa-angle-right"></i>
+          </button>
+      </div>
+      <div class="row">
+          <button title="全部添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPost(true)">
+              <i class="fa fa-angle-double-right"></i>
+          </button>
+      </div>
+
+      <div class="row">
+          <button title="全部删除" data-placement="right" data-toggle="tooltip" class="btn  btn-success btn-sm" ng-click="dropPost(true)">
+              <i class="fa fa-angle-double-left"></i>
+          </button>
+      </div>
+    </div>
+    <!-- 已有数据列表 -->
+    <div class="col-md-5">
+        <div class="row">
+          <div class="btn btn-group btn-group-sm pull-right pad0">              
+            <button class="btn btn-primary" ng-click="save()">
+                <i class="fa fa-save"></i> 保存
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table  table-condensed">
+<!--             <thead>
+              <tr>
+                <th class="check"><input type="checkbox" ng-model="_allChecked" ng-click="_selectAll();"></th>
+                <th>编号</th>
+                <th>名称</th>
+                <th>类型</th>
+              </tr>
+            </thead> -->
+            <tbody>
+              <tr ng-repeat="record in selecteds">
+                <td>
+<!--                   <i class="fa fa-1 fa-check-circle yhte-ico-success" ng-click="record.unChecked = !record.unChecked" ng-hide="record.unChecked"></i>
+                  <i class="fa fa-1 fa-times-circle" ng-click="record.unChecked = !record.unChecked" ng-show="record.unChecked"></i> -->
+                  <i class="fa fa-times" ng-click="dropPost($index)"></i>
+                </td>
+                <td>{{record.id}}</td>
+                <td style="width: 100px;">{{record.name}}</td>
+                <td>{{record.type.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟controller之间的通信</title>
+
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="controller3.js"></script>
+
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="Sandcrawler">
+    <div ng-controller="Droid1">
+        <h2>R2-D2</h2>
+        <p>Droid Location:{{location}} </p>
+        <button ng-click="recallAddDroids1()">Recall All Droids1</button>
+    </div>
+    <div ng-controller="Droid2">
+        <h2>C-3PO</h2>
+        <p>Droid Location:{{location}} </p>
+        <button ng-click="recallAddDroids2()">Recall All Droids2</button>
+    </div>
+</div>
+
+</body>
+</html>

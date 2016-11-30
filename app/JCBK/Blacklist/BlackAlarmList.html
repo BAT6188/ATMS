@@ -1,0 +1,104 @@
+<legend>报警管理</legend>
+
+<div>
+  <!-- 工具栏 -->
+  <div class="row">
+  
+    <div class="col-sm-3">
+      <div class="input-group">
+        <button class="btn btn-primary btn-sm pull-right" type="button" ng-click="batchMark()">
+                 <i class="fa fa-wrench"> 处理</i>
+              </button>
+            </div>
+    </div>
+    
+    <div class="col-sm-4">
+          <div class="input-group">
+              <span class="input-group-addon">报警时间</span>
+            <input id="startDate" calendar type="text" class="form-control input-sm" ng-model="alarmStartTime"/>
+              <span class="input-group-addon">—</span>
+            <input id="endDate" calendar type="text" class="form-control input-sm" ng-model="alarmEndTime"/>
+          </div>
+    </div>
+    
+    <!-- <div class="col-sm-3">
+            <div class="input-group">
+                   <span class="input-group-addon">点位、区域</span>
+                    <input id="points" type="text" readonly="true" class="form-control input-sm" ng-model="pointNos" ng-click="showPointMenu()"/>
+               </div>
+           </div> -->
+           
+        <div class="col-sm-2">
+               <div class="input-group">
+                   <span class="input-group-addon">报警类型</span>
+                   <select class="form-control input-sm" ng-model="alarmType" ng-options="d.code as d.name for d in alarmTypes">
+                       <option value="">全部</option>
+                   </select>
+               </div>
+           </div>
+        
+    <div class="col-sm-2">
+               <div class="input-group">
+                   <span class="input-group-addon">处理标记</span>
+                   <select class="form-control input-sm" ng-model="mark" ng-options="d.code as d.name for d in statuses">
+                       <option value="">全部</option>
+                   </select>
+               </div>
+           </div>
+    
+    <div class="col-sm-1">
+      <div class="input-group-btn">
+        <button class="btn btn-primary btn-sm pull-right" type="button"
+          ng-click="query();">
+          <i class="fa fa-search"> 查询</i>
+        </button>
+          </div>
+    </div>
+      
+  </div>
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-md-12">
+      <table ng-table="tableParams" class="xtable table table-bordered table-striped table-hover table-condensed ng-table-responsive">
+        <col width="30px" />
+        <col width="100px"/>
+        <col width="80px"/>
+        <col  />
+        <col width="60px"/>
+        <col width="90px"/>
+        <col width="150px"/>
+        <col width="150px"/>
+        <col width="90px"/>
+        <col  />
+        <tr ng-repeat="record in records">
+          <td width="30" style="text-align: center; " header="'ng-table/headers/checkbox.html'">
+              <input type="checkbox" ng-model="checkboxes.items[$index]" />
+          </td>
+          <td data-title="'号牌号码'" style="text-align: center; padding: 0px 5px;">
+            <div ng-class="{'0':'whitePlate', '1': 'yellowPlate', '2': 'bluePlate', '3': 'blackPlate', '4': 'otherPlate'}['{{record.plateColor.code}}']">{{record.plateNo}}</div>
+          </td>
+          <td data-title="'报警类型'">{{record.alarmType.name}}</td>
+          <td data-title="'报警点位'">{{record.pointName}}</td>
+          <td data-title="'速度'">{{record.speed}}</td>
+          <td data-title="'方向'" style="text-align: center;">{{record.direction.name}}</td>
+          <td data-title="'经过时间'" style="text-align: center;">{{record.passtime}}</td>
+          <td data-title="'报警时间'" style="text-align: center;">{{record.alarmTime}}</td>
+          <td data-title="'处理标记'" style="text-align: center;">
+            <label class="label" style="cursor: pointer" ng-click="changeStatus(record)"
+                  ng-class="{'label-success': record.mark == 1, 'label-danger': record.mark == 0}">
+               {{record.mark | dictFilterByCode : statuses}}
+            </label>
+          </td>
+          <td data-title="'操作'" style="text-align: center;">
+            <a href="" tooltip="详细信息"><i class="fa fa-eye" ng-click="alarmInfoModal(record)"></i></a>
+            <a href="" tooltip="标记" ng-click="mark(record)"><i class="fa fa-gavel yhte-ico-primary" ng-show="record.mark == '0'"></i></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="menuContent1" class="treeview-back" style="display:none; position: absolute; z-index: 10000; max-height: 269px;background-color: #ffffff;">
+    <ul id="pointTree" class="ztree" style="margin-top:0; width:160px;"></ul>
+</div>

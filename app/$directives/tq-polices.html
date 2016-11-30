@@ -1,0 +1,62 @@
+<div class="alert alert-success my-box-shdow atms-free-polices">
+    <button ng-click="close()" type="button" class="close">&times;</button>
+    <a class="alert-link pointer">选取警员</a>
+    
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="input-group input-sm" style="padding:0px;">
+          <input type="text" class="form-control" ng-model="Q.policeName">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="query();">查询</button>
+            <button class="btn btn-default" type="button" ng-click="addPolices()">添加</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-sm-12">
+        <table class="table table-bordered table-hover table-condensed">
+          <thead>
+            <tr class="success">
+              <th class="check">
+                <input type="checkbox" ng-model="allChecked"
+                ng-click="selectAll();">
+              </th>
+              <th class="no">序号</th>
+              <th>用户名</th>
+              <th>电话</th>
+              <th>距离</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="record in data" class="success">
+              <td class="check">
+                <input type="checkbox"
+                ng-model="checks[$index]" ng-click="select($index);">
+              </td>
+              <td>{{$index + 1}}</td>
+              <td>{{record.policeName}}</td>
+              <td>{{record.phone}}</td>
+              <td>{{record.distance || ''}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="col-sm-12">
+        <div pagination class="pagination-sm pull-right"
+          boundary-links="true"
+          rotate="false" 
+          total-items="total"
+          page="Q.page"
+          items-per-page="Q.pageSize"
+          max-size="Q.maxSize"
+          on-select-page="pChange(page)"
+          previous-text="&lsaquo;"
+          next-text="&rsaquo;"
+          first-text="&laquo;"
+          last-text="&raquo;"> 
+        </div>
+      </div>
+    </div>
+    
+</div>

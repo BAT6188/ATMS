@@ -1,0 +1,367 @@
+<legend>报修单列表</legend>
+
+<div class="row">
+  <!-- <div class="col-sm-2">
+    <div class="btn-group">
+      <a class="btn btn-success btn-sm" ng-href="#/SBGL.ApplyRepair">
+        <i class="fa fa-plus"> 申请报修</i>
+      </a>
+    </div>
+  </div> -->
+  <div class="col-sm-4">
+    <div class="input-group">
+      <span class="input-group-addon span-sm">设备大类</span> <select
+      class="form-control input-sm" ng-model="Q.repairClass"
+      ng-options="c.code as c.name for c in repairObjs"></select>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="input-group">
+      <span class="input-group-addon">报修单状态</span> <select
+      class="form-control input-sm" ng-model="Q.statusCode"
+      ng-options="c.code as c.name for c in repairStates"></select>
+    </div>
+  </div>
+  <div class="col-sm-4 text-right">
+    <div class="input-group">
+      <input type="text" class="form-control input-sm" ng-model="Q.deviceName"> 
+      <span
+        class="input-group-btn">
+        <button class="btn btn-primary btn-sm" type="button"
+          ng-click="query();">
+          <i class="fa fa-search"></i>
+        </button> </span>
+    </div>
+  </div>
+</div>
+
+<!-- 表格 -->
+<div class="row">
+  <div class="col-sm-12 map-over-this">
+    <table
+      class="table table-bordered table-hover table-condensed table-striped">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <th>报修编号</th>
+          <th>名称</th>
+          <th>设备大类</th>
+          <th>报修人</th>
+          <th>报修来电</th>
+          <th>报修类别</th>
+          <th>审核人</th>
+          <th>故障描述</th>
+          <th>设备状态</th>
+          <th>报修状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records" id="{{record.id}}">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td>{{record.id}}</td>
+          <td>{{record.deviceName}}</td>
+          <td>{{record.repairClass.name}}</td>
+          <td>{{record.person}}</td>
+          <td>{{record.phone}}</td>
+          <td>{{record.type.name}}</td>
+          <td>{{record.verifier}}</td>
+          <td>{{record.faultDesc}}</td>
+          <td>{{record.deviceStatus.name}}</td>
+          <td>
+            <span style="font-size:12px;margin-left:10px" class="label {{record.status.code | filterDevStatus}}">{{record.status.name}}</span>
+          </td>
+          <td class="text-center">
+          <i class="fa fa-user" ng-click="check(record)" tooltip="审核" ng-show="record.status.code === '1'"></i>
+          <i class="fa fa-wrench" ng-click="doExecute(record)" tooltip="执行报修" ng-show="record.status.code === '3'"></i>
+          <i class="fa fa-check" ng-click="doConfirm(record)" tooltip="确认已维修" ng-show="record.status.code === '4'"></i>
+          <i class="fa fa-eye" ng-click="infoModal(record)" tooltip="详情"></i> 
+          <!--
+                    <a ng-href="#/SBGL.Bill/{{record.id}}/detail" tooltip="详情"><i class="fa fa-check"></i></a>
+                    <a ng-href="#/SBGL.AuditRepair/{{record.id}}/detail"  tooltip="驳回详情"><i class="fa fa-check"></i></a>
+                    <a ng-href="#/SBGL.ApplyRepair/{{record.id}}/edit"  tooltip="编辑"><i class="fa fa-check"></i></a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-sm-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>
+
+<!--详情模态对话框-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close"
+          type="button">×</button>
+        <h4 id="myModalLabel" class="modal-title">
+          报修单详情{{checkRecord.name}}
+          <label class="label" ng-class="{'1': 'label-danger', '2': 'label-default', '3': 'label-warning', '4': 'label-warning', '5': 'label-success'}['{{checkRecord.status.code}}']">{{checkRecord.status.name}}</label>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed table-bordered ">
+          <tr>
+            <td class="col-sm-1">报修单状态</td>
+            <td class="col-sm-2">{{checkRecord.status.name}}</td>
+            <td class="col-sm-1">设备编号</td>
+            <td class="col-sm-2">{{checkRecord.deviceNo}}</td>
+          </tr>
+          <tr>
+            <td class="col-sm-2">报修编号</td>
+            <td class="col-sm-4">{{checkRecord.id}}</td>
+            <td class="col-sm-2">设备名称</td>
+            <td class="col-sm-4">{{checkRecord.deviceName}}</td>
+          </tr>
+          <tr>
+            <td>设备类型</td>
+            <td>{{checkRecord.repairClass.name}}</td>
+            <td>报修类别</td>
+            <td>{{checkRecord.type.name}}</td>
+          </tr>
+          <tr>
+            <td>故障描述</td>
+            <td>{{checkRecord.faultDesc}}</td>
+            <td>报修来电</td>
+            <td>{{checkRecord.phone}}</td>
+          </tr>
+          <tr>
+            <td>报修人</td>
+            <td>{{checkRecord.person}}</td>
+            <td>审核人</td>
+            <td>{{checkRecord.verifier}}</td>
+          </tr>
+          <tr>
+            <td>响应人</td>
+            <td>{{checkRecord.replier}}</td>
+            <td>审核时间</td>
+            <td>{{checkRecord.verifyTime}}</td>
+          </tr>
+          <tr>
+            <td>响应时间</td>
+            <td>{{checkRecord.replyTime}}</td>
+            <td>故障原因</td>
+            <td>{{checkRecord.faultReason}}</td>
+          </tr>
+          <tr>
+            <td>修复方法</td>
+            <td>{{checkRecord.repairDesc}}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <a class="btn btn-primary btn-sm" data-dismiss="modal"><i
+            class="fa fa-remove-circle" tooltip="关闭对话框"> 关闭</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!--审核模态对话框-->
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close"
+          type="button">×</button>
+        <h4 id="myModalLabel" class="modal-title">
+          审核报修『{{checkRecord.deviceName}}』 <label class="label"
+            ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{checkRecord.status.code}}']">{{checkRecord.status.name}}</label>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed table-bordered ">
+          <tr>
+            <td class="col-sm-2">设备名称</td>
+            <td class="col-sm-4">{{checkRecord.deviceName}}</td>
+          </tr>
+          <tr>
+            <td>设备类型</td>
+            <td>{{checkRecord.deviceType.name}}</td>
+          </tr>
+          <tr>
+            <td>报修类别</td>
+            <td>{{checkRecord.type.code}}</td>
+          </tr>
+          <tr>
+            <td>故障描述</td>
+            <td>{{checkRecord.faultDesc}}</td>
+          </tr>
+          <tr>
+            <td>报修来电</td>
+            <td>{{checkRecord.phone}}</td>
+          </tr>
+          <tr>
+            <td>报修人</td>
+            <td>{{checkRecord.person}}</td>
+          </tr>
+          <tr>
+            <td>驳回原因</td>
+            <td><textarea class="form-control  input-sm" name="rejectReason" ng-model="checkRecord.rejectReason" required></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-success"><i class="fa fa-check"
+            ng-click="pass()"> 通过审核</i>
+          </a> <a class="btn btn-sm btn-danger"><i class="fa fa-times"
+            ng-click="reject()"> 驳回</i>
+          </a> <a class="btn btn-primary btn-sm" data-dismiss="modal"><i
+            class="fa fa-remove-circle" tooltip="关闭对话框"> 关闭</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!--执行报修模态对话框-->
+<div class="modal fade" id="executeModal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close"
+          type="button">×</button>
+        <h4 id="myModalLabel" class="modal-title">
+          执行报修『{{checkRecord.name}}』 <label class="label"
+            ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{checkRecord.status.code}}']">{{checkRecord.status.name}}</label>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed table-bordered ">
+          <tr>
+            <td class="col-sm-2">设备名称</td>
+            <td class="col-sm-4">{{checkRecord.deviceName}}</td>
+          </tr>
+          <tr>
+            <td>设备类型</td>
+            <td>{{checkRecord.deviceType.name}}</td>
+          </tr>
+          <tr>
+            <td>报修类别</td>
+            <td>{{checkRecord.type.code}}</td>
+          </tr>
+          <tr>
+            <td>故障描述</td>
+            <td>{{checkRecord.faultDesc}}</td>
+          </tr>
+          <tr>
+            <td>报修来电</td>
+            <td>{{checkRecord.phone}}</td>
+          </tr>
+          <tr>
+            <td>报修人</td>
+            <td>{{checkRecord.person}}</td>
+          </tr>
+          <tr>
+            <td>维修描述</td>
+            <td><textarea class="form-control  input-sm" name="repairDesc" ng-model="checkRecord.repairDesc" required></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-success"><i class="fa fa-check"
+            ng-click="execute()"> 确定</i>
+          </a> <a class="btn btn-primary btn-sm" data-dismiss="modal"><i
+            class="fa fa-remove-circle" tooltip="关闭对话框"> 关闭</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!--确认维修模态对话框-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close"
+          type="button">×</button>
+        <h4 id="myModalLabel" class="modal-title">
+          确认报修『{{checkRecord.name}}』 <label class="label"
+            ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{checkRecord.status.code}}']">{{checkRecord.status.name}}</label>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed table-bordered ">
+          <tr>
+            <td class="col-sm-2">设备名称</td>
+            <td class="col-sm-4">{{checkRecord.deviceName}}</td>
+          </tr>
+          <tr>
+            <td>设备类型</td>
+            <td>{{checkRecord.deviceType.name}}</td>
+          </tr>
+          <tr>
+            <td>报修类别</td>
+            <td>{{checkRecord.type.code}}</td>
+          </tr>
+          <tr>
+            <td>故障描述</td>
+            <td>{{checkRecord.faultDesc}}</td>
+          </tr>
+          <tr>
+            <td>报修来电</td>
+            <td>{{checkRecord.phone}}</td>
+          </tr>
+          <tr>
+            <td>报修人</td>
+            <td>{{checkRecord.person}}</td>
+          </tr>
+          <tr>
+            <td>维修描述</td>
+            <td><textarea class="form-control  input-sm" name="repairDesc" ng-model="checkRecord.repairDesc" required></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-success"><i class="fa fa-check"
+            ng-click="confirm()"> 确认</i>
+          </a>
+          <a class="btn btn-sm btn-danger"><i class="fa fa-times"
+            ng-click="reRepair()"> 重修</i>
+          </a>
+           <a class="btn btn-primary btn-sm" data-dismiss="modal"><i
+            class="fa fa-remove-circle" tooltip="关闭对话框"> 关闭</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

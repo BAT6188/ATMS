@@ -1,0 +1,153 @@
+<div class="modal-header">
+    <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">
+        <b>黑名单布控报警比对</b>
+    </h4>
+</div>
+<div class="modal-body">
+           	<div class="row">
+           		<div class="col-sm-5">
+           			<img src="{{dispatchImgUrl}}" style="border: 1px solid #666;height:250px;width:420px;">
+           		</div>
+           		<div class="col-sm-7">
+           			<form class="form-horizontal">
+           				<div class="form-group">
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">号牌号码</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.plateNo" class="form-control"/>
+				                </div>
+				            </div>
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">号牌颜色</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.plateColor.name" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				        
+				        <div class="form-group">
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">黑名单类型</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.type.name" class="form-control"/>
+				                </div>
+				            </div>
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">布控状态</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.status.name" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">匹配精度</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.matchLevel.name" class="form-control"/>
+				                </div>
+				            </div>
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">匹配号码</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.matchPlateNo" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				        
+				        <div class="form-group">
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">联系电话</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.tel" class="form-control"/>
+				                </div>
+				            </div>
+				            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+				                <label class="col-sm-4 control-label" style="padding-right: 0px;">报警有效期</label>
+				                <div class="col-sm-8">
+				                    <input type="text" ng-model="disRecord.alarmEndDate" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <div class="col-sm-12">
+				                <label class="col-sm-2 control-label" style="padding-left: 0px; padding-right: 10px;">黑名单原因</label>
+				                <div class="col-sm-10" style="padding-left:5px; padding-right: 0px;">
+				                    <input type="text" ng-model="disRecord.reason" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <div class="col-sm-12">
+				                <label class="col-sm-2 control-label" style="padding-left: 0px; padding-right: 10px;">拦截说明</label>
+				                <div class="col-sm-10" style="padding-left:5px; padding-right: 0px;">
+				                    <input type="text" ng-model="disRecord.desc" class="form-control"/>
+				                </div>
+				            </div>
+				        </div>
+				    </form>
+           		</div>
+           	</div>
+           	<div class="row">
+            		<div class="col-sm-5">
+            			<img src="{{imgUrl}}" style="border: 1px solid #666;height:250px;width:420px;">
+            		</div>
+            		<div class="col-sm-7">
+            			<form class="form-horizontal">
+					        <div class="form-group">
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">号牌号码</label>
+					                <div class="col-sm-8">
+					                    <input type="text" ng-model="alarmRecord.plateNo" class="form-control"/>
+					                </div>
+					            </div>
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">号牌颜色</label>
+					                <div class="col-sm-8">
+					                    <input type="text" ng-model="alarmRecord.plateColor.name" class="form-control"/>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">车身颜色</label>
+					                <div class="col-sm-8">
+					                    <input type="text" ng-model="alarmRecord.carColor.name" class="form-control"/>
+					                </div>
+					            </div>
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">行驶方向</label>
+					                <div class="col-sm-8">
+					                    <input type="text" ng-model="alarmRecord.direction.name" class="form-control"/>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">经过时间</label>
+					                <div class="col-sm-8">
+					                    <input type="text" ng-model="alarmRecord.passtime" class="form-control"/>
+					                </div>
+					            </div>
+					            <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px;">
+					                <label class="col-sm-4 control-label" style="padding-right: 0px;">报警时间</label>
+					                <div class="col-md-8">
+					                    <input type="text" ng-model="alarmRecord.alarmTime" class="form-control"/>
+					                </div>
+					            </div>
+					        </div>
+					        <div class="form-group">
+					            <div class="col-sm-12">
+					                <label class="col-sm-2 control-label" style="padding-left: 0px; padding-right: 10px;">报警地点</label>
+					                <div class="col-sm-10" style="padding-left:5px; padding-right: 0px;">
+					                    <input type="text" ng-model="alarmRecord.unlawfulAddr" class="form-control">
+					                </div>
+					            </div>
+					        </div>
+					    </form>
+            		</div>
+            	</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-sm" ng-click="close()">关闭</button>
+</div>

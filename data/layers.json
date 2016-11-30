@@ -1,0 +1,22 @@
+[{
+  "label":"路况",
+  "name":"roadSectionState",
+  "cls":"layerRoad",
+  "isLayer":"true",
+  "isshow":"true",
+  "url":"../giserver/configs/hk_road/"
+},{
+  "label":"诱导",
+  "name":"deviceMsgPublish",
+  "cls":"layerScreen",
+  "isLayer":"true",
+  "isshow":"true",
+  "url":"../giserver/configs/hk_deviceMsgPublish/"
+},{
+  "label":"路况发布",
+  "name":"deviceMsgPublish",
+  "cls":"layerScreen",
+  "isshow":"true",
+  "isLayer":"false",
+  "url":"/LKFB.CmsList"
+}]

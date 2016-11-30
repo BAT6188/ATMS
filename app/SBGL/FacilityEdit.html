@@ -1,0 +1,198 @@
+<legend>
+  综合管理 > 设备设施管理 >
+  <a href="#/SBGL.FacilityList">设施</a> > 
+  {{title}}
+</legend>
+
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group pull-right">
+          <a class="btn btn-success btn-sm" ng-click="save()" ng-disabled="iForm.$invalid">
+            <i class="fa fa-check"></i> 保存
+          </a>
+          <a class="btn btn-info btn-sm" ng-href="#/SBGL.FacilityList">
+            <i class="fa fa-arrow-left"></i> 返回列表
+          </a>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="iForm">
+        <div class="col-sm-12">
+          <div class="col-sm-4">
+            <label for="" class="col-sm-4 control-label input-sm font14">编号:</label>
+            <div class="col-sm-8">
+               <input name="code" type="text" ng-model="record.code" class="form-control input-sm">
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <label for="" class="col-sm-4 control-label input-sm font14">名称:</label>
+            <div class="col-sm-8"  ng-class="{'has-error': iForm.signName.$invalid}">
+               <input name="signName" type="text" ng-model="record.name" class="form-control input-sm"
+                 required>
+            </div>
+          </div>
+          <div class="col-sm-4" >
+            <label for="" class="col-sm-4 control-label input-sm font14">类型:</label>
+            <div class="col-sm-8" style="padding-right:0px" ng-class="{'has-error': iForm.signType.$invalid}">
+                <select class="form-control  input-sm" 
+                  name="signType"
+                  ng-model="record.type"
+                  ng-options="e.name for e in signalTypes track by e.code"
+                  required>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="col-sm-4">
+            <label for="" class="col-sm-4 control-label input-sm font14">附件上传:</label>
+            <div class="col-sm-8">
+                <div upload-file file-url="record.imgUrl" upload='/java/uploadFile'></div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <label class="col-sm-4 control-label input-sm font14">
+              图片路径
+                        <i class="fa fa-times yhte-ico-danger"
+             ng-show="record.imgUrl"
+             ng-click="removeImg()"
+             style="margin-left:10px;font-size:13px">删除该图片</i>
+            </label>
+            <div class="col-sm-8 inline-txt-new">
+              <a class="pointer" tooltip="单击预览图片" ng-click="toggleShow()">{{record.imgUrl}}</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <legend>其他</legend>
+  <div class="row font14">
+    <div class="col-sm-4">
+      <label class="control-label col-sm-4">经度</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.lng">
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <label class="control-label col-sm-4">纬度</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.lat">
+      </div>
+    </div>
+    <a class="font13" ng-click="locate()" style="cursor:pointer;color:#428BCA">
+      <i class="fa fa-globe"></i> 单击此处地图定位
+    </a>
+  </div>
+  <div class="row font14">
+      <div class="col-sm-4">
+          <label for="" class="col-sm-4 control-label input-sm font14">安装日期:</label>
+          <div class="col-sm-8">
+            <div datetimepicker-new
+              class="form-control input-sm"
+              placeholder="选择日期"
+              ng-model="record.buildTime"
+              format="'yyyy-mm-dd'"
+              min-view="'month'"
+              start-view="'month'">
+            </div>
+        </div>
+        </div>
+      <div class="col-sm-4">
+        <label for="" class="col-sm-4 control-label input-sm font14">安装方式:</label>
+        <div class="col-sm-8">
+            <select class="form-control input-sm"
+            ng-model="record.buildWay"
+            ng-options="c.name for c in buildWays track by c.code"></select>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">状态</label>
+        <div class="col-sm-8">
+           <select class="form-control" 
+            ng-model="record.status"
+            ng-options="e.name for e in statuses track by e.code"
+           >
+          </select>
+        </div>
+      </div>
+  </div>
+  <div class="row font14">
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">位置描述</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.address">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">所属道路</label>
+        <div class="col-sm-8">
+          <input name="belongRoad" type="text" class="form-control input-sm"
+            ng-model="record.belongRoad">
+        </div>
+      </div>
+  </div>
+  <div class="row font14">
+      <div class="col-sm-8">
+        <label class="control-label col-sm-2 input-sm font14">管辖单位</label>
+        <div class="col-sm-10" style="padding-left:10px">
+            <input type="text" class="form-control input-sm" ng-model="record.manageDeptCode">
+            </select>
+        </div>
+      </div>
+  </div>
+  <div class="row font14">
+      <div class="col-sm-8">
+        <label for="" class="col-sm-2 control-label input-sm font14">施工单位:</label>
+        <div class="col-sm-10" style="padding-left:10px">
+            <input type="text" class="form-control input-sm"  ng-model="record.constructUnit">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label for="" class="col-sm-4 control-label input-sm font14">联系方式:</label>
+        <div class="col-sm-8">
+             <input name="person" type="text" class="form-control input-sm" ng-model="record.constructUnitContact"
+             >
+        </div>
+      </div>
+  </div>
+  <div class="row font14">
+    <div class="col-sm-8">
+      <label for="" class="col-sm-2 control-label input-sm font14">维护单位:</label>
+      <div class="col-sm-10" style="padding-left:10px">
+          <input type="text" class="form-control input-sm"  ng-model="record.maintain">
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <label for="" class="col-sm-4 control-label input-sm font14">联系方式:</label>
+      <div class="col-sm-8">
+           <input name="person" type="text" class="form-control input-sm" ng-model="record.maintainUnitContact"
+           >
+      </div>
+    </div>
+  </div>
+  <div class="row font14">
+    <div class="col-sm-12">
+      <label class="control-label col-sm-2">备注</label>
+      <div class="col-sm-10" style="padding-right:0px;margin-left:-60px">
+        <input type="text" class="form-control input-sm" ng-model="record.remark">
+      </div>
+    </div>
+  </div>
+  <legend></legend>
+  <div class="row marginLR0 font14"> 
+
+
+  </div>
+</div>
+
+<div 
+atms-img-preview
+ng-show = "showImg"
+urls = urls
+remove = "true"
+on-close = "showImg = false"
+></div>

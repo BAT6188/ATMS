@@ -1,0 +1,14 @@
+[
+	{"name":"灯组1", "port":1, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组2", "port":2, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组3", "port":3, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组4", "port":4, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组5", "port":5, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组6", "port":6, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组7", "port":7, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组8", "port":8, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组9", "port":9, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组10", "port":10, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组11", "port":11, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+   ,{"name":"灯组12", "port":12, "direction":{"code":0, "name":"北"}, "type":{"code":1,"name":"左转箭头主灯组"},"isMain":0}
+]

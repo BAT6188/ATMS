@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>angular directive</title>
+    <script src="../libs/angular/1.2.15/angular.js"></script>
+    <script src="app_modules.js"></script>
+    <script src="grid_directives.js"></script>
+</head>
+<body >
+
+<h1>Advanced Directives with Angular Js</h1>
+
+<grid-screen resource="/api/data.json">
+    <grid-columns>
+        <grid-column title="Product" filed="product"></grid-column>
+        <grid-column title="Description" filed="description"></grid-column>
+        <grid-column title="Cost" filed="cost"></grid-column>
+    </grid-columns>
+    <grid with-inline-editor></grid>
+</grid-screen>
+</body>
+</html>

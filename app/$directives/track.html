@@ -1,0 +1,71 @@
+<div>
+    <div class="col-sm-12 padLR0"
+      style="height:168px;margin-bottom:0px">
+      <h4>
+        <a style="font-size:14px;color:#999">追踪警员</a>
+        <a class="font13  yhte-ico-primary" ng-click="untrackAllPolice()" style="margin-left:15px;cursor:pointer" tooltip="撤销所有警员轨迹">
+          <i class="fa fa-minus-circle"></i>
+        </a></h4>
+      <div ng-repeat="p in policeTrackFeatures" ng-show="policeTrackFeatures.length > 0">
+        <div class="col-sm-2 padLR0">
+          <span
+            class="badge pull-left"
+            ng-class="{'#0000CC':'policeTrackColor1',
+                      '#330033':'policeTrackColor2',
+                      '#990099':'policeTrackColor3',
+                      '#CC0000':'policeTrackColor4',
+                      '#FF6600':'policeTrackColor5',
+                      '#333333':'policeTrackColor6'}['{{p.color}}']||'badge-default'">
+              {{$index+1}}
+          </span>
+        </div>
+        <div class="col-sm-7 padLR0" style="font-size:13px">{{p.attributes.POLICE_NO}} {{p.attributes.POLICE_NAME}}</div>
+        <div class="col-sm-3 padLR0">
+              <i class="fa fa-map-marker"  
+                map-center 
+                lng="p.points[p.points.length-1].x || p.geometry.x"
+                lat="p.points[p.points.length-1].y || p.geometry.y"
+                style="margin-right:8px"> 
+              </i>
+            <a tip-event event-name="'unTrackPolice'", event-data="p" ng-if="p.onTrack">
+              <i class="fa fa-times" tooltip="撤销实时轨迹"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+	<!-- 警车 -->
+	<div class="col-sm-12 padLR0" 
+	  style="height:168px;margin-bottom:0px">
+	  <h4>
+	    <a style="font-size:14px;color:#999">已追踪警车</a>
+	    <a class="font13  yhte-ico-primary" ng-click="untrackAllCar()" style="margin-left:15px;cursor:pointer" tooltip="撤销所有警车轨迹">
+	      <i class="fa fa-minus-circle"></i>
+	    </a></h4>
+	  <div ng-repeat="p in carTrackFeatures" ng-show="carTrackFeatures.length > 0">
+	    <div class="col-sm-2 padLR0">
+	      <span
+	        class="badge pull-left"
+	        ng-class="{'#FFFF00':'carTrackColor1',
+	                  '#FF9999':'carTrackColor2',
+	                  '#FF3399':'carTrackColor3',
+	                  '#CC33FF':'carTrackColor4',
+	                  '#99FF00':'carTrackColor5',
+	                  '#6699FF':'carTrackColor6'}['{{p.color}}']||'badge-default'">
+	        {{$index+1}}
+	      </span>
+	    </div>
+	    <div class="col-sm-7 padLR0" style="font-size:13px">{{p.attributes.CAR_NO}}</div>
+	    <div class="col-sm-3 padLR0">
+	          <i class="fa fa-map-marker"  
+	            map-center 
+	            lng="p.points[p.points.length-1].x || p.geometry.x"
+	            lat="p.points[p.points.length-1].y || p.geometry.y"
+	            style="margin-right:8px"> 
+	          </i>
+	        <a tip-event event-name="'unTrackCar'", event-data="p" ng-if="p.onTrack">
+	          <i class="fa fa-times" tooltip="撤销实时轨迹"></i>
+	        </a>
+	    </div>
+	  </div>
+	</div>
+</div>

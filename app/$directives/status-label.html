@@ -1,0 +1,3 @@
+<span style="margin-left: 5px;"
+  ng-class="{1:'label label-warning', 2:'label label-success', 3:'label label-info', 4:'label label-primary', 5:'label label-danger'}['{{type.icon}}']||'label label-default'"
+  ng-show="{{type.icon===5 || (type.icon===1&&(type.viewName==='police'||type.viewName==='policeCar'))}}" ng-repeat="type in status" tooltip="{{type.statusName}}">{{type.statusNum}}</span>

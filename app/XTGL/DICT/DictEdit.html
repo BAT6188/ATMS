@@ -1,0 +1,105 @@
+<legend>
+    字典数据详细
+    <span class="label label-danger" ng-show="entity.initFlag==='1'">系统初始</span>
+</legend>
+
+<div class="row">
+    <form name="entityForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- 右对齐的 btn-group -->
+                <div class="btn-group pull-right">
+                    <button ng-click="save();" ng-disabled="entityForm.$invalid||entity.initFlag==='1'" class="btn btn-sm btn-primary" >
+                        <i class="fa fa-floppy-o"></i> 保存
+                    </button>
+                    <button ng-click="reset();" ng-disabled="entity.initFlag==='1'" class="btn btn-sm btn-info">
+                        <i class="fa fa fa-times"></i> 重置
+                    </button>
+                    <!-- 个人觉得不一定需要这个按钮 -->
+                    <a class="btn btn-sm btn-default" ng-href="#/XTGL.DICT.Dict">
+                        <i class="fa fa-align-justify"></i> 返回列表
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">名称</label>
+            <div class="col-sm-4" ng-class="{'has-error': entityForm.dataName.$invalid}">
+                <!-- 必选 required -->
+                <input name="name" type="text" class="form-control input-sm"
+                       placeholder="字典数据名称, 必须!"
+                       ng-disabled="entity.initFlag==='1'"
+                       ng-model="entity.name" required>
+            </div>
+            <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">编码</label>
+            <div class="col-sm-4" ng-class="{'has-error': entityForm.dataCode.$invalid}">
+                <input name="code" type="text"  class="form-control input-sm"
+                       placeholder="字典数据编码, 必须! "
+                       ng-disabled="entity.initFlag==='1'"
+                       ng-model="entity.code" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">所属</label>
+            <div class="col-sm-4" ng-class="{'has-error': entityForm.parentDataCode.$invalid}">
+                <!-- 必选 required -->
+                <select ng-model="entity.parent" ng-options="p.name for p in parents" class="form-control" ng-disabled="entity.initFlag==='1'" required></select>
+            </div>
+            <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">有效性</label>
+            <div class="col-sm-1">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="status" ng-model="entity.status.code" value="1" ng-disabled="entity.initFlag==='1'"> 有效
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="status" ng-model="entity.status.code" ng-disabled="entity.initFlag==='1'" value="0"> 无效
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <legend><button class="btn btn-info btn-sm col-md-12">同级字典数据</button></legend>
+        <table ng-table="tableParams1" class="table table-bordered table-hover table-condensed table-responsive">
+            <tr ng-repeat="record in $data">
+                <td width="30" style="text-align: left; text-align: center" header="'ng-table/headers/checkbox1.html'">
+                    <input type="checkbox" ng-model="checkboxes1.items[record.id]" />
+                </td>
+                <td data-title="'名称'"><a ng-href="#XTGL.DICT.Dict/{{record.id}}/Edit">{{record.name}}</a></td>
+                <td data-title="'编码'">{{record.code}}</td>
+                <td data-title="'所属'">{{record.parent.code}}</td>
+                <td data-title="'有效性'">{{record.status.name}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <legend><button class="btn btn-info btn-sm col-md-12">子级字典数据</button></legend>
+        <table ng-table="tableParams2" class="table table-bordered table-hover table-condensed table-responsive">
+            <tr ng-repeat="record in $data">
+                <td width="30" style="text-align: left; text-align: center" header="'ng-table/headers/checkbox2.html'">
+                    <input type="checkbox" ng-model="checkboxes2.items[record.id]" />
+                </td>
+                <td data-title="'名称'"><a ng-href="#XTGL.DICT.Dict/{{record.id}}/Edit">{{record.name}}</a></td>
+                <td data-title="'编码'">{{record.code}}</td>
+                <td data-title="'所属'">{{record.parent.name}}</td>
+                <td data-title="'有效性'">{{record.status.name}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/ng-template" id="ng-table/headers/checkbox1.html">
+    <input type="checkbox" ng-model="checkboxes1.checked" id="select_all1"/>
+</script>
+<script type="text/ng-template" id="ng-table/headers/checkbox2.html">
+    <input type="checkbox" ng-model="checkboxes2.checked" id="select_all2"/>
+</script>
+

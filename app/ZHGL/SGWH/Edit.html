@@ -1,0 +1,165 @@
+<!-- 工具栏 -->
+<legend>交通管制信息登记<label class="label">{{iState}}</label></legend>
+
+<form>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button class="btn btn-success btn-sm" ng-click="save()">
+          <i class="fa fa-save" tooltip="保存"></i> 保存
+        </button>
+        <a class="btn btn-primary btn-sm" ng-href="#/ZHGL.JTGZ.TrafficCtrl">
+          <i class="fa fa-arrow-left" tooltip="返回列表"></i> 返回
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>类型</label>
+          <select 
+            ng-options="c.name for c in types track by c.code" 
+            ng-model="record.type" 
+            class="form-control input-sm">
+          </select>
+        </div>
+        <div class="form-group col-sm-9">
+          <label>标题</label>
+          <input class="form-control input-sm" ng-model="record.title">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>管制日期(开始)</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="开始日期"
+            ng-model="record.startDate "
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'"
+            end-date = "record.endDate">
+          </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label>管制日期(结束)</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="结束日期"
+            ng-model="record.endDate "
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'"
+            start-date = "record.startDate ">
+          </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label>管制时段(开始)</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="选择小时"
+            ng-model="record.startMoment"
+            format="'hh'"
+            min-view="'day'"
+            start-view="'day'">
+          </div>
+        </div>
+
+        <div class="form-group col-sm-3">
+          <label>管制时段(结束)</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="选择小时"
+            ng-model="record.endMoment"
+            format="'hh'"
+            min-view="'day'"
+            start-view="'day'">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>发布单位</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+        <div class="form-group col-sm-6">
+          <label>发布时间</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="选择日期"
+            ng-model="record.planReleaseTime"
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label>描述</label>
+          <textarea class="form-control input-sm" rows="3" ng-model="record.description"></textarea>
+        </div>
+      </div>
+
+<!--       <div class="row">
+        <div class="form-group col-sm-6" ng-show="toUpload || !record.imgUrl">
+          <label>附件上传
+            <a ng-click="cancel()" ng-show="toUpload"
+            style="font-size:13px;margin-left:10px;font-weight:normal">取消上传</a>
+          </label>
+          <div upload-file file-url="record.imgUrl" upload='/java/uploadFile'></div>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label>图片路径</label>
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" ng-model="record.imgUrl" disabled>
+            <span class="input-group-btn pointer">
+              <button class="btn btn-sm btn-primary" ng-disabled="!record.imgUrl"  ng-click="toggleShow()">查看</button>
+            </span>
+            <span class="input-group-btn pointer" ng-click="reUpload()" ng-hide="toUpload || !record.imgUrl">   <button class="btn btn-sm btn-primary">重新上传</button>
+            </span>
+          </div>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>图片路径
+          <i class="fa fa-times yhte-ico-danger"
+             ng-show="record.imgUrl"
+             ng-click="removeImg()"
+             style="margin-left:10px;font-size:13px">删除该图片</i>
+           </label>
+          <div class="inline-txt-new">
+            <a class="pointer" 
+              tooltip="单击预览图片"
+             ng-click="toggleShow()"
+             ng-disabled ="!record.imgUrl"
+             >
+              {{record.imgUrl || '暂无图片,请上传'}}
+               </a>
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>附件上传</label>
+          <div upload-file file-url="record.imgUrl" upload='/java/uploadFile'></div>
+        </div>
+      </div>
+    </div>
+</form>
+<div 
+  atms-img-preview
+  ng-show = "showImg"
+  urls = urls
+  remove = "true"
+  on-close = "showImg = false"
+></div>

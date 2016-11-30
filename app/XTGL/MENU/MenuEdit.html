@@ -1,0 +1,47 @@
+<legend> 编辑菜单 </legend>
+<form name="form" novalidate>
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="save();" ng-disabled="form.$invalid || isUnchanged(record)"
+          class="btn btn-sm btn-primary">
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button class="btn btn-sm btn-info" ng-click="reset();" ng-disabled="isUnchanged(record)">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <a class="btn btn-sm btn-default" ng-href="#/XTGL.MENU.MenuList"> <i
+          class="fa fa-align-justify"> 返回</i> </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <label>菜单名称</label>
+      <input name="menuName" type="text" class="form-control input-sm"
+        placeholder="菜单名称, 必须!" ng-model="record.menuName" required>
+    </div>
+
+    <div class="col-sm-6">
+      <label>菜单序号</label>
+      <input name="seq" type="number" class="form-control input-sm"
+        placeholder="菜单序号, 必须! " min="0" max="99" ng-model="record.seq" required>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <label>菜单路径</label>
+      <input name="path" type="text" class="form-control input-sm"
+        ng-model="record.path">
+    </div>
+
+    <div class="col-sm-6">
+      <label>上级菜单</label>
+      <select class="form-control input-sm"
+        ng-options="c.id as c.name for c in parents" ng-model="record.parent.id"></select>
+    </div>
+  </div>
+</form>  

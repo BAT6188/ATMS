@@ -1,0 +1,22 @@
+			define(function(require, exports, module){
+			  var controller = ['$scope','Restangular','Modal', 'DictCache','$location',
+			                    function($scope,Rest,Modal,DictCache,$location){
+			       //保存
+				   $scope.update = function(){
+				      var data = _.extend({}, $scope.record);
+				      Rest.one('{{java_name}}', $routeParams.id).doPUT(data).then(function(data){
+				        console.log(data);
+				        if(!data.success){
+				           Messenger().post({
+				                message: '更新数据失败',
+				                type: 'error',
+				                showCloseButton: true
+				           });
+				          return
+				        }
+				         Messenger().post({message: '成功更新数据',type: 'success',showCloseButton: true });
+				      });
+				   };
+			  }];
+			  module.exports = controller;
+			});

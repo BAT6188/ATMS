@@ -1,0 +1,226 @@
+<legend>警车信息及领用记录</legend>
+<div class="row">
+    <div class="btn-group pull-left col-sm-4" style="padding-left:15px">
+        <a class="btn btn-success btn-sm" ng-click="distribute()" ng-show="device.status.code === 1"><i  class="fa fa-user"> 领用</i></a>
+        <a class="btn btn-warning btn-sm" ng-click="returnEquip()" ng-show="device.status.code === 2"><i  class="fa fa-arrow-left"> 归还</i></a>
+        <a class="btn btn-primary btn-sm" ng-href="#/QWGL.ZB.PoliceCar"><i  class="fa fa-th-list"> 警车列表</i></a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-book"> 基本信息</i></h3>
+            </div>
+            <div class="panel-body">
+                <div class="row marginLR0">
+                    <i  class="fa fa-check pull-right" ng-disabled="entityForm.$invalid" ng-click="saveInfo()"> 保存</i>
+                    <i  class="fa fa-pencil pull-right" ng-click="editable = !editable"> 编辑</i>
+                </div>
+               <!--  列表展示 -->
+                <table class="table table-condensed table-bordered" ng-hide="editable">
+                    <tbody>
+                        <tr><th class="col-sm-4">ID</th><td class="col-sm-8">{{device.id}}</td></tr>
+                        <tr><th>警车名称</th><td>{{device.carName}}</td></tr>
+                        <tr><th>车牌</th><td>{{device.carNo}}</td></tr>
+                        <tr><th>类型</th><td>{{device.type.name}}</td></tr>
+                        <tr><th>仓库</th><td>{{device.wareHouse.name}}</td></tr>
+                        <tr><th>GPS</th><td>{{device.carGps.name}}</td></tr>
+                        <tr><th>视频</th><td>{{device.carVideo.name}}</td></tr>
+                        <tr><th>车载台</th><td>{{device.carRadio.name}}</td></tr>
+                        <tr><th>备注</th><td>{{device.remark}}</td></tr>
+                        <tr><th>状态</th><td>{{device.status.name}}</td></tr>
+                        <tr><th>创建人</th><td>{{device.creator.name}} </td></tr>
+                        <tr><th>创建时间</th><td>{{device.createDate}}</td></tr> 
+                        <tr ng-show=" device.status === 2"><th>领用人</th><td>{{device.record.ownerName}}</td></tr>
+                    </tbody>
+                </table>
+                <!-- 可编辑 -->
+                <form class="form-horizontal row marginLR0" name="deviceForm" ng-show="editable">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">车牌</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.carNo.$invalid}">
+                            <input type="text" class="form-control input-sm" name="carNo" ng-model="device.carNo" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">名称</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.carName.$invalid}">
+                            <input type="text" class="form-control input-sm" name="carName" ng-model="device.carName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">类型</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.type.$invalid}">
+                            <select class="form-control input-sm"  name="type" ng-model="device.type" ng-options="c.name for c in types track by c.code" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">仓库</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.wareHouse.$invalid}">
+                            <select class="form-control input-sm" name="wareHouse" ng-model="device.wareHouse" ng-options="c.name for c in wareHouses track by c.code" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">可否定位</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.gpsFlag.$invalid}">
+                             <select class="form-control input-sm" name="gpsFlag" ng-model="device.gpsFlag" required>
+                                <option value = '1'>是</option>
+                                <option value = '0'>否</option>
+                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">GPS</label>
+                        <div class="col-sm-9" ng-class="{'has-error': entityForm.carGps.$invalid}">
+                            <select class="form-control input-sm" name="carGps" ng-model="device.carGps" ng-options="c.name for c in gps track by c.code" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">视频</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.carVideo.$invalid}">
+                            <select class="form-control input-sm" name="carVideo" ng-model="device.carVideo" ng-options="c.name for c in videos track by c.code" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3  control-label">车载台</label>
+                        <div class="col-sm-9" ng-class="{'has-error': deviceForm.carRadio.$invalid}">
+                            <select class="form-control input-sm" name="carRadio" ng-model="device.carRadio" ng-options="c.name for c in radios track by c.code" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" ng-model="device.remark"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-11 padLR0">
+                <div class="col-sm-4" style="padding-left:0px">
+                    <div class="input-group">
+                        <span class="input-group-addon">领用人</span>
+                        <input type="text" class="form-control input-sm" ng-model="Q.ownerName">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">开始时间</span>
+                        <input type="text" class="form-control input-sm" datetimepicker ng-model="Q.startTime">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">结束时间</span>
+                        <input type="text" class="form-control input-sm" datetimepicker ng-model="Q.endTime">
+                    </div>
+                </div>
+            </div>
+            <button class="col-sm-1 btn btn-primary btn-sm" type="button" ng-click="query();">
+              <i class="fa fa-search"> 查询</i>
+            </button>
+        </div>
+        <!-- 领用记录 -->
+        <div class="row">
+            <table class="col-sm-12 table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>流水号</th>
+                        <th>领用人ID</th>
+                        <th>领用人姓名</th>
+                        <th>领用时间</th>
+                        <th>归还时间</th>
+                        <th>领用原因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="record in records">
+                        <td>{{record.recordId}}</td>
+                        <td>{{record.owner}}</td>
+                        <td>{{record.ownerName}}</td>  
+                        <td>{{record.ownTime}}</td> 
+                        <td>{{record.revertTime}}</td> 
+                        <td>{{record.ownReason}}</td> 
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 分页栏 -->
+            <div class="col-sm-12">
+                <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false"
+                            total-items="total"
+                            page="Q.page"
+                            items-per-page="Q.pageSize"
+                            max-size="Q.maxSize"
+                            on-select-page="pChange(page)"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            last-text="最后一页"
+                            first-text="最前一页">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">派车『{{device.carName}}』
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="quickForm">
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用人ID</label>
+                        <div class="col-sm-8 input-group" ng-class="{'has-error': quickForm.owner.$invalid}">
+                            <input type="text" class="form-control input-sm" name="owner" ng-model="newRecord.owner" required>
+                        </div>
+                    </div>
+<!--                     <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用人姓名</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.ownerName.$invalid}">
+                           <input type="text" class="form-control input-sm" name="ownerName" ng-model="newRecord.ownerName" required>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用时间</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.ownTime.$invalid}">
+                             <input type="text" class="form-control input-sm" datetimepicker ng-model="newRecord.ownTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用原因</label>
+                        <div class="col-sm-8 input-group" ng-class="{'has-error': quickForm.ownReason.$invalid}">
+                            <textarea class="form-control input-sm" name="ownReason" ng-model="newRecord.ownReason" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">同行人</label>
+                        <div class="col-sm-8 input-group" ng-class="{'has-error': quickForm.company.$invalid}">
+                            <input class="form-control input-sm" name="company" placeholder="abc" disabled/>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">预计归还时间</label>
+                        <div class="col-sm-8">
+                            <input class="form-control  input-sm" datetimepicker name="company" ng-model="newRecord.planRevertTime" placeholder="2013-03-03"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a class="btn btn-success btn-sm" ng-disabled="quickForm.$invalid" ng-click="saveDispatch()"><i class="fa fa-check" > 确认</i></a>
+                    <a class="btn btn-default btn-sm"  data-dismiss="modal">
+                    <i class="fa fa-time"> 取消</i></a>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

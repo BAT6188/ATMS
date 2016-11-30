@@ -1,0 +1,314 @@
+<legend>
+  综合管理 > 设备设施管理 >
+  <a href="#/SBGL.DeviceList">设备</a>>新增设备
+</legend>
+
+<div class="col-sm-12">
+  <div tabset>
+    <div tab heading="诱导屏" ng-click="changeTab('3')">
+      <div class="col-sm-12 padLR0">
+          <div class="row">
+            <div class="col-sm-offset-8 col-sm-4">
+              <div class="btn-group pull-right" style="padding-right:15px;">
+                <button class="btn btn-sm btn-primary" ng-click="save();">保存</button>
+                <a class="btn btn-sm btn-default" ng-href="#/SBGL.DeviceList">取消</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <form name="iForm" class="font14">
+              <div class="col-sm-12 padLR0">
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-4">编号</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control input-sm" ng-model="cms.no">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-4">名称</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control input-sm" ng-model="cms.name">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-4">类型</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" 
+                      ng-model="cms.cmsType"
+                      ng-options="e.name for e in cmsTypes"
+                     >
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 padLR0">
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-4">屏宽</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control input-sm" ng-model="cms.width">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-4">屏高</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control input-sm" ng-model="cms.height">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    <div tab  heading="卡口点位" ng-click="changeTab('5')">
+      <div class="col-sm-12 padLR0">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-group pull-right" style="padding:0 15px;">
+              <button class="btn btn-sm btn-primary" ng-click="save();">保存</button>
+              <a class="btn btn-sm btn-default" ng-href="#/SBGL.DeviceList">取消</a>
+            </div>
+          </div>
+        </div>
+        <form name="iForm" class="font14">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label col-sm-4">编号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control input-sm" ng-model="kk.no">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label col-sm-4">名称</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control input-sm" ng-model="kk.name">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label col-sm-4">点位类型</label>
+              <div class="col-sm-8">
+                  <select class="form-control" 
+                    ng-model="kk.pointType"
+                    ng-options="e.name for e in pointTypes"
+                   >
+                  </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label col-sm-4">方向</label>
+              <div class="col-sm-8">
+                <select type="text" ng-model="kk.roadTrend" class="form-control input-sm"
+                        ng-options="d.name for d in trends">
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <label class="control-label col-sm-2">专网图路径</label>
+              <div class="col-sm-10 padLR0" style="margin-left:-32px;">
+                <input type="text" class="form-control input-sm" ng-model="kk.imgPath1">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <label class="control-label col-sm-2">公安网图路径</label>
+              <div class="col-sm-10 padLR0" style="margin-left:-32px">
+                <input type="text" class="form-control input-sm" ng-model="kk.imgPath2">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div tab heading="视频" ng-click="changeTab('2')"> 
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <div style="padding:0 15px;" class="btn-group pull-right">
+              <button ng-click="save();" class="btn btn-sm btn-primary">保存</button>
+              <a ng-href="#/SBGL.DeviceList" class="btn btn-sm btn-default" href="#/SBGL.DeviceList">取消</a>
+            </div>
+          </div>
+        </div>
+        <div class="row"> 
+          <form name="iForm" class="font14">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="control-label col-sm-4">编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control input-sm" ng-model="video.no">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label class="control-label col-sm-4">名称</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control input-sm" ng-model="video.name">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label class="control-label col-sm-4">通信方式</label>
+                <div class="col-sm-8">
+                  <select name="comModel.code" type="text"
+                    class="form-control input-sm"
+                    ng-options="c.name for c in comModels track by c.code" ng-model="video.comModel"></select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div tab heading="信号机" ng-click="changeTab('1')"> 
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <div style="padding:0 15px;" class="btn-group pull-right">
+              <button ng-click="save();" class="btn btn-sm btn-primary">保存</button>
+              <a ng-href="#/SBGL.DeviceList" class="btn btn-sm btn-default" href="#/SBGL.DeviceList">取消</a>
+            </div>
+          </div>
+        </div>
+        <div class="row"> 
+          <form name="iForm" class="font14">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="control-label col-sm-4">编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control input-sm" ng-model="signal.no">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label class="control-label col-sm-4">名称</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control input-sm" ng-model="signal.name">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <legend>网络配置</legend>
+    <div class="row font14">
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">IP 地址</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.ip">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">端口号</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.port">
+        </div>
+      </div>
+    </div>
+  <legend>其他</legend>
+    <div class="row font14">
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">经度</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.lng">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">纬度</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.lat">
+        </div>
+      </div>
+      <a class="font13" ng-click="locate()" style="cursor:pointer;color:#428BCA">
+        <i class="fa fa-globe"></i> 单击此处地图定位
+      </a>
+    </div>
+    <div class="row font14">
+        <div class="col-sm-4">
+          <label class="control-label col-sm-4">位置描述</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control input-sm" ng-model="record.address">
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <label class="control-label col-sm-4">所属道路</label>
+          <div class="col-sm-8">
+            <input name="belongRoad" type="text" class="form-control input-sm"
+              ng-model="record.belongRoad">
+          </div>
+        </div>
+    </div>
+    <div class="row font14">
+        <div class="col-sm-4">
+          <label class="control-label col-sm-4">线路厂商</label>
+          <div class="col-sm-8">
+              <select class="form-control" 
+              ng-model="record.lineMaintain"
+              ng-options="e.name for e in lineMaintains"
+             >
+            </select>
+          </div>
+        </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">安装日期</label>
+        <div class="col-sm-8">
+            <div datetimepicker-new
+              class="form-control input-sm"
+              placeholder="选择日期"
+              ng-model="record.buildTime"
+              format="'yyyy-mm-dd'"
+              min-view="'month'"
+              start-view="'month'">
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">启用日期</label>
+        <div class="col-sm-8">
+            <div datetimepicker-new
+              class="form-control input-sm"
+              placeholder="选择日期"
+              ng-model="record.startTime"
+              format="'yyyy-mm-dd'"
+              min-view="'month'"
+              start-view="'month'">
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row font14">
+      <div class="col-sm-4">
+          <label class="control-label col-sm-4">管辖单位</label>
+          <div class="col-sm-8">
+             <input type="text" class="form-control input-sm" ng-model="record.manageDeptCode" >
+          </div>
+        </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">维护单位</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.maintain" >
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="control-label col-sm-4">施工单位</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control input-sm" ng-model="record.builder" >
+        </div>
+      </div>
+    </div>
+    <div class="row font14">
+      <div class="col-sm-12">
+        <label class="control-label col-sm-2">备注</label>
+        <div class="col-sm-10" style="padding-right:0px;margin-left:-60px">
+          <input type="text" class="form-control input-sm" ng-model="record.remark">
+        </div>
+      </div>
+    </div>
+</div>

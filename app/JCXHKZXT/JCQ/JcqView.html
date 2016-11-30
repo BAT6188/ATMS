@@ -1,0 +1,109 @@
+<legend>
+ {{name}}
+</legend>
+
+<div class="col-sm-12">
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-sm-3">
+    	<div class="panel panel-default padLR0">
+	   	    <div class="panel-heading font14">
+	   	    	检测器:{{records[0].name}}
+	   	    </div>
+		    <div class="panel-body">
+		    	<div class="row">
+		    		<div class="col-sm-4">时间</div>
+		    		<div class="col-sm-4">交通流量</div>
+		    		<div class="col-sm-4">占有率</div>
+		    	</div>
+		    	<div class="row" ng-repeat="record in records[0].list">
+		    		<div class="col-sm-4">{{record.time}}</div>
+		    		<div class="col-sm-4">{{record.flow}}</div>
+		    		<div class="col-sm-4">
+		    			<div class="progress" style="margin-bottom: 0;">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{record.share}};">
+						    {{record.share}}
+						  </div>
+						</div>
+					</div>
+		    	</div>
+		    </div>
+	  	</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-default padLR0">
+	   	    <div class="panel-heading font14">
+	   	    	检测器:{{records[1].name}}
+	   	    </div>
+		    <div class="panel-body">
+		    	<div class="row">
+		    		<div class="col-sm-4">时间</div>
+		    		<div class="col-sm-4">交通流量</div>
+		    		<div class="col-sm-4">占有率</div>
+		    	</div>
+		    	<div class="row" ng-repeat="record in records[1].list">
+		    		<div class="col-sm-4">{{record.time}}</div>
+		    		<div class="col-sm-4">{{record.flow}}</div>
+		    		<div class="col-sm-4">
+		    			<div class="progress" style="margin-bottom: 0;">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{record.share}};">
+						    {{record.share}}
+						  </div>
+						</div>
+		    		</div>
+		    	</div>
+		    </div>
+	  	</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-default padLR0">
+	   	    <div class="panel-heading font14">
+	   	    	检测器:{{records[2].name}}
+	   	    </div>
+		    <div class="panel-body">
+		    	<div class="row">
+		    		<div class="col-sm-4">时间</div>
+		    		<div class="col-sm-4">交通流量</div>
+		    		<div class="col-sm-4">占有率</div>
+		    	</div>
+		    	<div class="row" ng-repeat="record in records[2].list">
+		    		<div class="col-sm-4">{{record.time}}</div>
+		    		<div class="col-sm-4">{{record.flow}}</div>
+		    		<div class="col-sm-4">
+						<div class="progress" style="margin-bottom: 0;">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{record.share}};">
+						    {{record.share}}
+						  </div>
+						</div>
+					</div>
+		    	</div>
+		    </div>
+	  	</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-default padLR0">
+	   	    <div class="panel-heading font14">
+	   	    	检测器:{{records[3].name}}
+	   	    </div>
+		    <div class="panel-body">
+		    	<div class="row">
+		    		<div class="col-sm-4">时间</div>
+		    		<div class="col-sm-4">交通流量</div>
+		    		<div class="col-sm-4">占有率</div>
+		    	</div>
+		    	<div class="row" ng-repeat="record in records[3].list">
+		    		<div class="col-sm-4">{{record.time}}</div>
+		    		<div class="col-sm-4">{{record.flow}}</div>
+		    		<div class="col-sm-4">
+		    			<div class="progress" style="margin-bottom: 0;">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{record.share}};">
+						    {{record.share}}
+						  </div>
+						</div>
+		    		</div>
+		    	</div>
+		    </div>
+	  	</div>
+    </div>
+  </div>
+</div>

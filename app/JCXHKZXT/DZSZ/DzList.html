@@ -1,0 +1,69 @@
+<legend>
+灯组设置 
+</legend>
+
+<div class="col-sm-12">
+	<div class="row">
+  <div class="col-sm-4">
+    <div class="btn-group">
+      <a class="btn btn-success btn-sm" ng-click="add();">
+        <span class="glyphicon glyphicon-plus" tooltip="新增"></span> 新增
+      </a>
+      <button class="btn btn-danger btn-sm" ng-click="remove();">
+        <span class="glyphicon glyphicon-minus" tooltip="删除"></span> 删除
+      </button>
+      <!-- <button class="btn btn-success btn-sm" ng-click="testCt();">
+        <span class="fa fa-wrench" tooltip="冲突检测"></span> 冲突检测
+      </button> -->
+    </div>
+  </div>
+  <!-- <div class="col-sm-8">
+    <div class="input-group">
+      <input type="text" class="form-control input-sm" placeholder="输入名称..." ng-model="Q.title">
+      <span class="input-group-btn">
+      <a class="btn btn-sm btn-primary" ng-click="query()">
+        <i class="fa fa-query"> 查询</i>
+      </a>
+      </span>
+    </div>
+  </div> -->
+</div>
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th class="check"><input type="checkbox"
+              ng-model="allChecked" ng-change="selectAll();"></th>
+            <th>灯组名</th>
+            <th>端口号</th>
+            <th>放行方向</th>
+            <th>类型</th>
+            <th>是否位于主干道</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in records">
+            <td class="check"><input type="checkbox"
+              ng-model="checks[$index]" ng-click="select($index);">
+            </td>
+            <td>{{record.name}}</td>
+            <td>{{record.port}}</td>
+            <td>{{record.direction.name}}</td>
+            <td>{{record.type.name}}</td>
+            <td>{{record.isMain|isMainFilter}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+      <div pagination class="pagination-sm pull-right" boundary-links="true"
+        rotate="false" total-items="total" page="Q.page"
+        items-per-page="Q.pageSize" max-size="Q.maxSize"
+        on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+        last-text="最后一页" first-text="最前一页"> </div>
+    </div>
+  </div>
+</div>

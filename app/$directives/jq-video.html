@@ -1,0 +1,162 @@
+<div>
+<!-- <div panel title="{{record.properties.DEVICE_NAME}} {{!isLogin?'Loading...':''}}"> -->
+  
+  <!-- <small><em>Object (changes type based on value)</em></small>
+  <progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></progressbar> -->
+  
+  <div>
+    {{isLogining?'登录大华视频服务器中...':''}}
+  <div id="msgDiv" class="text-danger"></div>
+    <!-- <iframe style="position: absolute; width:560px; height:260px;z-index:99998;border-width: 0px;"></iframe>
+    <div style="position: absolute; width:560px; height:260px; z-index:99999;">
+      <img src="resources/img/loading_circle.gif" style="width: 100%; height: 100%"></img> 
+    </div> -->
+  </div>
+  
+  <iframe id="upfrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="updiv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/up-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img>
+  </div>
+
+  <iframe id="downfrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="downdiv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/down-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img>
+  </div>
+
+  <iframe id="leftfrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="leftdiv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/left-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img> 
+  </div>
+
+  <iframe id="rightfrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="rightdiv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/right-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img> 
+  </div>
+
+  <iframe id="middlefrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="middlediv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/right-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img> 
+  </div>
+
+  <!-- <iframe id="rightupfrm" 
+    style="width: 30px; height: 30px; 
+    z-index: 2; border-width: 0; display: none;">
+  </iframe>
+  <div id="rightupdiv" 
+    style="width: 30px; height: 30px; 
+    z-index: 3; background: blue; display: none;">
+    <img src="resources/img/full-grey.png" style="width: 100%; height: 100%; cursor: pointer;"></img>
+  </div> -->
+
+  <div id="VD" class="row marginLR0"><!-- border:solid 1px #563D7C -->
+  </div>
+  
+  <!--<div class="rightDiv" style="">
+      
+      <br>
+      <input type="button" id="create" value="创建" ng-click="createFun();">
+      <input type="button" id="set" value="设置" ng-click="setFun();">
+  
+      <input type="button" id="setIn" value="设置" class="button" onclick="return ButtonCreateWnd_onclick()" />
+      <input type="button" id="buttonLogin" value="登录" class="button" onclick="return ButtonLogin_onclick()" />
+      <input type="button" id="buttonLogout" value="登出" class="button" onclick="return ButtonLogout_onclick()" />
+      <input type="button" id="buttonLoadDGroupInfo" value="加载组织结构" class="button" onclick="return ButtonLoadDGroupInfo_onclick()" />
+      <div style="width: 250px;height: 150px;overflow: auto;" id="DGroupInfo">
+      </div>
+      <input type="button" id="buttonStartRealplayByWndNo" value="当前选中窗口播放视频" onclick="return ButtonStartRealplayByWndNo_onclick()" />
+      <input type="button" id="buttonStopRealplayByWndNo" value="关闭当前选中视频" onclick="return ButtonStopRealplayByWndNo_onclick()" />
+      <input type="button" id="buttonCapturePictureByWndNo" value="按窗口号抓图" onclick="return ButtonCapturePictureByWndNo_onclick()" />
+      <input type="button" id="buttonStartRealRecordByWndNo" value="开始录像" onclick="return ButtonStartRealRecordByWndNo_onclick()" />
+      <input type="button" id="buttonStopRealRecordByWndNo" value="停止录像" onclick="return ButtonStopRealRecordByWndNo_onclick()" /> -->
+      <!-- <table >
+        <tr>
+          <td  width="50px;" align="center">
+          <input type="button" id="" value="左上" onclick="return ButtonPtzDirection_onclick(5)" />
+          </td>
+          <td width="50px;" align="center">
+          <input type="button" class="button" id="" value="&nbsp;&nbsp;上&nbsp;&nbsp;" onclick="return ButtonPtzDirection_onclick(1)" />
+          </td>
+          <td width="50px;" align="center">
+          <input type="button" id="" value="右上" onclick="return ButtonPtzDirection_onclick(7)" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+          <input type="button" id="" value="&nbsp;&nbsp;左&nbsp;&nbsp;" onclick="return ButtonPtzDirection_onclick(3)" />
+          </td>
+          <td align="center">
+          <input type="button" id="" value="停止" onclick="return ButtonPtzDirection_onclickStop(1)" />
+          </td>
+          <td align="center">
+          <input type="button" id="" value="&nbsp;&nbsp;右&nbsp;&nbsp;" onclick="return ButtonPtzDirection_onclick(4)" />
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+          <input type="button" id="" value="左下" onclick="return ButtonPtzDirection_onclick(6)" />
+          </td>
+          <td align="center">
+          <input type="button" class="button" id="" value="&nbsp;&nbsp;下&nbsp;&nbsp;" onclick="return ButtonPtzDirection_onclick(2)" />
+          </td>
+          <td align="center">
+          <input type="button" id="" value="右下" onclick="return ButtonPtzDirection_onclick(8)" />
+          </br></td>
+        </tr>
+      </table>
+  </div> -->
+  
+  <div class="btn-group pull-right">
+    <!-- <input type="button" id="create" value="创建" ng-click="createFun();">
+    <input type="button" id="set" value="设置" ng-click="setFun();"> -->
+    <!-- <button type="button" class="btn btn-primary btn-sm" ng-click="loginFun();">
+      登录
+    </button> -->
+    <button type="button" class="btn btn-link btn-sm" ng-click="startRealplayByWndNoFun(true);">
+      播放
+    </button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="stopRealplayByWndNoFun(true);">
+      关闭
+    </button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="capturePictureByWndNoFun();">
+      截图
+    </button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="startRealRecordByWndNoFun();" ng-show="!isVideoing">
+      开始录像
+    </button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="stopRealRecordByWndNoFun();" ng-show="isVideoing">
+      结束录像
+    </button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="modal();">
+      全屏
+    </button>
+  </div>
+  
+  <div ng-transclude>
+
+  </div>
+</div>

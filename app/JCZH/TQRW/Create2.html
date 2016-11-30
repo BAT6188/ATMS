@@ -1,0 +1,121 @@
+<legend>创建特勤特务</legend>
+<div class="col-sm-2">
+  <div class="list-group">
+    <a class="list-group-item" ng-click="toStep1()">基本信息及线路</a>
+    <a class="list-group-item active">编辑信号机预置位</a>
+    <a class="list-group-item" ng-click="toStep3()">配置岗位</a>
+    <a class="list-group-item" ng-show="">下发任务</a>
+  </div>
+</div>
+<div class="col-sm-10">
+  <div class="col-sm-12">
+    <div class="pull-left">
+      <button type="button" class="btn btn-sm btn-primary" ng-click="toStep1()">上一步</button>
+    </div>
+    <div class="pull-right">
+      <button type="button" class="btn btn-sm btn-primary" ng-click="toStep3()">下一步</button>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div style="padding:15px 0;">
+      <div class="input-group">
+        <select class="selectpicker  show-tick form-control col-sm-12"
+          opts="allsignals"
+          showname = "name"
+          title="选择信号机"
+          data-live-search="true"
+          objs="querySignal">
+        </select>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="onQuerySelect()">添加信号机</button>
+        </span>
+      </div>
+      
+      <div style="height:20px;">
+        <i ng-hide="ifLoaded" class="glyphicon glyphicon-refresh"></i>
+      </div>    
+    </div>
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <th>序号</th>
+        <th>路口</th>
+        <th>编辑预置位</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="snc in sncs">
+          <td>{{$index+1}}
+            <a tooltip="删除" ng-click="removeNode(snc)" type="button" class="close">&times;</a>
+          </td>
+          <td>
+            <a ng-click="itemClick(snc);">{{snc.name}}</a>
+            <a class="pointer" tooltip="当前选中信号机" ng-show="selected.id===snc.id">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+          </td>
+          <td>
+            <select class="form-control input-sm" ng-model="snc.config.yzw" ng-options="c as c.name for c in types track by c.code"></select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default" style="margin-top:15px;">
+      <div class="panel-heading">
+        <h5 ng-show="showList">
+          {{selected.name}} 周边50米视频
+        </h5>
+        <h5 ng-hide="showList">
+          {{currentVideo.name}}
+          <button class="btn btn-default btn-sm" style="margin-left:10px" ng-click="showList=true;currentVideo=null;">
+            <i class="fa fa-arrow-left"></i>
+            返回
+          </button>
+        </h5>
+      </div>
+      <div class="panel-body">
+        <div ng-show="showList">
+          <p ng-show="selected.config.videos.length === 0">周边无视频</p>
+          <div class="row" ng-repeat="video in selected.config.videos | paginator:page:size">
+            <div class="col-sm-10 pointer" ng-click="openVideo(video)">
+              <span class="badge badge-success">
+                {{(page-1)*size+$index+1}}
+              </span>
+              {{video.name || 'XXX'}}
+            </div>
+            <div class="col-sm-2">
+              <div class="hover-show-item pull-right" style="padding:0 5px;">
+                <a tooltip="删除视频" ng-click="cancel(video)">
+                  <span class="fa fa-times"></span>
+                </a>
+               <!--  <a tooltip="设置预置位">
+                  <span class="fa fa-wrench"></span>
+                </a> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="pagination-sm pull-right"
+                ng-show="total>size"
+                pagination 
+                boundary-links="true" 
+                total-items="total" 
+                page="page"
+                items-per-page="size"
+                max-size="5" 
+                previous-text="&lsaquo;" 
+                next-text="&rsaquo;" 
+                first-text="&laquo;" 
+                last-text="&raquo;">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-hide="showList">
+          <div atms-jq-video data="feature" ocx-height='260px' style="height: 310px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<legend>交通流量统计</legend>
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="#/FXYP.LLTJ.HourDif" class="list-group-item">小时内流量同期比</a>
+        <a href="#/FXYP.LLTJ.DayDif" class="list-group-item">日小时流量同期比</a>
+        <a href="#/FXYP.LLTJ.MonthDif" class="list-group-item active">月流量同期比</a>
+    </div>
+</div>
+<div class="col-md-9">
+    <legend>小时流量同期比</legend>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-md-5 padLR0">
+            <label for="" class="col-sm-3 control-label input-sm font14">对比时间:</label>
+            <div class="col-sm-9">
+                <div class="input-group"> 
+                  <div datetimepicker ng-model="newTime" format="yyyy-MM-dd hh"></div>
+                  <span class="input-group-addon" ng-click="addTime()"><i class="fa fa-plus"> 单击添加</i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 padLR0">
+          <span ng-repeat="t in times" class="label label-warning" style="margin-left:3px">
+            {{t}}
+            <i class="fa fa-times" ng-click="times.splice($index,1)"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-5 padLR0">
+            <label for="" class="col-sm-3 control-label input-sm font14">断面:</label>
+            <div class="col-sm-9">
+                <div class="input-group"> 
+                  <input id="flowInput" name="name" type="text" class="form-control input-sm" ng-click="showMenu()" required>
+                  <span class="input-group-addon" ng-click="removeFlow()"><i class="fa fa-times"> 清除断面</i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padLR0">
+          <div class="btn-group pull-right">
+              <a class="btn btn-sm btn-primary" ng-click="analyze()">
+                <i class="fa fa-search"> 统计</i>
+              </a>
+              <a class="btn btn-sm btn-success" ng-click="">
+                <i class="fa fa-cloud-download"></i> 导出
+              </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div highcharts data="chartLineData" xaxis="chartLineXAxis" title="图表" type="line" ytitle="过车数(辆)"></div>
+        </div>
+        <div  class="col-sm-12">
+          <table class="table table-condensed table-bordered font11">
+            <tr>
+              <th>时间</th>
+              <th ng-repeat="t in chartLineXAxis">{{t}}</th>
+            </tr>
+            <tr ng-repeat="c in records">
+              <td>{{c.getTime}}</td>
+              <td ng-repeat="f in c.facetFlowDatas">
+                {{f.flow}}
+              </td>
+            </tr>
+          </table>
+        </div>
+    </div>
+</div>
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+  <ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+</div>

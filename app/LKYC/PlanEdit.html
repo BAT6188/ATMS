@@ -1,0 +1,90 @@
+<legend>
+    编辑预测
+</legend>
+
+<form name="entityForm">
+  <div class="row ">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="save();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" disabled="disabled">
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <!-- 个人觉得不一定需要这个按钮 -->
+        <a class="btn btn-sm btn-default" ng-href="#LKYC.Plan/{{roadSectionId}}/{{roadName}}/List">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">名称</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.dataName.$invalid}">
+      <!-- 必选 required -->
+      <input name="settingName" type="text" class="form-control input-sm"
+        placeholder="预测名称, 必须!"
+        ng-model="entity.settingName" required>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">路况状态</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.code.$invalid}">
+      <select ng-model="entity.status" name="status" ng-options="t.name for t in statuses track by  t.code" class="form-control" required></select>
+    </div>
+  </div>
+  
+<div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">开始时间</label>
+    <div class="col-sm-4">
+        <div datetimepicker
+             timesize="5"
+             nosecond="true"
+             minuteno="true"
+             ng-model="record.start"
+             format="yyyy-MM-dd hh:mm">
+          </div>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">结束时间</label>
+    <div class="col-sm-4">
+        <div datetimepicker
+             timesize="5"
+             nosecond="true"
+             minuteno="true"
+               ng-model="record.end"
+               format="yyyy-MM-dd hh:mm">
+          </div>
+    </div>
+  </div>
+  
+ <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">开始星期</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.parent.$invalid}">
+        <select ng-model="entity.startWeek" name="startWeek" ng-options="p.name for p in weeks track by  p.code" class="form-control" required></select>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">结束星期</label>
+    <div class="col-sm-4">
+        <select ng-model="entity.endWeek" name="endWeek" ng-options="p.name for p in weeks track by  p.code" class="form-control" required></select>
+    </div>
+  </div> 
+ 
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">有效性</label>
+    <div class="col-sm-1">
+        <div class="radio">
+          <label>
+            <input type="radio" name="isUsing" ng-model="entity.isUsing" value="1" checked> 有效
+          </label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="radio">
+          <label>
+            <input type="radio" name="isUsing" ng-model="entity.isUsing" value="0"> 无效
+          </label>
+        </div>
+    </div>
+  </div>
+
+</div>

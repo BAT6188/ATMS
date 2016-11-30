@@ -1,0 +1,241 @@
+<div class="col-100-auto col-sm-3">
+  <div class="row">
+    <legend class="col-sm-12" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); padding-right: 0px;">
+      <span class="col-sm-8">
+      警情处置
+      <span style="font-size:12px;margin-left:10px;" class="label {{record.status.code | pTaskState}}">
+        {{record.status.name}}
+      </span>
+      </span>
+      <span class="col-sm-4 pull-right">
+        <a class="label label-primary" ng-href="#/JCZH.ZHDD.CommandDispatchExecuter" style="padding-right: 12px;">
+          <span class="glyphicon glyphicon-chevron-left" ></span> 返回列表
+        </a>
+      </span>
+    </legend>
+
+    <div class="btn-group pull-right">
+      <button class="btn btn-success btn-sm" ng-click="finish()" ng-disabled="" ng-hide="record.status.code===3||record.status.code==='3'" privilege="指挥调度_大队" effect="disabled" when="ptaskTypeIsMajor();">
+        <span class="glyphicon glyphicon-ok"></span> 完结
+      </button>
+    </div>
+  </div>
+
+  <!--  警员反馈信息 -->
+  <div class="row" ng-show="viewCode === '1' && policeItemShow === 1">
+    <div atms-jq-police-message 
+      show="policeItemShow"
+      data="message"
+      police="_police"
+      ptask="record.id"
+      on-close="policeItemShow=-1">
+    </div>
+  </div>
+  
+  <!-- 警务通 -->
+  <div class="row" ng-hide="!msgSenderVisible">
+    <div msg-sender
+      on-close="msgSenderVisible=false"
+      on-call="msgSenderVisible=true">
+    </div>
+  </div>
+
+  <div class="row">
+    <!--  呼叫 -->
+    <!-- <div atms-jq-police-call class="col-sm-12"
+      police="_police"
+      ng-show="viewCode === '1' && policeItemShow === 2">
+    </div> -->
+
+    <!-- 视频 -->
+    <div class="alert alert-default my-box-shdow col-sm-12" ng-show="detailItem === '视频'" >
+      <div atms-jq-video ocx-height='180px'
+        data="_device">
+      </div>
+    </div>
+
+    <!-- 信号机 -->
+    <div atms-jq-signal ng-show="detailItem === '信号机'"
+      data="_device">
+    </div>
+  </div>
+
+  <!-- 警情面板，包含显示和编辑两个状态 -->
+  <div class="row">
+    <div class="alert alert-deafult my-box-shdow">
+      <h4>
+        警情 - {{record.id}}
+      </h4>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="btn-group pull-right">
+            <!-- <a  class="btn" ng-click="baseShow = 'accident'" ng-show="record.type.code === 1">
+              <i class="fa fa-exclamation-circle pull-right"> 事故</i>
+            </a> -->
+            <a  class="btn" ng-click="baseShow = 'info'" ng-show="record.type.code === 1">
+              <i class="fa fa-exclamation-circle pull-right"> 警情</i>
+            </a>
+            <a  class="btn"  ng-click="update();baseShow = 'info'" ng-show="baseShow === 'edit'" >
+              <i class="fa fa-pencil pull-right"> 保存</i>
+            </a>
+            <a  class="btn" ng-hide="baseShow === 'edit'" ng-click="baseShow = 'edit'" privilege="指挥调度_大队" effect="disabled" when="ptaskTypeIsMajor();">
+              <i class="fa fa-pencil pull-right"> 编辑</i>
+            </a>
+            <a  class="btn" ng-click="baseShow = 'info'" ng-show="baseShow === 'edit'" >
+              <i class="fa fa-pencil pull-right"> 取消</i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 警情显示 -->
+        <div class="col-sm-12" 
+          atms-jq-info
+          ng-show="baseShow === 'info'"
+          data="record" 
+          map="map"
+          fb-panel="fbPanel"
+          to-evaluate="toEvaluate" 
+          evaluate-length="evaluations.length">
+        </div>
+
+        <!-- 报警人反馈信息 -->
+        <div class="col-sm-12" atms-jq-call-feedback data="record"
+          on-location-click="onLocationClick($lng, $lat);">
+        </div>
+
+        <!-- 警情编辑 -->
+        <div class="col-sm-12" atms-jq-edit
+          data="record"
+          ng-show="baseShow === 'edit'"
+          types="types" 
+          levels="levels" 
+          map="map"
+          alarm-ways="alarmWays" >
+        </div>
+        <!-- 事故信息 -->
+        <div class="col-sm-12">
+          <table class="table table-condensed" ng-show="baseShow === 'accident'">
+            <tr><th>事故名称</th><td>{{accident.name}}</td></tr>
+            <tr><th>开始时间</th><td>{{accident.occurTime}}</td></tr>
+            <tr><th>事故等级</th><td>{{accident.level.name}}</td></tr>
+            <tr><th>事故类型</th><td>{{accident.type.name}}</td></tr>
+            <tr><th>事故形态</th><td>{{accident.form.name}}</td></tr>
+            <tr><th>道路里程</th><td>{{accident.roadMile}}</td></tr>
+            <tr><th>路面条件</th><td>{{accident.roadCondition}}</td></tr>
+            <tr><th>经济损失</th><td>{{accident.financialLoss}}</td></tr>
+            <tr><th>详细地址</th><td>{{accident.position}}</td></tr>
+            <tr><th>经纬度</th><td>{{accident.lng}}-{{accident.lat}}</td></tr>
+            <tr><th>事故状态</th><td>{{accident.status.name}}</td></tr>
+            <tr><th>事故描述</th><td>{{accident.desc}}</td></tr>
+            <tr><th>管辖单位</th><td>{{accident.dept.name}}</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 评价-->
+    <div atms-jq-evaluate data="evaluations" ptask="record.id" ng-show="toEvaluate">
+    </div>
+    
+    <!-- 报警人反馈 -->
+    <div class="panel panel-default" ng-show="fbPanel">
+      <div class="panel-heading">
+        <span>报警人反馈</span>
+      </div>
+      <div class="panel-body">
+        <textarea class="form-control" row="3" ng-model="record.callerFeedback"></textarea>
+        <div class="btn-group btn-group-sm pull-right">
+          <a class="btn btn-sm padTB0">
+            <i class="fa fa-times yhte-ico-primary" ng-click="fbPanel = !fbPanel" > 取消</i>
+          </a>
+          <a class="btn btn-sm padTB0">
+            <i class="fa fa-check yhte-ico-primary" ng-click="update();fbPanel = false" > 确认</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-6">
+  <!-- 地图 -->
+  <div class="my-box-shdow"
+    yhte-map inst="map" style="height:100%;">
+  </div>
+
+  <!--  警员详细信息 -->
+  <div style="position:absolute;top:0;right:15px;left:15px;z-index:1000;"
+    atms-jq-police-info 
+    ng-show="viewCode === '1' && _police"
+    data="_police"
+    message="message"
+    selecteds="selecteds"
+    ptask="record.id"
+    is-disabled-confirm="isDisabledConfirm"
+    police-item-show="policeItemShow"
+    on-close="_police=null;">
+  </div>
+
+</div>
+
+<div class="col-100-auto col-sm-3">
+  <!-- 附近资源 -->
+  <div class="row">
+    <div atms-jq-nearby-catalog 
+      class="col-sm-12"
+      on-item-click="onItemClick($viewCode);"  
+      selected-item="selectedItem">
+    </div>
+  </div>
+
+  <!-- 已选警员 -->
+  <div class="row">
+    <div atms-jq-selected-polices class="col-sm-12" ng-show="viewCode === '1'"
+      jq="record.dutyId"
+      data="selecteds"
+      ptask="record"
+      on-item-click="onPoliceClick($item);"
+      lng="record.lng"
+      lat="record.lat"
+      select-view="selectView"
+      map="map">
+    </div>
+  </div>
+
+  <!-- 附近资源 -->
+  <div class="row">
+    <div class="alert alert-deafult my-box-shdow">
+      <h5>
+        附近资源 > {{selectedItem.title}}
+      </h5>
+
+      <!-- 附近设备资源 -->
+      <div
+        atms-jq-nearby
+        ng-show="viewCode === '2' || viewCode === '3'"
+        map="map"
+        url="selectedItem.url"
+        device-type="selectedItem.code"
+        center="{'lng':record.lng,'lat':record.lat}"
+        on-item-click="detail($record);"
+        data="devices"
+        init="initJqnearby">
+      </div>
+
+      <!-- 附近警员 ng-show="(selectView || record.status.code === '1') && viewCode === '1'"-->
+      <div
+        atms-free-polices 
+        ng-show="viewCode === '1'"
+        ptask="record"
+        lng="record.lng"
+        lat="record.lat"
+        select-items="selecteds"
+        on-item-click="onPoliceClick($item);"
+        data="freePolices"
+        map="map"
+        url="selectedItem.url">
+     </div>
+    </div>
+  </div>
+
+</div>

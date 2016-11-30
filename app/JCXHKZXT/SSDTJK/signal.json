@@ -1,0 +1,51 @@
+[
+    {
+        "time": "2000",
+        "intersection": {
+            "0": ["LR", "SG", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }, {
+        "time": "4000",
+        "intersection": {
+            "0": ["LY", "SY", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }, {
+        "time": "6000",
+        "intersection": {
+            "0": ["LG", "SR", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }, {
+        "time": "8000",
+        "intersection": {
+            "0": ["LY", "SR", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }, {
+        "time": "10000",
+        "intersection": {
+            "0": ["LR", "SR", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }, {
+        "time": "12000",
+        "intersection": {
+            "0": ["LR", "SY", "RG"],
+            "1": ["LR", "SR", "RG"],
+            "2": ["LR", "SR", "RG"],
+            "3": ["LR", "SR", "RG"]
+        }
+    }
+]

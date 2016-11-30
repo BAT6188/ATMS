@@ -1,0 +1,6 @@
+/*可以在这里添加你自己的css*/
+body { background-color:#000000 }
+
+.view p{
+    white-space: nowrap;
+}

@@ -1,0 +1,92 @@
+<legend>
+    诱导屏管理
+</legend>
+<div class="row">
+    <!--<div class="col-sm-2">
+        <div class="btn-group">
+            <a class="btn btn-success btn-sm" ng-href="#LKYC.Plan/{{roadSectionId}}/{{roadName}}/New">
+                <span class="glyphicon glyphicon-plus"></span>
+                新增 </a>
+            <button class="btn btn-danger btn-sm" ng-click="remove();">
+                <span class="glyphicon glyphicon-minus"></span> 删除
+            </button>
+        </div>
+    </div>
+    <div class="col-sm-3">
+    </div>-->
+
+    <div class="col-sm-3 col-sm-offset-8">
+        <div class="input-group">
+            <span class="input-group-addon">诱导屏名称</span>
+            <input type="text" class="form-control input-sm" ng-model="Q.name">
+        </div>
+    </div>
+
+  <!--  <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon">有效时间</span>
+
+            <div datetimepicker
+                 ng-model="Q.datePoint"
+                 format="yyyy-MM-dd hh:mm:ss">
+            </div>
+        </div>
+    </div>-->
+
+    <div class="col-sm-1">
+        <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+            <i class="fa fa-search"> 查询</i>
+        </button>
+    </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <!--<th class="check"><input type="checkbox"
+                                         ng-model="allChecked" ng-change="selectAll();"></th>-->
+                <th>诱导屏名称</th>
+                <th>高度</th>
+                <th>宽度</th>
+                <th>地址</th>
+                <th>IP</th>
+                <th>端口</th>
+                <th>连接状态</th>
+                <th>更新时间</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="record in records">
+               <!-- <td class="check"><input type="checkbox"
+                                         ng-model="checks[$index]" ng-click="select($index);">
+                </td>-->
+                <td><a ng-href="#LKFB.Road/{{record.id}}/{{record.name}}/List">{{record.name}}</a></td>
+                <td>{{record.height}}</td>
+                <td>{{record.weight}}</td>
+                <td>{{record.address}}</td>
+                <td>{{record.ip}}</td>
+                <td>{{record.port}}</td>
+                <!--<td>{{record.connected.name}}</td>-->
+                <td><label class="label"
+                           ng-class="{'1': 'label-success', '3': 'label-danger', '2': 'label-warning', '0': 'label-default'}['{{record.connected.code}}']">
+                    {{record.connected.name}}</label></td>
+                <td>{{record.updateTime}}</td>
+                <td>{{record.remark}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+        <div pagination class="pagination-sm pull-right" boundary-links="true"
+             rotate="false" total-items="total" page="Q.page"
+             items-per-page="Q.pageSize" max-size="Q.maxSize"
+             on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+             last-text="最后一页" first-text="最前一页">
+        </div>
+    </div>
+</div>
+</div>

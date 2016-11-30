@@ -1,0 +1,81 @@
+<!doctype html>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+</style>
+<body onload="onload();">
+	<OBJECT id="ocx" classid="CLSID:82490EEB-771D-4572-8901-2554D4F61D27" width="500" height="320"></OBJECT>
+</body>
+<script>
+	//注册指定事件监听函数
+	var addEvent = function(event) {
+		//根据‘事件名称’动态创建事件监听函数，监听函数会调用父窗口的 __event 事件，并传递相关参数
+
+		window[event] = function(p1, p2, p3) {
+			parent.__event(arguments.callee.N, p1, p2, p3);
+		};
+		window[event]['N'] = event;
+		var script = document.createElement("script");
+		script.language = 'javascript';
+		script.htmlFor = 'ocx';
+
+		script.event = event + '(a, b, c);';
+		script.text = script.event;
+
+		//document.body.appendChild(script);
+		document.getElementsByTagName('body')[0].appendChild(script);
+	};
+
+	//创建并加载指定 CLASSID 的 OCX 控件
+	var addOCX = function(classid, type, width, height) {
+		/**
+		var ocx = document.createElement("object");
+		ocx.id = 'ocx';
+		ocx.classid = 'CLSID:' + classid;
+		// ocx.setAttribute('classid', 'CLSID:' + classid);
+		ocx.width = width || '100%';
+		ocx.height = height || '100%';
+		document.body.appendChild(ocx);
+		**/
+	};
+
+	//页面加载完成触发函数
+	var onload = function() {
+		//调用父窗口的 __onload 函数
+		parent.__onload();
+
+		//从 URL 获取参数 classid & events
+		var params = getParams(location), classid = params['classid'], events = params['events']
+				.split(',');
+		var type = params['type'];
+		var width = params['width'];
+		var height = params['height'];
+
+		//添加事件监听
+		for ( var i = 0, size = events.length; i < size; i++) {
+			if (events[i]) {
+				addEvent(events[i]);
+			}
+		}
+		;
+
+		//向页面添加 OCX 控件
+		addOCX(classid, type, width, height);
+	};
+
+	//获取URL参数
+	var getParams = function(location) {
+		var params = location.search.split('?')[1], data = {};
+		if (params) {
+			var arys = params.split('&');
+			for ( var i = 0, len = arys.length; i < len; i++) {
+				var keyVal = arys[i].split('=');
+				data[keyVal[0]] = keyVal[1];
+			}
+		}
+		return data;
+	};
+</script>

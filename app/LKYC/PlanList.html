@@ -1,0 +1,166 @@
+<legend>
+    预测管理_{{roadName}}
+</legend>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="btn-group">
+            <a class="btn btn-success btn-sm" ng-href="#LKYC.Plan/{{roadSectionId}}/{{roadName}}/New">
+                <span class="glyphicon glyphicon-plus"></span>
+                新增 </a>
+            <button class="btn btn-danger btn-sm" ng-click="remove();">
+                <span class="glyphicon glyphicon-minus"></span> 删除
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+    </div>
+
+    <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon">预案名称</span>
+            <input type="text" class="form-control input-sm" ng-model="Q.settingName">
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon">有效时间</span>
+
+            <div datetimepicker
+                 ng-model="Q.datePoint"
+                 format="yyyy-MM-dd hh:mm:ss">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-1">
+        <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+            <i class="fa fa-search"> 查询</i>
+        </button>
+    </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th class="check"><input type="checkbox"
+                                         ng-model="allChecked" ng-change="selectAll();"></th>
+                <th>预案名称</th>
+                <th>开始日期</th>
+                <th>结束日期</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>开始星期</th>
+                <th>结束星期</th>
+                <th>路况状态</th>
+                <th>是否有效</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="record in records">
+                <td class="check"><input type="checkbox"
+                                         ng-model="checks[$index]" ng-click="select($index);">
+                </td>
+                <td><a ng-href="#LKYC.Plan/{{record.settingId}}/{{roadSectionId}}/{{roadName}}/{{record.startDate|dateFilter}}/{{record.endDate|dateFilter}}/{{record.startTime|timeFilter}}/{{record.endTime|timeFilter}}/Edit">{{record.settingName}}</a></td>
+                <td>{{record.startDate|dateFilter}}</td>
+                <td>{{record.endDate|dateFilter}}</td>
+                <td>{{record.startTime|timeFilter}}</td>
+                <td>{{record.endTime|timeFilter}}</td>
+                <td>{{record.startWeek|weekFilter}}</td>
+                <td>{{record.endWeek|weekFilter}}</td>
+                <td><label class="label"
+                           ng-class="{'1': 'label-success', '4': 'label-danger', '3': 'label-warning', '2': 'label-default'}['{{record.status.code}}']">{{record.status.name
+                    || 'null'}}</label></td>
+                <td><label class="label"
+                           ng-class="{'1': 'label-success',  '2': 'label-warning', '3': 'label-default'}['{{record.isUsing}}']">{{record.isUsing
+                    || 'null'|FilterIsUsing}}</label></td>
+                <!-- <td><label class="label"
+                  ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{record.status.code}}']">{{record.status.name
+                    || 'null'}}</label></td> -->
+                <td class="text-center">
+                    <a styel="margin-left:45px"><i class="fa fa-eye" tooltip="详细信息"
+                                                   ng-click="infoModal(record);"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+        <div pagination class="pagination-sm pull-right" boundary-links="true"
+             rotate="false" total-items="total" page="Q.page"
+             items-per-page="Q.pageSize" max-size="Q.maxSize"
+             on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+             last-text="最后一页" first-text="最前一页">
+
+        </div>
+    </div>
+</div>
+<!--模态对话框-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close"
+                        type="button">×
+                </button>
+                <h4 id="myModalLabel" class="modal-title">
+                    预案『{{checkRecord.settingName}}』详细信息
+                    <label class="label"
+                           ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{checkRecord.status.code}}']">{{checkRecord.settingName
+                        || 'null'}}
+                    </label>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed table-bordered ">
+                    <tr>
+                        <td class="col-sm-2">预案编号</td>
+                        <td class="col-sm-4">{{checkRecord.settingId}}</td>
+                        <td class="col-sm-2">预案名称</td>
+                        <td class="col-sm-4">{{checkRecord.settingName}}</td>
+                    </tr>
+                    <tr>
+                        <td>开始日期</td>
+                        <td>{{checkRecord.startDate|dateFilter}}</td>
+                        <td>结束日期</td>
+                        <td>{{checkRecord.endDate|dateFilter}}</td>
+                    </tr>
+                    <tr>
+                        <td>开始时间</td>
+                        <td>{{checkRecord.startTime|timeFilter}}</td>
+                        <td>结束时间</td>
+                        <td>{{checkRecord.endTime|timeFilter}}</td>
+                    </tr>
+                    <tr>
+                        <td>开始星期</td>
+                        <td>{{checkRecord.startWeek|weekFilter}}</td>
+                        <td>结束星期</td>
+                        <td>{{checkRecord.endWeek|weekFilter}}</td>
+                    </tr>
+                    <tr>
+                        <td>路况状态</td>
+                        <td>{{checkRecord.status.name}}</td>
+                        <td>是否有效</td>
+                        <td>{{checkRecord.isUsing}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-sm" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-circle" tooltip="关闭对话框"></span>关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+</div>

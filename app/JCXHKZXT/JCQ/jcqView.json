@@ -1,0 +1,59 @@
+[
+   {"name":"01", "list":
+		[{"time":"08:01", "flow": 48, "share":"50%"}
+		,{"time":"08:02", "flow": 82, "share":"74%"}
+	   ,{"time":"08:03", "flow": 26, "share":"28%"}
+	   ,{"time":"08:04", "flow": 38, "share":"36%"}
+	   ,{"time":"08:05", "flow": 58, "share":"54%"}
+	   ,{"time":"08:06", "flow": 76, "share":"70%"}
+	   ,{"time":"08:07", "flow": 86, "share":"82%"}
+	   ,{"time":"08:08", "flow": 70, "share":"65%"}
+	   ,{"time":"08:09", "flow": 74, "share":"69%"}
+	   ,{"time":"08:10", "flow": 64, "share":"65%"}
+	   ,{"time":"08:11", "flow": 74, "share":"69%"}
+		]
+	}
+ ,{"name":"02", "list":
+		[{"time":"08:01", "flow": 38, "share":"35%"}
+		,{"time":"08:02", "flow": 22, "share":"23%"}
+	   ,{"time":"08:03", "flow": 26, "share":"30%"}
+	   ,{"time":"08:04", "flow": 18, "share":"29%"}
+	   ,{"time":"08:05", "flow": 81, "share":"80%"}
+	   ,{"time":"08:06", "flow": 46, "share":"38%"}
+	   ,{"time":"08:07", "flow": 39, "share":"35%"}
+	   ,{"time":"08:08", "flow": 30, "share":"32%"}
+	   ,{"time":"08:09", "flow": 44, "share":"41%"}
+	   ,{"time":"08:10", "flow": 38, "share":"39%"}
+		,{"time":"08:11", "flow": 56, "share":"55%"}
+		]
+	}
+ ,{"name":"03", "list":
+	[{"time":"08:01", "flow": 80, "share":"79%"}
+	,{"time":"08:02", "flow": 37, "share":"38%"}
+   ,{"time":"08:03", "flow": 36, "share":"35%"}
+   ,{"time":"08:04", "flow": 30, "share":"32%"}
+   ,{"time":"08:05", "flow": 44, "share":"41%"}
+   ,{"time":"08:06", "flow": 38, "share":"39%"}
+   ,{"time":"08:07", "flow": 56, "share":"56%"}
+   ,{"time":"08:08", "flow": 60, "share":"58%"}
+   ,{"time":"08:09", "flow": 41, "share":"38%"}
+   ,{"time":"08:10", "flow": 34, "share":"32%"}
+   ,{"time":"08:11", "flow": 26, "share":"30%"}
+	]
+}
+,{"name":"04", "list":
+	[{"time":"08:01", "flow": 38, "share":"39%"}
+	,{"time":"08:02", "flow": 56, "share":"55%"}
+   ,{"time":"08:03", "flow": 6, "share":"82%"}
+   ,{"time":"08:04", "flow": 64, "share":"65%"}
+   ,{"time":"08:05", "flow": 74, "share":"69%"}
+   ,{"time":"08:06", "flow": 47, "share":"42%"}
+   ,{"time":"08:07", "flow": 41, "share":"38%"}
+   ,{"time":"08:08", "flow": 36, "share":"35%"}
+   ,{"time":"08:09", "flow": 50, "share":"48%"}
+   ,{"time":"08:10", "flow": 74, "share":"75%"}
+  ,{"time":"08:11", "flow": 36, "share":"35%"}
+	]
+}
+   
+]

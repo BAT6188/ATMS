@@ -1,0 +1,64 @@
+<legend>警车信息录入</legend>
+<div class="row">
+    <div class="btn-group pull-right" style="">
+        <a class="btn btn-primary btn-sm" ng-click="save()" ng-disabled="entityForm.$invalid">
+            <i class="fa fa-check"></i> 添加
+        </a>
+        <a class="btn btn-default btn-sm" ng-href="#/QWGL.ZB.PoliceCar">
+            <i class="fa fa-times"></i> 取消
+        </a>
+    </div>
+</div>
+<div class="row">
+    <form class="form-horizontal" name="entityForm">
+        <div class="form-group">
+            <label class="col-md-2 control-label font14">车牌</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.carNo.$invalid}">
+                <input type="text" class="form-control input-sm" name="carNo" ng-model="entity.carNo" required>
+            </div>
+            <label class="col-md-2 control-label font14">名称</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.carName.$invalid}">
+                <input type="text" class="form-control input-sm" name="carName" ng-model="entity.carName" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2  control-label font14">类型</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.type.$invalid}">
+                <select class="form-control input-sm"  name="type" ng-model="entity.type" ng-options="c.name for c in types" required></select>
+            </div>
+            <label class="col-md-2 control-label font14">所属仓库</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.wareHouse.$invalid}">
+                <select class="form-control input-sm" name="wareHouse" ng-model="entity.wareHouse" ng-options="c.name for c in wareHouses" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label font14">可否定位</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.gpsFlag.$invalid}">
+                 <select class="form-control input-sm" name="gpsFlag" ng-model="entity.gpsFlag" required>
+                    <option value = '1'>是</option>
+                    <option value = '0'>否</option>
+                 </select>
+            </div>
+            <label class="col-md-2 control-label font14">GPS编号</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.carGps.$invalid}">
+                <select class="form-control input-sm" name="carGps" ng-model="entity.carGps" ng-options="c.name for c in gps" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label font14">视频</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.carVideo.$invalid}">
+                <select class="form-control input-sm" name="carVideo" ng-model="entity.carVideo" ng-options="c.name for c in videos" required></select>
+            </div>
+            <label class="col-md-2 control-label font14">车载台</label>
+            <div class="col-md-4" ng-class="{'has-error': entityForm.carRadio.$invalid}">
+                <select class="form-control input-sm" name="carRadio" ng-model="entity.carRadio" ng-options="c.name for c in radios" required></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label font14">备注</label>
+            <div class="col-md-10">
+                <textarea class="form-control" ng-model="entity.remark"></textarea>
+            </div>
+        </div>
+    </form>
+</div>

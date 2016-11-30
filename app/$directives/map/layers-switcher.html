@@ -1,0 +1,69 @@
+<div class="" style="margin-bottom:0px;">
+<!--   <div class="my-box-shdow" style="padding: 5px;background:#fff;" ng-repeat="layer in layers">
+    <div class="pull-left" style="width: 20px; height: 20px; cursor: pointer;"
+      ng-click="toggle(layer);"
+      tooltip="是否显示该图层">
+      <span class="glyphicon glyphicon-ok-circle yhte-ico-success"
+        ng-show="layer.visibility">
+      </span>
+    </div>
+    <a ng-click="onlyShow(layer);" tooltip="只显示该图层">
+      <span class="layer {{layer.cls}}"></span>
+    </a>
+    <a ng-click="showData(layer);" tooltip="显示数据列表">
+      <span>{{layer.label}}</span>
+    </a>
+    <a status-label ng-if="!hideStatus" type="layer.name" layer="layer"></a>
+  </div> -->
+  <div class="col-sm-6" style="text-align:center;height:68px"  ng-repeat="layer in layers" >
+    <i class="yhte-iconfont pointer" style="font-size:3em" 
+        ng-hide = "layer.label === '警车' || layer.label === '路况' || layer.label === '警情' || layer.label === '监控' || layer.label === '卡口'"
+        ng-class = "{'iconfont-police': layer.label === '警员',
+                   'iconfont-camera': layer.label === '视频',
+                   'iconfont-signal': layer.label === '信号',
+                   'iconfont-cms': layer.label === '诱导'} "
+
+        ng-click="toggle(layer);"></i>
+    <i class="fa fa-road" style="font-size:3em;color:#990033 " ng-if="layer.label === '路况'" ng-click="toggle(layer);"></i>
+    <i class="fa fa-car" style="font-size:3em;color:#428bca" ng-if="layer.label === '警车'" ng-click="toggle(layer);"></i>
+    <i class="fa fa-exclamation-triangle" style="font-size:3em;color:#f0ad4e" ng-if="layer.label === '警情'" ng-click="toggle(layer);"></i>
+    <i class="fa fa-video-camera" style="font-size:3em;color:#996699 " ng-if="layer.label === '监控'" ng-click="toggle(layer);"></i><!-- #006666  -->
+    <i class="fa fa-camera" style="font-size:3em;color:#921AFF;" ng-if="layer.label === '卡口'" ng-click="toggle(layer);"></i>
+    <i class="yhte-iconfont pointer iconfont-road" style="font-size:3em;color:#f0ad4e" ng-if="layer.label === '路况发布'" ng-click="turn(layer);"></i>
+
+    <div ng-show="layer.isLayer" ng-init="layer.isshow=false">
+      <i class="fa fa-check-circle yhte-ico-grey" 
+        ng-click="toggle(layer);"
+        tooltip="显示该图层" 
+        ng-if="!layer.visibility">
+      </i>
+      <i class="fa fa-check-circle yhte-ico-success-bright" 
+        ng-click="toggle(layer);"
+        tooltip="隐藏该图层"
+        ng-if="layer.visibility">
+      </i>
+      <a ng-click="showData(layer);" tooltip="显示数据列表" ng-show="!layer.isshow" style="cursor:pointer;color:#999">
+        <span>{{layer.label}}</span>
+      </a>
+        <a ng-click="showData(layer);" tooltip="隐藏数据列表" ng-show="layer.isshow" style="cursor:pointer;color:#999">
+            <span>{{layer.label}}</span>
+        </a>
+      <!-- TODO: 暂时隐藏, 没有好的位置放置 -->
+      <a status-label ng-show="false" type="layer.name" layer="layer"></a>
+    </div>
+
+    <div ng-show="layer.isLayer=='false'">
+        <i class="fa fa-check-circle yhte-ico-grey"
+           ng-click="turn(layer);"
+           tooltip="{{layer.label}}">
+        </i>
+          <a ng-click="turn(layer);" tooltip="{{layer.label}}" style="cursor:pointer;color:#999">
+              <span>{{layer.label}}</span>
+          </a>
+      </div>
+
+  </div>
+ <!--  <div class="col-sm-12" style="height:20px;text-align:center;background:#ddd">
+   <i class="fa fa-angle-double-up"> 轨迹</i>
+  </div> -->
+</div>

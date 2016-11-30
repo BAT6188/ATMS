@@ -1,0 +1,49 @@
+<div class="row">
+<!--   <div class="col-sm-12" style="margin-top:5px;">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-link" ng-click="kaiguan();">{{onoff}}</button>
+          <button class="btn btn-link" ng-click="getStatus()">
+            手动即时获取
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="input-group input-sm" style="padding-left:0px;">
+          <span class="input-group-addon">预置位</span>
+          <select class="form-control input-sm" ng-model="yzw" ng-options="e.name for e in types track by e.code"></select>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-sm btn-default" ng-click="changeBtnName();" ng-disabled="btnAble">{{btnName}}</button>
+            <button type="button" class="btn btn-sm btn-default" ng-show="cancelShow" ng-click="cancel()">撤销</button>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+  </div> -->
+  <div class="col-sm-12">
+      <div id="msgDiv" class="text-danger"></div>
+    <!-- <div class="well" style="text-align:center;"> -->
+      <img class="signalMap" src="" alt="信号机相位图" id="{{interId}}">
+    <!-- </div> -->
+  </div>
+  
+  <div class="col-sm-12" ng-show="controlPrivilege">
+    <div class="input-group input-sm" id="inputGroupId">
+        <select class="form-control input-sm" ng-model="interCode" ng-options="c as c.name for c in types track by c.code"></select>
+
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-sm btn-default" ng-click="execute();" ng-disabled="snc.btnAble">
+                执行{{snc.leftTime}}
+            </button>
+            <button type="button" class="btn btn-sm btn-default" ng-show="snc.cancelShow" ng-click="cancel();">
+                撤销
+            </button> </span>
+    </div>
+  </div>
+</div>

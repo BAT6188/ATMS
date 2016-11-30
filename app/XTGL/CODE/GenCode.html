@@ -1,0 +1,254 @@
+
+		<legend>代码生成</legend>
+		<!-- 后台代码 -->
+		<div class="row" style="margin:5px;">
+		    <div class="col-sm-12">
+		      <div class="btn-group pull-right">
+				 <button id="btn_table" class="btn btn-success btn-sm"><i class="fa fa-save"></i> 生成建表语句文件</button>
+				 
+				<button id="btn_po" class="btn btn-success btn-sm"  ng-click="poqbClick()"><i class="fa fa-save"></i> 生成PO/QB文件</button>
+				
+				<button id="btn_interface" class="btn btn-success btn-sm" ng-click="itfClick()"><i class="fa fa-save"></i> 生成itf文件</button>
+				
+				<button id="btn_biz" class="btn btn-success btn-sm" ng-click="jarClick()"><i class="fa fa-save"></i> 生成jar文件</button>
+				
+				<button id="btn_helper" class="btn btn-success btn-sm" ng-click="webClick()"><i class="fa fa-save"></i> 生成web文件</button>
+
+		      </div>
+		    </div>
+	    </div>
+	    <!-- 前台代码 -->
+	    <div class="row" style="margin:5px">
+		    <div class="col-sm-12">
+		    	<div class="btn-group pull-right">
+			    	<button id="list" class="btn btn-success btn-sm" ng-click="frontCode()">
+			           生成前端代码
+			        </button>
+<!-- 			        <button id="file" class="btn btn-success btn-sm" ng-click="getLoadUrl()" ng-disabled="frontNum != 6">
+			           下载
+			        </button> -->
+		    	</div>
+		    </div>
+		</div>
+		<div class="row" style="margin:15px">
+			<div class="col-sm-12" style="margin-top:30px">
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>包的路径</label></div>
+					<div class="form-group col-sm-5">
+						<input id="packagePath" type="text" class="form-control input-sm" ng-model="jason.packagePath">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:net.yhte.atms.device</span></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>所属模块</label></div>
+					<div class="form-group col-sm-5">
+						<input id="module" type="text" class="form-control input-sm" ng-model="jason.module">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:device</span></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>po类名称</label></div>
+					<div class="form-group col-sm-5">
+						<input id="javaClass" type="text" class="form-control input-sm" ng-model="jason.javaClass">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:TrafficCtrl</span></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>po类描述</label></div>
+					<div class="form-group col-sm-5">
+						<input id="classDesc" type="text" class="form-control input-sm"  ng-model="jason.desc">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:交通管制信息</span></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>table表名</label></div>
+					<div class="form-group col-sm-5">
+						<input id="table" type="text" class="form-control input-sm" ng-model="jason.table">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:T_TRAFFIC_CTRL</span></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>seq名称</label></div>
+					<div class="form-group col-sm-5">
+						<input id="seq" type="text" class="form-control input-sm"  ng-model="jason.seq">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:SEQ_TRAFFIC_CRTL</span></div>
+				</div>
+<!-- 				<div class="col-sm-6">
+					<div class="form-group col-sm-2"><label>前端代码文件路径</label></div>
+					<div class="form-group col-sm-5">
+						<input id="seq" type="text" class="form-control input-sm"  ng-model="jason.frontFolderName">
+					</div>
+					<div class="form-group col-sm-5"><span>例如:ZHGL.JTGZ</span></div>
+				</div> -->
+			</div>
+			<div class="col-sm-12" style="margin-top:30px">
+				<div id="fields">
+					<div class="col-sm-12">
+						<div class="form-group col-sm-2 text-center"><label>名称</label></div>
+						<div class="form-group col-sm-2 text-center"><label>描述</label></div>
+						<div class="form-group col-sm-2 text-center"><label>数据类型</label></div>
+						<div class="form-group col-sm-2 text-center"><label>表单类型</label></div>
+						<div class="form-group col-sm-2 text-center"><label>必选</label></div>
+						<div class="form-group col-sm-2 text-center"><label>筛选</label></div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="String" checked="checked">String</option>
+								<option value="Integer">Integer</option>
+								<option value="float">float</option>
+								<option value="Date">Date</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="Input" checked="checked">文本</option>
+								<option value="Select">下拉列表</option>
+								<option value="Textarea">长文本</option>
+								<option value="Date">时间</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="String" checked="checked">String</option>
+								<option value="Integer">Integer</option>
+								<option value="float">float</option>
+								<option value="Date">Date</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="Input" checked="checked">文本</option>
+								<option value="Select">下拉列表</option>
+								<option value="Textarea">长文本</option>
+								<option value="Date">时间</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="String" checked="checked">String</option>
+								<option value="Integer">Integer</option>
+								<option value="float">float</option>
+								<option value="Date">Date</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="Input" checked="checked">文本</option>
+								<option value="Select">下拉列表</option>
+								<option value="Textarea">长文本</option>
+								<option value="Date">时间</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2"><input type="text" class="form-control input-sm"></div>
+						<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="String" checked="checked">String</option>
+								<option value="Integer">Integer</option>
+								<option value="float">float</option>
+								<option value="Date">Date</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2">
+							<select class="form-control input-sm">
+								<option value="Input" checked="checked">文本</option>
+								<option value="Select">下拉列表</option>
+								<option value="Textarea">长文本</option>
+								<option value="Date">时间</option>
+		  					</select>
+		  				</div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+		  				<div class="form-group col-sm-2"><input type="checkbox" class="form-control input-sm"></div>
+					</div>
+				</div>
+				<a id="newRow" style="cursor:pointer">新增</a>
+			</div>
+		</div>
+		<div id="text"></div>
+		<!-- 前台代码  模板-->
+
+		<!-- 列表 html -->
+	    <script id="yhte-list-template-html" type="text/x-handlebars-template">  
+
+	    </script> 
+	    <!-- 列表 js -->
+	    <script id="yhte-list-template-js" type="text/x-handlebars-template">  
+	    
+		</script> 
+		<!-- 新增 html-->
+		<script id="yhte-new-template-html" type="text/x-handlebars-template">  
+
+	    </script>
+	    <!-- 新增 js--> 
+	    <script id="yhte-new-template-js" type="text/x-handlebars-template">  
+
+		</script>
+		<!-- 编辑 html-->
+		<script id="yhte-edit-template-html" type="text/x-handlebars-template">  
+
+	    </script>
+	    <!-- 编辑 js--> 
+	    <script id="yhte-edit-template-js" type="text/x-handlebars-template">  
+
+		</script>
+
+		<!-- 后台代码  模板-->
+		<script id="xml-template" type="text/x-handlebars-template">
+
+		</script>
+	
+		<script id="controller-template" type="text/x-handlebars-template">
+
+		</script>
+		
+		<script id="service-template" type="text/x-handlebars-template">
+
+		</script>
+	
+		<script id="rda-template" type="text/x-handlebars-template">
+			
+		</script>
+	
+		<script id="int-template" type="text/x-handlebars-template">
+
+		</script>
+	
+		<script id="biz-template" type="text/x-handlebars-template">
+
+		</script>
+	
+		<script id="dao-template" type="text/x-handlebars-template">
+
+		</script>
+		
+		<script id="po-template" type="text/x-handlebars-template">
+
+		</script>
+		
+		<script id="qb-template" type="text/x-handlebars-template">
+
+		</script>
+		
+		<script id="table-template" type="text/x-handlebars-template">
+
+		</script> 

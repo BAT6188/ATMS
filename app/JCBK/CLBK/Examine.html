@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <button type="button btm-sm" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title">
+        <b>布控审批</b>
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <label for="" class="col-sm-2 control-label input-sm font14">审批结论:</label>
+        <div class="col-sm-9 padLR0" style="margin-top:5px">
+            <label>
+              <input type="radio" name="pass" value="0" ng-model="verifyStatu"> 通过
+            </label>
+            <label>
+              <input type="radio" name="pass" value="1" ng-model="verifyStatu" ng-init="verifyStatu='0'"> 不通过
+            </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <label for="" class="col-sm-2 control-label input-sm font14">审批意见:</label>
+        <div class="col-sm-9 padLR0" style="margin-left:-5px">
+            <textarea class="form-control" ng-model="verifyDesc"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <label for="" class="col-sm-2 control-label input-sm font14">审核人:</label>
+        <div class="col-sm-9 padLR0" style="margin-top:5px">
+           {{user.userName || '暂缺'}}
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <label for="" class="col-sm-2 control-label input-sm font14">审核单位:</label>
+        <div class="col-sm-9 padLR0" style="margin-top:5px">
+           {{user.deptName || '暂缺'}}
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <label for="" class="col-sm-2 control-label input-sm font14">证件号码:</label>
+        <div class="col-sm-9 padLR0" style="margin-top:5px">
+           {{user.idCard || '暂缺'}}
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-sm" ng-click="close()">取消</button>
+    <button type="button" class="btn btn-primary btn-sm" ng-disabled="quickForm.$invalid" ng-click="examine()">确认</button>
+</div>

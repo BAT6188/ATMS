@@ -1,0 +1,23 @@
+<div class="row marginLR0">
+    <h3>布控报警</h3>
+  <div class="col-sm-12" ng-repeat="e in data" style="border-bottom:1px solid #111;color:#999">
+    <div class="col-sm-12" style="font-size:12px;">
+      {{$index+1}}. 
+      {{e.pointName}}
+    </div>
+    <div class="col-sm-12"  style="font-size:11px">
+      <span  class="label" style="font-size:100%" ng-class="{'0':'label-white','1':'label-warning','2':'label-primary','3':'label-black','9':'label-default'}['{{e.hpys}}']||'btn-default'">
+        {{e.hphm}}
+      </span>
+      <span ng-repeat="stat in cur_layer.status" ng-click="statusClick(stat);"  class="pointer label label-default ng-scope ng-binding label-info" style="margin: 0 5px 0 0;">离线 0</span>
+        <span class="">
+        {{e.alarmTime}}
+      </span>
+      <i class="fa fa-map-marker pull-right"  
+          map-center 
+          lng="e.lng"
+          lat="e.lat"> 
+      </i>     
+    </div>
+  </div>
+</div>

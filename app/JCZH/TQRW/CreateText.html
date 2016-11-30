@@ -1,0 +1,166 @@
+<form class="form-horizontal" role="form" name="entityForm">
+  <div class="form-group">
+    <h1 style="text-align: center;">特勤任务单</h1>
+  </div>
+  <legend>基本信息</legend>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="btn-group pull-right">
+        <!-- <button type="submit" class="btn btn-primary" ng-click="save();" ng-disabled="entityForm.$invalid">保存特勤</button> -->
+      </div>
+      <button type="submit" class="btn btn-default">
+        <span class="glyphicon glyphicon-print"></span>
+      </button>  
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">任务名称</label>
+    <div class="col-sm-10">
+      <input class="form-control" placeholder="任务名称" ng-model="record.name" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">开始时间</label>
+    <div class="col-sm-10">
+      <div datetimepicker
+        ng-model="record.startTime">
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <label class="col-sm-2 control-label">前导车</label>
+    <div class="col-sm-2">
+      <input class="form-control" ng-model="record.carNo" placeholder="前导车牌号">
+    </div>
+    <label class="col-sm-1 control-label">联系人</label>
+    <div class="col-sm-2">
+      <input class="form-control" ng-model="record.contact" placeholder="联系人">
+    </div>
+    <label class="col-sm-1 control-label">联系电话</label>
+    <div class="col-sm-4">
+      <input class="form-control" ng-model="record.contactTel" placeholder="电话">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">工作要求</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" placeholder="工作要求" row="3" ng-model="record.requirements"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">
+      任务路线<br>
+      <a class="pointer" ng-click="changeView();">
+        <span class="glyphicon" ng-class="{'glyphicon-edit':mapVisible,'glyphicon-globe':!mapVisible}"></span>
+      </a>
+    </label>
+    <div class="col-sm-10">
+      <textarea class="form-control" placeholder="途经路口" row="10" 
+        ng-model="interSections" ng-disabled="mapVisible">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">途径行政区</label>
+    <div class="col-sm-10">
+      <input class="form-control" placeholder="执行任务单位" ng-disabled=" mapVisible" ng-model="regions">
+    </div>
+  </div>
+
+  <div class="form-group" ng-show="mapVisible">
+    <div class="col-sm-offset-2 col-sm-8">
+      <div layers-switcher ng-show="mapVisible1" 
+        data="config"
+        map="signalMap"
+        layers="layers"
+        filter="text"
+        placeholder="placeholder"
+        hide-status="true"
+        on-item-click="onLayerSwitchClick();">
+      </div>
+      <div yhte-map inst="signalMap" style="height:400px;border: 1px solid #ccc;border-radius: 4px;">
+      </div>
+    </div>
+    <ul class="col-sm-2 list-group" style="height:400px;overflow-y:auto;overflow-x:hidden;">
+      <a class="list-group-item active" ng-click="drawLine();">
+        地图上绘制特勤路线
+      </a>
+      <li class="list-group-item" ng-repeat="feature in features">
+        <a class="pointer" map-center geometry="feature.geometry" map="signalMap">
+          {{$index+1}} {{feature.attributes.NAME}}
+        </a>
+        <button ng-click="removeNode(feature)" type="button" class="close pull-right">&times;</button>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" ng-click="editSignal(); " ng-disabled="!features">编辑信号机预置位</button>
+      <button type="submit" class="btn btn-primary pull-right" ng-click="save();" ng-disabled="entityForm.$invalid">保存特勤</button>
+
+<!--       <button type="submit" class="btn btn-default pull-right" ng-click="lookon();" style="margin-left:10px;">观看特勤</button>
+      <button type="submit" class="btn btn-default pull-right" ng-click="execute();">执行特勤</button> -->
+    </div>
+  </div>
+</form>
+
+<form class="form-horizontal" role="form">
+  <legend>岗位设置</legend>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-2 control-label">
+      地图<br>
+      <a class="pointer" ng-click="changeView1();">
+        <span class="glyphicon" ng-class="{'glyphicon-edit':map1Visible,'glyphicon-globe':!map1Visible}"></span>
+      </a>
+    </label>
+
+    <div class="form-group" ng-show="map1Visible">
+      <div class="col-sm-offset-2 col-sm-8">
+        <div yhte-map inst="postMap" style="height:400px;border: 1px solid #ccc;border-radius: 4px;"></div>
+      </div>
+      <ul class="col-sm-2 list-group" style="height:400px;overflow-y:auto;overflow-x:hidden;">
+        <a class="list-group-item active" ng-click="addPosts();">
+          添加岗位
+        </a>
+        <li class="list-group-item" ng-repeat="point in points">
+          <a class="pointer" map-center map="postMap" geometry="point.geometry">
+            <span class="badge badge-success">{{$index+1}}</span> {{point.geometry.x.toFixed(2)}},{{point.geometry.y.toFixed(2)}}
+          </a>
+          <button ng-click="removePost(point)" type="button" class="close pull-right">&times;</button>
+        </li>
+      </ul>
+    </div>
+
+<!--     <div class="col-sm-10">
+      <textarea class="form-control" placeholder="点击地图设置岗位" row="3" ng-model="record.posts"></textarea>
+    </div> -->
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default pull-right" ng-click="distribute();" ng-disabled="ifDis" style="margin-left:10px;">下发任务</button>
+      <button type="submit" class="btn btn-default pull-right" ng-click="savePosts();" style="margin-left:10px;">保存岗位</button>
+    </div>
+  </div>
+</form>
+
+<!-- <div class="form-group">
+  <label class="col-sm-2 control-label">开始时间</label>
+  <div class="col-sm-4">
+    <div datetimepicker
+      format="yyyy-MM-dd"
+      ng-model="record.startTime">
+    </div>
+  </div>
+  <label class="col-sm-2 control-label">结束时间</label>
+  <div class="col-sm-4">
+    <div datetimepicker
+      format="yyyy-MM-dd"
+      start-date="record.startTime"
+      ng-model="record.endTime">
+    </div>
+  </div>
+</div> -->

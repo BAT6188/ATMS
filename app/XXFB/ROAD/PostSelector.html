@@ -1,0 +1,50 @@
+<div class="col-100-auto col-sm-7">
+  <div style="height:99%;" class="row my-box-shdow"
+    yhte-map
+    inst="map">
+  </div>
+  
+  <!-- 图层切换 -->
+  <div layers-switcher class="no-resize" style="z-index:1000;position: absolute;top: 0;right: 15px;"
+    data="config"
+    hide-status="true"
+    map="map"
+    layers="layers"
+    select-feature="feature">
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-5">
+  <div class="panel panel-default row my-box-shdow">
+    <div class="panel-heading">
+      诱导屏
+    </div>
+    <div class="panel-body">
+      <div 
+        vms-panel
+        map="map"
+        data="data">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default row my-box-shdow">
+    <div class="panel-heading">
+      路段配置
+    </div>
+    <div class="panel-body">
+      <p>
+        <button class="btn btn-sm btn-primary pull-right" ng-click="save();">保存</button>
+      </p>
+      <p ng-repeat="feature in features" hover-show style="padding-bottom:10px;">
+        <span class="badge badge-info">{{$index+1}}</span> 
+        <a class="hover-show-item pointer" tooltip="删除" ng-click="removeSection(feature);">
+          <span class="glyphicon glyphicon-remove yhte-ico-danger"></span>
+        </a>
+        <a map-center geometry="feature.geometry" map="map" zoom="6" highlight="false">
+          {{feature.attributes.NAME || feature.attributes.OBJECTID}}
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

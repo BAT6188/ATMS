@@ -1,0 +1,15 @@
+<div z-tree 
+  setting="config"
+  ng-model="data"
+  tree-obj="tree1"
+  checked-nodes="checkedNodes"
+  selected-nodes="selectedNodes">
+</div>
+
+<span>selectedNodes</span>
+<p>{{selectedNodes[0].deptName}}</p>
+
+<span>checkedNodes</span>
+<ul>
+  <li ng-repeat="node in checkedNodes">{{node.deptName}}</li>
+</ul>

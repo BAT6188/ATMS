@@ -1,0 +1,102 @@
+<form class="form-horizontal" role="form" name="entityForm">
+  <legend>创建特勤特务</legend>
+  <div class="col-md-2">
+      <div class="list-group">
+          <a class="list-group-item active">基本信息及线路</a>
+          <a class="list-group-item" ng-click="toStep2()">编辑信号机预置位</a>
+          <a class="list-group-item">配置岗位</a>
+      </div>
+  </div>
+  <div class="col-md-10">
+    <div class="col-100-auto col-sm-12">
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="btn-group pull-right">
+              <button type="submit" class="btn btn-primary pull-right" ng-click="save();" ng-disabled="entityForm.$invalid">下一步</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label">任务名称</label>
+          <div class="col-sm-11">
+            <input class="form-control" placeholder="任务名称" ng-model="record.name" maxlength="30" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label">开始时间</label>
+          <div class="col-sm-11">
+            <div datetimepicker
+              ng-model="record.startTime" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-1 control-label">前导车</label>
+          <div class="col-sm-3">
+            <input class="form-control" ng-model="record.carNo" placeholder="前导车牌号">
+          </div>
+          <label class="col-sm-1 control-label">联系人</label>
+          <div class="col-sm-3">
+            <input class="form-control" ng-model="record.contact" placeholder="联系人">
+          </div>
+          <label class="col-sm-1 control-label">联系电话</label>
+          <div class="col-sm-3">
+            <input class="form-control" ng-model="record.contactTel" placeholder="电话">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-1 control-label">工作要求</label>
+          <div class="col-sm-11">
+            <textarea class="form-control" placeholder="工作要求" row="3" ng-model="record.requirements"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-1 control-label">
+            任务路线<br>
+            <a class="pointer" ng-click="changeView();">
+              <span class="glyphicon" ng-class="{'glyphicon-edit':mapVisible,'glyphicon-globe':!mapVisible}"></span>
+            </a>
+          </label>
+          <div class="col-sm-11">
+            <textarea class="form-control" placeholder="途经路口" row="10" 
+              ng-model="interSections" ng-disabled="true">
+            </textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-1 control-label">途径辖区</label>
+          <div class="col-sm-11">
+            <input class="form-control" placeholder="执行任务单位" ng-disabled="true" ng-model="regions">
+          </div>
+        </div>
+        <div class="form-group" ng-show="mapVisible">
+          <div class="col-sm-offset-1 col-sm-9">
+            <div layers-switcher ng-show="mapVisible1" 
+              data="config"
+              map="signalMap"
+              layers="layers"
+              filter="text"
+              placeholder="placeholder"
+              hide-status="true"
+              on-item-click="onLayerSwitchClick();">
+            </div>
+            <div yhte-map inst="signalMap" style="height:400px;border: 1px solid #ccc;border-radius: 4px;">
+            </div>
+          </div>
+          <ul class="col-sm-2 list-group" style="height:400px;overflow-y:auto;overflow-x:hidden;">
+            <a class="list-group-item active pointer" ng-click="drawLine();">
+              地图上绘制特勤路线
+            </a>
+            <li class="list-group-item" ng-repeat="feature in features">
+              <a class="pointer" map-center geometry="feature.geometry" map="signalMap">
+                {{$index+1}} {{feature.attributes.NAME}}
+              </a>
+              <button ng-click="removeNode(feature)" type="button" class="close pull-right">&times;</button>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</form>
+
+

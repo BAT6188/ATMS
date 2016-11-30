@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>filter</title>
+    <script src="../libs/angular/1.2.15/angular.js"></script>
+</head>
+<body ng-app="Filter">
+    <div  ng-controller="FilterController" >
+       <div   ng-repeat="user in users">
+            <input type="text" ng-model="searchText"/>
+            <div ng-repeat="friend in user.friends | AgeFilter">
+                {{user.name}} {{friend.name}} {{friend.age}}
+            </div>
+        </div>
+    </div>
+    <script src="filterController.js"></script>
+</body>
+</html>

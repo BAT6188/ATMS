@@ -1,0 +1,143 @@
+<legend>诱导屏与路段对应关系管理</legend>
+
+<div>
+<!-- 工具栏 -->
+<div class="row">
+  <div class="col-md-6 btn-group" style="padding-left: 15px;">
+    <!-- x-go-new 添加href属性，值为 当前页面url + 'New' -->
+    <!-- <a class="btn btn-success btn-sm" ng-href="#XTGL.DICT.New"> -->
+    <a class="btn btn-success btn-sm" ng-href="#XTGL.USER.UserNew"> <span
+      class="glyphicon glyphicon-plus"></span> 新增 </a>
+    <button class="btn btn-danger btn-sm" ng-click="remove();">
+      <span class="glyphicon glyphicon-minus"></span> 删除
+    </button>
+  </div>
+  
+  <div class="col-md-6 padLR0 pull-right">
+    <div class="col-md-5 input-group">
+      <span class="input-group-addon">诱导屏名称</span> <input type="text"
+        class="form-control" ng-model="Q.cmsName">
+    </div>
+    <div class="col-md-5 input-group">
+      <span class="input-group-addon">路段名</span> <input type="text"
+        class="form-control" ng-model="Q.roadName">
+    </div>
+    <button class="btn btn-primary" type="button"
+      ng-click="query();">
+      <i class="fa fa-search"> 查询</i>
+    </button>
+  </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-md-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <th>编号</th>
+          <th>诱导屏名称</th>
+          <th>路段名称</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td>{{record.id}}</a></td>
+          <td>{{record.cmsName}}</td>
+          <td>{{record.roadName}}</td>
+          <td class="text-center">
+            <a styel="margin-left:45px"><i class="fa fa-eye" tooltip="编辑" ng-click="infoModal(record);"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-md-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>
+
+  <!--模态对话框-->
+  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-hidden="true" data-dismiss="modal" class="close"
+            type="button">×</button>
+          <h4 id="myModalLabel" class="modal-title">
+            诱导屏『{{checkRecord.name}}』
+          </h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-condensed table-bordered ">
+            <tr>
+              <td class="col-md-2">诱导屏编号</td>
+              <td class="col-md-4">{{checkRecord.id}}</td>
+              <td class="col-md-2">设备名称</td>
+              <td class="col-md-4">{{checkRecord.name}}</td>
+            </tr>
+            <tr>
+              <td>诱导屏类型</td>
+              <td>{{checkRecord.type.name}}</td>
+            </tr>
+            <tr>
+              <td>IP地址</td>
+              <td>{{checkRecord.ip}}</td>
+              <td>端口号</td>
+              <td>{{checkRecord.port}}</td>
+            </tr>
+            <tr>
+              <td>宽度</td>
+              <td>{{checkRecord.width}}</td>
+              <td>高度</td>
+              <td>{{checkRecord.height}}</td>
+            </tr>
+            <tr>
+              <td>经度</td>
+              <td>{{checkRecord.lng}}</td>
+              <td>纬度</td>
+              <td>{{checkRecord.lat}}</td>
+            </tr>
+            <tr>
+              <td>诱导屏地址</td>
+              <td>{{checkRecord.address}}</td>
+              <td>连接状态</td>
+              <td>{{checkRecord.status.name}}</td>
+            </tr>
+            <tr>
+              <td>更新时间</td>
+              <td>{{checkRecord.updateTime}}</td>
+              <td>备注</td>
+              <td>{{checkRecord.info}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group">
+            <button class="btn btn-primary btn-sm" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove-circle" tooltip="关闭对话框"></span>关闭
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+</div>

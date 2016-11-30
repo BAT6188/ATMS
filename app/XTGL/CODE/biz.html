@@ -1,0 +1,46 @@
+<textarea>
+package {{packagePath}}.biz;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import {{packagePath}}.{{javaClass}}QB;
+import {{packagePath}}.{{javaClass}};
+import {{packagePath}}.dao.{{javaClass}}Dao;
+import {{packagePath}}.I{{javaClass}};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service("{{lowerCase javaClass}}Biz")
+public class {{javaClass}}Biz implements I{{javaClass}}{
+
+	@Autowired
+	private {{javaClass}}Dao {{lowerCase javaClass}}Dao;
+	
+	public String insert({{javaClass}} record) throws RemoteException {
+		return {{lowerCase javaClass}}Dao.insert(record);
+	}
+
+	public void update({{javaClass}} record) throws RemoteException {
+		{{lowerCase javaClass}}Dao.update(record);
+	}
+
+	public void delete(String[] ids) throws RemoteException {
+		{{lowerCase javaClass}}Dao.delete(ids);
+	}
+
+	public {{javaClass}} selectOne(String id) throws RemoteException {
+		return {{lowerCase javaClass}}Dao.selectOne(id);
+	}
+
+	public List<{{javaClass}}> selectList({{javaClass}}QB qb) throws RemoteException {
+		return {{lowerCase javaClass}}Dao.selectList(qb);
+	}
+
+	public Integer selectCount({{javaClass}}QB qb) throws RemoteException {
+		return {{lowerCase javaClass}}Dao.selectCount(qb);
+	}
+
+}
+		</textarea>

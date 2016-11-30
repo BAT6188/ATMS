@@ -1,0 +1,21 @@
+<textarea>
+package {{packagePath}};
+
+import java.io.Serializable;
+
+public class {{javaClass}} implements Serializable{
+	{{#joinNew fields}} 
+	/**
+	 * {{this.dataDesc}}
+	 */
+	private {{this.dataType}} {{this.dataName}};
+	
+	public  {{this.dataType}} get{{upperFirstCase this.dataName}}() {
+		return {{this.dataName}};
+	}
+	public void set{{upperFirstCase this.dataName}}({{this.dataType}} {{this.dataName}}) {
+		this.{{this.dataName}} = {{this.dataName}};
+	}
+	{{/joinNew}}
+}
+</textarea>

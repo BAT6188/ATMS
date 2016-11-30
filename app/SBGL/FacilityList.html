@@ -1,0 +1,162 @@
+<legend>
+  综合管理 > 设备设施管理 > 设施 / 
+    <a href="#/SBGL.DeviceList" style="font-size:15px"> 设备</a> 
+</legend>
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-9 padLR0">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <a class="btn btn-sm btn-success" tooltip="新增设施" ng-href="#/SBGL.FacilityNew">
+              <i class="fa fa-plus"></i>
+            </a>
+          </span>
+          <input type="text" class="form-control input-sm" placeholder="输入设备名称..." ng-model="Q.name">
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <span class="input-group-addon">类型</span>
+          <select class="form-control input-sm"
+            ng-options="c.code as c.name for c in types"
+            ng-model="Q.typeCode">
+          </select>
+        </div>
+      </div>
+      <button class="col-sm-1 btn btn-sm btn-primary" type="button"
+        ng-click="query();">
+        <i class="fa fa-search"> 查询</i>
+      </button>
+    </div>
+  </div>
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th class="check"><input type="checkbox"
+              ng-model="allChecked" ng-change="selectAll();"></th>
+            <th>名称</th>
+            <th>设施类型</th>
+            <th>管辖单位</th>
+            <th>所属道路</th>
+            <th>维护单位</th>
+            <th>安装日期</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in records">
+            <td class="check"><input type="checkbox"
+              ng-model="checks[$index]" ng-click="select($index);">
+            </td>
+            <td><a ng-href="#SBGL.Facility/{{record.id}}/Edit">{{record.name}}</a></td>
+            <td>{{record.type.name}}</td>
+            <td>{{record.manageDeptCode}}</td>
+            <td>{{record.belongRoad}}</td>
+            <td>{{record.maintain}}</td>
+            <td>{{record.buildTime.slice(0,10)}}</td>
+            <td><label class="label"
+              ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{record.status.code}}']">{{record.status.name
+                || 'null'}}</label></td>
+            <td class="text-center">
+              <a><i class="fa fa-map-marker" tooltip="地图定位" ng-click="viewChange(record)"></i></a>
+              <a styel="margin-left:45px"><i class="fa fa-eye" tooltip="详细信息" ng-click="infoModal(record);"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+      <div pagination class="pagination-sm pull-right" boundary-links="true"
+        rotate="false" total-items="total" page="Q.page"
+        items-per-page="Q.pageSize" max-size="Q.maxSize"
+        on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+        last-text="最后一页" first-text="最前一页"> </div>
+    </div>
+  </div>
+  <!--模态对话框-->
+  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button aria-hidden="true" data-dismiss="modal" class="close"
+            type="button">×</button>
+          <h4 id="myModalLabel" class="modal-title">
+            设施『{{checkRecord.name}}』 <label class="label"
+              ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{checkRecord.status.code}}']">{{checkRecord.status.name
+              || 'null'}}</label>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <table class="table table-condensed table-bordered ">
+            <tr>
+              <td class="col-sm-2">设施编号</td>
+              <td class="col-sm-4">{{checkRecord.code}}</td>
+              <td class="col-sm-2">设备名称</td>
+              <td class="col-sm-4">{{checkRecord.name}}</td>
+            </tr>
+            <tr>
+              <td>设备类型</td>
+              <td>{{checkRecord.type.name}}</td>
+              <td>设备型号</td>
+              <td>{{checkRecord.mode.name}}</td>
+            </tr>
+            <tr>
+              <td>安装方式</td>
+              <td>{{checkRecord.buildWay.name}}</td>
+              <td>安装日期</td>
+              <td>{{checkRecord.buildTime}}</td>
+            </tr>
+            <tr>
+              <td>经度</td>
+              <td>{{checkRecord.lng}}</td>
+              <td>纬度</td>
+              <td>{{checkRecord.lat}}</td>
+            </tr>
+            <tr>
+              <td>位置描述</td>
+              <td colspan="3">{{checkRecord.address}}</td>
+            </tr>
+            <tr>
+              <td>管辖单位</td>
+              <td>{{checkRecord.manageDeptCode}}</td>
+              <td>所属道路</td>
+              <td>{{checkRecord.belongRoad}}</td>
+            </tr>
+            <tr>
+              <td>维护单位</td>
+              <td>{{checkRecord.maintain}}</td>
+              <td>联系方式</td>
+              <td>{{checkRecord.maintainUnitContact}}</td>
+            </tr>
+            <tr>
+              <td>建设单位</td>
+              <td>{{checkRecord.constructUnit}}</td>
+              <td>联系方式</td>
+              <td>{{checkRecord.constructUnitContact}}</td>
+            </tr>
+            <tr>
+              <td>备注</td>
+              <td>{{checkRecord.remark}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group">
+            <button class="btn btn-primary btn-sm" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove-circle" tooltip="关闭对话框"></span>关闭
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>

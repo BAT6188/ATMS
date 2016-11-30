@@ -1,0 +1,25 @@
+<div class="tq-dd-list">
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <a class="btn btn-sm pull-right" x-ng-click="apply();">
+        确认
+      </a>
+    </div>
+  </div> -->
+  <table class="table table-bordered table-condensed">
+    <tbody>
+      <tr ng-repeat="record in records">
+        <td style="width:10px;">
+          {{$index+1}}
+        </td>
+        <td style="width:10px;">
+          <i class="fa fa-1 fa-check-circle"
+            ng-class="{'yhte-ico-success': record.checked, 'yhte-ico-grey': !record.checked}" 
+            ng-click="select(record);">
+          </i>
+        </td>
+        <td>{{record.deptName}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

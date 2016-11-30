@@ -1,0 +1,80 @@
+<legend>菜单管理</legend>
+
+<!-- 工具栏 -->
+<div class="row">
+  <div class="col-sm-2 btn-group">
+    <!-- x-go-new 添加href属性，值为 当前页面url + 'New' -->
+    <!-- <a class="btn btn-success btn-sm" ng-href="#XTGL.DICT.New"> -->
+    <a class="btn btn-success btn-sm" ng-href="#XTGL.MENU.MenuNew"> <span
+      class="glyphicon glyphicon-plus"></span> 新增 </a>
+    <button class="btn btn-danger btn-sm" ng-click="remove();">
+      <span class="glyphicon glyphicon-minus"></span> 删除
+    </button>
+  </div>
+
+  
+  <div class="col-sm-8 pull-right">
+      <div class="col-sm-11">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon">菜单名称</span>
+              <input type="text" class="form-control input-sm" ng-model="Q.menuName">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="input-group">
+              <span class="input-group-addon">路径</span> 
+              <input type="text" class="form-control input-sm" ng-model="Q.path">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="col-sm-1 btn btn-primary btn-sm" type="button"
+        ng-click="query();">
+        <i class="fa fa-search"> 查询</i>
+      </button>
+    <!-- </div> -->
+  </div>
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-sm-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <th style="width:40px;">序号 </th>
+          <th>菜单名称</th>
+          <th>菜单序号</th>
+          <th>路径</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td>{{(Q.page-1)*Q.pageSize+$index+1}}</td>
+          <td><a ng-href="#XTGL.MENU.Menu/{{record.menuId}}/Edit">{{record.menuName}}</a>
+          </td>
+          <td>{{record.seq}}</td>
+          <td>{{record.path}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-sm-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>

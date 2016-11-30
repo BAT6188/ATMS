@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟controller之间的通信</title>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="controller1.js"></script>
+</head>
+<body ng-app="myApp">
+
+<div ng-controller="Sandcrawler">
+    <p>Sandcrawler Location:{{location}} </p>
+    <div ng-controller="Droid">
+        <p>Droid Location:{{location}} </p>
+        <button ng-click="summon()">Summon Sandcrawler</button>
+    </div>
+</div>
+</body>
+</html>

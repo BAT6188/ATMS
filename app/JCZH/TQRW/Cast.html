@@ -1,0 +1,52 @@
+<div class="col-100-auto col-sm-4">
+  <div class="row">
+    <div class="col-sm-12" style="height:600px;">
+      <div class="panel panel-success my-box-shdow">
+        <div class="panel-heading">
+          信号机相位 
+          <a class="pull-right" ng-click="openVideoPage();">
+            <span class="glyphicon glyphicon-facetime-video">
+              新页面查看关联视频
+            </span>
+          </a>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <li class="list-group-item" ng-repeat="snc in sncs">
+                <a class="pointer" map-center lng="snc.lng" lat="snc.lat">
+                  <span class="badge badge-success">{{$index+1}}</span> {{snc.name}}
+                </a>
+                <a class="alert-link pointer pull-right" ng-click="showDetail(snc);">
+                  详细
+                </a>
+                <a class="alert-link pointer pull-right" ng-click="showVideos(snc);" style="margin-right:10px;">
+                  视频
+                </a>
+                <div ng-show="snc.ifDetail" style="margin:15px;">
+                  <div signal-map style="text-align:center;" ng-class="
+                  currentSnc.attributes.id===snc.id?'signal-map-border':''"
+                    inter-id="snc.id"
+                    image-size="[300,300]"
+                    lane-width="20">
+                  </div> 
+                </div>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--       <a map-center map="map" lng="currentSnc.geometry.x" lat="currentSnc.geometry.y">
+        {{currentSnc.attributes.name}}
+      </a>
+      <button ng-click="showVideos()" type="button" class="btn btn-default">视频</button> -->
+    </div>
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-8" >
+  <div class="my-box-shdow" yhte-map inst="map" style="height:600px;">
+  </div>
+</div>
+
+

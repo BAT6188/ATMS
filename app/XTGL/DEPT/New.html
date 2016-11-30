@@ -1,0 +1,97 @@
+<legend>
+    新增部门
+</legend>
+
+<form name="entityForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="save();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" >
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <!-- 个人觉得不一定需要这个按钮 -->
+        <a class="btn btn-sm btn-default" ng-href="#/XTGL.DEPT.Dept">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">名称</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.deptName.$invalid}">
+      <!-- 必选 required -->
+      <input name="deptName" type="text" class="form-control input-sm"
+        placeholder="部门名称, 必须!"
+        ng-model="entity.deptName" required>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">编码</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.deptCode.$invalid}">
+      <input name="deptCode" type="text"  class="form-control input-sm" 
+        placeholder="部门编码, 必须! "
+        ng-model="entity.deptCode" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">管辖区域</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.area.$invalid}">
+      <select name="area" type="text" class="form-control input-sm"  ng-options="c.name for c in areass track by c.code" ng-model="entity.area" required></select>
+    </div>
+    
+    <label for="" class="col-sm-2 control-label input-sm font14">标注</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.remark.$invalid}">
+      <!-- 必选 required -->
+      <input name="remark" type="text" class="form-control input-sm"
+        placeholder="部门标注!"
+        ng-model="entity.remark">
+    </div>
+  </div>
+  
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">市局部门编号</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.deptCodeNew.$invalid}">
+        <input name="deptCodeNew" type="text"  class="form-control input-sm" 
+            placeholder="市局部门编号, 必须! "
+            ng-model="entity.deptCodeNew" required>
+    </div>
+    
+    <label for="" class="col-sm-2 control-label input-sm font14">所属大队/支队</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.parentAreaDept.$invalid}">
+        <select class="selectpicker show-tick form-control col-sm-12"
+            opts="depts"
+            showname = "deptName"
+            val="deptCode"
+            title=""
+            data-live-search="true"
+            data-subtext="laneCount"
+            objs="entity.parentAreaDept"></select>
+    </div>
+  </div>
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">上级部门</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.parentDept.$invalid}">
+        <select class="selectpicker show-tick form-control col-sm-12"
+            opts="parentDepts"
+            showname = "deptName"
+            val="deptCode"
+            title=""
+            data-live-search="true"
+            data-subtext="laneCount"
+            objs="entity.parentDept"></select>
+    </div>
+    
+    <!-- <label for="" class="col-sm-2 control-label input-sm font14" ng-show="typeShow">部门类型</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.parentDept.$invalid}" ng-show="typeShow">
+     <input type="checkbox"
+        yhte-switch
+        ng-model="typeClass" 
+        data-on-text="下属分队" 
+        data-off-text="下属部门">
+    </div> -->
+  </div>
+</form>

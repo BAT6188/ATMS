@@ -1,0 +1,186 @@
+<legend>
+    断面配置
+</legend>
+
+<style>
+    .bs-ld {
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 -15px 15px;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+        background-color: #fff;
+        border-width: 1px;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+    }
+
+    .bs-ld:after {
+        content: "路段编辑";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<form name="entityForm">
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-sm-6">
+            <label for="" class="col-sm-3 control-label input-sm font14">断面</label>
+            <div class="col-sm-9"
+            ng-class="{'has-error': entityForm.type.code.$invalid}">
+                <select class="selectpicker show-tick form-control col-sm-12"
+                opts="facets"
+                showname = "facetName,facetId"
+                val="facetId"
+                title="选择断面"
+                data-live-search="true"
+                data-subtext="laneCount"
+                objs="queryFacets"></select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="btn-group pull-right">
+                <button ng-click="add();" class="btn btn-sm btn-success" >
+                    <i class="glyphicon glyphicon-plus"></i> 添加
+                </button>
+                <button ng-click="remove();" class="btn btn-sm btn-danger" >
+                    <i class="glyphicon glyphicon-minus"></i> 删除
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bs-ld" style="margin-left: 20px; margin-right: 20px;">
+        <div class="row" style="margin: -30px 0px 10px;">
+            <div class="col-sm-offset-6 col-sm-6">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <div class="btn-group pull-right">
+                        <button ng-click="save();" ng-disabled="entityForm.$invalid || (!record.selectData || record.selectData.length === 0)" class="btn btn-sm btn-primary" >
+                            <i class="fa fa-floppy-o"></i> 保存
+                        </button>
+                        <button ng-click="reset();" class="btn btn-sm btn-info">
+                            <i class="fa fa fa-times"></i> 重置
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <div class="col-sm-6">
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">畅通速度</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.trafficSmoothSpeed.$invalid}">
+                        <input name="trafficSmoothSpeed" type="text" class="form-control input-sm" ng-model="record.trafficSmoothSpeed" required>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">正常速度</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.trafficCommonSpeed.$invalid}">
+                        <input name="trafficCommonSpeed" type="text" class="form-control input-sm" ng-model="record.trafficCommonSpeed" required>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">拥堵速度</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.trafficJamSpeed.$invalid}">
+                        <input name="trafficJamSpeed" type="text" class="form-control input-sm" ng-model="record.trafficJamSpeed" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">已选路段</label>
+                    <div class="col-sm-9">
+                        <table class="table table-hover table-condensed">
+                            <tbody>
+                                <tr ng-repeat="record in record.selectData|paginator:selectPage:selectSize">
+                                    <td style="width:20px;">{{$index + 1}}</td>
+                                    <td style="width:10px;"><i class="fa fa-1 fa-times-circle yhte-ico-danger"
+                                    ng-click="unselect(record);"> </i></td>
+                                    <td style="width: 80px;"><a> {{record.roadName}} </a></td>
+                                    <td>{{record.roadSectionName}}</td>
+                                    <td>{{record.roadSectionId}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div pagination
+                                total-items="selectTotal"
+                                items-per-page="selectSize"
+                                page="selectPage"
+                                max-size="selectMaxSize"
+                                class="pagination-sm pull-right"
+                                boundary-links="true"
+                                rotate="false"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                first-text="&laquo;"
+                                last-text="&raquo;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="" class="col-sm-3 control-label input-sm font14">路段</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" ng-model="Q.roadSectionName" placeholder="按交叉口名称检索">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+                                <i class="fa fa-search" tooltip="查询"></i>
+                            </button> </span>
+                    </div>
+
+                    <table class="table table-hover table-condensed">
+                        <tbody>
+                            <tr ng-repeat="record in data">
+                                <td style="width:20px;">{{$index + 1}}</td>
+                                <td style="width:10px;"><i class="fa fa-1 fa-check-circle"
+                                ng-class="{'yhte-ico-success': record.checked, 'yhte-ico-grey': !record.checked}"
+                                ng-click="select(record);"> </i></td>
+                                <td style="width: 80px;"><a> {{record.roadName}} </a></td>
+                                <td>{{record.roadSectionName}}</td>
+                                <td>{{record.roadSectionId}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div pagination
+                            total-items="total"
+                            items-per-page="Q.pageSize"
+                            page="Q.page"
+                            max-size="Q.maxSize"
+                            class="pagination-sm pull-right"
+                            boundary-links="true"
+                            rotate="false"
+                            on-select-page="pChange(page)"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;"
+                            last-text="&raquo;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

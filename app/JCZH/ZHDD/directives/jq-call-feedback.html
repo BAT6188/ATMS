@@ -1,0 +1,15 @@
+<panel title="报警人上报信息">
+    <table class="table table-condensed table-bordered">
+      <tr>
+        <td>{{record.callFeedback}}</td>
+      </tr>
+    </table>
+    <textarea class="form-control" rows="3" ng-model="record.callFeedback"></textarea>
+    <div class="btn-group col-sm-6 col-sm-offset-6">
+      <button type="button" class="btn btn-primary btn-sm" ng-click="submit()">提交</button>
+      <button type="button" class="btn btn-primary btn-sm" ng-click="">取消</button>
+    </div>
+    <div ng-transclude>
+    
+    </div>
+</panel>

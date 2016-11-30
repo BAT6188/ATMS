@@ -1,0 +1,14 @@
+[
+	{"id":"test1","sdEntity":{"code":1, "name":"时段1","time":"06:00—06:20"}, "date":"2014-09-08","seq":"1"}
+   ,{"id":"test2","sdEntity":{"code":2, "name":"时段2","time":"06:00—07:00"},  "date":"2014-09-01","seq":"2"}
+   ,{"id":"test3","sdEntity":{"code":3, "name":"时段3","time":"08:00—08:40"},  "date":"2014-08-26","seq":"3"}
+   ,{"id":"test4","sdEntity":{"code":4, "name":"时段4","time":"09:00—09:40"},  "date":"2014-08-15","seq":"4"}
+   ,{"id":"test5","sdEntity":{"code":5, "name":"时段5","time":"11:00—11:20"},  "date":"2014-08-12","seq":"5"}
+   ,{"id":"test6","sdEntity":{"code":6, "name":"时段6","time":"11:30—11:50"},  "date":"2014-07-02","seq":"6"}
+   ,{"id":"test7","sdEntity":{"code":7, "name":"时段7","time":"14:00—15:00"},  "date":"2014-06-28","seq":"7"}
+   ,{"id":"test8","sdEntity":{"code":8, "name":"时段8","time":"15:00—15:40"},  "date":"2014-06-10","seq":"8"}
+   ,{"id":"test9","sdEntity":{"code":9, "name":"时段9","time":"16:00—16:30"},  "date":"2014-05-30","seq":"9"}
+   ,{"id":"test10","sdEntity":{"code":10, "name":"时段10","time":"11:00—11:40"},  "date":"2014-05-01","seq":"10"}
+   ,{"id":"test11","sdEntity":{"code":11, "name":"时段11","time":"13:00—15:00"},  "date":"2014-04-02","seq":"11"}
+   ,{"id":"test12","sdEntity":{"code":12, "name":"时段12","time":"15:00—16:00"},  "date":"2014-03-22","seq":"12"}
+]

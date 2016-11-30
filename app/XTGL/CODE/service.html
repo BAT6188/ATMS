@@ -1,0 +1,114 @@
+<textarea>
+package {{ packagePath }}.service;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+import {{ packagePath }}.model.{{ javaClass }}Model;
+import {{ packagePath }}.query.{{ javaClass }}QueryBean;
+import {{ packagePath }}.rda.{{ javaClass }}Rda;
+import {{ packagePath }}.{{ javaClass }}QB;
+import {{ packagePath }}.{{ javaClass }};
+import net.yhte.common.data.cache.DictionaryCache;
+import net.yhte.common.data.constant.DataDictionaryConst;
+import net.yhte.common.result.JsonResult;
+import net.yhte.common.result.ResultRender;
+
+import org.springframework.beans.BeanUtils;
+
+public class {{ javaClass }}Service {
+	
+	private {{ javaClass }}Rda {{lowerCase javaClass }}Rda;
+	
+	public void set{{ javaClass }}Rda({{ javaClass }}Rda {{lowerCase javaClass }}Rda) {
+		this.{{lowerCase javaClass }}Rda = {{lowerCase javaClass }}Rda;
+	}
+	
+	public JsonResult insert({{ javaClass }}Model model){
+		{{ javaClass }} d = new {{ javaClass }}();
+		try{
+			this.setModelToPo(model,d);
+			String id = {{lowerCase javaClass }}Rda.insert(d);
+			model.setId(id);
+			 return ResultRender.renderResult(model);
+		}catch(RemoteException e){
+			return ResultRender.renderErrorResult(e);
+		}
+		 
+	}
+
+	public JsonResult update({{ javaClass }}Model model) {
+		{{ javaClass }} d = new {{ javaClass }}();
+		try{
+			this.setModelToPo(model, d);
+			{{lowerCase javaClass }}Rda.update(d);
+			return ResultRender.renderResult(model);
+		}catch(RemoteException e){
+			return ResultRender.renderErrorResult(e);
+		}
+		
+	}
+
+	public JsonResult delete(String ids) {
+		try{
+			{{lowerCase javaClass }}Rda.delete(ids.split(","));
+			return ResultRender.renderResult("删除成功");
+		}catch(RemoteException e){
+			return ResultRender.renderErrorResult(e);
+		}
+		
+	}
+
+	public JsonResult findOne(String id) {
+		{{ javaClass }} d = new {{ javaClass }}();
+		{{ javaClass }}Model model = new {{ javaClass }}Model();
+		try{
+			d = {{lowerCase javaClass }}Rda.findOne(id);
+			if(d != null){
+				this.setPoToModel(d,model);
+				
+			}
+			return ResultRender.renderResult(model);
+		}catch(Exception e){
+			return ResultRender.renderErrorResult(e);
+		}
+	}
+
+	public JsonResult findPagingData({{ javaClass }}QueryBean queryBean) {
+		List<{{ javaClass }}Model> data = new ArrayList<{{ javaClass }}Model>();
+		List<{{ javaClass }}> list = new ArrayList<{{ javaClass }}>();
+		Integer total = 0;
+		{{ javaClass }}QB qb = new {{ javaClass }}QB();
+		BeanUtils.copyProperties(queryBean, qb);
+		qb.setLimit(queryBean.getLimit());
+		qb.setStart(queryBean.getStart());
+		try{
+			list = {{lowerCase javaClass }}Rda.findList(qb);
+			if(list != null && list.size() > 0){
+				for({{ javaClass }} d:list){
+					{{ javaClass }}Model model = new {{ javaClass }}Model();
+					this.setPoToModel(d, model);
+					data.add(model);
+				}
+			}
+			 total = {{lowerCase javaClass }}Rda.findCount(qb);
+			return ResultRender.renderPagedResult(data, total);
+		}catch(RemoteException e){
+			return ResultRender.renderErrorResult(e);
+		}
+		
+	}
+
+	private void setModelToPo({{ javaClass }}Model model, {{ javaClass }} d) {
+		BeanUtils.copyProperties(model, d);
+		
+	}
+	
+	private void setPoToModel({{ javaClass }} d, {{ javaClass }}Model model) {
+		BeanUtils.copyProperties(d, model);
+
+	}
+
+}
+		</textarea>

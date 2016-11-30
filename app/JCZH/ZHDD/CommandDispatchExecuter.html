@@ -1,0 +1,334 @@
+
+<legend>警情列表</legend>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="btn-group">
+      <a ng-href="#/JCZH.ZHDD.DispatchNew" class="btn btn-success btn-sm">
+        <i class="fa fa-plus"></i> 新增
+      </a>
+      <!-- <a class="btn btn-info btn-sm" ng-click="mannulCombineData()">
+        <i class="fa fa-arrows-h"></i> 合单
+      </a> -->
+    </div>
+  </div>
+  <div class="col-sm-6">
+      <div class="input-group">
+          <input type="text" class="form-control input-sm" ng-model="Q.name" placeholder="按警情名称检索">
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+                <i class="fa fa-search" tooltip="查询"></i>
+            </button>
+              <button class="btn btn-primary btn-sm" type="button" ng-click="showAdvance = !showAdvance">
+                  <i class="fa fa-angle-double-down" ng-hide="showAdvance"> 展&#12288;开</i>
+                  <i class="fa fa-angle-double-up " ng-show="showAdvance"> 收&#12288;&#160;&#160;&#160;起</i>
+              </button>
+          </span>
+      </div>
+  </div>
+</div>
+<!-- 条件检索 -->
+<div class="row" ng-show="showAdvance">
+  <div class="col-sm-2">
+    <div class="input-group input-group-sm">
+      <span class="input-group-addon">状态</span>
+      <select class="form-control" ng-model="Q.statusCode" ng-options="c.code as c.name for c in _status"></select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">类型</span>
+        <select class="form-control" ng-model="Q.typeCode" ng-options="c.code as c.name for c in _types"></select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">级别</span>
+        <select class="form-control" ng-model="Q.levelCode" ng-options="c.code as c.name for c in _levels"></select>
+    </div>
+  </div>
+  <!-- <div class="col-sm-2">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon">部门</span>
+        <select class="form-control" ng-options="c.deptCode as c.deptName for c in parentDepts" ng-model="Q.deptCode"></select>
+    </div>
+  </div> -->
+  <div class="col-sm-4">
+    <div class="input-group">
+      <div class="input-group input-group-sm">
+          <span class="input-group-addon">开始时间</span>
+          <div datetimepicker
+          ng-model="Q.startOccurTime">
+          </div>
+          <span class="input-group-addon">结束时间</span>
+          <div datetimepicker
+          ng-model="Q.endOccurTime">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 全部，待合单 -->
+<div class="row">
+  <div class="col-sm-12">
+    <button class="btn btn-default btn-sm" disabled>总计：{{total}} 条记录</button>
+
+    <div class="btn-group pull-right">
+      <button class="btn btn-default btn-sm" ng-class="{'4': 'btn-primary'}[btnNum]" type="button" ng-click="btnNum=4;query4Today();">
+          <i class="fa fa-search"> 今日</i>
+      </button>
+        <button class="btn btn-default btn-sm" ng-class="{'3': 'btn-primary'}[btnNum]" type="button" ng-click="btnNum=3;query4Week();">
+            <i class="fa fa-search"> 本周</i>
+        </button>
+        <button class="btn btn-default btn-sm" ng-class="{'2': 'btn-primary'}[btnNum]" type="button" ng-click="btnNum=2;query4Month();">
+            <i class="fa fa-search"> 本月</i>
+        </button>
+      <button class="btn btn-default btn-sm" ng-class="{'1': 'btn-primary'}[btnNum]" type="button" ng-click="btnNum=1;Q.startOccurTime='';Q.endOccurTime='';query();">
+          <i class="fa fa-search"> 全部</i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 表格 -->
+<div class="row">
+  <div class="col-md-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed table_noline">
+      <thead>
+        <tr>
+          <th class="check"><input type="checkbox" ng-model="allChecked" ng-change="selectAll();"></th>
+          <th style="width: 20px;"></th>
+          <!-- <th style="width: 80px;">报警单号</th> -->
+          <th style="width: 180px;">警情单号</th>
+          <th style="width: 80px;">类型</th>
+          <th style="width: 180px;">接警单位</th>
+          <th style="width: 80px;">报警人</th>
+          <th class="col-sm-2">事故内容</th>
+          <th>派警人员</th>
+          <th>接警时间</th>
+          <th style="width: 150px;">等待时长/出警时长</th>
+          <th style="width: 80px;">状态</th>
+        </tr>
+      </thead>
+      <tbody>   
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+          <td>
+            <a ng-click="showMod(record)" ng-show="(record.status.code==='1') && ((record.merge.code === '1' && record.tempAffiliate.length>1) || (record.merge.code === '3'))">
+              <i class="fa fa-exclamation-circle" ng-class="{'0': 'yhte-ico-primary','1': 'yhte-ico-danger', '3': 'yhte-ico-primary'}['{{record.merge.code}}']"></i>
+            </a>
+          </td>
+          <!-- <td>{{record.id || 'null'}}
+          </td> -->
+          <td>
+            <a ng-href="#/JCZH.ZHDD.Dispatch/{{record.id}}/Edit">{{record.name}}
+            </a>
+          </td>
+          <td>{{record.type.name || record.type.code}}</td>
+          <td>{{record.deptName}}</td>
+          <td>{{record.caller}}</td>
+          <td class="table_noline">{{record.desc}}</td>
+          <td class="table_noline">
+            <span ng-if="!record.policesSendOut">暂无</span>
+            <span style="margin: 0 5px 0 0;" ng-repeat="police in record.policesSendOut" tooltip="{{police.phone?'电话:'+police.phone:''}} {{police.distance?'距离:'+police.distance+'米':''}}">{{police.userName}}</span>
+          </td>
+          <td>{{record.occurTime}}</td>
+          <td class="text-center">{{record.waitTime || '-'}}</td>
+          <td> 
+            <span class="label" ng-class="{'1': 'yhte-ico-danger', '2': 'yhte-ico-warning', '3': 'yhte-ico-success'}['{{record.status.code}}']">{{record.status.name || record.status.code}}</span>
+            <!-- <label class="label label-primary" ng-show="record.status.code  === 3" ng-click="evaluate(record)">评价</label> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-md-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false" 
+        total-items="total"
+        page="Q.page" 
+        items-per-page="Q.pageSize"
+        max-size="Q.maxSize"
+        on-select-page="pChange(page)"
+        previous-text="上一页"
+        next-text="下一页"
+        last-text="最后一页"
+        first-text="最前一页">
+     </div>
+    </div>
+ </div>
+
+<!-- 合单分单 -->
+<div class="modal fade" id="combineModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">
+                  <span ng-show="majorRec.merge.code==='1'">合单</span>
+                  <span ng-show="majorRec.merge.code==='3'">拆单</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+              <table class="table  table-condensed table-bordered">
+                <tr>
+                  <th></th>
+                 <!--  <th></th> -->
+                  <th>警情编号</th>
+                  <th>名称</th>
+                  <th>等级</th>
+                  <th>发生时间</th>
+                  <th>类型</th>
+                </tr>
+                <tr class="tr-purse">
+                  <td>
+                    <i class="fa fa-flag yhte-ico-primary"> 主单</i>
+                  </td>
+                  <td>{{majorRec.id}}</td>
+                  <td>{{majorRec.name}}</td>
+                  <td>{{majorRec.level.name}}</td>
+                  <td>{{majorRec.occurTime}}</td>
+                  <td>{{majorRec.type.name}}</td>
+                </tr>
+                <tr ng-repeat="e in c_s_affiliate">
+<!--                   <td></td> -->
+                  <td>
+                  <i class="fa  fa-check-circle yhte-ico-grey" ng-hide="e.checked" ng-click="e.checked = !e.checked"></i>
+                  <i class="fa  fa-check-circle yhte-ico-primary" ng-show="e.checked" ng-click="e.checked = !e.checked"></i>
+                  </td>
+                  <td>{{e.id}}</td>
+                  <td>{{e.name}}</td>
+                  <td>{{e.level.name}}</td>
+                  <td>{{e.occurTime}}</td>
+                  <td>{{e.type.name}}</td>
+                </tr>
+              </table>
+              <div class="row form-group marginLR0" style="border-bottom:solid 1px  #E5E5E5">
+                <div style="margin-top:10px">
+                  <label class="col-sm-5 control-label input-sm" style="font-size:15px">详细信息</label>
+                  <label class="col-sm-2 control-label input-sm" style="font-size:12px">当前警情</label>
+                  <div class="col-sm-5">
+                    <select  class="form-control input-sm" 
+                   ng-options="e.name for e in c_s_data track by e.id"  ng-model="selectedRec" ng-change="test()"></select>
+                  </div>
+                </div>
+              </div>
+              <form name="entityForm" class="normalFontwet">
+                  <div class="row marginLR0">
+                    <label for="" class="col-sm-2 control-label input-sm">简述</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.name.$invalid}">
+                      <input name="name" type="text" class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                        placeholder="警情的简要描述, 必须!"
+                        ng-model="selectedRec.name" required>
+                    </div>
+                    <label for="" class="col-sm-2 control-label input-sm">案发时间</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.occurTime.$invalid}">
+                      <input name="occurTime" type="text"  class="form-control input-sm"  ng-disabled="selectedRec!=majorRec"
+                        placeholder="警情上报时间, 格式: YYYY-MM-DD HH:MM:SS, 必须! "
+                        ng-model="selectedRec.occurTime" datetimepicker required>
+                    </div>
+                  </div>
+
+                  <div class="row marginLR0">
+                    <label for="" class="col-sm-2 control-label input-sm">事件类型</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.type.$invalid}">
+                      <select name="type" class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                         ng-options="e.name for e in types track by e.code"  ng-model="selectedRec.type" required></select>
+                    </div>
+                    <label class="col-sm-2 control-label input-sm" for="">级别</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.level.$invalid}">
+                      <select name="level" class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                         ng-options="e.name for e in levels track by e.code"  ng-model="selectedRec.level" required></select>
+                    </div>
+                  </div>
+
+                  <div class="row marginLR0">
+                    <label for="" class="col-sm-2 control-label input-sm">报警方式</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.alarmWay.$invalid}">
+                      <select name="alarmWay" class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                         ng-options="e.name for e in alarmWays track by e.code"  ng-model="selectedRec.alarmWay" required></select>
+                    </div>
+
+                    <label for="" class="col-sm-2 control-label input-sm">报警人</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.caller.$invalid}">
+                      <input type="text"  name="caller" class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                      ng-model="selectedRec.caller">
+                    </div> 
+                  </div>
+
+                  <div class="row marginLR0">
+                    <label for="" class="col-sm-2 control-label input-sm">报警电话</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.phone.$invalid}">
+                      <input name="phone" type="text"  class="form-control input-sm" ng-disabled="selectedRec!=majorRec"
+                      ng-model="selectedRec.phone">
+                    </div>
+                    <label class="col-sm-2 control-label input-sm" for="">案发地点</label>
+                    <div class=" col-sm-4">
+                      <div class="input-group"  ng-class="{'has-error': entityForm.occurAddress.$invalid}">
+                        <input type="text"  name="occurAddress" class="form-control input-sm" ng-disabled="selectedRec !== majordRec"
+                        ng-model="selectedRec.occurAddress" required>
+                        <span class="input-group-btn">
+                          <button class="btn btn-info btn-default btn-sm" type="button" ng-click="viewChange()"><i class="fa fa-map-marker fa-1"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row marginLR0">
+                    <label class="col-sm-2 control-label input-sm" for="">经度</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.lng.$invalid}">
+                      <input name="lng"　type="text" class="form-control input-sm"  ng-disabled="selectedRec!=majorRec" ng-model="selectedRec.lng" required>
+                    </div>
+                    <label class="col-sm-2 control-label input-sm" for="">纬度</label>
+                    <div class="col-sm-4" ng-class="{'has-error': entityForm.lat.$invalid}">
+                      <input name="lat"　type="text" class="form-control input-sm"  ng-disabled="selectedRec!=majorRec" ng-model="selectedRec.lat" required>
+                    </div>
+                  </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a class="btn btn-success btn-sm"   ng-disabled="entityForm.$invalid" ng-click="c_s_Ptask()"><i class="fa fa-check" > 确认</i></a>
+                    <a class="btn btn-default btn-sm"  data-dismiss="modal">
+                    <i class="fa fa-time"> 取消</i></a>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+ <!-- 评价对话框 -->
+<div class="modal fade" id="evaluateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">感谢对该警情进行评价！
+                </h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control" rows="3" ng-model="evaluateRec.evaluation"></textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <a class="btn btn-success btn-sm" ng-disabled="quickForm.$invalid" ng-click="updatePt()"><i class="fa fa-check" > 确认</i></a>
+                    <a class="btn btn-default btn-sm"  data-dismiss="modal">
+                    <i class="fa fa-time"> 取消</i></a>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<!-- 
+    <div ng-repeat="e in test" >
+      <input type="radio" ng-model="color" name="ddd" ng-value="e"> <span>{{e}}</span>
+    </div>
+    <tt>color = {{color}}</tt><br/> -->
+<!-- <div ng-repeat="item in arr">
+    <input type="radio" ng-model="$parent.object" ng-value="item" name="radio3">  {{item}} <br/>
+</div>
+object: {{object}} -->

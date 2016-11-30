@@ -1,0 +1,21 @@
+			define(function(require, exports, module){
+			  var controller = ['$scope','Restangular','Modal', 'DictCache','$location',
+			                    function($scope,Rest,Modal,DictCache,$location){
+			       //保存
+			      $scope.save = function(){
+			         Rest.all('{{java_name}}').post($scope.record).then(function (data){
+			            if(!data.success){
+			              //alert(data.msg);
+			              Messenger().post({
+			                message: data.msg,
+			                type: 'error',
+			                showCloseButton: true
+			              });
+			            }
+			            $scope.record = {};
+			          });
+			      };
+			  }];
+
+			  module.exports = controller;
+			});

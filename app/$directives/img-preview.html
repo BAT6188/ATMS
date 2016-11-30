@@ -1,0 +1,14 @@
+<div class="img-preview panel panel-success" style="position:absolute;bottom:0px;right:0px;z-index:999">
+  <div class="panel-heading">
+    图片预览(共 {{urls.length}}张/第{{idx + 1}}张)
+    <button type="button" class="close pull-right" ng-click="close()">&times;</button>
+    <span class="pull-right pointer" style="margin:0px 15px" ng-click="next();" ng-disabled = "idx === (urls.length-1)">下一张</span>
+    <span class="pull-right pointer" style="margin-left:15px" ng-click="pre();" ng-disabled = "idx === 0">上一张</span>
+<!--   -->
+  </div>
+  <div class="panel-body" style="width:394px;height:300px;over-flow:auto">
+    <img ng-repeat="e in urls" src="{{e}}"
+     ng-class="{'imgActive': $index == 0}"
+     style="max-width:400px;max-height:300px;over-flow:auto"></img>
+  </div>
+</div>

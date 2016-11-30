@@ -1,0 +1,65 @@
+[
+    {
+        "id": "00",
+        "state": "两相位",
+        "url": [
+            {
+                "num": "1",
+                "path": "app/JCXHKZXT/img/xx/2-1.png"
+            }, {
+                "num": "2",
+                "path": "app/JCXHKZXT/img/xx/2-2.png"
+            }
+        ]
+    }, {
+        "id": "01",
+        "state": "四相位",
+        "url": [
+            {
+                "num": "1",
+                "path": "app/JCXHKZXT/img/xx/4-1.png"
+            }, {
+                "num": "2",
+                "path": "app/JCXHKZXT/img/xx/4-2.png"
+            }, {
+                "num": "3",
+                "path": "app/JCXHKZXT/img/xx/4-3.png"
+            }, {
+                "num": "4",
+                "path": "app/JCXHKZXT/img/xx/4-4.png"
+            }
+        ]
+    }, {
+        "id": "02",
+        "state": "六相位",
+        "url": [
+            {
+                "num": "1",
+                "path": "app/JCXHKZXT/img/xx/6-1.png"
+            }, {
+                "num": "2",
+                "path": "app/JCXHKZXT/img/xx/6-2.png"
+            }, {
+                "num": "3",
+                "path": "app/JCXHKZXT/img/xx/6-3.png"
+            }, {
+                "num": "4",
+                "path": "app/JCXHKZXT/img/xx/6-4.png"
+            }, {
+                "num": "5",
+                "path": "app/JCXHKZXT/img/xx/6-5.png"
+            }, {
+                "num": "6",
+                "path": "app/JCXHKZXT/img/xx/6-6.png"
+            }
+        ]
+    }, {
+        "id": "03",
+        "state": "八相位",
+        "url": []
+    }, {
+        "id": "04",
+        "state": "十六相位",
+        "url": []
+    }
+]

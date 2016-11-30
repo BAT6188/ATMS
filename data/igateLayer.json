@@ -1,0 +1,7 @@
+[{
+  "label":"点位", 
+  "name":"point",
+  "cls":"layerPolice",
+  "url":"../giserver/configs/point/",
+  "visible":true
+}]

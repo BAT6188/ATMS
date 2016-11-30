@@ -1,0 +1,38 @@
+<div class="stask-point">
+  <div class="row">
+    <div class="col-sm-6">
+      <a class="btn btn-xs btn-success" ng-click="mapCenter(data);">
+        <span class="glyphicon glyphicon-pushpin"></span> 定位：{{data.lng.toFixed(6)}} ,{{data.lat.toFixed(6)}}
+      </a>
+    </div>
+    <div class="col-sm-6">
+      <a class="btn btn-xs btn-primary pull-right">
+        <span class="glyphicon glyphicon-saved"></span> 保存
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button class="btn btn-xs btn-info" btn-checkbox ng-model="showBuffer">
+        缓冲
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button class="btn btn-xs btn-link btn-success">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <table>
+    <tbody>
+      <tr ng-repeat="device in data.pointDevices">
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

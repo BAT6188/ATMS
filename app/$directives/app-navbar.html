@@ -1,0 +1,71 @@
+<div>
+  <div class="navbar navbar-fixed-top navbar-blue" role="banner" ng-show="!normal">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">导航开关</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a ng-show="!authed" class="navbar-brand" ng-href="#" style="font-size:36px; font-family:Britannic Bold;">{{title}}</a>
+        <a ng-show="authed" class="navbar-brand" ng-href="#" style="font-size:36px; font-family:Britannic Bold;">{{title1}}</a>
+        
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul id="menu" class="nav navbar-nav">
+          <li class="dropdown" ng-repeat="menu in menus">
+            <a ng-href="{{menu.path}}" class="menu pointer" data-toggle="dropdown"  ng-click="clickMainMenu(i.menuName);">{{menu.menuName}}
+              <b class="caret" ng-if="menu.children.length > 0"></b>
+            </a>
+            <ul class="dropdown-menu" ng-if="menu.children.length > 0">
+              <li ng-repeat="i in menu.children" class="dropdown-submenu">
+                <a ng-href="{{i.path}}" ng-click="changeSwitchMenu(i.menuName);">
+                  {{i.menuName}}
+                    <i class="fa fa-sort-down fa-rotate-270" ng-if="i.show"></i>
+                </a>
+                <ul class="dropdown-menu" ng-if="i.show">
+                  <li ng-repeat="a in i.children" ng-class = "{'divider': !a.path} ">
+                    <a ng-href="{{a.path}}" ng-if="a.path" ng-click="changeSwitchMenu(i.menuName);">{{a.menuName}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+             <a href="" data-toggle="dropdown" class="menu" ng-hide="authed"><i class="fa fa-download"></i> 插件下载 <b class="caret"></b></a>
+             <ul role="menu" class="dropdown-menu">
+                <li ng-show="false"><a target="_blank" ng-href="plugins/video.exe">视频插件</a></li>
+                <li><a target="_blank" ng-href="plugins/vmsEnvironment.exe">诱导屏环境</a></li>
+                <li><a target="_blank" ng-href="plugins/vms.exe">诱导屏插件</a></li>
+                <li><a target="_blank" ng-href="plugins/IE8-WindowsXP-x86-CHS.rar">IE8下载</a></li>
+                <li><a target="_blank" ng-href="plugins/ziti.rar">字体下载</a></li>
+            </ul>
+          </li>
+          <li ng-show="false"><a ng-href="#/$modules.$login" ng-hide="authed">登录</a></li>
+          <!-- <li>
+            <a ng-show="authed">
+                <span class="glyphicon glyphicon-user" title="{{username}}"></span>
+            </a>
+          </li> -->
+          <li>
+            <a style="cursor: pointer;" ng-click="logout();" ng-show="authed" tooltip="注销">
+              <span class="glyphicon glyphicon-log-out"></span>
+            </a>
+          </li>
+          <li id="id-navbar-toggle">
+            <a style="cursor: pointer;" tip-event event-name="'toggleNavbar'">
+              <i class="fa fa-angle-double-up"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <a style="z-index: 1000; position: absolute; top: 0; left: 50%; height: 32px; width: 32px; cursor: pointer; font-size: 20px; color: black;" 
+  tip-event event-name="'toggleNavbar'">
+    <i class="fa fa-angle-double-down"></i>
+  </a>
+</div>

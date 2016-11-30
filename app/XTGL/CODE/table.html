@@ -1,0 +1,7 @@
+<textarea>
+-- Create table
+create table {{ table }}
+(
+{{#join fields}}{{upperCaseAll this.dataName}} {{converseTypeTable this.dataType}}{{/join}}
+)
+</textarea>

@@ -1,0 +1,176 @@
+<legend>系统日志</legend>
+
+<div class="row">
+    <div class="col-md-6">
+      
+      <div class="input-group">
+        <span class="input-group-addon">功能模块</span>
+        <select class="form-control input-sm" 
+         ng-options="e.code as e.name for e in modules"  ng-model="Q.moduleCode">
+        </select>
+
+        <span class="input-group-btn">
+          <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+            <span class="glyphicon glyphicon-search" tooltip="查询"></span>
+          </button>
+          <button class="btn btn-primary btn-sm" type="button" ng-click="advance()">
+             
+              <i class="fa fa-wrench" ng-show="!showAdvance"> 条件检索</i>
+              <i class="fa fa-wrench" ng-show="showAdvance"> 收起</i>
+          </button>     
+        </span>
+      </div>
+    </div>
+</div>
+
+<div class="row" ng-show="showAdvance">
+    <div class=" col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">执行人</span>
+        <input type="text" class="form-control input-sm" ng-model="Q.userName" placeholder="执行人"/>
+      </div>
+    </div>
+    <div class=" col-md-3">
+      <div class="input-group">
+       <span class="input-group-addon">详细</span>
+       <input type="text" class="form-control input-sm" ng-model="Q.detailMessage" placeholder="详细"/>
+      </div>
+    </div>
+
+     <div class=" col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">执行结果</span>
+        <select class="form-control input-sm" 
+         ng-options="e.code as e.name for e in results"  ng-model="Q.resultCode">
+        </select>
+      </div>
+    </div>
+
+     <div class=" col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">日志类型</span>
+        <select class="form-control input-sm" 
+         ng-options="e.code as e.name for e in types"  ng-model="Q.typeCode">
+        </select>
+      </div>
+    </div>
+
+     <div class=" col-md-3">
+      <div class="input-group">
+        <span class="input-group-addon">执行时间</span>
+        <input type="text" class="form-control"  datetimepicker="" ng-model="Q.startTime" placeholder="开始">
+      </div>
+    </div>
+
+     <div class=" col-md-3">
+      <div class="input-group">
+        <input type="text" class="form-control"  datetimepicker="" ng-model="Q.endTime" placeholder="结束">
+      </div>
+    </div>
+</div>
+
+<!-- 表格 -->
+<div class="row">
+  <div class="col-md-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+      
+          <!-- <th class="no">序号</th> -->
+          <th>功能模块</th>
+          <th>执行方法</th>
+          <th>日志类型</th>
+          <th>执行人</th>
+          <th>执行时间</th>
+          <th>执行详细</th>
+          <th>执行结果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          
+          <!-- <td class="no">{{( + 1) + (Q.page - 1) * Q.pageSize}}</td> -->
+          <td>{{record.module.name}}</td>
+          <td>{{record.excuteMethod.name}}</td>
+          <td>{{record.type.name}}</td>
+          <td>{{record.user.name}}</td>
+          <td>{{record.excuteTime}}</td>
+          <td><a ng-click="infoModal(record)" >详情</a></td>
+          <td>
+          <label  class="label" ng-class="{'1': 'label-success', '2': 'label-danger'}['{{record.result.code}}']">{{record.result.name || 'null'}}</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-md-12">
+    <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false" 
+        total-items="total"
+        page="Q.page" 
+        items-per-page="Q.pageSize"
+        max-size="Q.maxSize"
+        on-select-page="pChange(page)"
+        previous-text="上一页"
+        next-text="下一页"
+        last-text="最后一页"
+        first-text="最前一页">
+     </div>
+    </div>
+ </div>
+
+
+ <!--详情模态对话框-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close"
+          type="button">×</button>
+        <h4 id="myModalLabel" class="modal-title">
+          日志详情
+        </h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-condensed table-bordered ">
+          <tr>
+            <td class="col-md-1">功能模块</td>
+            <td class="col-md-2">{{checkRecord.module.name}}</td>
+            <td class="col-md-1">执行方法</td>
+            <td class="col-md-2">{{checkRecord.excuteMethod.name}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">日志类型</td>
+            <td class="col-md-4">{{checkRecord.type.name}}</td>
+            <td class="col-md-2">执行人</td>
+            <td class="col-md-4">{{checkRecord.user.name}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">执行时间</td>
+            <td class="col-md-4">{{checkRecord.excuteTime}}</td>
+            <td class="col-md-2">执行结果</td>
+            <td class="col-md-4">{{checkRecord.result.name}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2">日志详细</td>
+            <td colspan='3'>{{checkRecord.detailMessage}}</td>
+          </tr>
+           
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <a class="btn btn-primary btn-sm" data-dismiss="modal"><i
+            class="fa fa-remove-circle" tooltip="关闭对话框"> 关闭</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

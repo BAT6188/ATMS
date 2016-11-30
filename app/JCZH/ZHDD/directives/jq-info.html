@@ -1,0 +1,45 @@
+<table class="table table-condensed">
+  <tr><th style="width:70px">案发时间</th><td>{{record.occurTime}}</td></tr>
+  <tr><th>报警来源</th><td>{{record.alarmWay.name}}</td></tr>
+  <tr>
+    <th>报警电话</th>
+    <td>
+      <a>{{record.phone}}</a>
+    </td>
+  </tr>
+  <tr>
+    <th>报警人</th>
+    <td>
+      <span ng-hide="addFeedback">{{record.caller}}</span>
+      <a class="btn btn-sm pull-right padTB0" 
+        tooltip="{{record.callerFeedback}}"
+        ng-hide="addFeedback" 
+        ng-click="addFb()">
+        <i class="fa fa-plus yhte-ico-primary" ng-hide="record.callerFeedback" > </i>
+        <i class="fa fa-pencil yhte-ico-primary" ng-show="record.callerFeedback"> </i>反馈
+      </a> 
+    </td>
+  </tr>
+  <tr><th>报警内容</th><td>{{record.desc}}</td></tr>
+  <tr><th>类型级别</th><td>{{record.type.name}}、{{record.level.name}}</td></tr>
+  <tr>
+    <th>案发地点</th>
+    <td>
+      <span tooltip="{{record.lng}}, {{record.lat}}">
+      <a map-center lng="record.lng" lat="record.lat" map="map">
+        {{record.occurAddress}}
+      </a>
+      </span>
+    </td>
+  </tr>
+  <tr><th>评价</th>
+    <td>{{evaluateLen || 0}}  条
+       <a class="btn btn-sm pull-right padTB0" ng-click="toEvaluate = !toEvaluate">
+        <i class="fa fa-eye yhte-ico-primary"> 查看</i>
+      </a>
+    </td>
+  </tr>
+  <tr ng-show="record.state.number === 2"><th>出警时间</th><td>...</td></tr>
+  <tr ng-show="record.state.number === 1"><th>等待时间</th><td>...</td></tr>
+  <tr ng-show="record.State.number === 2"><th>处理时长</th><td>...</td></tr>
+</table>

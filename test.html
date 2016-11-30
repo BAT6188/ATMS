@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>LedActiveX测试窗口</title>
+
+    <script id="clientEventHandlersJS" language="javascript">
+
+	function InitLed()
+	{
+		//YhLedObject.InitLed(1,"172.16.60.29",4321,644,300);
+		//YhLedObject.InitLed(1,"127.0.0.1",27669,644,300);
+		YhLedObject.InitLed(1,"172.16.60.29",1234,644,300);
+	}
+	
+	function toTop(oldIndex){
+		YhLedObject.adjustPosition(oldIndex, 0);		
+	 }
+
+    	function setSize(width,height)
+	{
+		YhLedObject.setSize(width,height);
+	}
+
+	function releaseMsg( )
+	{
+	    YhLedObject.releaseMsg();
+	}
+	
+	function  eventRelease(bSuccess)
+	{
+	    if( bSuccess )
+	        alert( "操作成功" );
+	    else
+	        alert( "操作失败" );
+	}
+
+	function addMsg(nType, strContent, strFontName, nFontSize, nFontColor, nShowType, nMoveTime,nShowSpeed,nStartTime, nEndTime, nRowSpace)
+	{
+	    YhLedObject.addMsg(nType, strContent,strFontName,nFontSize,nFontColor,nShowType,nMoveTime,nShowSpeed,nStartTime,nEndTime,nRowSpace );
+	}
+	
+	function updateMsg( lIndex, strContent, strFontName, nFontSize, nFontColor, nShowType, nMoveTime, nShowSpeed,nStartTime, nEndTime)
+	{
+		YhLedObject.updateMsg( lIndex, strContent, strFontName, nFontSize, nFontColor, nShowType, nMoveTime, nShowSpeed,nStartTime, nEndTime );
+	}
+	
+	function delMsg( lIndex )
+	{
+	    YhLedObject.delMsg( lIndex );
+	}
+	
+	function  getAllMsg( )
+	{
+	    alert( YhLedObject.getAllMsg( ) );
+	}
+	
+	function getConnectState( )
+	{
+		alert( YhLedObject.getConnectState( ) );
+	}
+    </script>
+
+    <script LANGUAGE="javascript" FOR="YhLedObject" EVENT="eventRelease(bSuccess)">
+        eventRelease(bSuccess)
+    </script>
+
+</head>
+<body>
+    <tr>
+        <td>
+            <button onclick="javascript:InitLed();">
+                初始化</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:setSize( 144,99 );">
+                改变大小</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:releaseMsg( );">
+                发布信息</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:addMsg(0, 'http://10.10.17.143/atms/5.jpg','宋体',12,65280,1,1,1,1388505600,1420041540,0);">
+                插入图片23</button>
+        </td>
+    </tr>
+	<tr>
+        <td>
+            <button onclick="javascript:addMsg(1, '行间距|第二行','楷体_GB2312',20,65280,1,7,4,1388505600,1420041540,1);">
+                插入文字</button>
+        </td>
+    </tr>
+	 <tr>
+        <td>
+            <button onclick="javascript:toTop(11);">
+                置顶</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:updateMsg(0,'更新播放信息--测试23232','楷体_GB2312',20,65280,5,7,4,1414207658,1414227658);">
+                更新信息</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:delMsg(0);">
+                删除信息</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:getAllMsg();">
+                获取列表</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="javascript:getConnectState();">
+                连接状态</button>
+        </td>
+    </tr>
+	<tr>
+        <td>
+            <a href="http://10.10.17.143/atms/#/$modules.$welcome">跳转</a>
+        </td>
+    </tr>
+    </table>
+    <tr>
+    </tr>
+    <object id="YhLedObject" classid="CLSID:82490EEB-771D-4572-8901-2554D4F61D27" width="644"
+        height="300">
+    </object>
+</html>

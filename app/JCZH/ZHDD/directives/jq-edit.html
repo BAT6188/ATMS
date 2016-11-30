@@ -1,0 +1,82 @@
+<form name="recordForm" class="form-horizontal row marginLR0">
+  <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm">内容</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.name.$invalid}">
+      <!-- 必选 required -->
+      <input name="name" type="text" class="form-control input-sm"
+        placeholder="警情的简要描述, 必须!"
+        ng-model="record.name" required>
+    </div>
+  </div>
+
+ <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm">案发时间</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.occurTime.$invalid}">
+      <input name="occurTime" type="text"  class="form-control input-sm" 
+        placeholder="警情上报时间, 格式: YYYY-MM-DD HH:MM:SS, 必须! "
+        ng-model="record.occurTime" datetimepicker required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm ">事件类型</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.type.$invalid}">
+      <select name="type" class="form-control input-sm"  style="padding-top:3px;padding-bottom:0px"
+         ng-options="e.name for e in types track by e.code"  ng-model="record.type" required></select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label input-sm" for="">级别</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.level.$invalid}">
+      <select name="level" class="form-control input-sm" style="padding-top:3px;padding-bottom:0px"
+         ng-options="e.name for e in levels track by e.code"  ng-model="record.level" required></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm">报警方式</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.alarmWay.$invalid}">
+      <select name="alarmWay" class="form-control input-sm" style="padding-top:3px;padding-bottom:0px"
+         ng-options="e.name for e in alarmWays track by e.code"  ng-model="record.alarmWay" required></select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm">报警人</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.caller.$invalid}">
+      <input type="text"  name="caller" class="form-control input-sm" ng-model="record.caller">
+    </div> 
+  </div>
+
+  <div class="form-group">
+    <label for="" class="col-sm-3 control-label input-sm">报警电话</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.phone.$invalid}">
+      <input name="phone" type="text"  class="form-control input-sm" ng-model="record.phone">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label input-sm" for="">案发地点</label>
+    <div class="col-sm-9">
+      <div class="input-group"  ng-class="{'has-error': recordForm.occurAddress.$invalid}">
+        <input type="text"  name="occurAddress" class="form-control input-sm" ng-model="record.occurAddress" required>
+        <span class="input-group-btn">
+          <button class="btn btn-info btn-default btn-sm" type="button" ng-click="locate()" style="padding-top:3px;padding-bottom:2px">
+            <i class="fa fa-map-marker fa-1"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label input-sm" for="">经度</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.lng.$invalid}">
+      <input name="lng"　type="text" class="form-control input-sm"  ng-model="record.lng" disabled required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label input-sm" for="">纬度</label>
+    <div class="col-sm-9" ng-class="{'has-error': recordForm.lat.$invalid}">
+      <input name="lat"　type="text" class="form-control input-sm"  ng-model="record.lat" disabled required>
+    </div>
+  </div>
+</form>

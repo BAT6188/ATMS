@@ -1,0 +1,63 @@
+<legend>
+    新增字典数据
+</legend>
+
+<form name="entityForm">
+  <div class="row ">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="save();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" disabled="disabled">
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <!-- 个人觉得不一定需要这个按钮 -->
+        <a class="btn btn-sm btn-default" ng-href="#/XTGL.DICT.Dict">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">名称</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.dataName.$invalid}">
+      <!-- 必选 required -->
+      <input name="dataName" type="text" class="form-control input-sm"
+        placeholder="字典数据名称, 必须!"
+        ng-model="entity.name" required>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">编码</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.code.$invalid}">
+      <input name="code" type="text"  class="form-control input-sm"
+        placeholder="字典数据编码, 必须! "
+        ng-model="entity.code" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">所属</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.parent.$invalid}">
+      <!-- 必选 required -->
+        <select ng-model="entity.parent" name="parent" ng-options="p.name for p in parents" class="form-control" required></select>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">有效性</label>
+    <div class="col-sm-1">
+        <div class="radio">
+          <label>
+            <input type="radio" name="status" ng-model="entity.status.code" value="1" checked> 有效
+          </label>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <div class="radio">
+          <label>
+            <input type="radio" name="status" ng-model="entity.status.code" value="0"> 无效
+          </label>
+        </div>
+    </div>
+  </div>
+
+</div>

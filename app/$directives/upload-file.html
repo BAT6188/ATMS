@@ -1,0 +1,9 @@
+<div class="input-group">
+  <input class="input-file form-control input-sm" type="file" name="fileToUpload" 
+    ng-disabled="uploading">
+  <span class="input-group-btn">
+    <button class="btn btn-sm btn-primary" ng-click="upload()" ng-disabled="uploading||noFile">
+      {{uploading ? '上传中...' : '上传'}}
+    </button>
+  </span>
+</div>

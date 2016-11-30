@@ -1,0 +1,27 @@
+	        <legend>{{title}}</legend> 
+			<form name="form">
+			  	<div class="row">
+				    <div class="col-sm-12">
+				      	<div class="btn-group pull-right">
+					        <button class="btn btn-success btn-sm" ng-click="save()">
+					          <i class="fa fa-save" tooltip="保存"></i> 保存
+					        </button>
+					        <a class="btn btn-primary btn-sm" ng-href="">
+					          <i class="fa fa-arrow-left" tooltip="返回列表"></i> 返回
+					        </a>
+				      	</div>
+				    </div>
+			  	</div>
+			  <div class="row">
+			  		{{#fields}}
+		          	<div class="form-group">
+			          	<label>{{dataDesc}}</label>
+			          	{{form_i dataName formType}}
+
+			          	{{#if required}}
+			          	<span ng-show="form.{{dataName}}.$error.required" class="help-block">该字段必填!</span>
+			          	{{/if}}
+			        </div>
+			        {{/fields}}
+			  </div>
+			</form>

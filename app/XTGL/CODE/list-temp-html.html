@@ -1,0 +1,46 @@
+	        <legend>{{title}}</legend> 
+	        <div class="row">
+			  	<div class="col-sm-4">
+				    <div class="btn-group">
+				      <a class="btn btn-success btn-sm" ng-href="">
+				        <span class="fa fa-plus" tooltip="新增"></span> 新增
+				      </a>
+				      <button class="btn btn-danger btn-sm" ng-click="remove();">
+				        <span class="fa fa-minus" tooltip="删除"></span> 删除
+				      </button>
+				    </div>
+			  	</div>
+			  	<div class="col-sm-8">
+				    <div class="input-group">
+				      <input type="text" class="form-control input-sm" placeholder="" ng-model="">
+				      <span class="input-group-btn">
+				      <a class="btn btn-sm btn-primary" ng-click="query()">
+				        <i class="fa fa-query"> 查询</i>
+				      </a>
+				      </span>
+				    </div>
+			 	</div>
+			</div>
+	        <div class="col-sm-12">
+		        <table class="table table-condensed table-bordered {{table_class}}">  
+		            <thead>
+			            {{#fields}}
+			            	<th>{{dataDesc}}</th>  
+			            {{/fields}} 
+		            </thead>   
+		            <tbody>  
+		              	<tr ng-repeat="e in records">
+						{{#fields}}
+			            	<td>{{td_str dataName}}</td>  
+			            {{/fields}} 
+		                </tr>      
+		            </tbody>
+			        <div class="col-sm-12">
+				      <div pagination class="pagination-sm pull-right" boundary-links="true"
+				        rotate="false" total-items="total" page="Q.page"
+				        items-per-page="Q.pageSize" max-size="Q.maxSize"
+				        on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+				        last-text="最后一页" first-text="最前一页"> </div>
+				    </div>   
+		        </table> 
+	        </div>

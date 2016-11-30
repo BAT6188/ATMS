@@ -1,0 +1,106 @@
+<legend>信息来源分析</legend>
+<div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-7">
+
+    </div>
+    <div class="col-sm-5">
+      <div class="col-sm-9 padLR0">
+        <div class="input-group"> 
+            <span class="input-group-addon">处理时间</span>
+              <div datetimepicker-new
+                class="form-control input-sm"
+                placeholder="选择日期"
+                ng-model="Q.startCLTime"
+                format="'yyyy-mm-dd'"
+                min-view="'month'"
+                start-view="'month'">
+              </div>
+            <span class="input-group-addon">到</span>
+              <div datetimepicker-new
+                class="form-control input-sm"
+                placeholder="选择日期"
+                ng-model="Q.endCLTime"
+                format="'yyyy-mm-dd'"
+                min-view="'month'"
+                start-view="'month'">
+              </div>
+        </div>
+      </div>
+      <div class="col-sm-3 padLR0">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-primary" ng-click="query()">
+          <i class="fa fa-search"> 查询</i>
+          </a>
+          <!-- <a class="btn btn-sm btn-success " ng-click="export()">
+            <i class="fa fa-cloud-download"></i> 导出
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span>列表</span>
+          </div>
+          <div class="panel-body">
+            <table class="table table-condensed table-bordered">
+              <tbody>
+                <tr class="font14">
+                  <th>编号</th>
+                  <th>信息来源名称</th>
+                  <th>已处理总数</th>
+                </tr>
+                <tr ng-repeat="c in records">
+                  <td>{{c.xxly.code || '暂缺'}}</td>
+                  <td>{{c.xxly.name || '暂缺'}}</td>
+                  <td>{{c.cs}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="col-md-12">
+              <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false" 
+                total-items="total"
+                page="Q.page" 
+                items-per-page="Q.limit"
+                max-size="5"
+                on-select-page="pChange(page)"
+                previous-text="上一页"
+                next-text="下一页"
+                last-text="最后一页"
+                first-text="最前一页">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span>柱状图</span>
+          </div>
+          <div class="panel-body">
+            <div highcharts data="chartColumnData" xaxis="chartColumnXAxis" title="图表" type="column" ytitle="违法次数(/次)" chartheight="300"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span>饼图</span>
+          </div>
+          <div class="panel-body">
+            <div class="">
+                <div highcharts data="chartPieData" title="图表" type="pie"  ytitle="违法次数(/次)" chartheight="300"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>

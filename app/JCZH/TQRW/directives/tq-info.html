@@ -1,0 +1,156 @@
+<div class="tq-info">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <span class="btn btn-sm btn-success pull-right"
+              ng-show="record.status.code >0"
+              style="margin-right:15px;">
+        {{record.status.name || record.status.code}}
+      </span>
+      <!-- 已保存的 record，并且状态为待下发，才显示下发按钮 -->
+      <a ng-show="record.id && record.status.code === 0 && posts" class="btn btn-sm pull-right"
+        ng-click="push();">
+        <i class="fa fa-check pull-right"> 下发</i>
+      </a>
+      <!-- 已保存的 record，显示编辑按钮，隐藏保存按钮 -->
+      <a class="btn pull-right"
+        ng-hide="record.id"
+        ng-click="save();">
+        <i class="fa fa-pencil pull-right"> 保存</i>
+      </a>
+      <!-- <button class="btn btn-sm btn-primary pull-right" ng-show="record.id">编辑</button> -->
+      <a ng-show="record.id && record.status.code === 0" class="btn btn-sm pull-right"
+        ng-click="update();">
+        <i class="fa fa-pencil pull-right"> 更新</i>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">任务名称</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control input-sm" ng-model="record.name">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">任务级别</label>
+      <div class="col-sm-9">
+        <select class="form-control input-sm" ng-model="record.level" 
+        ng-options="c.code as c.name for c in levels track by c.code"></select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">出发地点</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control input-sm" ng-model="record.startPoint">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">目的地点</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control input-sm" ng-model="record.endPoint">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">任务路线</label>
+      <div class="col-sm-9">
+        <a x-ng-click="editRoute();"
+          x-ng-hide="record.lineMap">
+          绘制路线
+        </a>
+        <a x-ng-click="editRoute();"
+          x-ng-show="record.lineMap">
+          编辑路线
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">开始时间</label>
+      <div class="col-sm-9" style="padding-left:15px;padding-right:15px;float:left;">
+        <datetimepicker
+          placeholder="开始时间"
+            ng-model="record.startTime"
+          start-date="record.startTime">
+        </datetimepicker>  
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">结束时间</label>
+      <div class="col-sm-9" style="padding-left:15px;padding-right:15px;float:left;">
+        <datetimepicker
+          placeholder="结束时间"
+          ng-model="record.endTime"
+          start-date="record.startTime">
+        </datetimepicker>  
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="" class="col-sm-3 control-label input-sm">任务描述</label>
+      <div class="col-sm-9">
+        <textarea class="form-control input-sm" ng-model="record.desc"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <a class="btn pull-right" 
+        ng-show="record.id">
+        手动分配
+      </a>
+    </div>
+  </div> -->
+
+  <table class="table table-bordered table-condensed">
+    <tbody>
+      <tr ng-hide="record.chidStaskModels" ng-repeat="dept in depts">
+        <td style="width:10px;">
+          {{$index+1}}
+        </td>
+        <td>{{dept.deptName}}</td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <tr ng-show="record.chidStaskModels" ng-repeat="child in record.chidStaskModels">
+        <td style="width:10px;">
+          {{$index+1}}
+        </td>
+        <td>
+          <a ng-href="#/JCZH.TQRW.DDView//">
+            {{child.dept.name}}
+          </a>
+        </td>
+        <td>
+          <label class="label" ng-class="{'0': 'label-warning', '1': 'label-default', '2': 'label-info', '3': 'label-primary', '4': 'label-success'}['{{record.status.code}}']">
+          {{child.status.name}}
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

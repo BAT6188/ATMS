@@ -1,0 +1,29 @@
+<panel title="警情评价">
+  <div class="col-sm-12 padLR0">
+    <a class="btn btn-sm padLR0" ng-click="toAdd()"><i class="fa fa-plus"> 添加</i></a>
+    <!-- <div class="pull-right">
+      <rating value="rate" max="max" readonly="false" on-hover="hoveringOver(value)" style="cursor:pointer"></rating>
+      <span class="label" ng-class="{'label-warning': rate<3, 'label-info': rate>3 && rate<6, 'label-success': rate>6}">{{rate}}分</span>
+    </div> -->
+  </div>
+  <div  class="col-sm-12 padLR0">
+    <table class="table table-condensed table-bordered">
+      <tr ng-repeat="e in records">
+        <td style="width:15px">{{$index+1}}</td>
+        <td style="width:10px" ng-click="remove(e,$index)"><i class="fa fa-times yhte-ico-grey"></i></td>
+        <td>{{e.content}}</td>
+        <td>{{e.time}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-12 padLR0" ng-show="addView || !records.length">
+    <textarea class="form-control" rows="1" ng-model="newRecd.content"></textarea>
+    <div class="btn-group pull-right">
+      <a class="btn btn-sm" ng-disabled="!newRecd.content"> <i  class="fa fa-check" ng-click="save()">提交</i></a>
+      <a class="btn btn-sm padLR0"><i  class="fa fa-times" ng-click="newRecd.content = '' ">清空</i></a>
+    </div>
+  </div>
+    <div ng-transclude>
+    
+    </div>
+</panel>

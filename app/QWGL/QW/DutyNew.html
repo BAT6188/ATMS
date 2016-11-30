@@ -1,0 +1,122 @@
+<legend>
+  <span>新建勤务</span>
+<!--   <span style="font-size:18px">
+    <span id="lgInfo" ng-show="state === 'info'" style="cursor:pointer">< 基本信息</span>
+    <span id="caInfo" ng-hide="state === 'info'" style="cursor:pointer">< 排班信息</span>
+    <span id="ptInfo" ng-show="state === 'postDetail'">< 岗位『{{selectPost.name}}』</span>
+  </span> -->
+  
+</legend>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="btn-group pull-right btn-group-sm">
+      <button class="btn btn-primary btn-sm"
+        ng-click="savePost();" ng-disabled="entityForm.$invalid">
+        <i class="fa fa-floppy-o"> 保存勤务</i> 
+      </button>
+    </div>
+  </div>
+</div>
+<form name="entityForm">
+  <div class="row">
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务名称</label>
+    <div class="col-sm-10" ng-class="{'has-error': entityForm.name.$invalid}">
+        <input class="form-control input-sm"
+          name="name"
+          ng-model="record.name"
+          required>
+    </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务类型</label>
+      <div class="col-sm-4" ng-class="{'has-error': entityForm.type.$invalid}">
+          <select class="form-control input-sm"
+            name="type"
+            ng-model="record.type"
+            ng-options="type.name for type in types track by type.code"
+            required>
+          </select>
+      </div>
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务级别</label>
+      <div class="col-sm-4" ng-class="{'has-error': entityForm.level.$invalid}">
+          <select class="form-control input-sm"
+            name="level"
+            ng-model="record.level"
+            ng-options="level.name for level in levels track by level.code"
+            required>
+          </select>
+      </div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">负责人</label>
+    <div class="col-sm-4" ng-class="{'has-error': entityForm.principal.$invalid}">
+      <!-- <input class="form-control input-sm" ng-model="record.principal"> -->
+      <select class="form-control input-sm"
+        name="principal"
+        ng-model="record.principal"
+        ng-options="user.userName for user in users">
+      </select>
+    </div>
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">联系方式</label>
+    <div class="col-sm-4">
+      <input class="form-control input-sm" ng-model="record.principalPhone">
+    </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">开始时间</label>
+      <div class="col-sm-4" 
+        style="padding-right:15px;padding-left:15px;float: left;"
+        ng-class="{'has-error': entityForm.startTime.$invalid}">
+          <input
+            class="form-control input-sm" 
+            name="startTime"
+            ng-model="record.startTime" 
+            datetimepicker
+            required>
+      </div>
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">结束时间</label>
+      <div class="col-sm-4"
+        style="padding-right:15px;padding-left:15px;float: left;"
+        ng-class="{'has-error': entityForm.endTime.$invalid}">
+          <input
+            style="padding-right:15px;padding-left:15px;float:right;"
+            class="form-control input-sm" 
+            name="endTime"
+            ng-model="record.endTime" 
+            datetimepicker
+            required>
+      </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务描述</label>
+      <div class="col-sm-10">
+          <textarea class="col-sm-10 form-control input-sm" ng-model="record.desc"></textarea>
+      </div>
+  </div>
+</form>
+<!-- <form name="entityForm"
+  ng-show="state === 'info'"
+  ng-include="'app/QWGL/QW/DutyNew.Info.html'">
+
+</form> -->
+
+<!-- <div class="row" ng-show="state === 'calendar'">
+  <div class="col-sm-12"  
+    events="record.posts"
+    agenda-day-click="selectPosts();"
+    event-click="editPost();"
+    full-calendar>
+  </div>
+</div> -->
+
+<!-- <div class="row">
+  <div class="col-sm-12">
+    <div class="btn-group pull-right btn-group-sm">
+      <a class="btn btn-primary btn-sm" 
+        ng-disabled="entityForm.$invalid" 
+        ng-click="next();">
+        <i class="fa fa-calendar"></i> 下一步, 开始排班
+      </a>
+    </div>
+  </div>
+</div> -->

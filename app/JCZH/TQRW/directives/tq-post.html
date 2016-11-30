@@ -1,0 +1,100 @@
+<div class="tq-post">
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <a class="btn btn-xs pull-right" x-ng-click="apply();">
+        确认
+      </a>
+    </div>
+  </div> -->
+
+
+ <!--  <div class="row">
+    <div class="col-sm-12" style="padding-left:15px;padding-right:15px;float:left;">
+      <button class="btn btn-xs btn-info">
+        时间配置
+      </button>
+    </div>
+  </div> -->
+
+<!--   <div class="row">
+    <div class="col-sm-6" style="padding-left:15px;padding-right:15px;float:left;">
+      <datetimepicker
+        placeholder="开始时间"
+        ng-model="post.planStartTime">
+      </datetimepicker>
+    </div>
+
+    <div class="col-sm-6" style="padding-left:15px;padding-right:15px;float:left;">
+      <datetimepicker
+        placeholder="结束时间"
+        start-date="post.planStartTime"
+        ng-model="post.planEndTime">
+      </datetimepicker>
+    </div>
+  </div>  -->
+
+  <div class="row">
+    <div class="col-sm-12" style="padding-left:15px;padding-right:15px;float:left;">
+      <button class="btn btn-xs btn-primary"
+        ng-click="selectPosts();">
+        添加警员
+      </button>
+
+      <button class="btn btn-xs btn-primary pull-right"
+        ng-click="savePosts();">
+        保存配置
+      </button>
+    </div>
+  </div> 
+
+
+  
+  
+
+  <div class="modal fade" id="freePolices" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close"
+            type="button">×</button>
+            <h4 id="myModalLabel" class="modal-title">
+              添加警员
+            </h4>
+          </div>
+          <div class="modal-body"> 
+            <!-- 警员列表 -->
+            <atms-free-polices
+              page-size="10"
+              lng="post.lng"
+              lat="post.lat"
+              radius="[100,500,1000,2000]"
+              select-items="selecteds"
+              data="polices"
+              map="map">
+            </atms-free-polices>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- 选中警员列表 -->
+  <table class="table table-bordered table-condensed">
+    <tbody>
+      <tr ng-repeat="record in post.polices | limitTo:5">
+        <td style="width:20px;">{{$index + 1}}</td>
+        <td hover-show>
+          <a href="">{{record.userName}}</a>
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="removePolice(record);">
+            <i class="glyphicon glyphicon-remove yhte-ico-danger"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+</div>

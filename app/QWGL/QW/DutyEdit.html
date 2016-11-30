@@ -1,0 +1,259 @@
+<legend>
+  <span>勤务『{{record.name}}』</span>
+  <span style="font-size:18px">
+    <span id="lgInfo" ng-show="state === 'info'" style="cursor:pointer">< 基本信息</span>
+    <span id="caInfo" ng-hide="state === 'info'" style="cursor:pointer">< 排班信息</span>
+    <span id="ptInfo" ng-show="state === 'postDetail'">< 岗位『{{selectPost.name}}』</span>
+  </span>
+  
+</legend>
+
+<div class="row marginLR0">
+  <div class="col-sm-6">
+        <a style="cursor:pointer;"
+          ng-click="changeState('info');selectPost={}" ng-disabled="state === 'info'">
+          基本信息
+        </a>
+        <a style="cursor:pointer;margin-left:15px"
+          ng-click="changeState('calendar');selectPost={}" ng-disabled="state === 'calendar'">
+          排班信息
+        </a>
+  </div>
+  <div class="col-sm-6" style="padding-right:0px">
+    <div class="btn-group pull-right btn-group-sm">
+      <button class="btn btn-primary btn-sm"
+        ng-click="updateDuty();">
+        <i class="fa fa-floppy-o"></i> 更新勤务
+      </button>
+      <a class="btn btn-default btn-sm"
+        ng-href="#/QWGL.QW.Duty">
+        <i class="fa fa-th-list"></i> 返回列表
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- 基本信息 -->
+<form name="entityForm" ng-show="state === 'info'">
+  <div class="row">
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务名称</label>
+    <div class="col-sm-10" ng-class="{'has-error': entityForm.name.$invalid}">
+        <input class="form-control input-sm"
+          name="name"
+          ng-model="record.name"
+          required>
+    </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务类型</label>
+      <div class="col-sm-4" ng-class="{'has-error': entityForm.type.$invalid}">
+          <select class="form-control input-sm"
+            name="type"
+            ng-model="record.type"
+            ng-options="type.name for type in types track by type.code"
+            required>
+          </select>
+      </div>
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务级别</label>
+      <div class="col-sm-4" ng-class="{'has-error': entityForm.level.$invalid}">
+          <select class="form-control input-sm"
+            name="level"
+            ng-model="record.level"
+            ng-options="level.name for level in levels track by level.code"
+            required>
+          </select>
+      </div>
+  </div>
+  <div class="row">
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">负责人</label>
+    <div class="col-sm-4">
+      <select class="form-control input-sm"
+        name="principal"
+        ng-model="record.principal"
+        ng-options="user.userName for user in users track by user.id"
+        required>
+      </select>
+    </div>
+    <label class="col-sm-1 col-sm-offset-1 control-label input-sm">联系方式</label>
+    <div class="col-sm-4">
+      <input class="form-control input-sm" ng-model="record.principalPhone">
+    </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">开始时间</label>
+      <div class="col-sm-4" 
+        style="padding-right:15px;padding-left:15px;float: left;"
+        ng-class="{'has-error': entityForm.startTime.$invalid}">
+          <input class="form-control input-sm" 
+            name="startTime"
+            ng-model="record.startTime" 
+            datetimepicker
+            required>
+      </div>
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">结束时间</label>
+      <div class="col-sm-4" 
+        style="padding-right:15px;padding-left:15px;float: left;"
+        ng-class="{'has-error': entityForm.endTime.$invalid}">
+          <input class="form-control input-sm" 
+            name="endTime"
+            ng-model="record.endTime" 
+            datetimepicker
+            required>
+      </div>
+  </div>
+  <div class="row">
+      <label class="col-sm-1 col-sm-offset-1 control-label input-sm">勤务描述</label>
+      <div class="col-sm-10">
+          <textarea class="col-sm-10 form-control input-sm" ng-model="record.desc"></textarea>
+      </div>
+  </div>
+</form>
+<!-- <form name="entityForm" ng-show="state === 'info'"
+  ng-include="'app/QWGL/QW/DutyNew.Info.html'">
+</form> -->
+<!--  <div class="row"  ng-show="state === 'info'">
+  <div class="col-sm-12">
+    <div class="btn-group pull-right btn-group-sm">
+      <a class="btn btn-primary btn-sm" 
+        ng-disabled="entityForm.$invalid" 
+        ng-click="changeState('calendar');selectPost={}">
+        <i class="fa fa-calendar"></i> 查看排班
+      </a>
+    </div>
+  </div>
+</div> -->
+
+<!-- 日历控件 -->
+<div class="row"  ng-show="state === 'calendar'">
+  <div class="col-sm-12"  
+    events="events"
+    agenda-day-click="selectPosts();"
+    event-click="editPost();"
+    full-calendar>
+  </div>
+</div>
+
+
+<!-- 某个岗位信息 -->
+<div class="row" ng-show="state === 'postDetail'">
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-book"> 岗位信息</i></h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <tbody>
+                    <tr><th>岗位名称</th><td>{{selectPost.name}}</td></tr>
+                    <tr><th>开始时间</th><td>{{selectPost.planStartTime}}</td></tr>
+                    <tr><th>结束时间</th><td>{{selectPost.planEndTime}}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="input-group">
+      <!--   <input type="text" class="form-control input-sm" ng-model="Q.name" placeholder="警员姓名"> -->
+        <select
+            name="deptments.deptId" type="text"
+            class="form-control input-sm"
+            ng-options="c.deptId as c.deptName for c in deptments"
+            ng-model="Q.deptId">
+        </select>
+        <span class="input-group-btn">
+          <button class="btn btn-primary btn-sm" type="button" ng-click="query()">
+              <i class="fa fa-search" tooltip="查询"></i>
+          </button>
+          <button class="btn btn-danger btn-sm" ng-click="removePost()">
+            <i class="fa fa-times"> 删除岗位</i> 
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row marginLR0">
+        <a ng-click="editViewChange()" ng-hide="editView" style="cursor:pointer">点击这里增删警员数据...</a>
+        <a ng-click="editViewChange()" ng-show="editView" style="cursor:pointer">退出警员数据编辑...</a>
+      </div>
+      <!-- 所有列表 -->
+      <div class="col-md-5" ng-show="editView" >
+        <div class="row">
+          <table class="table table-bordered table-hover table-condensed">
+            <thead>
+              <tr>
+                <th><input type="checkbox" ng-model="allChecked" ng-change="selectAll();"></th>
+                <th>编号</th>
+                <th>名称</th>
+                <th>类型</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="record in policeList">
+                <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+                <td>{{record.userId}}</td>
+                <td><a>{{record.userName}}</a></td>
+                <td>{{record.dept.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false"
+                      total-items="total"
+                      page="Q.page"
+                      items-per-page="Q.pageSize"
+                      max-size="Q.maxSize"
+                      on-select-page="pChange(page)"
+                      previous-text="上一页"
+                      next-text="下一页"
+                      last-text=">>"
+                      first-text="<<">
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding-top: 60px" class="col-md-2" ng-show="editView">
+        <div class="row">
+            <button title="选择添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPolice()">
+                <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
+        <div class="row">
+            <button title="全部添加" data-placement="right" data-toggle="tooltip" class="btn btn-success btn-sm" ng-click="getPolice(true)">
+                <i class="fa fa-angle-double-right"></i>
+            </button>
+        </div>
+
+        <div class="row">
+            <button title="全部删除" data-placement="right" data-toggle="tooltip" class="btn  btn-success btn-sm" ng-click="dropPolice(true)">
+                <i class="fa fa-angle-double-left"></i>
+            </button>
+        </div>
+      </div>
+      <!-- 已有数据列表 -->
+      <div class="col-md-12" id="pList">
+        <div class="row">
+          <table class="table  table-condensed">
+            <tbody>
+              <tr ng-repeat="record in selectPost.polices">
+                <td>
+                  <i class="fa fa-times" ng-click="dropPolice($index)"></i>
+                </td>
+                <td>{{record.userId}}</td>
+                <td>{{record.userName}}</td>
+                <td>{{record.dept.name}}</td>
+                <td>
+                  <span ng-show="record.actualStartTime"> <strong>到岗时间:</strong>{{record.actualStartTime}}</span>
+                  <span style="margin-left:15px" ng-show="record.actualEndTime && record.actualEndTime"> <strong>离岗时间:</strong>{{record.actualEndTime}}</span>
+                </td>
+                <td>
+                  <i class="fa fa-check yhte-ico-primary" ng-show="!record.actualStartTime" ng-click="confirmStart(record)"> 确认到岗</i>
+                  <i class="fa fa-times yhte-ico-primary" ng-show="!record.actualEndTime && record.actualStartTime" ng-click="confirmEnd(record)"> 确认离岗</i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<legend>布控申请</legend>
+
+<div>
+<!-- 工具栏 -->
+<div class="row">
+  <div class="col-sm-2 btn-group">
+    <a ng-href="" class="btn btn-primary btn-sm" ng-click="add()">
+         <i class="fa fa-plus"></i> 新增
+       </a>
+  </div>
+               
+    <div class="col-sm-2">
+        <div class="input-group">
+            <span class="input-group-addon">状态</span>
+            <select type="text"  ng-model="status" class="form-control input-sm" ng-options="d.code as d.name for d in statuses">
+                <option value="">--- 全部 ---</option>
+            </select>
+        </div>
+    </div>
+    
+    
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">布控时间</span>
+           <input id="dispTime" calendar type="text" class="form-control input-sm" ng-model="dispTime" required/>
+            <span class="input-group-addon">—</span>
+           <input id="dispEndTime" calendar type="text" class="form-control input-sm" ng-model="dispEndTime" required/>
+        </div>
+    </div>
+    
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">号牌号码</span>
+      <div class="input-group-btn" style="width: 100px;">
+        <select type="text" ng-model="plateColor" class="form-control input-sm"
+                           ng-options="d.code as d.name for d in plateColors">
+                       <option value="">--- 全部 ---</option>
+                   </select>
+        </div>
+        <input id="plateNo" type="text" class="form-control input-sm pull-right"
+              ng-model="plateNo">
+           <span class="input-group-btn">
+          <button class="btn btn-primary btn-sm" type="button" ng-click="query()">
+              <i class="fa fa-search"></i> 查询
+          </button>
+           </span>
+        </div>
+    </div>
+  
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-sm-12">
+    <table class="xtable" ng-table="tableParams">
+      <tr ng-repeat="record in records">
+                <td width="30" style="text-align: center; " header="'ng-table/headers/checkbox.html'">
+                    <input type="checkbox" ng-model="checkboxes.items[$index]" />
+                </td>
+          <td data-title="'号牌颜色'">{{record.plateColor.name}}</td>
+          <td data-title="'号牌号码'">{{record.plateNo}}</td>
+                <td data-title="'布控性质'" style="text-align: center;">{{record.dispNature.name}}</td>
+                <td data-title="'布控类型'" style="text-align: center;">{{record.dispType.name}}</td>
+                <td data-title="'布控原因'">{{record.dispReason.name}}</td>
+                <td data-title="'布控时间'" style="text-align: center;">{{record.dispTime}}</td>
+                <td data-title="'布控截止期'" style="text-align: center;">{{record.dispEndTime}}</td>
+                <td data-title="'布控状态'" style="text-align: center;">{{record.status.name}}</td>
+                <td data-title="'审批状态'" style="text-align: center;">{{record.verifyStatus.name}}</td>
+                <td data-title="'报警记录'" style="text-align: center;"><a href="" tooltip="报警记录"><i class="fa fa-eye" ng-click="alarmList(record)"></i></a></td>
+                <td data-title="'操作'" style="text-align: center;">
+                  <a href="" tooltip="查看" ng-click="view(record)"><i class="fa fa-eye"></i></a>
+                  <a href="" tooltip="编辑" ng-click="edit(record)"><i class="fa fa-edit" ng-show="record.verifyStatus.code === '1'"></i></a>
+                <a href="" tooltip="撤控" ng-click="cancleMod(record)"><i class="fa fa-times yhte-ico-danger" ng-show="record.verifyStatus.code === '2'"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+		<textarea>
+package {{ packagePath }}.rda;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import {{ packagePath }}.{{ javaClass }}QB;
+import {{ packagePath }}.{{ javaClass }};
+import {{ packagePath }}.I{{ javaClass }};
+
+public class {{ javaClass }}Rda {
+	
+	private I{{ javaClass }} {{lowerCase javaClass }}Rmi;
+
+	public void set{{ javaClass }}Rmi(I{{ javaClass }} {{lowerCase javaClass }}Rmi) {
+		this.{{lowerCase javaClass }}Rmi = {{lowerCase javaClass }}Rmi;
+	}
+
+	public String insert({{ javaClass }} d) throws RemoteException{
+		return {{lowerCase javaClass }}Rmi.insert(d);
+	}
+
+	public void update({{ javaClass }} d) throws RemoteException{
+		{{lowerCase javaClass }}Rmi.update(d);
+	}
+
+	public void delete(String[] id) throws RemoteException{
+		{{lowerCase javaClass }}Rmi.delete(id);
+	}
+
+	public {{ javaClass }} findOne(String id) throws RemoteException{
+		{{ javaClass }} d = {{lowerCase javaClass }}Rmi.selectOne(id);
+		return d;
+	}
+
+	public List<{{ javaClass }}> findList({{ javaClass }}QB qb) throws RemoteException{
+		List<{{ javaClass }}> list = {{lowerCase javaClass }}Rmi.selectList(qb);
+		return list;
+	}
+
+	public Integer findCount({{ javaClass }}QB qb) throws RemoteException{
+		Integer c =0;
+		c = {{lowerCase javaClass }}Rmi.selectCount(qb);
+		return c;
+	}
+}
+		</textarea>

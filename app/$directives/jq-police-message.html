@@ -1,0 +1,26 @@
+<div class="alert alert-default my-box-shdow">
+  <h5>
+    {{police.userName}} > 反馈信息
+    <button ng-click="close()" type="button" class="close">&times;</button>
+  </h5>
+  <table class="table table-condensed table-bordered">
+    <tr ng-repeat="e in message"> <!-- tooltip="{{e.feedbackTime}}" -->
+      <td style="width:15px">{{$index+1}}</td>
+      <td>{{e.fileContent}}</td>
+      <td style="width:10px" ng-click="remove(e,$index)"><i class="fa fa-times"></i></td>
+    </tr>
+  </table>
+  <div class="row">
+    <div class="col-sm-12">
+      <textarea class="form-control" rows="2" ng-model="newMsg.fileContent"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default btn-sm" ng-click="newMsg.fileContent = '' ">清空</button>
+        <button type="button" class="btn btn-default btn-sm" ng-click="save()">提交</button>
+      </div>
+    </div>
+  </div>
+</div>  

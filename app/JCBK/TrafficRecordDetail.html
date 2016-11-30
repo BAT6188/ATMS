@@ -1,0 +1,99 @@
+<div class="panel panel-default" style="width: 840px;">
+  <div class="panel-heading">车辆详情信息
+    <button class="close" ng-click="close()" type="button">×</button>
+  </div>
+  <div class="panel-body">
+    <div class="row" style="padding: 5px 20px 0px;">
+      <div class="col-md-7 yhNav">
+        <div tabset class="">
+            <div tab heading="全景照片" ng-show="record.fullImg!=null">
+              <div class="row marginLR0">
+              <div >
+                  <a href="{{record.fullImg}}" class="jqzoom" >
+                      <img ng-src="{{record.fullImg}}" style="border: 1px solid #666;height:440px;width:480px;"> 
+                    </a>  
+                </div>        
+            </div>
+          </div>
+          <div tab heading="车头照片" ng-show="record.headImg!=null">
+            <div class="row marginLR0">
+              <div >
+                  <a href="{{record.headImg}}" class="jqzoom" >
+                      <img ng-src="{{record.headImg}}"  style="border: 1px solid #666;height:440px;width:480px;"> 
+                    </a>  
+                </div>        
+            </div>
+          </div>
+          <div tab heading="车尾照片" ng-show="record.tailImg!=null">
+            <div class="row marginLR0">
+              <div >
+                  <a href="{{record.tailImg}}" class="jqzoom" >
+                      <img ng-src="{{record.tailImg}}"  style="border: 1px solid #666;height:440px;width:480px;"> 
+                    </a>  
+                </div>        
+            </div>
+          </div>
+          <div tab heading="预留照片1" ng-show="record.reserveImg1!=null">
+            <div class="row marginLR0">
+              <div >
+                  <a href="{{record.reserveImg1}}" class="jqzoom" >
+                      <img ng-src="{{record.reserveImg1}}"  style="border: 1px solid #666;height:440px;width:480px;"> 
+                    </a>  
+                </div>        
+            </div>
+          </div>
+          <div tab heading="预留照片2" ng-show="record.reserveImg2!=null">
+            <div class="row marginLR0">
+              <div >
+                  <a href="{{record.reserveImg2}}" class="jqzoom" >
+                      <img ng-src="{{record.reserveImg2}}"  style="border: 1px solid #666;height:440px;width:480px;"> 
+                    </a>  
+                </div>        
+            </div>
+          </div>
+          </div>
+      </div>
+      <div class="col-md-5">
+        <form class="form-horizontal font13 formMarginB10">
+          <div class="form-group">
+            <div class="col-sm-12">
+                        <label for="" class="col-sm-3 control-label input-sm">车牌号码</label>
+                    <div class="col-sm-2" style="padding-right:0px">
+                        <select type="text"  ng-model="record.plateColor" class="form-control input-sm" ng-options="d.name for d in plateColors track by d.code">
+                            </select>
+                    </div>
+                    <div class="col-sm-3" style="padding-left:0px;padding-right:0px;">
+                       <input type="text" class="form-control input-sm" ng-model="record.plateNo">
+                    </div>
+                    <div class="col-sm-2" style="padding-left:0px;">
+                       <input type="button" class="form-control input-sm btn-primary" value="修改" ng-click="update();">
+                    </div>
+                  </div>
+          </div>
+          <table class="table table-bordered">
+            
+            <tr><th>车身颜色</th><td>{{record.carColor.name}}</td></tr>
+            <tr><th>颜色深浅</th><td>{{record.carColorShade.name}}</td></tr>
+            <tr><th>号牌种类</th><td>{{record.plateType.name}}</td></tr>
+            <tr><th>车型类型</th><td>{{record.carType.name}}</td></tr>
+            <tr><th>车长</th><td>{{record.carLength}}</td></tr>
+            <tr><th>所在车道</th><td>{{record.laneNum.name}}</td></tr>
+            <tr><th>车速</th><td>{{record.speed}}</td></tr>
+            <tr><th>行驶方向</th><td>{{record.direction.name}}</td></tr>
+            <tr><th>点位</th><td>{{record.pointName}}</td></tr>
+            <tr><th>经过时间</th><td>{{record.passtime}}</td></tr>
+            <tr><th>行驶状态</th><td>{{record.travelStatus.name}}</td></tr>
+            <tr><th>经过状态</th><td>{{record.passtime}}</td></tr>
+            </tr>
+          </table>
+        </form>
+         </div>
+    </div>
+    <div class="modal-footer" style="padding: 10px 10px 10px;">
+      <div class="btn-group">
+        <a class="btn btn-default btn-sm" data-dismiss="modal"> <i
+          class="fa fa-time" ng-click="close()"> 关闭</i> </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div>
+	<div ng-hide="edit">
+		<h4 style="">{{weather.date}}
+			<i class="fa fa-pencil pull-right" style="font-size:14px" ng-click="edit = !edit"></i>
+		</h4>
+	  	<div class="col-sm-7">
+	  		<i class="iconfont {{weather.type.code}} pull-left" style="font-size:4em;">
+	  		</i>
+	  	</div>
+	  	<div class="col-sm-5" style="padding-top:15px">
+	  		<h5>{{weather.type.name}}</h5>
+	  		<h5>{{weather.low}}--{{weather.high}}</h5>
+	  	</div>
+	</div>
+	<div  ng-show="edit">
+		<form class="form-horizontal" role="form">
+		  <div class="form-group" style="margin-bottom:3px">
+		    <label for="inputEmail3" class="col-sm-3 control-label" style="font-size:12px;padding:7px 5px 0px 5px">天气</label>
+		    <div class="col-sm-9">
+		      <select  type="text" class="form-control input-sm"  ng-options="c.name for c in types " ng-model="weather.type"></select>
+		    </div>
+		  </div>
+		  <div class="form-group"  style="margin-bottom:3px">
+		    <label for="inputPassword3" class="col-sm-3 control-label" style="font-size:12px;padding:7px 5px 0px 5px">最低温</label>
+		    <div class="col-sm-9">
+		      <input class="form-control input-sm" ng-model="weather.low">
+		    </div>
+		  </div>
+		  <div class="form-group" style="margin-bottom:3px">
+		    <label for="inputPassword3" class="col-sm-3 control-label" style="font-size:12px;padding:7px 5px 0px 5px">最高温</label>
+		    <div class="col-sm-9">
+		      <input  class="form-control input-sm"  ng-model="weather.high">
+		    </div>
+		  </div>
+		  <div class="form-group" style="margin-bottom:1px">
+		    <div class="btn btn-group pull-right padTB0">
+		      <button class="btn btn-default btn-sm" ng-click="edit = !edit">确认</button>
+		      <button class="btn btn-default btn-sm" ng-click="edit = !edit">取消</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+</div>

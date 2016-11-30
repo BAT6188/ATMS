@@ -1,0 +1,7 @@
+{
+    "/java": "http://172.16.65.181:8081/ATMS_WEB/",
+
+    "/giserver": "http://172.16.60.38:7777/giserver2013",
+
+    "/signalMap": "http://172.16.64.59:8888/intersectionDraw"
+}

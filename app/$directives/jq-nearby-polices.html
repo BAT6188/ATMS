@@ -1,0 +1,35 @@
+<div panel title="附近警员">
+<div class="row">
+  <div class="col-sm-12">
+    <a style="padding-left: 5px; cursor: pointer;"
+      class="pull-right"
+      ng-repeat="distance in distances" ng-click="onDistanceChange(distance);">
+      {{distance}}
+    </a>  
+  </div>
+</div>
+<table class="table table-hover table-condensed table-bordered">
+  <tbody>
+    <tr ng-repeat="record in records |paginator:1:5" hover-show>
+      <td style="width:10px;">
+        {{$index+1}}
+      </td>
+      <td style="width:10px;" privilege="指挥调度_大队" effect="hide" when="ptaskTypeIsMajor();">
+        <i class="fa fa-1 fa-check-circle"
+          ng-class="{'yhte-ico-success': record.checked, 'yhte-ico-grey': !record.checked}" 
+          ng-click="select(record);">
+        </i>
+      </td>
+      <td ng-dblclick="">
+        {{record.userName}} ({{record.dept.name}}) - {{record.distance|| '?'}} 米
+        <br>
+        <i class="fa fa-map-marker fa-1 yhte-ico-primary hover-show-item pull-right" ng-click="detail(record);"> 查看
+        </i> 
+        <i class="fa fa-map-marker fa-1 yhte-ico-primary hover-show-item pull-right" x-ng-click="onLocate(record)"> 定位
+        </i> 
+        <i class="fa fa-phone-square fa-1 yhte-ico-primary hover-show-item pull-right" ng-click="caller(record);"> 呼叫</i> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

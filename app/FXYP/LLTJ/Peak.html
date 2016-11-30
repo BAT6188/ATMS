@@ -1,0 +1,159 @@
+<legend>交通流量断面比分析</legend>
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="#/FXYP.LLTJ.Hour" class="list-group-item">日小时流量分析</a>
+        <a href="#/FXYP.LLTJ.Day" class="list-group-item">月流量分析</a>
+        <a href="#/FXYP.LLTJ.Peak" class="list-group-item active">日高峰流量分析</a>
+    </div>
+</div>
+<div class="col-md-9">
+    <legend>日高峰流量分析</legend>
+
+    <div class="row">
+      <div class="col-sm-12">
+          <div class="col-sm-12" style="padding-left:0px">
+            <label for="" class="col-sm-1 control-label input-sm font14">断面:</label>
+            <div class="col-sm-11 padLR0">
+                <select class="selectpicker  show-tick form-control col-sm-12"
+                  id="facetSelect" 
+                  opts="facets"
+                  showname = "facetName"
+                  val="facetId"
+                  title="选择断面"
+                  data-live-search="true"
+                  data-subtext="laneCount"
+                  multiple>
+                </select>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-md-4 padLR0">
+            <label for="" class="col-sm-3 control-label input-sm font13">对比时间:</label>
+            <div class="col-sm-9 padLR0">
+              <div datetimepicker-new
+                class="form-control input-sm"
+                placeholder="选择日期"
+                ng-model="Q.queryTime"
+                format="'yyyy-mm-dd'"
+                min-view="'month'"
+                start-view="'month'">
+              </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+          <!-- <div class="col-sm-4 padLR0">
+              <div class="col-sm-4 padLR0">
+                  <input name="name" type="checkbox" class="form-control input-sm" ng-model="Q._queryAM"
+                     required>
+              </div>
+              <label for="" class="col-sm-8 control-label input-sm font14 padLR0">早高峰</label>
+          </div>
+          <div class="col-sm-4 padLR0">
+              <div class="col-sm-4 padLR0">
+                 <input name="name" type="checkbox" class="form-control input-sm" ng-model="Q._queryPM"
+                     required>
+              </div>
+              <label for="" class="col-sm-8 control-label input-sm font14 padLR0">晚高峰</label>
+          </div> -->
+        </div>
+        <div class="btn-group pull-right">
+          <a class="btn btn-sm btn-primary" ng-click="getSelect()">
+            <i class="fa fa-search"> 统计</i>
+          </a>
+          <a class="btn btn-sm btn-warning " ng-click="analysis()">
+            <i class="fa fa-warning"></i> 研判
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <ul style="list-style:none" ng-show="showType === 'list'">
+          <li ng-repeat="e in records">
+            <a><i class="fa fa-plus" ng-click="e.detail = true;" ng-show="!e.detail"> {{e.facetName ||'暂缺'}}</i></a>
+            <a><i class="fa fa-minus" ng-click="e.detail = false" ng-show="e.detail"> {{e.facetName ||'暂缺'}}</i></a>
+            <div  class="col-sm-12" ng-show="e.detail">
+              <table class="table table-condensed table-bordered font11">
+                <tr>
+                  <td>采集时间</td>
+                  <td>流量(次)</td>
+                  <td>速度(km/h)</td>
+                  <td>占有率(%)</td>
+                </tr>
+                <tr ng-repeat="c in e.facetFlowDatas |paginator:page:size">
+                  <td>{{c.getTimeStr}}</td>
+                  <td>{{c.flow}}</td>
+                  <td>{{c.speed}}</td>
+                  <td>{{c.occupy*100}}</td>
+                </tr>
+              </table>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div pagination 
+                    total-items="e.facetFlowDatas.length" 
+                    items-per-page="size"
+                    page="page" 
+                    max-size="maxSize"
+                    class="pagination-sm pull-right" 
+                    boundary-links="true" 
+                    rotate="false" 
+                    previous-text="&lsaquo;" 
+                    next-text="&rsaquo;" 
+                    first-text="&laquo;" 
+                    last-text="&raquo;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-12" ng-show="showType === 'line'">
+         <div highcharts data="chartLineData" xaxis="chartLineXAxis" title="断面交通流量分析" type="line" ytitle="过车数(辆)"></div>
+      </div>
+      <div class="col-sm-12" ng-show="showType === 'column'">
+         <div highcharts data="chartColumnData" xaxis="chartColumnXAxis" title="断面交通流量分析" type="column"  ytitle="过车数(辆)"></div>
+      </div>
+    </div>
+</div>
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+  <ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+</div>
+
+<!-- 研判信息 -->
+<div class="modal fade" id="analysisModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 1000px;">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h4 id="myModalLabel" class="modal-title"> 日高峰研判
+            </h4>
+        </div>
+        <div class="modal-body" style="padding-bottom:0px;padding-top:5px">
+          <div  class="col-sm-12"   ng-repeat="road in judges">
+            <h5>{{road.name}}</h5>
+             <table class="table table-condensed table-bordered">
+                <tbody>
+                  <tr class="font14">
+                    <th>时间</th>
+                    <th style="width:700px">原因</th>
+                  </tr>
+                  <tr  ng-repeat="c in road.data">
+                    <td>{{c.getTime}}</td>
+                    <td>{{c.level.reason}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin-top:0px;padding-top:5px">
+          <div class="btn-group">
+              <a class="btn btn-default btn-sm"  data-dismiss="modal">
+              <i class="fa fa-time"> 关闭</i></a>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

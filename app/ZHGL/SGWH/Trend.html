@@ -1,0 +1,46 @@
+
+<legend>事故趋势分析</legend>
+    <div class="row">
+      	<div class="col-sm-3">
+	        <label for="" class="col-sm-4 control-label input-sm font14">辖区:</label>
+	        <div class="col-sm-8">
+	            <select class="form-control input-sm" 
+	              ng-options="e.name for e in regions"
+	             >
+	            </select>
+	        </div>
+     	 </div>
+     	 <div class="col-sm-5">
+          	<div class="input-group"> 
+	            <span class="input-group-addon">处理时间</span>
+	            <div datetimepicker-new
+	              class="form-control input-sm"
+	              placeholder="选择日期"
+	              ng-model="Q.startCLTime"
+	              format="'yyyy-mm-dd'"
+	              min-view="'month'"
+	              start-view="'month'">
+	            </div>
+	            <span class="input-group-addon">到</span>
+	            <div datetimepicker-new
+	              class="form-control input-sm"
+	              placeholder="选择日期"
+	              ng-model="Q.endCLTime"
+	              format="'yyyy-mm-dd'"
+	              min-view="'month'"
+	              start-view="'month'">
+	            </div>
+          	</div> 
+        </div>
+        <div class="col-sm-4">
+	        <div class="btn-group pull-left">
+	            <a class="btn btn-sm btn-primary" ng-click="getSelect()">
+	              <i class="fa fa-search"> 统计</i>
+	            </a>
+	        </div>
+      	</div>
+    </div>
+    <div class="row">
+        <div highcharts data="series" xaxis="xaxis" title="图表" type="column" ytitle="泉山大队事故趋势图" chartheight="300"></div>
+    </div>
+

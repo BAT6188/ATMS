@@ -1,0 +1,106 @@
+<legend> 编辑诱导屏与路段对应关系 </legend>
+
+<form name="entityForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="ok();" ng-disabled="entityForm.$invalid"
+          class="btn btn-sm btn-primary" disabled="disabled">
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <a class="btn btn-sm btn-default" ng-href="#/XTGL.USER.User"> <i
+          class="fa fa-align-justify"> 返回列表</i> </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">警员编号</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.policeNo.$invalid}">
+      <!-- 必选 required -->
+      <input name="policeNo" type="text" class="form-control input-sm"
+        placeholder="警员编号, 必须!" ng-model="record.policeNo" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">用户名</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.userCode.$invalid}">
+      <input name="userCode" type="text" class="form-control input-sm"
+        placeholder="用户名, 必须! " ng-model="record.userCode" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">用户姓名</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.userName.$invalid}">
+      <!-- 必选 required -->
+      <input name="userName" type="text" class="form-control input-sm"
+        placeholder="用户姓名, 必须!" ng-model="record.userName" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">密码</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.password.$invalid}">
+      <input name="password" type="text" class="form-control input-sm"
+        placeholder="密码, 必须! " ng-model="record.password" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">身份证件号码</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.certNo.$invalid}">
+      <!-- 必选 required -->
+      <input name="certNo" type="text" class="form-control input-sm"
+        placeholder="身份证件号码, 必须!" ng-model="record.certNo" required>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">警务通号</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.policePhone.$invalid}">
+      <!-- 必选 required -->
+      <input name="policePhone" type="text" class="form-control input-sm"
+        placeholder="警务通号, 必须!" ng-model="record.policePhone" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">部门</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.dept.$invalid}">
+      <select name="dept.deptCode" type="text"
+        class="form-control input-sm"
+        ng-options="c.deptName for c in department track by c.deptCode" ng-model="record.dept"></select>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">联系电话</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.phone.$invalid}">
+      <input name="phone" type="text" class="form-control input-sm"
+        placeholder="联系电话, 必须! " ng-model="record.phone" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">有效性</label>
+    <div class="col-sm-1">
+      <div class="radio">
+        <label> <input type="radio" name="status"
+          ng-model="record.status.code" value="1"> 有效 </label>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="radio">
+        <label> <input type="radio" name="status"
+          ng-model="record.status.code" value="0"> 无效 </label>
+      </div>
+    </div>
+    <label for="" class="col-sm-1 control-label input-sm col-sm-offset-1">过期日期</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.expireDate.$invalid}">
+      <input name="expireDate" type="text" class="form-control input-sm"
+        ng-model="record.expireDate" datetimepicker>
+    </div>
+  </div>

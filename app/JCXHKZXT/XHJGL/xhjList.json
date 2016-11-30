@@ -1,0 +1,11 @@
+[
+	{"no":"001", "name":"岷江大道-通义路", "detectorNum": 8, "type":{"code":0, "name":"宝康"}}
+   ,{"no":"002", "name":"岷江大道-学士路", "detectorNum": 12, "type":{"code":1, "name":"泰尔文特"}}
+   ,{"no":"004", "name":"裴城路-杭州路", "detectorNum": 6, "type":{"code":0, "name":"宝康"}}
+   ,{"no":"005", "name":"裴城路-通义路", "detectorNum": 8, "type":{"code":1, "name":"泰尔文特"}}
+   ,{"no":"006", "name":"眉州大道-玉屏街", "detectorNum": 8, "type":{"code":0, "name":"宝康"}}
+   ,{"no":"007", "name":"眉州大道-文忠路", "detectorNum": 16, "type":{"code":1, "name":"泰尔文特"}}
+   ,{"no":"008", "name":"眉州大道-彭寿街", "detectorNum": 6, "type":{"code":0, "name":"宝康"}}
+   ,{"no":"009", "name":"眉州大道-文定街", "detectorNum": 10, "type":{"code":1, "name":"泰尔文特"}}
+   ,{"no":"010", "name":"文安路-文定街", "detectorNum": 14, "type":{"code":0, "name":"宝康"}}
+]

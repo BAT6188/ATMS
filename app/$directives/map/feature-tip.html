@@ -1,0 +1,120 @@
+<div>
+  <div class="alert alert-default my-box-shdow">
+    <button ng-click="close()" type="button" class="close">&times;</button>
+    
+    <!-- 诱导 -->
+    <div ng-show="feature.attributes.DEVICE_TYPE == '3'"
+      vms-panel data="feature" map="map">
+    </div>
+    <!-- 警员 -->
+    <div ng-if="feature.attributes.POLICE_NO">
+      <h4>{{feature.attributes.NAME}}</h4> 
+      ({{feature.attributes.POLICE_NO}}) {{feature.attributes.DEPT_NAME}} <br>
+      联系电话：
+      <a>
+        <span class="glyphicon glyphicon-phone-alt" tooltip="电话" ng-click="callOutPhone($event, feature.attributes.POLICE_PHONE);" style="cursor: pointer;"></span> {{feature.attributes.POLICE_PHONE}} 
+      </a>
+      警务通：
+      <a class="pointer" tip-event event-name="'jwt:feature'" event-data="feature">
+        <span class="glyphicon glyphicon-phone" tooltip="警务通"></span> {{feature.attributes.POLICE_NO}}
+      </a><br>
+      驾乘车辆：{{feature.attributes.EQUIP_CODE}}  <br>
+      状态：{{['离线','在线','越界'][feature.attributes.STATUS] || '未定义'}}  <br>
+      定位时间：{{feature.attributes.UPLOAD_TIME}} <br>
+      <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y" icon="/atms/resources/img/map-center.png">
+        <i class="fa fa-map-marker"> 定位</i>
+      </a>
+      <a tip-event event-name="'trackPolice'", event-data="feature" style="margin-right:10px">
+        <i class="fa fa-location-arrow" ng-if="!feature.onTrack"> 查看实时轨迹</i>
+<!--         <i class="fa fa-location-arrow yhte-ico-success" style="cursor:default" ng-if="feature.onTrack">轨迹追踪中....</i> -->
+        <span class="label label-success" ng-if="feature.onTrack">轨迹追踪中....</span>
+      </a>
+      <a  ng-click="policeHistory(feature)"><i class="fa fa-angle-double-right"> 历史轨迹</i></a>
+
+      <!-- <a tip-event event-name="'track'">
+        轨迹
+      </a> -->
+     
+    </div>
+    <!-- 警车 -->
+    <div ng-if="feature.attributes.CAR_NO">
+      <h4>{{feature.attributes.NAME}}</h4>
+      {{feature.attributes.DEPT_NAME}} <br>
+      勤务描述：{{feature.attributes.TASK_DESC}} <br>
+      状态：{{['离线','在线','越界'][feature.attributes.STATUS] || '未定义'}} <br>
+      定位时间：{{feature.attributes.UPLOAD_TIME}} <br>
+      <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y">
+        <span class="glyphicon glyphicon-map-marker"></span>
+      </a>
+      <a  ng-click="carHistory(feature)"><i class="fa fa-angle-double-right"> 历史轨迹</i></a>
+      <!-- 
+      <a tip-event event-name="'buffer'" event-data="feature">
+        周边
+      </a>
+       -->
+    </div>
+    <!-- 视频 -->
+    <div ng-show="feature.attributes.DEVICE_TYPE === '2' || feature.attributes.DEVICE_TYPE === '9'">
+      <h4>{{feature.attributes.NAME}}</h4>
+      <div atms-jq-video data="feature" ocx-height='260px' style="height: 310px;"></div>
+    </div>
+    <!-- 路段 -->
+    <div ng-if="feature.attributes.ROAD_NAME !== undefined">
+      <div road-tip data="feature" map="map"></div>
+    </div>
+    <!-- 信号机 -->
+    <div ng-if="feature.attributes.DEVICE_TYPE==='1'">
+      <a map-center map="map" lng="feature.geometry.x" lat="feature.geometry.y" icon="/atms/resources/img/map-center.png">
+        {{feature.attributes.NAME}}
+      </a>
+      <!-- <div class="row"> -->
+      <div class="well" style="text-align:center;">
+        <div signal-map
+          inter-id="roadid"
+          image-size="[300,300]"
+          lane-width="20">
+        </div>
+       </div>
+      <!-- </div> -->
+
+      
+    </div>
+    <!-- 警情 -->
+    <div ng-if="feature.attributes.PTASK_NAME">
+      <h4>{{feature.attributes.PTASK_NAME}}</h4>
+      <div class="row">
+        <p class="col-sm-12 text-primary">
+          [{{feature.attributes.PTASK_STATUS_NAME}}] [{{feature.attributes.PTASK_TYPE_NAME}}] [{{feature.attributes.PTASK_LEVEL_NAME}}] {{feature.attributes.NAME}}
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          发生时间：{{feature.attributes.OCCUR_TIME}}
+        </div>
+        <div class="col-sm-6">
+           创建时间：{{feature.attributes.CREATE_DATE}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          报警人：{{feature.attributes.CALLER_NAME}} {{feature.attributes.CALLER_PHONE}}
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-sm-12">
+          {{feature.attributes.AREA}} -
+          {{feature.attributes.OCCUR_ADDRESS}} -
+          {{feature.attributes.STATUS}} -
+          {{feature.attributes.BILL_STATE_NAME}} -
+          {{feature.attributes.BILL_STATE}} -
+          {{feature.attributes.ALARM_WAY}} -
+          {{feature.attributes.PTASK_TYPE}} -
+          {{feature.attributes.DEAL_END_TIME}} -
+          {{feature.attributes.CREATE_USER_NAME}} -
+          {{feature.attributes.ALARM_WAY_NAME}} -
+          {{feature.attributes.RN}}
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

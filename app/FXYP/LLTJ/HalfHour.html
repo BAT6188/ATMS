@@ -1,0 +1,126 @@
+<legend>交通流量统计</legend>
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="#/FXYP.LLTJ.Hour" class="list-group-item ">日小时流量分析</a>
+        <a href="#/FXYP.LLTJ.HalfHour" class="list-group-item active">半小时流量分析</a>
+        <a href="#/FXYP.LLTJ.Day" class="list-group-item">日流量分析</a>
+        <a href="#/FXYP.LLTJ.Peak" class="list-group-item">日高峰流量分析</a>
+    </div>
+</div>
+
+
+<div class="col-md-9">
+    <legend>半小时流量分析</legend>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-12" >
+          <label for="" class="col-sm-1 control-label input-sm font14">断面:</label>
+          <div class="col-sm-11">
+             <input id="flowInput" 
+             name="name" 
+             type="text"
+             class="form-control input-sm"
+              ng-click="showMenu()" 
+              placeholder="选择断面"
+              required>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="col-sm-6">
+          <label for="" class="col-sm-2 control-label input-sm font14">时间:</label>
+          <div class="col-sm-4">
+                <div datetimepicker 
+                ng-model="Q.startTime" 
+                format="yyyy-MM-dd"
+                pick-time="false">
+            </div>
+          </div>
+          <label for="" class="col-sm-2 control-label input-sm font14">到:</label>
+          <div class="col-sm-4">
+            <div datetimepicker 
+                ng-model="Q.endTime" 
+                format="yyyy-MM-dd"
+                start-date="Q.startTime"
+                pick-time="false">
+              </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+            <label for="" class="col-sm-3 control-label input-sm font13 padLR0">类型:</label>
+            <div class="col-sm-9" >
+                <select class="form-control input-sm"
+                    ng-options="c.value as c.name for c in showTypes"
+                    ng-model="showType"
+                    ng-change="changeType()"
+                    ></select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="btn-group pull-left">
+              <a class="btn btn-sm btn-primary" ng-click="getSelect()">
+                <i class="fa fa-search"> 统计</i>
+              </a>
+              <a class="btn btn-sm btn-success" ng-click="export()">
+                <i class="fa fa-cloud-download"></i> 导出
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+    <!-- 表格 -->
+      <div class="col-sm-12">
+        <ul style="list-style:none" ng-show="showType === 'list'">
+          <li ng-repeat="e in selectFacets">
+            <a><i class="fa fa-plus" ng-click="e.detail = true;getData(e)" ng-show="!e.detail"> {{e.facetName}}</i></a>
+            <a><i class="fa fa-minus" ng-click="e.detail = false" ng-show="e.detail"> {{e.facetName}}</i></a>
+            <div  class="col-sm-12" ng-show="e.detail">
+              <table class="table table-condensed table-bordered font11">
+                <tr>
+                  <td>时段</td>
+                  <td>流量</td>
+                  <td>速度</td>
+                  <td>占有率</td>
+                </tr>
+                <tr ng-repeat="c in e.data |paginator:page:size">
+                  <td>{{c.timePart}}</td>
+                  <td>{{c.flow}}</td>
+                  <td>{{c.speed}}</td>
+                  <td>{{c.occupy}}</td>
+                </tr>
+              </table>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div pagination 
+                    total-items="e.total" 
+                    items-per-page="size"
+                    page="page" 
+                    max-size="maxSize"
+                    class="pagination-sm pull-right" 
+                    boundary-links="true" 
+                    rotate="false" 
+                    previous-text="&lsaquo;" 
+                    next-text="&rsaquo;" 
+                    first-text="&laquo;" 
+                    last-text="&raquo;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-12" ng-show="showType === 'line'">
+         <div highcharts data="chartLineData" xaxis="chartLineXAxis" title="图表" type="line"  ytitle="过车数(辆)"></div>
+      </div>
+      <div class="col-sm-12" ng-show="showType === 'column'">
+         <div highcharts data="chartColumnData" xaxis="chartColumnXAxis" title="图表" type="column"  ytitle="过车数(辆)"></div>
+      </div>
+    </div>
+</div>
+<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+  <ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+</div>

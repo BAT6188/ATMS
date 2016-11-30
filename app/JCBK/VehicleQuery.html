@@ -1,0 +1,117 @@
+<legend>车辆查询</legend>
+
+<div>
+<!-- 工具栏 -->
+<div class="row">  
+  <div class="col-md-12">
+    <div class="col-md-9">
+      <div class="col-md-5">
+        <label for="" class="col-sm-5 control-label input-sm font14">号牌号码</label>
+          <div class="col-sm-3 padLR0">
+              <select class="form-control input-sm"
+            ng-options="c.code as c.name for c in plateColors"
+            ng-model="Q.plateColor"></select>
+          </div>
+          <div class="col-sm-4 padLR0">
+            <input name="name" type="text" class="form-control input-sm"
+              ng-model="Q.plateNos">
+          </div>
+      </div>
+      <div class="col-md-7">
+      <div class="input-group">  
+        <span class="input-group-addon">时间</span>
+        <div datetimepicker ng-model="Q.startDate" format="yyyy-MM-dd hh:mm:ss"></div>
+        <span class="input-group-addon">到</span>
+        <div datetimepicker ng-model="Q.endDate" format="yyyy-MM-dd hh:mm:ss"></div>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="btn-group pull-right">
+        <button class="btn btn-primary btn-sm" type="button"
+          ng-click="query();">
+          <i class="fa fa-search">查询</i>
+        </button>
+        <!-- <button class="btn btn-success btn-sm" type="button" ng-click="smartQuery()">
+                  <i class="fa fa-wrench"> 高级查询</i>
+              </button>
+              <button class="btn btn-warning btn-sm" ng-click="exportData();">
+          <i class="fa fa-cloud-download"></i> 导出结果
+        </button> -->
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!-- 表格 -->
+<div class="row">
+  <div class="col-md-12 map-over-this">
+    <table class="table table-bordered table-hover table-condensed">
+      <thead>
+        <tr class="font14">
+          <th class="check"><input type="checkbox" ng-model="allChecked"
+            ng-click="selectAll();">
+          </th>
+          <th>号牌号码</th>
+          <th>号牌照片</th>
+          <th>点位名称</th>
+          <th>车型</th>
+          <th>车身颜色</th>
+          <th>行驶方向</th>
+          <th>车道</th>
+          <th>经过时间</th>
+          <th>速度</th>
+          <th>查看</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="record in records">
+          <td class="check"><input type="checkbox"
+            ng-model="checks[$index]" ng-click="select($index);">
+          </td>
+          <td><span class="label label-default"  ng-class="{'0':'whitePlate', '1': 'label-warning', '2': 'label-primary', '3': 'blackPlate', '4': 'label-default'}['{{record.plateColor.code}}']">{{record.plateNo}}</span></td>
+          <td><img ng-src= {{record.headPlateImg}}></td>
+          <td>{{record.pointName}}</td>
+          <td>{{record.carType.name}}</td>
+          <td>{{record.plateColor.name}}</td>
+          <td>{{record.direction.name}}</td>
+          <td>{{record.laneNum.name}}</td>
+          <td>{{record.passtime}}</td>
+          <td>{{record.speed}}</td>
+          <td class="text-center">
+            <a styel="margin-left:45px"><i class="fa fa-eye" tooltip="详细信息" ng-click="infoModal(record);"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 分页栏 -->
+<div class="row">
+  <div class="col-md-12">
+<!--     <div class="btn-group pull-left">
+      <sapn class="label label-primary">
+             蓝牌车
+          </sapn>
+          <sapn class="label label-warning">
+             黄牌车
+          </sapn>
+          <sapn class="label blackPlate">
+             黑牌车
+          </sapn>
+          <sapn class="label whitePlate">
+             白牌车
+          </sapn>
+          <sapn class="label label-default">
+             其他颜色
+          </sapn>
+    </div> -->
+    <div pagination class="pagination-sm pull-right" boundary-links="true"
+      rotate="false" total-items="total" page="Q.page"
+      items-per-page="Q.pageSize" max-size="Q.maxSize"
+      on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+      last-text="最后一页" first-text="最前一页"> </div>
+  </div>
+</div>
+</div>

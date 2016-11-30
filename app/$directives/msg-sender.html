@@ -1,0 +1,46 @@
+<div class="alert alert-default my-box-shdow">
+  <div class="row">
+    <div class="col-sm-12">
+      <button type="button" class="close" ng-click="close();"
+        ng-disabled="running">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <strong>收件人：</strong>
+      <span style="margin: 0 5px 0 0;"
+        class="pointer label label-success"
+        ng-repeat="contact in contacts"
+        ng-dblclick="removeContact(contact);">
+        {{contact.label}}
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <textarea class="form-control" rows="3" ng-model="message"
+        ng-disabled="running" ng-maxlength="256">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:0;">
+    <div class="col-sm-6">
+      <p ng-if="error" class="text-success">{{comment}}</p>
+      <p ng-if="!error" class="text-danger">{{comment}}</p>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-primary btn-xs pull-right" 
+        ng-click="sendMsg();" 
+        ng-disabled="!(contacts.length > 0 && message.length > 0) || running">
+        {{error ? '' : '重新'}}发送
+      </button>
+    </div>
+  </div>
+
+</div>

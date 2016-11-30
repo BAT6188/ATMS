@@ -1,0 +1,84 @@
+<legend>
+ 信号机 
+</legend>
+
+<div class="col-sm-12">
+	<div class="row">
+  <div class="col-sm-4">
+    <div class="btn-group">
+      <button class="btn btn-success btn-sm" ng-click="batchTime();">
+        <span class="fa fa-clock-o" tooltip="批量校时"></span> 批量校时
+      </button>
+      <!-- <a class="btn btn-success btn-sm" ng-href="#/ZHGL.JTGZ.TrafficCtrlNew">
+        <span class="glyphicon glyphicon-plus" tooltip="新增"></span> 新增
+      </a>
+      <button class="btn btn-danger btn-sm" ng-click="remove();">
+        <span class="glyphicon glyphicon-minus" tooltip="删除"></span> 删除
+      </button> -->
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="input-group">
+      <input type="text" class="form-control input-sm" placeholder="输入名称..." ng-model="Q.title">
+      <span class="input-group-btn">
+      <a class="btn btn-sm btn-primary" ng-click="query()">
+        <i class="fa fa-query"> 查询</i>
+      </a>
+      </span>
+    </div>
+  </div>
+</div>
+  <!-- 表格 -->
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th class="check"><input type="checkbox"
+              ng-model="allChecked" ng-change="selectAll();"></th>
+            <th>设备编号</th>
+            <th>名称</th>
+            <th>检测器</th>
+            <th>校时</th>
+            <th>灯组设置</th>
+            <th>冲突表</th>
+            <th>配时方案</th>
+            <th>时段配置</th>
+            <th>特殊日设置</th>
+            <th>定位</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="record in records">
+            <td class="check"><input type="checkbox"
+              ng-model="checks[$index]" ng-click="select($index);">
+            </td>
+            <td>{{record.no}}</td>
+            <td><a ng-href="#/JCXHKZXT.SSDTJK./{{record.no}}/Detail">{{record.name}}</a></td>
+            <td><a ng-href="#JCXHKZXT.JCQ.Jcq/{{record.name}}/View">{{record.detectorNum}}</a></td>
+            <td>
+            	<a><i class="fa fa-clock-o" tooltip="校时" ng-click="time(record)"></i></a>
+            </td>
+            <td><a ng-href="#JCXHKZXT.DZSZ.DzList"><i class="fa fa-lightbulb-o" tooltip="灯组设置"></i></a></td>
+            <td><a ng-click="testCt(record)"><i class="fa fa-table" tooltip="冲突表"></i></a></td>
+            <td ng-show="{{record.type.code}} == 1"><a ng-href="#JCXHKZXT.PSFA./{{record.name}}/View"><i class="fa fa-tasks" tooltip="配时方案"></i></a></td>
+            <td ng-show="{{record.type.code}} == 0"><a ng-href="#JCXHKZXT.SBFA.List"><i class="fa fa-bar-chart-o" tooltip="色步方案"></i></a></td>
+            <td><a ng-href="#JCXHKZXT.SD.TimeFrameConfig"><i class="fa fa-calendar-o" tooltip="时段配置"></i></a></td>
+            <td><a ng-href="#JCXHKZXT.TSR./{{record.name}}/TsrView"><i class="fa fa-book" tooltip="特殊日设置"></i></a></td>
+            <td>
+              <a><i class="fa fa-map-marker" tooltip="地图定位" ng-click="viewChange(record)"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+      <div pagination class="pagination-sm pull-right" boundary-links="true"
+        rotate="false" total-items="total" page="Q.page"
+        items-per-page="Q.pageSize" max-size="Q.maxSize"
+        on-select-page="pChange(page)" previous-text="上一页" next-text="下一页"
+        last-text="最后一页" first-text="最前一页"> </div>
+    </div>
+  </div>
+</div>

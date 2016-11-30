@@ -1,0 +1,99 @@
+<textarea>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="{{javaClass}}XML">	
+
+	<!--结果集合 -->
+	<resultMap type="{{javaClass}}" id="BaseResultMap"> 
+ 		{{#joinNew fields}}<result property="{{this.dataName}}" column="{{upperCaseAll this.dataName}}"  jdbcType="{{converseType this.dataType}}"/>
+		{{/joinNew}}
+	</resultMap>
+
+	<sql id="page_select_head">
+		SELECT * FROM (
+		SELECT A.*, ROWNUM RN FROM (
+	</sql>
+	<sql id="page_select_tail">
+		<![CDATA[
+			) A where rownum <= (#{start} + #{limit})
+			) WHERE RN > #{start}
+		]]>
+	</sql>
+
+
+	<!-- 动态条件SQL语句 -->
+	<sql id="sql_where">
+		<where>
+		{{#joinNew fields}}{{#if this.isQuery}}
+			<if test="{{this.dataName}} != null and {{this.dataName}} != ''">
+			AND {{upperCaseAll this.dataName}} = #{ {{this.dataName}},jdbcType={{converseType this.dataType}} }
+			</if>{{/if}}{{/joinNew}}
+		</where>
+	</sql>
+	
+
+	<!--新增-->
+	<insert id="insertOne" parameterType="{{ javaClass }}">
+	<selectKey resultType="String" keyProperty="id" order="BEFORE">
+			SELECT {{seq}}.NEXTVAL FROM DUAL
+	</selectKey>
+	insert
+	into {{ table}}
+		(
+			 {{#join fields}} {{this.dataName}}{{/join}}
+		)
+	values
+	(
+			{{#join fields}}#{ {{ this.dataName }},jdbcType={{converseType this.dataType}} }{{/join}}
+	)
+	</insert>
+	
+ 	<!--修改-->
+	<update id="updateOne" parameterType="{{ javaClass }}" >
+	UPDATE {{ table}}
+		 set{{#join fields sep=" " start="1"}}
+			<if test="{{this.dataName}} != null and {{this.dataName}} != ''">
+			{{this.dataName}} = #{ {{this.dataName}},jdbcType={{converseType this.dataType}} } {{#if @last}} {{else}} , {{/if}}
+			</if>{{/join}}
+		where
+		id = #{id} 
+   </update>
+
+	<!--批量删除-->
+	<delete id="deleteByIds" >
+		delete from {{ table}} 
+		where ID in
+		<foreach item="ids" index="index" open="(" close=")"
+			separator="," collection="array">#{ids}
+		</foreach>
+   </delete>
+   
+	<!--查询单个-->
+   <select id="selectOne" resultMap="BaseResultMap" parameterType="string" >
+		SELECT *
+		  FROM {{ table}} 
+		 WHERE ID = #{id}	 
+   </select>
+
+	<!--条件查询多个-->
+	<select id="selectList" parameterType="{{ javaClass }}QB" resultMap="BaseResultMap" > 
+    	<if test=" limit != null and start != null">
+			<include refid="page_select_head" />
+		</if>
+		select * from {{ table}} T	
+		<include refid="sql_where" />
+		ORDER BY T.ID DESC
+		<if test=" limit != null and start != null">
+			<include refid="page_select_tail" />
+		</if>
+   </select>  
+
+	<!--条件查询多个总数-->
+	<select id="selectCount"  parameterType="{{ javaClass }}QB" resultType="Integer">
+        SELECT COUNT(1) FROM {{ table}}
+    	<include refid="sql_where"/>
+   </select> 
+
+</mapper>
+</textarea>

@@ -1,0 +1,152 @@
+<div class="panel panel-default" style="width:900px">
+  <div class="panel-heading">智能查询
+    <button class="close" ng-click="close()" type="button">×</button>
+  </div>
+  <div class="panel-body" style="margin-top: 20px;">
+    <div class="col-sm-4" style="height:300px;border:solid 1px #00999">
+      <div class="col-sm-12">
+        <label for="" class="col-sm-4 control-label input-sm font14">点位树</label>
+        <a class="btn btn-sm col-sm-3" ng-click="addPointsByMap()"><i class="fa fa-globe"> 地图添加</i> </a>
+      </div>
+      <div class="col-sm-12">
+        <div z-tree 
+          setting="config"
+          ng-model="data"
+          tree-obj="tree1"
+          checked-nodes="$parent.checkedNodes"
+          selected-nodes="$parent.selectedNodes">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+
+      <form class="form-horizontal font14">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="" class="col-sm-3 control-label input-sm font14">车牌号码</label>
+                  <div class="col-sm-3" style="padding-right:0px">
+                      <select type="text"  ng-model="entity.plateColor.code" class="form-control input-sm" ng-options="d.code as d.name for d in plateColors">
+                          <option value="">--- 全部 ---</option>
+                          </select>
+                  </div>
+                  <div class="col-sm-6" style="padding-left:0px">
+                     <input type="text" ng-model="entity.plateNos" class="form-control input-sm">
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-12">
+                    <label for="" class="col-sm-3 control-label input-sm">不包含</label>
+                <div class="col-sm-3" style="padding-right:0px">
+                      <select type="text"  ng-model="entity.excPlateColor.code" class="form-control input-sm" ng-options="d.code as d.name for d in exPlateColors">
+                          <option value="">--- 全部 ---</option>
+                          </select>
+                </div>
+                <div class="col-sm-6" style="padding-left:0px">
+                   <input type="text" ng-model="entity.excPlateNos" class="form-control input-sm">
+                </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">方向</label>
+                    <div class="col-sm-9">
+                        <select type="text input-sm"  ng-model="entity.direction.code" class="form-control input-sm" ng-options="d.code as d.name for d in directions">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">车道</label>
+                    <div class="col-sm-9">
+                        <select type="text input-sm"  ng-model="entity.lane.code" class="form-control input-sm" ng-options="d.code as d.name for d in lanes">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">时间</label>
+                    <div class="col-sm-4" style="padding-right:0px">
+                          <div class="input-group">
+                          <div id="startDate" datetimepicker ng-model="entity.startDate" format="yyyy-MM-dd hh:mm:ss"></div>
+                         <span class="input-group-addon"><i class="fa fa-times"></i></span>
+                    </div>
+                    </div>
+                    <label class="col-sm-1 control-label" style="padding-left:0px;">-</label>
+                    <div class="col-sm-4" style="padding-left:0px">
+                          <div class="input-group">
+                          <div id="endDate" datetimepicker ng-model="entity.endDate" format="yyyy-MM-dd hh:mm:ss"></div>
+                          <span class="input-group-addon"><i class="fa fa-times"></i></span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label" for="dept" class="col-md-4 control-label">车身颜色</label>
+                    <div class="col-sm-9">
+                        <select type="text"  ng-model="entity.carColor.code" class="form-control input-sm" ng-options="d.code as d.name for d in carColors">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label" for="dept" class="col-md-4 control-label">行驶状态</label>
+                    <div class="col-md-9">
+                          <select type="text"  ng-model="entity.travel_status.code" class="form-control input-sm" ng-options="d.code as d.name for d in travelStatuses">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">速度</label>
+                    <div class="col-sm-4" style="padding-right:0px">
+                        <input type="text" ng-model="entity.minSpeed" class="form-control input-sm">
+                    </div>
+                    <label class="col-sm-1 control-label" style="padding-left:0px;">-</label>
+                    <div class="col-sm-4" style="padding-left:0px">
+                        <input type="text" ng-model="entity.maxSpeed" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">车身长度</label>
+                    <div class="col-sm-4" style="padding-right:0px">
+                        <input type="text" ng-model="entity.minCarLength" class="form-control input-sm">
+                    </div>
+                    <label class="col-sm-1 control-label" style="padding-left:0px;">-</label>
+                    <div class="col-sm-4" style="padding-left:0px">
+                        <input type="text" ng-model="entity.maxCarLength" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="col-sm-3 control-label">车辆类型</label>
+                    <div class="col-sm-9">
+                        <select type="text"  ng-model="entity.carType.code" class="form-control input-sm" ng-options="d.code as d.name for d in carTypes">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+  </div>
+  <div class="modal-footer" style="padding: 10px 10px 10px;">
+      <div class="btn-group">
+        <a class="btn btn-success btn-sm" ng-disabled="quickForm.$invalid"
+          ng-click="saveQuick()"><i class="fa fa-check"> 查询</i> </a> <a
+          class="btn btn-default btn-sm" data-dismiss="modal"> <i
+          class="fa fa-time" ng-click="close()"> 取消</i> </a>
+      </div>
+    </div>
+</div>

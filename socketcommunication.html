@@ -1,0 +1,108 @@
+
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script src="libs/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script src="libs/websocket/socket.io/socket.io.js"></script>
+    <script src="libs/json2/json2.js"></script>
+    <script src="config/system.js"></script>
+    <script type="text/javascript">
+        var WEB_SOCKET_SWF_LOCATION = "libs/websocket/socket.io/WebSocketMain.swf";
+        var socket = io.connect(systemConfig.getSystemValue('WEBSOCKET_SERVER_IP')+':'+systemConfig.getSystemValue('WEBSOCKET_SERVER_PORT'));
+        socket.on('connect',function(data){
+            $("#log").append('<p>connected!');
+            socket.emit('cmsInfoStart',{clientType:"cmsInfo"});
+        });
+        socket.on('message',function(data){
+            //初始化
+            for(var i=0 ;i<data.length; i++){
+                InitLed(data[i].cmsId,data[i].ip,data[i].port);
+                sleep(5000);
+                setTimeout(tt(data[i]), 5000);
+            }
+        });
+
+         function tt(obj){
+             //获取播放列表;
+             var msgAry = null;
+             msgAry =YhLedObject.getAllMsg();
+             var prefix = systemConfig.getSystemValue('VMS_PREFIX_URL');
+             path=obj.url;
+             path = prefix + "/" + path;
+             var startDate = new Date(obj.startTime.replace(/-/g,"/"));
+             var startMillsecond = startDate.getTime();
+             var endDate = new Date(obj.endTime.replace(/-/g,"/"));
+             var endMillsecond = endDate.getTime();
+             if(msgAry == null || msgAry == ""){
+                 YhLedObject.addMsg(0,path,'楷体_GB2312',20,65280,1,7,4,startMillsecond/1000, endMillsecond/1000,0 );
+             }else{
+                 //更新
+                 updateMsg( 0, 0,path,'楷体_GB2312',20,65280,1,7,4,startMillsecond/1000, endMillsecond/1000,0 );
+             }
+             //发布
+             releaseMsg();
+             $("#log").append("<b>开始时间:"+obj.startTime+"结束时间:"+obj.endTime+"<br>资源路径:"+path+"</b><hr>");
+             if ($("#log b").length >=6 ){     // 找到对应id=div的元素，然后执行此块代码
+                 $("#log b:first").remove();
+                 $("#log br:first").remove();
+                 $("#log hr:first").remove();
+             }
+         }
+         function test(){
+                var obj=[{"cmsId":"1","endTime":"2015-01-14 23:59:00","ip":"172.16.60.29","port":"1234","startTime":"2016-01-14 00:55:00","url":"1_4601004_4_460100033_1.jpg"}
+                    ,{"cmsId":"1","endTime":"2015-01-14 23:59:00","ip":"172.16.60.29","port":"1234","startTime":"2016-01-14 00:55:00","url":"1_4601004_4_460100033_2.jpg"}
+                    ,{"cmsId":"1","endTime":"2015-01-14 23:59:00","ip":"172.16.60.29","port":"1234","startTime":"2016-01-14 00:55:00","url":"1_4601004_4_460100033_3.jpg"}
+                    ,{"cmsId":"1","endTime":"2015-01-14 23:59:00","ip":"172.16.60.29","port":"1234","startTime":"2016-01-14 00:55:00","url":"1_4601004_4_460100033_4.jpg"}
+                                //,
+                     //{"cmsId":"6","endTime":"2015-01-16 17:30:00","ip":"172.16.60.29","port":"1234","startTime":"2015-01-16 11:25:00","url":"6_114_1_205_1_303_1_4601002_1_4601003_4_4601004_1_-46010001_1_46010003_1_46010004_1_46010019_1_46010026_1_46010027_1_46010032_1_-460100021_1_460100023_4_460100040_1_460100041_1.jpg"}
+                ];
+                //初始化
+                for(var i=0 ;i<obj.length; i++){
+                    console.log(i);
+                    InitLed(obj[i].cmsId,obj[i].ip,obj[i].port);
+                    sleep(5000);
+                    setTimeout(tt(obj[i]), 5000);
+
+                }
+         }
+
+       function   sleep(n)
+       {
+           var   start=new   Date().getTime();
+           while(true)   if(new   Date().getTime()-start> n)   break;
+       }
+       //调用插件接口
+       //初始化
+       function InitLed(cmsId,ip, port)
+       {
+           YhLedObject.InitLed(cmsId,ip,port,644,300);
+       }
+       //更新信息
+       function updateMsg( index,picOrText, content, fontName, fontSize, fontColor, enterType, moveTme, ShowSpeed, StartTime, endTime,rowSpace)
+       {
+           YhLedObject.updateMsg( index,picOrText, content, fontName, fontSize, fontColor, enterType, moveTme, ShowSpeed, StartTime, endTime,rowSpace);
+       }
+       //发布信息
+       function releaseMsg( )
+       {
+           YhLedObject.releaseMsg();
+       }
+
+       //添加播放条目
+       function addMsg(picOrText, content, fontName, fontSize, fontColor,enterType, moveTme, ShowSpeed, StartTime, endTime,rowSpace){
+
+           YhLedObject.addMsg( picOrText, content, fontName, fontSize, fontColor,
+                   enterType, moveTme, ShowSpeed, StartTime, endTime,rowSpace);
+       }
+    </script>
+</head>
+<body>
+<h2>诱导屏推送测试</h2>
+<div id="log"></div>
+<div><button onclick="test();">测试</button></div>
+<button onclick="getAllMsg();">获取列表</button>
+    <object id="YhLedObject" classid="CLSID:82490EEB-771D-4572-8901-2554D4F61D27"  width="644" height="300"></object>
+
+</body>
+</html>

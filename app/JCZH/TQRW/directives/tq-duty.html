@@ -1,0 +1,105 @@
+<div class="tq-duty">
+  <!-- 子任务即大队没有分配岗位的权限 -->
+  <div class="row" ng-hide="tqData.parentStaskId !=0"  ng-hide="deleteMsg">
+    <div class="col-sm-6">
+      <button class="btn btn-xs btn-link btn-success"
+        ng-click="addPostFromMap();">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <a class="btn btn-xs btn-primary pull-right" 
+        ng-disabled="!records.length"
+        x-ng-click="pushDuty();">
+        <span class="glyphicon glyphicon-saved"></span> {{duty?'更新':'提交'}}
+      </a>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-6" style="padding-left:15px;padding-right:15px;float:left;">
+      <datetimepicker
+        placeholder="开始时间"
+        ng-model="selected.planStartTime">
+      </datetimepicker>
+    </div>
+
+    <div class="col-sm-6" style="padding-left:15px;padding-right:15px;float:left;">
+      <datetimepicker
+        placeholder="结束时间"
+        start-date="selected.planStartTime"
+        ng-model="selected.planEndTime">
+      </datetimepicker>
+    </div>
+  </div>
+  
+
+  <table class="table table-bordered table-condensed" ng-hide="deleteMsg">
+    <tbody>
+      <tr ng-repeat="record in records|paginator:page:size">
+        <td style="width:20px;">{{$index + 1}}</td>
+        <td hover-show>
+          <a ng-click="onItemDblClick(record);">
+            {{record.name || '岗位'}}({{record.polices.length}})
+          </a>
+          <span class="label label-info" ng-show="record.planStartTime" tooltip="{{record.planStartTime}}">
+            始</span>
+          <span class="label label-info" ng-show="record.planEndTime" tooltip="{{record.planEndTime}}">
+            终</span>
+
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="removePost(record);">
+            <i class="glyphicon glyphicon-remove yhte-ico-danger"></i>
+          </button>
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="mapCenter(record);">
+            <i class="fa fa-map-marker"></i>
+          </button>
+          <button class="btn btn-xs btn-link hover-show-item pull-right"
+            ng-click="modifyPostFromMap()"> 
+            <i class="fa fa-plus-circle"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row" ng-show="records.length>size">
+    <div class="col-sm-12">
+      <div pagination 
+        total-items="total" 
+        items-per-page="size"
+        page="page" 
+        max-size="maxSize"
+        class="pagination-sm pull-right" 
+        boundary-links="true" 
+        rotate="false" 
+        previous-text="&lsaquo;" 
+        next-text="&rsaquo;" 
+        first-text="&laquo;" 
+        last-text="&raquo;">
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  
+  <div class="row" ng-show="deleteMsg">
+    <div class="col-sm-12">
+      <alert close="cancel();" type="'danger'">
+        <strong>提示:</strong> 确认要删除该岗位吗?
+        <br><br>
+        <button class="btn btn-sm btn-success" ng-click="delPosition();">
+          确认
+        </button>
+        <button class="btn btn-sm btn-default" ng-click="cancel();">
+          取消
+        </button>
+      </alert>
+    </div>
+  </div>
+</div>

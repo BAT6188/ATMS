@@ -1,0 +1,113 @@
+  .popRB{
+    right:0px;
+    bottom: 0px;
+  }
+  .btnPB{
+      right:0px;
+      bottom: -180px;
+  }
+  .iPopover {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    padding: 1px;
+    position: fixed;
+    text-align: left;
+    display: none;
+    white-space: normal;
+    z-index: 1010;
+}
+/*.popSpl{
+    width:250px;
+    height:110px;
+    right: 0;
+    top: 50px;
+}
+
+.popCpx{
+    width:600px;
+    height:110px;
+    right: 0;
+    top: 50px;
+}*/
+.popover-btns .btn{
+	margin-left: 14px;
+}
+
+.layer {
+	width:28px;
+    height:18px;
+    display:block;
+    cursor:pointer;
+    float:left;
+}
+
+.layerRoad {
+	background:url(../img/traffic_act.png) no-repeat left top;
+}
+
+.layerPolice {
+	background:url(../img/police_act.png) no-repeat left top;
+}
+
+.layerPoliceCar {
+	background:url(../img/car_act.png) no-repeat left top;
+}
+
+.layerPoliceAlarm {
+	background:url(../img/jq_act.png) no-repeat left top;
+}
+
+.layerScreen {
+	background:url(../img/ydp_act.png) no-repeat left top;
+}
+
+.layerSignal {
+	background:url(../img/xhj_act.png) no-repeat left top;
+}
+
+.layerVideo {
+	background:url(../img/video_act.png) no-repeat left top;
+}
+
+.layerMonitor {
+	background:url(../img/monitor_act.png) no-repeat left top;
+}
+
+.viewport .panel-heading, .viewport .panel-body,.viewport .panel-footer, .viewport .panel-footer {
+  padding: 5px;
+}
+
+.tsjk-nearby {
+  display:none;
+  position: absolute;
+  z-index: 1006;
+  right:20px;
+  top:150px;
+  width:250px;
+}
+
+.searchbutton {
+  background-color: #4d90fe;
+  background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+  border: 0;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  height: 32px;
+  text-align: center;
+  top: 0;
+  vertical-align: top;
+  width: 72px;
+  z-index: -1;
+}
+.searchbutton:hover {
+  background-color: #357ae8;
+  background-image: -webkit-linear-gradient(top,#4d90fe,#357ae8);
+}
+
+.yhNav li>a{position:relative;display:block;padding:10px 5px}
+
+

@@ -1,0 +1,80 @@
+<div class="col-sm-4">
+    <form name="entityForm">
+        <div class="row">
+          <legend class="col-sm-12">添加岗位</legend>
+
+          <div class="col-sm-12 btn-group" style="margin: 10px 0;">
+            <button class="btn btn-primary btn-sm" ng-click="save()" ng-disabled="entityForm.$invalid" >
+                    <i class="fa fa-save"></i> 保存
+            </button>
+            <a class="btn btn-default btn-sm" ng-href="#/QWGL.GW.Post">
+                <i class="fa fa-align-justify"> 返回列表</i>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row marginLR0">
+                    <label for="postName" class="col-sm-3 control-label  input-sm">岗位名称</label>
+                    <div class="col-sm-9 input-group" ng-class="{'has-error': entityForm.name.$invalid}">
+                        <input type="text" class="form-control input-sm"
+                            name="name"
+                            ng-model="record.name"
+                            required>
+                    </div>
+                </div>
+                <div class="row marginLR0">
+                    <label for="postType" class="col-sm-3 control-label  input-sm">岗位类型</label>
+                    <div class="col-sm-9 input-group" ng-class="{'has-error': entityForm.type.$invalid}">
+                        <select name="type" class="form-control input-sm"
+                            ng-model="record.type"
+                            ng-options="type.name for type in types track by type.code"
+                            required>
+                        </select>
+                    </div>
+                </div>
+                <div class="row marginLR0">
+                    <label for="postSite" class="col-sm-3 control-label input-sm">岗位位置</label>
+                    <div class="input-group col-md-9" ng-class="{'has-error': entityForm.address.$invalid}">
+                        <input type="text" class="form-control input-sm"
+                            name="address"
+                            ng-model="record.address"
+                            required>
+                        <span class="input-group-btn">
+                            <button class="control-label btn btn-success btn-sm" ng-click="location();">
+                                <i class="fa fa-map-marker"></i> 定位
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="row marginLR0">
+                    <label for="postType" class="col-sm-3 control-label input-sm">经度</label>
+                    <div class="col-sm-9 input-group" ng-class="{'has-error': entityForm.lng.$invalid}">
+                        <input name="lng" class="form-control input-sm"
+                            ng-model="record.lng"
+                            required>
+                    </div>
+                </div>
+                <div class="row marginLR0">
+                    <label for="postType" class="col-sm-3 control-label input-sm">纬度</label>
+                    <div class="col-sm-9 input-group" ng-class="{'has-error': entityForm.lat.$invalid}">
+                        <input name="lat" class="form-control input-sm"
+                            ng-model="record.lat"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-8">
+  
+  <!-- <div class="row"> -->
+    <div panel title="地图">
+      <yhte-map class="col-sm-12" inst="map">
+      </yhte-map>
+    </div>
+  <!-- </div> -->
+
+</div>

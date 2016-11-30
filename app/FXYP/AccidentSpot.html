@@ -1,0 +1,74 @@
+
+<div class="col-100-auto col-sm-4">
+  	<legend>事故黑点分析</legend>
+	<div ng-show="first">
+		<div class="btn-group  btn-group-sm padLR0" style="margin-bottom:10px">
+			<button class="btn btn-default btn-sm" ng-click="listShow = true;barShow =false;regionShow =false;">列表展示</button>
+			<button class="btn btn-default btn-sm" ng-click="barShow = true;listShow =false;regionShow =false;">图表展示</button>
+			<button class="btn btn-default btn-sm" ng-click="regionShow =true;listShow = false;barShow =false;">分区域</button>
+		</div>
+
+
+		<!-- 列表 -->
+		<table class="table table-hover table-bordered" ng-show="listShow">
+			<tr>
+				<td></td><td>黑点位置</td><td>事故次数</td><td></td>
+			</tr>
+			<tr  ng-repeat="e in records" class="pointer">
+				<td><span class="badge badge-primary">{{$index+1}}</span></td>
+				<td>{{e.name}}</td>
+				<td  style="width:100px">{{e.normal + e.large + e.extra}}</td>
+				<td><i class="fa fa-map-marker"></i></td>
+			</tr>
+		</table>
+
+		<!-- 图表 -->
+		<div ng-show="barShow">
+           <div highcharts data="chartBarData" xaxis="chartBarXAxis" title="图表" type="bar"  ytitle="过车数(辆)"></div>
+        </div>
+
+        <!-- 区域 -->
+        <div ng-show="regionShow">
+			<div class="col-sm-3"  ng-repeat="e in regions" style="padding-left:0px">
+			   <div class="panel panel-default padLR0">
+			   	    <div class="panel-heading font14" style="background-color:#869400;border:none">
+			   	    	<a ng-click = "region(e)" style="color:#fff">{{e.name}}</a>
+			   	    </div>
+				    <div class="panel-body" style="height:100px;background:#b0c100">
+				    	黑点数 :{{e.accSpot.length}}</br>
+				    	普通事故:{{e.accSpot[0].normal}}</br>
+				    	重大事故:{{e.accSpot[0].large}}</br>
+				    	特大事故:{{e.accSpot[0].extra}}
+				    </div>
+			  </div>
+			</div> 
+		</div>
+	</div>
+	
+	<div ng-hide="first">
+		<div class="panel panel-default padLR0">
+	   	    <div class="panel-heading font14">
+	   	    	{{regionData.name}}
+	   	    </div>
+		    <div class="panel-body">
+				<table class="table table-hover">
+					<tr>
+						<td>地点</td><td>普通</td><td>重大</td><td>特大</td><td></td>
+					</tr>
+					<tr  ng-repeat="e in regionData.accSpot" class="pointer">	
+						<td>{{e.name}}</td>
+						<td>{{e.normal}}</td>
+						<td>{{e.large}}</td>
+						<td>{{e.extra}}</td>
+						<td><i class="fa fa-map-marker"></i></td>
+					</tr>
+					<tr><td  colspan="5"><i class="fa fa-level-up pull-right yhte-ico-primary" ng-click="first = true"></i></td></tr>
+				</table>
+		    </div>
+	  	</div>
+	</div>
+</div>
+<div class="col-100-auto col-sm-8">
+	<div yhte-map inst="map" class="my-box-shdow" style="height:100%;">
+	</div>
+</div>

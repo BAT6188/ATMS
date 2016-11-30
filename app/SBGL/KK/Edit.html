@@ -1,0 +1,175 @@
+<legend>{{title}}</legend>
+
+<div class="col-sm-3">
+  <div class="list-group">
+    <a ng-href="#/SBGL.DeviceRegistDevice" class="list-group-item">基础设备管理</a>
+    <a ng-href="#/SBGL.DeviceRegistFacility" class="list-group-item">基础设施管理</a>
+    <a ng-href="#/ZHGL.TrafficSigns" class="list-group-item">标志标牌管理</a>
+    <a ng-href="#/XXFB.CMS.CmsList" class="list-group-item">诱导屏管理</a>
+    <a ng-href="#/SBGL.KK.List" class="list-group-item active">卡口点位管理</a>
+  </div>
+</div>
+
+<div class="col-sm-9">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right" style="padding:0 15px;">
+        <button class="btn btn-sm btn-primary" ng-click="save();">保存</button>
+        <button class="btn btn-sm btn-danger" ng-click="remove();">删除</button>
+        <a class="btn btn-sm btn-default" ng-href="#/SBGL.KK.List">取消</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">编号</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.pointNo">
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">名称</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.pointName">
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">位置</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.pointAddr">
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">方向</label>
+      <div class="col-sm-8">
+        <select type="text" ng-model="record.roadTrend" class="form-control input-sm"
+                ng-options="d.code as d.name for d in trends">
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">类型</label>
+      <div class="col-sm-8">
+          <select class="form-control" 
+            ng-model="record.pointType"
+            ng-options="e.code as e.name for e in natures track by e.code" 
+           >
+          </select>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">行政区划</label>
+      <div class="col-sm-8">
+          <select class="form-control" 
+            ng-model="record.localityCode"
+            ng-options="e.code as e.name for e in dists"
+           >
+          </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">经度</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.lng">
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">纬度</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.lat">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <a class="font13" ng-click="locate()" style="margin-left:25px;cursor:pointer;color:#428BCA">
+        <i class="fa fa-globe"></i> 单击此处地图定位
+      </a>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">联系人</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.contactPerson">
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">联系电话</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.contactTel">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">管辖单位</label>
+      <div class="col-sm-8">
+          <select class="form-control" 
+            ng-model="manager"
+            ng-options="e.name for e in managerDepts track by e.code"
+           >
+          </select>
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">管辖单位代码</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.managerCode" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">性质</label>
+      <div class="col-sm-8">
+<!--           <select class="form-control" 
+            ng-model="record.pointNature" 
+            ng-disabled="ldDisabled"
+            ng-options="e.code as e.name for e in natures  track by e.code" 
+           >
+          </select> -->
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">状态</label>
+      <div class="col-sm-8">
+         <select class="form-control" 
+          ng-model="record.status"
+          ng-options="e.name for e in statuses  track by e.code" 
+         >
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">专网图片路径</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.imgPath1">
+      </div>
+    </div>
+    <div class="col-sm-5">
+      <label class="control-label col-sm-4">公安网图片路径</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control input-sm" ng-model="record.imgPath2">
+      </div>
+    </div>
+  </div>
+
+</div>

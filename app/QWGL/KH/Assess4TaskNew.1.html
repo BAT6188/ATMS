@@ -1,0 +1,211 @@
+<div ng-controller="dutyInfo">
+<hr>
+<div ng-show="mainShow">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group pull-right">
+                    <a class="btn btn-info" x-go-back>返回</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-1 control-label">任务名称</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" value="任务1">
+            </div>
+            <label class="col-sm-1 control-label">任务类型</label>
+            <div class="col-sm-2">
+                <select class="form-control">
+                    <option value="" selected>巡逻任务</option>
+                    <option value="">高峰任务</option>
+                    <option value="">临时任务</option>
+                    <option value="">特勤任务</option>
+                    <option value="">领导任务</option>
+                    <option value="">整治任务</option>
+                    <option value="">窗口任务</option>
+                    <option value="">事故外勤任务</option>
+                    <option value="">事故内勤任务</option>
+                </select>
+            </div>
+            <label class="col-sm-1 control-label">任务级别</label>
+            <div class="col-sm-2">
+                <select class="form-control">
+                    <option value="" selected>普通</option>
+                    <option value="">一级</option>
+                    <option value="">二级</option>
+                    <option value="">三级</option>
+                    <option value="">四级</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-1 control-label">负责人</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" value="xxx">
+            </div>
+            <label class="col-sm-1 control-label">联系方式</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" value="139XXX">
+            </div>
+            <label class="col-sm-1 control-label">任务周期</label>
+            <div class="col-sm-2">
+                <select class="form-control" ng-model="dutyType" ng-options="dutyType.name for dutyType in dutyTypes"></select>
+            </div>
+            <label class="col-sm-1 control-label"><button class="btn btn-success" ng-click="editDuty()">排班</button></label>
+        </div>
+        <div class="row">
+            <label class="col-sm-1 control-label">任务时间</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" datetimepicker>
+            </div>
+            <label class="col-sm-1 control-label">~</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" datetimepicker>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-1 control-label">任务时间</label>
+            <div class="col-sm-11">
+                <textarea class="form-control">desc</textarea>
+            </div>
+        </div>
+</div>
+<div ng-show="!mainShow">
+        <div class="row">
+            <div class="col-md-12" id="dutyTable">
+                <table class="table table-bordered table-hover table-condensed" ng-show="dutySet === 'week'">
+                    <thead>
+                    <tr class="text-center">
+                        <td style="width:100px;"></td>
+                        <td ng-repeat="week in weeks">{{week}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="record in taskWeekPosts">
+                        <td>{{record.name}}<button class="close" ng-click="removeTaskDuty($index)">x</button></td>
+                        <td class="text-center" ng-repeat="week in weeks">
+                            <label class="checkbox-inline"><input type="checkbox" ng-model="record.weeks[$index].show"><span class="badge" tooltip="是否排班">勤</span></label>
+                            <a href="" ng-click="addPerson(record, $index)" class="btn btn-primary btn-xs" ng-show="record.weeks[$index].show" tooltip="人员配置">人</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100px;">
+                            <a href="" ng-click="addPost();"><b>添加岗位...</b></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover table-condensed" ng-show="dutySet === 'day'">
+                    <tbody>
+                    <tr ng-repeat="record in taskDayPosts">
+                        <td>{{record.name}}<button class="close" ng-click="removeTaskDuty($index)">x</button></td>
+                        <td class="text-center" ng-show="!record.addTime">
+                            <span id="popover" ng-click="popTime(record)" class="glyphicon glyphicon-edit" tooltip="排班"></span>
+                            <span class="badge">{{record.setTime}}</span>
+                            <a href="" ng-click="addPerson(record)" class="btn btn-primary btn-xs" tooltip="人员配置">人</a>
+                            <label class="label label-success" ng-repeat="p in record.dayPersons">{{p.name}}</label>
+                        </td>
+                        <td class="row" ng-show="record.addTime">
+                            <div ng-show="record.addTime">
+                                <div class="control-group input-append col-md-4">
+                                    开始时间<input type="text" ng-model="record.startTime" bs-timepicker style="width: 60px"
+                                               data-minute-step="5" data-show-meridian="false">
+                                    <button type="button" class="btn" data-toggle="timepicker"><i class="icon-time"></i></button>
+                                </div>
+                                <div class="control-group input-append col-md-4">
+                                    结束时间<input type="text" ng-model="record.endTime" bs-timepicker style="width: 60px"
+                                               data-minute-step="5" data-show-meridian="false">
+                                    <button type="button" class="btn" data-toggle="timepicker"><i class="icon-time"></i></button>
+                                </div>
+                                <button class="btn" ng-click="resetTime(record)">取消</button>
+                                <button class="btn" ng-click="submitTime(record)">确定</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100px;">
+                            <a ng-click="addPost();"><b>添加岗位...</b></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="btn-group pull-right">
+                    <button class="btn btn-primary">保存</button>
+                    <a class="btn btn-default" ng-click="defaultView()">返回</a>
+                </div>
+            </div>
+            <div class="col-md-4" ng-show="rightShow === 'post'">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">岗位选择</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12" style="margin-bottom:10px;">
+                            <button class="btn btn-primary btn-sm">列表选择</button>
+                            <button class="btn btn-primary btn-sm" ng-click="showMap();">地图选择</button>
+                            <button class="btn btn-success btn-sm" ng-click="hideMap();">新岗位</button>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover table-condensed">
+                                <thead>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>类型</td>
+                                    <td>位置</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="duty in duties">
+                                    <td ng-click="selectPost(duty);">
+                                        <a href="" data-toggle="tooltip" data-placement="right"
+                                           data-original-title="选择"><span class="badge">{{duty.name}}</span></a>
+                                    </td>
+                                    <td>{{duty.type}}</td>
+                                    <td>
+                                        <a>
+                                            <span class="glyphicon glyphicon-screenshot" tooltip="定位"></span> 定位
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" ng-show="rightShow === 'person'">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">人员配置</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover table-condensed">
+                                <thead>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>编号</td>
+                                    <td>姓名</td>
+                                    <td>所属</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="p in persons">
+                                    <td>
+                                        <input type="checkbox" ng-model="p.checked">
+                                    </td>
+                                    <td>{{p.no}}</td>
+                                    <td>{{p.name}}</td>
+                                    <td>{{p.dept}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn pull-right" ng-click="configPerson()">保存人员配置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

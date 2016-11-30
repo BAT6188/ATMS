@@ -1,0 +1,341 @@
+[{
+  "mods":[
+  {"path": "SBGL.DeviceList"},
+  {"path": "SBGL.DeviceNew"},
+  {"path": "SBGL.Device/:id/Edit2"},
+  {"path": "SBGL.FacilityList"},
+  {"path": "SBGL.FacilityNew"},
+  {"path": "SBGL.Facility/:id/Edit"},
+  {"path": "SBGL.ApplyRepair/:id/Edit"},
+  {"path": "SBGL.AuditRepair/:id"},
+  {"path": "SBGL.DeviceStatusHistory/:id"},
+  {"path": "SBGL.DeviceRegistDevice"},
+  {"path": "SBGL.DeviceNew"},
+  {"path": "SBGL.Device/:id/Edit"},
+  {"path": "SBGL.DeviceRegistUpload"},
+  {"path": "SBGL.DeviceRegistFacility"},
+  {"path": "SBGL.DeviceFacility/:id/Edit"},
+  {"path": "SBGL.DeviceFacilityUpload"},
+  {"path": "SBGL.ReportManageWayManageItem"},
+  {"path": "SBGL.ApplyRepair/:id/Edit"},
+  {"path": "SBGL.Audit/:id/Repair"},
+  {"path": "SBGL.DeviceRepair"},
+  {"path": "SBGL.DMPZ.FacetConfig"},
+  {"path": "SBGL.DeviceStatus"},
+  {"path": "SBGL.Bill/:id/confirm"},
+  {"path": "SBGL.DeviceStatistics"},
+  {"path": "SBGL.ReportManageDeviceState"},
+  {"path": "SBGL.DeviceRegist"},
+  {"path": "SBGL.DeviceRepairHistory"},
+  {"path": "SBGL.ApplyRepair"},
+  {"path": "SBGL.ReportManageBrigadeManageItem"},
+  {"path": "SBGL.Device/:id/Detail"},
+  {"path": "SBGL.Facility/:id/Detail"},
+  {"path": "SBGL.Bill/:id/Detail"},
+  {"path": "SBGL.ReportManageDevice"},
+  {"path": "SBGL.ShortcutRepair"},
+  {"path": "SBGL.ReportManage"},
+  {"path": "SBGL.ReportManageRepairPaper"},
+  {"path": "SBGL.AuditRepair/:id/Detail"},
+
+  
+  {"path": "JCBK.Blacklist.Dispatch"},
+  {"path": "JCBK.Blacklist.BlackAlarmList"},
+  {"path": "JCBK.CLBK.Dispatch"},
+  {"path": "JCBK.CLBK.ExamineList"},
+  
+  {"path": "JCBK.ExamineList"},
+  {"path": "JCBK.Dispatch"},
+  {"path": "JCBK.RealtimeAlarm"},
+  {"path": "JCBK.VideoDeploymentAlarm"},
+  {"path": "JCBK.Alarm/:id/Edit"},
+  {"path": "JCBK.DispAlarmList/:id"},
+  {"path": "JCBK.Administrate"},
+  {"path": "JCBK.Examine"},
+  {"path": "JCBK.ApplyNew"},
+  {"path": "JCBK.Dispatch/:id/View"},
+  {"path": "JCBK.Apply/:id/"},
+  {"path": "JCBK.Apply"},
+  {"path": "JCBK.VehicleQuery"},
+
+  {"path" : "ZHGL.JTGZ.TrafficCtrlNew"},
+  {"path" : "ZHGL.JTGZ.TrafficCtrl"},
+  {"path" : "ZHGL.JTGZ.TrafficCtrlEdit/:id"},
+
+  {"path" : "XXFB.CMS.CmsList"},
+  {"path" : "XXFB.CMS.CmsNew"},
+  {"path" : "XXFB.CMS.CmsEdit/:id"},
+
+  {"path" : "SBGL.KK.Edit/:id"},
+  {"path" : "SBGL.KK.New"},
+  {"path" : "SBGL.KK.List"},
+
+  {"path" : "ZHGL.SGZD.New"},
+  {"path" : "ZHGL.SGZD.New1"},
+  {"path" : "ZHGL.SGZD.Edit/:id"},
+  {"path" : "ZHGL.SGZD.Apply"},
+  {"path" : "ZHGL.SGZD.Welcome"},
+
+  {"path" : "ZHGL.SGWH.New"},
+  {"path" : "ZHGL.SGWH.Trend"},
+
+  {"path" : "QWGL.ZB.PoliceCar/:id/edit"},
+  
+  {"path" : "XXFB.CMS.PlayList/:id/:width/:height"},
+  {"path" : "XXFB.CMS.PlayListNew/:id/:width/:height"},
+  {"path" : "XXFB.CMS.PlayListEdit/:id/:cmsId/:width/:height"},
+  {"path" : "XXFB.ROAD.CmsRoadRelation"},
+  {"path" : "XXFB.ROAD.PostSelector/:id"},
+  {"path" : "XXFB.PUBLISH.MsgPubNew"},
+  {"path" : "XXFB.PUBLISH.MsgPubList"},
+
+  {"path" : "JCZH.ZHDD.New"},
+  {"path" : "JCZH.ZHDD.Dispatch/:id/Edit"},
+  {"path" : "JCZH.ZHDD.CommandDispatchExecuter"},
+  {"path" : "JCZH.ZHDD.DispatchNew"},
+  {"path" : "JCZH.ZHDD.CommandDispatchCommander"},
+
+  {
+    "path" : "JCZH.TQRW.Cast/:id/Video"
+  },{
+    "path" : "JCZH.TQRW.Execute/:id/Video"
+  },{
+    "path" : "JCZH.TQRW.Edit1/:id"
+  },{
+    "path" : "JCZH.TQRW.Create1"
+  },{
+    "path" : "JCZH.TQRW.Create2/:id"
+  },{
+    "path" : "JCZH.TQRW.Create3/:id"
+  },{
+    "path" : "JCZH.TQRW.SetPolicesForPost/:id"
+  },{
+    "path" : "JCZH.TQRW.Cast/:id"
+  },{
+    "path" : "JCZH.TQRW.TextEdit/:id"
+  },{
+    "path" : "JCZH.TQRW.CreateText"
+  },{
+    "path" : "XTGL.REGION.Edit"
+  },{
+    "path" : "JCZH.TQRW.Execute/:id"
+  },{
+    "path" : "JCZH.TQRW.SignalEdit/:id"
+  },{
+    "path" :  "ZHGL.TrafficSignNew"
+  },{
+    "path" :  "ZHGL.TrafficSign/:id/Edit"
+  },{
+    "path" :  "ZHGL.TrafficSigns"
+  },{
+    "path" :  "FXYP.WHCX.JSR"
+  },{
+    "path" :  "FXYP.WHCX.LDTQ"
+  },{
+    "path" :  "FXYP.WHCX.DLD"
+  },{
+    "path" :  "FXYP.WHCX.illegalVehicle/:Q/Edit"
+  },{
+    "path" :  "FXYP.WHCX.IllegalVehicleFX"
+  },{
+    "path" :  "FXYP.WHCX.ZDWFXW"
+  },{
+    "path" :  "FXYP.WHCX.XXLY"
+  },{
+    "path" :  "FXYP.WHCX.JDSLB"
+  },{
+    "path" :  "FXYP.WHCX.CFZL"
+  },{
+    "path" :  "FXYP.WHCX.DDSJFX"
+  },{
+    "path" :  "FXYP.WHCX.YCF"
+  },{
+    "path" :  "FXYP.LLTJ.FlowCompareTime"
+  },{
+    "path" :  "FXYP.LLTJ.Hour"
+  },{
+    "path" :  "FXYP.LLTJ.HalfHour"
+  },{
+    "path" :  "FXYP.LLTJ.Day"
+  },{
+    "path" :  "FXYP.LLTJ.Peak"
+  },{
+    "path" :  "FXYP.AccidentSpot"
+  },{
+    "path" :  "FXYP.AccidentTrend"
+  },{
+    "path" :  "QWGL.QW.DutyNewPost"
+  },{
+    "path" :  "QWGL.QW.DutyNewArrange"
+  },{
+    "path" : "XTGL.DEPT.New"
+  },{
+    "path" : "XTGL.Tree"
+  },{
+    "path" : "XTGL.picker"
+  },{
+    "path" : "XTGL.DEPT.Dept/:id/Edit"
+  }, {
+    "path" : "ZHGL.QWGL.Main"
+  }, {
+    "path" : "XTGL.DEPT.Dept"
+  },{
+    "path" : "TSJK.JCTS.Main"
+  }, {
+    "path" : "TSJK.DBTS.Main"
+  }, {
+    "path" : "JCZH.TQRW.List"
+  }, {
+    "path" : "TSJK.Main"
+  }, {
+    "path" : "TSJK.JCTS.groups/:id"
+  }, {
+    "path" : "$modules.$mods"
+  }, {
+    "path" : "QWGL.GW.PostNew"
+  }, {
+    "path" : "QWGL.KH.Assess4Person"
+  }, {
+    "path" : "JCZH.TQRW.Edit/:id/"
+  }, {
+    "path" : "TSJK.Test"
+  }, {
+    "path" : "QWGL.ZB.PoliceCar/:id/Edit"
+  }, {
+    "path" : "JCZH.TQRW.New"
+  }, {
+    "path" : "JCZH.TQRW.New2"
+  }, {
+    "path" : "JCZH.TQRW.DDView/:id/"
+  }, {
+    "path" : "QWGL.ZB.PoliceCarNew"
+  }, {
+    "path" : "XTGL.DICT.Dict"
+  }, {
+    "path" : "XTGL.DICT.New"
+  }, {
+    "path" : "XTGL.DICT.Dict/:id/Edit"
+  }, {
+    "path" : "JCZH.TQRW.PecialDuties/:id/DutyPost/:name"
+  }, {
+    "path" : "QWGL.GW.Post"
+  }, {
+    "path" : "QWGL.ZB.PoliceCar"
+  }, {
+    "path" : "QWGL.KH.Assess4PersonInfo"
+  }, {
+    "path" : "QWGL.GW.Post/:id/Edit"
+  }, {
+    "path" : "TSJK.JCTS.PoliceVehicles/:id/:ifTrack/Edit"
+  }, {
+    "path" : "TSJK.JCGZTS.Main"
+  }, {
+    "path" : "QWGL.QW.Duty/:id/Edit"
+  },{
+    "path" : "QWGL.KH.Assess4Task"
+  }, {
+    "path" : "XTGL.LOG.List"
+  }, {
+    "path" : "XTGL.LOG.Edit/:id"
+  }, {
+    "path" : "XTGL.USER.User"
+  },{
+    "path" : "XTGL.USER.UserNew"
+  }, {
+    "path" : "XTGL.USER.User/:id/Edit"
+  },{
+    "path" : "XTGL.PRI.AssignPri"
+  },{
+    "path" : "XTGL.PRI.RoleList"
+  },{
+    "path" : "XTGL.PRI.RoleNew"
+  }, {
+    "path" : "XTGL.PRI.Role/:id/Edit"
+  }, {
+    "path" : "QWGL.QW.Duty"
+  }, {
+    "path" : "TSJK.JCJTS.Main"
+  }, {
+    "path" : "TSJK.DBTS.Polices/:id/:ifTrack/Edit"
+  }, {
+    "path" : "QWGL.QW.DutyNew"
+  }, {
+    "path" : "QWGL.KH.Assess4TaskNew"
+  }, {
+    "path" : "JCZH.TQRW.PecialDuties/:id/View"
+  }, {
+    "path" : "JCZH.TQRW.Welcome"
+  }, {
+    "path" : "ZHGL.JTGZ.TrafficCtrl/:id/Edit"
+  },{
+    "path" : "$modules.$mods/:id/Edit"
+  }, {
+    "path" : "$modules.$mods2"
+  }, {
+    "path" : "QWGL.QW.PoliceTrack/:id"
+  }, {
+    "path" : "QWGL.QW.CarTrack/:id"
+  },{
+    "path" : "ZHGL.QWGL.List"
+  }, {
+    "path" : "ZHGL.QWGL.Add"
+  }, {
+    "path" : "ZHGL.QWGL.AddMonthView"
+  }, {
+    "path" : "ZHGL.QWGL.AddDayView"
+  }, {
+    "path" : "XXFB.PUBLISH.MsgPublishList"
+  }, {
+    "path" : "XXFB.PUBLISH.MsgPublishNew"
+  }, {
+    "path" : "XTGL.MENU.MenuList"
+  },{
+    "path" : "XTGL.MENU.MenuNew"
+  },{
+    "path" : "XTGL.MENU.Menu/:id/Edit"
+  },{
+    "path" : "TSJK.Tsjk"
+  },{
+    "path" : "TSJK.Tsjk2"
+  },{
+    "path" : "XTGL.CODE.GenCode"
+  },{
+    "path" : "JCXHKZXT.XX.PhaseSequenceConfig/:id"
+  },{
+    "path" : "JCXHKZXT.SD.TimeFrameConfig"
+  },{
+    "path" : "JCXHKZXT.SSDTJK./:no/Detail"
+  },{
+    "path" : "JCXHKZXT.PSFA./:name/View"
+  },{
+    "path" : "JCXHKZXT.XHJGL.XhjList"
+  },{
+     "path" : "JCXHKZXT.CT./:name/CtView"
+  },{
+     "path" : "JCXHKZXT.TSR./:name/TsrView"
+  },{
+    "path" : "JCXHKZXT.JCQ.Jcq/:name/View"
+  },{
+    "path" : "JCXHKZXT.SBFA.List"
+  },{
+    "path" : "JCXHKZXT.DZSZ.DzList"
+  },{
+    "path" : "JCXHKZXT.DZSZ.DzNew"
+  },{
+    "path" : "JCXHKZXT.LB.LbList"
+  },{
+    "path" : "JCXHKZXT.LB./:name/LbView"
+  },{
+    "path" : "LKYC.RoadList"
+  },{
+    "path" : "LKYC.Plan/:roadSectionId/:roadName/List"
+  },{
+    "path" : "LKYC.Plan/:roadSectionId/:roadName/New"
+  },{
+    "path" : "LKYC.Plan/:id/:roadSectionId/:roadName/:sd/:ed/:st/:et/Edit"
+  },{
+      "path" : "LKFB.CmsList"
+  },{
+      "path" : "LKFB.Road/:id/:name/List"
+    }]
+}]

@@ -1,0 +1,134 @@
+
+<legend>编辑施工占道</legend>
+<form name="form">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button ng-click="save()" ng-disabled="!form.$valid" class="btn btn-sm btn-primary">保存</button><a ng-href="#/ZHGL.SGZD.Apply" class="btn btn-sm btn-default">取消</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>标题</label>
+          <textarea name="title" ng-model="record.title" required="required" class="form-control input-sm"></textarea><span ng-show="form.title.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>申请理由</label>
+          <textarea name="applyReason" ng-model="record.applyReason" required="required" class="form-control input-sm"></textarea><span ng-show="form.applyReason.$error.required" class="help-block">该字段必填!</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>申请单位</label>
+          <input ng-model="record.applyUnit" name="applyUnit" required="required" class="form-control input-sm"/><span ng-show="form.applyUnit.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>申请单位联系电话</label>
+          <input ng-model="record.applyPhone" name="applyPhone" required="required" class="form-control input-sm"/><span ng-show="form.applyPhone.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>施工单位</label>
+          <input ng-model="record.builder" name="builder" required="required" class="form-control input-sm"/><span ng-show="form.builder.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>施工单位联系电话</label>
+          <input ng-model="record.operatorPhone" name="operatorPhone" required="required" class="form-control input-sm"/><span ng-show="form.operatorPhone.$error.required" class="help-block">该字段必填!</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>开始时间</label>
+           <div datetimepicker-new
+            name="startTime"
+            class="form-control input-sm"
+            placeholder="选择日期"
+            ng-model="record.startTime"
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'" 
+            end-date = "record.endTime"
+            required>
+          </div>
+          <span ng-show="form.startTime.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>结束时间</label>
+          <div datetimepicker-new
+            name='endTime'
+            class="form-control input-sm"
+            placeholder="选择日期"
+            ng-model="record.endTime"
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-date="record.startTime"
+            start-view="'month'" required>
+          </div>
+          <span ng-show="form.endTime.$error.required" class="help-block">该字段必填!</span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>区域长度</label>
+          <input ng-model="record.areaLength" class="form-control input-sm"/>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>区域宽度</label>
+          <input ng-model="record.areaWidth" class="form-control input-sm"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>施工路段-地图标绘</label>
+          <div class="input-group">
+            <input ng-model="record.roads" disabled="disabled" class="form-control input-sm"/><span class="input-group-btn">
+              <button ng-click="region();" class="btn btn-default btn-sm"><i class="fa fa-globe"> 地图</i></button></span>
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>施工路段-描述</label>
+          <input ng-model="record.roadDesc"  class="form-control input-sm"/><span class="input-group-btn"></span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>负责警员</label>
+          <input ng-model="record.principal"  class="form-control input-sm"/><span class="input-group-btn"></span>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>负责警员-电话</label>
+          <input ng-model="record.phone"  class="form-control input-sm"/><span class="input-group-btn"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>图片路径
+            <i class="fa fa-times yhte-ico-danger"
+             ng-show="record.imgUrl"
+             ng-click="removeImg()"
+             style="margin-left:10px;font-size:13px">删除该图片</i>
+          </label>
+          <div class="inline-txt-new">
+            <a class="pointer" 
+              tooltip="单击预览图片"
+             ng-click="toggleShow()"
+             ng-disabled ="!record.imgUrl"
+             >
+              {{record.imgUrl || '暂无图片,请上传'}}
+               </a>
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>附件上传</label>
+          <div upload-file file-url="record.imgUrl" upload='/java/uploadFile'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div 
+atms-img-preview
+ng-show = "showImg"
+urls = urls
+remove = "true"
+on-close = "showImg = false"
+on-update = "imgUpdate()"
+></div>

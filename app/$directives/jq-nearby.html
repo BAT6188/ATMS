@@ -1,0 +1,60 @@
+<div class="atms-jq-nearby">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group btn-group-xs pull-right" data-toggle="buttons">
+        <label ng-repeat="rad in distances" class="btn btn-default" ng-class="rad===200?'active':''" ng-click="onDistanceChange(rad);">
+          <input type="radio" name="options">{{rad}}</input>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="input-group">
+    <input type="text" class="form-control input-sm" ng-model="deviceName" placeholder="按名称查询">
+    <span class="input-group-btn">
+      <button class="btn btn-primary btn-sm" ng-click="query();">
+        <i class="fa fa-search" tooltip="查询"></i>
+      </button> </span>
+  </div>
+  <span ng-show="!devices.length">暂无数据</span>
+  <table class="table table-hover table-condensed">
+    <tr ng-repeat="item in devices |paginator:page:size">
+      <td class="col-sm-1">
+        <span class="badge badge-primary" style="margin-right:10px;">{{$index + 1}}</span>
+      </td>
+      <td style="width:10px;" ng-show="hasSelect">
+        <i class="fa fa-1 fa-check-circle"
+          ng-class="{'yhte-ico-success': item.checked, 'yhte-ico-grey': !item.checked}" 
+          ng-click="select(item);">
+        </i>
+      </td>
+      <td class="col-sm-9" hover-show>
+        <a ng-click="itemClick(item);">
+          {{item.properties.DEVICE_NAME}}{{item.disToCtr?' - '+item.disToCtr:''}}
+        </a>
+        <a style="padding-left:0px">
+          <i class="fa fa-map-marker pull-right"  
+            map-center 
+            lng="item.geometry.coordinates[0]"
+            lat="item.geometry.coordinates[1]"> 
+          </i>
+        </a>
+      </td>
+    </tr>
+  </table>
+  
+ <div class="row">
+  <div pagination
+    total-items="total" 
+    items-per-page="size"
+    page="page" 
+    max-size="maxSize"
+    class="pagination-sm pull-right" 
+    boundary-links="true" 
+    rotate="false" 
+    previous-text="&lsaquo;" 
+    next-text="&rsaquo;" 
+    first-text="&laquo;" 
+    last-text="&raquo;">
+  </div>
+ </div>
+</div>

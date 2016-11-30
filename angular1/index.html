@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="Dialog">
+
+<head>
+    <link href="../libs/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" >
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>-->
+    <script src="../libs/angular/1.2.15/angular.js"></script>
+    <script src="../angular1/controller.js"></script>
+    <script src="../angular1/directive.js"></script>
+</head>
+<body>
+<div ng-controller="MyCtrl">
+    <button ng-click="show==true">show</button>
+    <p>{{title}}</p>
+    <input type="text" ng-model="title"/>
+    <dialog title="Hello"
+            visible="visible"
+            on-cancel="show==false;"
+            on-ok="show==false;parentScope();">
+        <!--上面的on-cancel、on-ok，是在directive的isoloate scope中通过&引用的。
+        如果表达式中包含函数，那么需要将函数绑定在parent scope（当前是MyCtrl的scope）中-->
+        Body goes here: 1111{{username}} , {{title}}.
+        <input type="text" ng-model="title"/>
+        <ul>
+            <!--这里还可以这么玩~names是parent scope的-->
+            <li ng-repeat="name in names">{{name}}</li>
+        </ul>
+        <div>
+            Email:<input type="text" ng-model="email" style="width: 200px;height:20px"/>
+        </div>
+        <div>
+            Count:<input type="text" ng-model="person.count" style="width: 120px;height:20px"/>
+            <button ng-click="changeCount()">Count加1</button>
+        </div>
+        <p></p>
+    </dialog>
+</div>
+</body>
+</html>

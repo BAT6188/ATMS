@@ -1,0 +1,79 @@
+<legend>违法行为分析</legend>
+
+<div class="row padLR15">
+  <div class="col-sm-6">
+    <div class="col-sm-6" style="padding-left:0px">
+      <label for="" class="col-sm-4 control-label input-sm font13 padLR0">违法行为</label>
+      <div class="col-sm-8 padLR0">
+           <select class="form-control input-sm"
+                ng-options="c.code as c.name for c in behaviors"
+                ng-model="Q.behavior"></select>
+      </div>
+    </div>
+    <div class="col-sm-6" style="padding-left:0px">
+      <label for="" class="col-sm-4 control-label input-sm font13 padLR0">统计周期</label>
+      <div class="col-sm-8 padLR0">
+          <select class="form-control input-sm"
+                ng-options="c.code as c.name for c in periods"
+                ng-model="Q.period"></select>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-5">
+    <div class="col-sm-9 padLR0">
+      <div class="input-group"> 
+          <span class="input-group-addon">时间</span>
+          <datetimepicker ng-model="Q.startTime" format="yyyy-MM-dd hh:mm:ss"></datetimepicker>
+          <span class="input-group-addon">到</span>
+          <datetimepicker ng-model="Q.endTime" format="yyyy-MM-dd hh:mm:ss"></datetimepicker>
+      </div>
+    </div>
+    <div class="col-sm-3 padLR0">
+      <div class="btn-group  pull-right">
+        <a class="btn btn-sm btn-primary" ng-click="chartData()">
+        <i class="fa fa-bar-chart-o"></i> 查询
+        </a>
+        <a class="btn btn-sm btn-primary " ng-click="chartData()">
+          <i class="fa fa-cloud-download"></i> 导出
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row padLR15">
+  <div class="col-sm-12">
+    <table class="table table-condensed table-bordered font13">
+      <tr>
+        <td>违法行为</td>
+        <td>违法次数</td>
+        <td>违法区域</td>
+        <td>车型</td>
+        <td>统计区间</td>
+        <td>处罚金额</td>
+      </tr>
+      <tr ng-repeat="c in records">
+        <td>{{}}</td>
+        <td>{{}}</td>
+        <td>{{}}</td>
+        <td>{{}}</td>
+        <td>{{}}</td>
+      </tr>
+    </table>
+    <div class="row">
+      <div class="col-md-12">
+        <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false" 
+          total-items="total"
+          page="Q.page" 
+          items-per-page="Q.pageSize"
+          max-size="Q.maxSize"
+          on-select-page="pChange(page)"
+          previous-text="上一页"
+          next-text="下一页"
+          last-text="最后一页"
+          first-text="最前一页">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

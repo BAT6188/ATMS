@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<title>测试页面</title>
+<meta charset="utf-8">
+<style>
+html,body{height: 100%;}
+</style>
+<input id="create" type="button" value="创建">
+<input id="set" type="button" value="设置">
+<br>
+<script src="jquery-1.10.2.min.js"></script>
+<script src="activex.js"></script>
+<script>
+$(function(){
+		var gWndId = 0;
+		var nDirect = -1;
+    var activeX = null;
+    /*onIframeLoaded = function(){
+        //alert('iframeLoaded, activeX 控件所在 iframe 已经加载完成！');
+    };*/
+
+		$('#set').click(function(){
+			gWndId = activeX.getOcx().DPSDK_CreateSmartWnd(0, 0, 100, 100);
+			var nWndCount = "4";
+			activeX.getOcx().DPSDK_SetWndCount(gWndId, nWndCount);
+			activeX.getOcx().DPSDK_SetSelWnd(gWndId, 0);
+		});
+
+    $('#start').click(function(){
+        if(!activeX) return;
+    });
+    
+    $('#create').click(function(){
+        if(activeX) return;
+        activeX = $('body').activeX('VD');
+        //activeX.bind('iframeLoaded', onIframeLoaded);
+    });
+
+    $('#destroy').click(function(){
+        if(!activeX) return;
+        activeX.destroy();
+        activeX = null;
+    });
+
+    $('#reload').click(function(){
+        if(!activeX) return;
+        activeX.reload();
+    });
+});
+</script>

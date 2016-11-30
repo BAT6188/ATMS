@@ -1,0 +1,33 @@
+<div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h5 class="text-success">鼠标移动到地图上开始绘制路线。</h5>
+      起点位置: {{startPoint}}<br> 
+      终点位置: {{endPoint}}<br>
+      线路长度: {{lineLength.toFixed(0)}}(米)<br>
+      行车速度: <select ng-init="speed=20" ng-model="speed" ng-options="i for i in [10,20,30,60,80,100,120]"></select>(千米/小时)<br>
+      行程时间: {{(lineLength/1000/speed*60).toFixed(0)}}(分钟)<br>
+      经过区域：<span style="margin: 0 5px 0 0;"
+                  class="pointer label label-success"
+                  ng-repeat="area in areas"
+                  ng-click="">
+                  {{area.properties.NAME}}
+                </span>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-sm btn-default" 
+        ng-click="prevClick();">上一步</button>
+
+      <button class="btn btn-sm btn-default" 
+        ng-show="lineDesc.length>0"
+        ng-click="redraw();">重新绘制</button>
+
+      <button class="btn btn-sm btn-primary pull-right"
+        ng-show="lineDesc.length>1" 
+        ng-click="nextClick();">下一步</button>
+    </div>
+  </div>
+</div>

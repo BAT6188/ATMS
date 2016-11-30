@@ -1,0 +1,43 @@
+<div class="police_main">信号机
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="police_main_table">
+    <tr>
+      <td>设备编号：</td>
+      <td>{{data.attributes.ID}}</td>
+    </tr>
+    <tr>
+      <td>设备名称：</td>
+      <td>{{data.attributes.NAME}}</td>
+    </tr>
+    <tr>
+      <td>厂家名称：</td>
+      <td>{{data.attributes.FACTORY}}</td>
+    </tr>
+    <tr>
+      <td>设备型号：</td>
+      <td>{{data.attributes.DEVICE_MODEL}}</td>
+    </tr>
+    <tr>
+      <td>安装点位：</td>
+      <td>{{data.attributes.ADDRESS}}</td>
+    </tr>
+    <tr>
+      <td>安装日期：</td>
+      <td>{{data.attributes.BUILD_DATE}}</td>
+    </tr>
+    <tr>
+      <td>状态：</td>
+      <td>{{data.attributes.DEVICE_STATUS}}</td>
+    </tr>
+    <tr>
+      <td>辖区大队：</td>
+      <td>{{data.attributes.BUILDER}}</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <a map-center map="map" lng="data.attributes.geometry.x" lat="data.geometry.y">
+          定位
+        </a>
+      </td>
+    </tr>
+  </table>
+</div> 

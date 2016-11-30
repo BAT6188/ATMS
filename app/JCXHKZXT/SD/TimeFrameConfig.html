@@ -1,0 +1,256 @@
+<legend>
+    时段配置
+</legend>
+
+<style>
+    .sd-sd {
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 -15px 15px;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+        background-color: #fff;
+        border-width: 1px;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+    }
+
+    .sd-sd:after {
+        content: "时段配置";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .sd-sdb {
+        position: relative;
+        padding: 45px 15px 15px;
+        margin: 0 -15px 15px;
+        background-color: #fafafa;
+        box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        margin-left: 0;
+        margin-right: 0;
+        background-color: #fff;
+        border-width: 1px;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+    }
+
+    .sd-sdb:after {
+        content: "时段表配置";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<form name="entityForm">
+    <div class="sd-sd" style="margin-left: 20px; margin-right: 20px;">
+        <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-offset-6 col-sm-6">
+                        <div class="btn-group pull-right">
+                            <button ng-click="add();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-success">
+                                <i class="glyphicon glyphicon-plus"></i> 添加
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">时段名</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.name.$invalid}">
+                        <input name="name" type="text" class="form-control input-sm" ng-model="model.name" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">起始时刻</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.trafficSmoothSpeed.$invalid}">
+                        <div datetimepicker-new
+                        class="form-control input-sm"
+                        placeholder=""
+                        ng-model="model.startTime"
+                        format="'hh:mm'"
+                        min-view="'day'"
+                        start-view="'day'" required></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">控制方式</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.control.$invalid}">
+                        <select name="control" class="form-control input-sm"
+                        ng-model="model.control"
+                        ng-options="c.code as c.name for c in controls" required></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">方案号</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.plan.$invalid}">
+                        <select name="plan" class="form-control input-sm"
+                        ng-model="model.plan"
+                        ng-options="p.code as p.name for p in plans" required></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">线控相位差</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entityForm.phaseDiff.$invalid}">
+                        <input name="phaseDiff" type="text" class="form-control input-sm" ng-model="model.phaseDiff" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="checkbox">
+                        是否响应行人过街
+                        </input>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-hover table-condensed">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>时段名</th>
+                                <th>起始时刻</th>
+                                <th>控制方式</th>
+                                <th>所用方案号</th>
+                                <th>线控相位差</th>
+                            </tr>
+                            <tbody>
+                                <tr ng-repeat="record in data|paginator:page:size">
+                                    <td>{{$index + 1}}</td>
+                                    <td><i class="fa fa-1 fa-times-circle yhte-ico-danger"
+                                    ng-click="remove(record);"> </i></td>
+                                    <td><a> {{record.name}} </a></td>
+                                    <td>{{record.startTime}}</td>
+                                    <td>{{record.control}}</td>
+                                    <td>{{record.plan}}</td>
+                                    <td>{{record.phaseDiff}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div pagination
+                                total-items="total"
+                                items-per-page="size"
+                                page="page"
+                                max-size="maxSize"
+                                class="pagination-sm pull-right"
+                                boundary-links="true"
+                                rotate="false"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                first-text="&laquo;"
+                                last-text="&raquo;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form name="entryForm4Date">
+    <div class="sd-sdb" style="margin-left: 20px; margin-right: 20px;">
+        <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-offset-6 col-sm-6">
+                        <div class="btn-group pull-right">
+                            <button ng-click="add4Date();"  ng-disabled="entryForm4Date.$invalid" class="btn btn-sm btn-success">
+                                <i class="glyphicon glyphicon-plus"></i> 添加
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="" class="col-sm-3 control-label input-sm font14">时段表名</label>
+                    <div class="col-sm-9"
+                    ng-class="{'has-error': entryForm4Date.name.$invalid}">
+                        <input name="name" type="text" class="form-control input-sm" ng-model="model4Date.name" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <select class="selectpicker show-tick form-control col-sm-12"
+                        opts="dates"
+                        showname="name"
+                        val="code"
+                        title="选择日期"
+                        objs="model4Date.queryDate"
+                        multiple></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-hover table-condensed">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>时段表名</th>
+                                <th>日期代码</th>
+                                <th>时段数</th>
+                            </tr>
+                            <tbody>
+                                <tr ng-repeat="record in data4Date|paginator:page4Date:size4Date">
+                                    <td>{{$index + 1}}</td>
+                                    <td><i class="fa fa-1 fa-times-circle yhte-ico-danger"
+                                    ng-click="remove4Date(record);"> </i></td>
+                                    <td><a> {{record.name}} </a></td>
+                                    <td>{{record.date}}</td>
+                                    <td>{{record.num}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div pagination
+                                total-items="total4Date"
+                                items-per-page="size4Date"
+                                page="page4Date"
+                                max-size="maxSize4Date"
+                                class="pagination-sm pull-right"
+                                boundary-links="true"
+                                rotate="false"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                first-text="&laquo;"
+                                last-text="&raquo;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

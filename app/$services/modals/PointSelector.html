@@ -1,0 +1,30 @@
+<div class="panel panel-default" style="width:900px">
+  <div class="panel-heading">添加点位
+    <button class="close" ng-click="close()" type="button">×</button>
+  </div>
+  <div class="panel-body">
+    <!-- 地图 -->
+    <div yhte-map class="row no-resize" inst="$parent.map" style="height:300px;">
+    </div>
+    
+    
+    <div class="no-resize user-icon" style="z-index:1000;position: absolute;top: 9px;right: 82px;height: 32px;width: 32px;cursor:pointer; font-size: 20px;color:#fff;">
+      <span class="glyphicon glyphicon-th"></span>
+    </div>
+    
+    <!-- 图层切换 -->
+    <div layers-switcher class="no-resize" style="display:none;"
+      data="config"
+      map="map"
+      select-feature="feature">
+    </div>
+  </div>
+  <div class="modal-footer" style="padding: 10px 10px 10px;">
+      <div class="btn-group">
+        <a class="btn btn-success btn-sm" ng-disabled="quickForm.$invalid"
+          ng-click="ok()"><i class="fa fa-check"> 确定</i> </a> <a
+          class="btn btn-default btn-sm" data-dismiss="modal"> <i
+          class="fa fa-time" ng-click="close()"> 取消</i> </a>
+      </div>
+    </div>
+</div>

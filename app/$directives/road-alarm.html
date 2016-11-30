@@ -1,0 +1,15 @@
+<div>
+    <div class="row marginLR0">
+        <div class="col-sm-12" ng-repeat="info in flowInfos" style="border-bottom:1px solid #ddd">
+            <div class="col-sm-12" style="font-size:12px;">
+                {{$index+1}}.
+                <a ng-click="onTsListItemClick(info);" style="cursor: pointer;">{{info.attributes.NAME}}</a>
+            </div>
+            <div class="col-sm-12"  style="font-size:12px">
+                <div atms-calculate-timecounter style="width:70px;" class="pull-right"></div>
+                <span class="pull-left"> {{info.attributes.STATE.speed?info.attributes.STATE.speed+'km/h':''}}
+                    {{info.attributes.STATE.flow?info.attributes.STATE.flow+'辆':''}}<span style="color: #FFF;" ng-class="{'4': 'label-danger', '1': 'label-success','3':'label-warning','2': 'label-info'}['{{info.attributes.STATE.state}}']||'label-default'"> {{info.attributes.STATE.stateName}} </span> </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<legend>新增交通事故</legend>
+
+<form>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group pull-right">
+        <button class="btn btn-success btn-sm" ng-click="save()">
+          <i class="fa fa-save" tooltip="保存"></i> 保存
+        </button>
+        <a class="btn btn-primary btn-sm" ng-href="#/ZHGL.JTGZ.TrafficCtrl">
+          <i class="fa fa-arrow-left" tooltip="返回列表"></i> 返回
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label>事故简述</label>
+          <textarea name="title" ng-model="record.title" required="required" class="form-control input-sm"></textarea><span ng-show="form.title.$error.required" class="help-block">该字段必填!</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>类型</label>
+          <select 
+            ng-options="c.name for c in types" 
+            ng-model="record.type" 
+            class="form-control input-sm">
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>等级</label>
+          <select 
+            ng-options="c.name for c in types" 
+            ng-model="record.type" 
+            class="form-control input-sm">
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>所属辖区</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+        <div class="form-group col-sm-3">
+          <label>负责警员</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>发生时间</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="开始日期"
+            ng-model="record.occurTime "
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'">
+          </div>
+        </div>
+        <div class="form-group col-sm-3">
+          <label>报警时间</label>
+          <div datetimepicker-new
+            class="form-control input-sm"
+            placeholder="报警时间"
+            ng-model="record.occurTime "
+            format="'yyyy-mm-dd'"
+            min-view="'month'"
+            start-view="'month'">
+          </div>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>事发地点</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label>受伤人数</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+        <div class="form-group col-sm-3">
+          <label>死亡人数</label>
+          <input class="form-control input-sm"  ng-model="record.releaseUnit">
+        </div>
+
+      </div>
+  </div>
+</form>

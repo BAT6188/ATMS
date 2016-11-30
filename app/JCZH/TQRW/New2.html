@@ -1,0 +1,101 @@
+<div class="col-100-auto col-sm-3">
+  
+  <div class="row">
+
+    <div class="col-sm-12">
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          特勤任务
+        </div>
+        <div class="panel-body">
+          <tq-info-new
+            on-create-route="drawLine();"
+            on-save="onSave($data);"
+            map="map"
+            depts="depts"
+            posts="posts"
+            data="record">
+          </tq-info-new>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          设备调度
+        </div>
+        <div class="panel-body">
+          <tq-devices 
+            tq-data="record" 
+            map="map"
+            snap-layer="routerLayer"
+            select-item="staskpoint">
+          </tq-devices>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-sm-12" ng-show="staskpoint">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          调度点配置
+        </div>
+        <div class="panel-body">
+          <tq-stask-point
+            data="staskpoint"
+            map="map">
+          </tq-stask-point>
+        </div>
+      </div>  
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="col-100-auto col-sm-6">
+  <div class="my-box-shdow" yhte-map inst="map" style="height:100%;">
+  </div>
+</div>
+
+<div class="col-100-auto col-sm-3">
+
+  <div class="row">
+    
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          勤务调度
+        </div>
+        <div class="panel-body">
+          <!-- 岗位列表 -->
+          <tq-duty
+            map="map"
+            tq-data="record"
+            data="posts"
+            on-item-click="onPostSelected($item);">
+          </tq-duty>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          岗位配置
+        </div>
+        <div class="panel-body">
+          <tq-post 
+            post="post"
+            polices="polices"
+            map="map">
+          </tq-post>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+
+</div>
+

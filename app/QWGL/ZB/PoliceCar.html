@@ -1,0 +1,167 @@
+<legend>警车管理</legend>
+<div class="row">
+    <div class="col-sm-6 btn-group" style="padding-left:15px;">
+        <a class="btn btn-success btn-sm" ng-href="#/QWGL.ZB.PoliceCarNew">
+            <i class="fa fa-plus"></i> 添加
+        </a>
+        <button class="btn btn-danger btn-sm" ng-click="remove();">
+            <i class="fa fa-minus"></i> 删除
+        </button>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="input-group">
+            <input type="text" class="form-control input-sm" ng-model="Q.carNo" placeholder="按车牌检索">
+            <span class="input-group-btn">
+              <button class="btn btn-primary btn-sm" type="button" ng-click="query();">
+                  <i class="fa fa-search" tooltip="查询"></i>
+              </button>
+                <button class="btn btn-primary btn-sm" type="button" ng-click="advance()">
+                    <i class="fa fa-wrench" ng-hide="showAdvance"> 条件检索</i>
+                    <i class="fa fa-wrench" ng-show="showAdvance"> 收起</i>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<!-- 高级查询 -->
+<div class="row" ng-show="showAdvance">
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">状态</span>
+            <select class="form-control input-sm" ng-model="Q.statusCode" ng-options="c.code as c.name for c in status"></select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">类型</span>
+            <select class="form-control input-sm" ng-model="Q.equipType" ng-options="c.code as c.name for c in types"></select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-addon">仓库</span>
+            <select class="form-control input-sm" ng-model="Q.wareHouse" ng-options="c.code as c.name for c in wareHouses"></select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" ng-model="allChecked" ng-change="selectAll();">
+                    </th>
+                    <th>编号</th>
+                    <th>车牌</th>
+                    <th>类型</th>
+                    <th>仓库</th>
+                    <th>领用人</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="record in records">
+                    <td class="check"><input type="checkbox" ng-model="checks[$index]" ng-click="select($index);"></td>
+                    <td>{{record.id}}</td>
+                    <td><a ng-href="#/QWGL.ZB.PoliceCar/{{record.id}}/edit">{{record.carNo}}</a></td>
+                    <td>{{record.type.name}}</td>
+                    <td>{{record.wareHouse.name}}</td>
+                    <td>{{record.record.ownerName}}</td>
+                    <td>
+                        <label class="label" ng-class="{'1': 'label-success', '2': 'label-danger', '3': 'label-warning', '4': 'label-default'}['{{record.status.code}}']">{{record.status.name || 'null'}}</label>
+                    </td>
+                    <td>
+                        <i class="fa fa-user yhte-ico-primary" ng-show="record.status.code === 1 " ng-click="distribute($index,record.id)"> 领用</i>
+                        <i class="fa fa-arrow-left" ng-show="record.status.code === 2 " ng-click="returnDispatch($index,record.id)"> 归还</i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页栏 -->
+    <div class="col-sm-12">
+        <div pagination class="pagination-sm pull-right" boundary-links="true" rotate="false"
+                    total-items="total"
+                    page="Q.page"
+                    items-per-page="Q.pageSize"
+                    max-size="Q.maxSize"
+                    on-select-page="pChange(page)"
+                    previous-text="上一页"
+                    next-text="下一页"
+                    last-text="最后一页"
+                    first-text="最前一页">
+        </div>
+    </div>
+</div>
+<!-- 领用模态对话框 -->
+<div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 id="myModalLabel" class="modal-title">派车『{{device.carName}}』
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!-- 警车基本信息 -->
+<!--                 <table class="table table-bordered col-sm-4">
+                    <tbody>
+                        <tr><th>编号</th><td>{{checkRecord.id}}</td></tr>
+                        <tr><th>车牌</th><td>{{checkRecord.carNo}}</td></tr>
+                        <tr><th>名称</th><td>{{checkRecord.carName}}</td></tr>
+                        <tr><th>类型</th><td>{{checkRecord.type.name}}</td></tr>
+                        <tr><th>所属仓库</th><td>{{checkRecord.wareHouse.name}}</td></tr>
+                        <tr><th>可否定位</th><td>{{checkRecord.gpsFlag}}</td></tr>
+                        <tr><th>GPS</th><td>{{checkRecord.carGps}}</td></tr>
+                        <tr>th>视频</th><td>{{checkRecord.carVideo}}</td></tr>
+                        <tr><th>车载台</th><td>{{checkRecord.carRadio}}</td></tr>
+                    </tbody>
+                </table> -->
+                <!-- 领用信息 -->
+                <form class="form-horizontal" role="form" name="quickForm">
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用人ID</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.owner.$invalid}">
+                            <input type="text" class="form-control input-sm" name="owner" ng-model="newRecord.owner" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用原因</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.ownReason.$invalid}">
+                            <textarea class="form-control  input-sm" name="ownReason" ng-model="newRecord.ownReason" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">领用时间</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.ownTime.$invalid}">
+                             <input type="text" class="form-control " name="ownTime" datetimepicker ng-model="newRecord.ownTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">同行人</label>
+                        <div class="col-sm-8" ng-class="{'has-error': quickForm.company.$invalid}">
+                            <input class="form-control  input-sm" name="company" placeholder="abc" disabled/>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="" class="col-sm-3 control-label">预计归还时间</label>
+                        <div class="col-sm-8">
+                            <input class="form-control  input-sm" datetimepicker name="company" ng-model="newRecord.planRevertTime" placeholder="2013-03-03"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">、
+                    <a class="btn btn-success btn-sm" ng-disabled="quickForm.$invalid" ng-click="saveDispatch()"><i class="fa fa-check" > 确认</i></a>
+                    <a class="btn btn-default btn-sm"  data-dismiss="modal">
+                    <i class="fa fa-time"> 取消</i></a>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

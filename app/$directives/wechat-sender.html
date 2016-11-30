@@ -1,0 +1,143 @@
+<div ng-class="{'alert alert-default my-box-shdow': modalSwitcher !== 'on'}">
+    <div class="row" style="margin-bottom: 0px;" ng-show="modalSwitcher !== 'on'">
+        <div class="col-sm-12">
+            <button type="button" class="close" ng-click="close();"
+            ng-disabled="running">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <legend ng-show="modalSwitcher !== 'on'">
+        微信发布
+    </legend>
+
+    <form name="entityForm">
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="col-sm-12" ng-show="showConfirm">
+                <div role="alert" class="alert alert-info alert-dismissible fade in">
+                    <button class="close" type="button" ng-click="showConfirm=false;">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 id="confirmId" class="font14"></h4>
+                    <p>
+                        <button class="btn btn-sm btn-primary" type="button" ng-click="add();">发布</button>
+                        <button class="btn btn-sm btn-default" type="button" ng-click="showConfirm=false;">取消</button>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12" ng-show="showWarning">
+                <div role="alert" class="alert alert-warning alert-dismissible fade in">
+                    <button class="close" type="button" ng-click="showWarning=false;">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 id="warningId"></h4>
+                </div>
+            </div>
+            <div class="col-sm-12" ng-hide="showConfirm && showWarning">
+                <!-- 右对齐的 btn-group -->
+                <div class="col-sm-10 col-sm-offset-2 btn-group">
+                    <button ng-click="shareMsg('2');" class="btn btn-sm btn-success pull-right">
+                        <i class="fa fa-weixin"></i> 微信
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">标题</label>
+                <div class="col-sm-10"
+                ng-class="{'has-error': entityForm.title.$invalid}">
+                    <!-- 必选 required -->
+                    <input name="title" type="text" class="form-control input-sm"
+                    placeholder="标题, 必须!" ng-model="record.title" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">信息类型</label>
+                <div class="col-sm-10"
+                ng-class="{'has-error': entityForm.type.$invalid}">
+                    <select name="type" class="form-control input-sm"
+                    ng-options="c.name for c in types track by c.code" ng-model="record.type" required></select>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">路段坐标</label>
+                <div class="col-sm-5"
+                ng-class="{'has-error': entityForm.lng.$invalid}">
+                    <input name="lng" class="form-control input-sm"
+                    placeholder="经度, 必须!" ng-model="record.lng" required/>
+                </div>
+                <div class="col-sm-5"
+                ng-class="{'has-error': entityForm.lat.$invalid}">
+                    <input name="lat" class="form-control input-sm"
+                    placeholder="纬度, 必须!" ng-model="record.lat" required/>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">内容</label>
+                <div class="col-sm-10"
+                ng-class="{'has-error': entityForm.content.$invalid}">
+                    <!-- 必选 required -->
+                    <textarea name="content" rows="2" class="form-control input-sm" 
+            placeholder="内容, 必须!" ng-model="record.content" required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="modalSwitcher === 'on'">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">上传</label>
+                <div class="col-sm-10" style="top: 5px;"
+                ng-class="{'has-error': entityForm.type.$invalid}">
+                    <div upload-file file-path="filePath" file-name="fileName" upload='/java/uploadFile'></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: -15px;">
+            <div class="col-sm-12">
+                <label for="" class="col-sm-2 control-label input-sm font14">图片</label>
+                <div class="col-sm-10" ng-show="record.pics.length >= 1">
+                    <div class="row">
+                        <span class="row">
+                            <div class="col-sm-6" ng-repeat="pic in record.pics | paginator:page4y:size4y">
+                                <div style="background: #f5f5f5; width: 150px; height: 165px; text-align: center;">
+                                    <img width='150px' height='150px' style='vertical-align:middle; border:0;' ng-src='{{pic.path}}'/>
+                                    <p style="text-align:center;">
+                                        {{(pic.name!=null && pic.name.length<=6)?pic.name:pic.name.slice(0, 6)+'...'}}
+                                        <span class="label label-danger" style="cursor: pointer;" ng-click="remove(pic);">删除</span>
+                                    </p>
+                                </div>
+                            </div> </span>
+                        <div class="row pull-right" style="padding-top: 30px;" ng-show="modalSwitcher !== 'on'"
+                        pagination
+                        total-items="total4y"
+                        items-per-page="size4y"
+                        page="page4y"
+                        max-size="maxSize4y"
+                        class="pagination-sm pull-right"
+                        boundary-links="true"
+                        rotate="false"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;"
+                        first-text="&laquo;"
+                        last-text="&raquo;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,68 @@
+<legend>
+    新增诱导消息
+</legend>
+
+<form name="entityForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- 右对齐的 btn-group -->
+      <div class="btn-group pull-right">
+        <button ng-click="ok();" ng-disabled="entityForm.$invalid" class="btn btn-sm btn-primary" >
+          <i class="fa fa-floppy-o"></i> 保存
+        </button>
+        <button ng-click="reset();" class="btn btn-sm btn-info">
+          <i class="fa fa fa-times"></i> 重置
+        </button>
+        <!-- 个人觉得不一定需要这个按钮 -->
+        <a class="btn btn-sm btn-default" ng-href="#/XXFB.PUBLISH.MsgPublishList">
+          <i class="fa fa-align-justify"> 返回列表</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+<div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">消息来源</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.source.code.$invalid}">
+      <select class="form-control input-sm"
+        ng-options="c.name for c in sources track by c.code" ng-model="record.source" required></select>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">上报时间</label>
+        <div class="col-sm-4" ng-class="{'has-error': entityForm.reportTime.$invalid}" style="padding-left:15px;padding-right:15px;float:left;">
+          <datetimepicker placeholder="上报时间" ng-model="record.reportTime" format="yyyy-MM-dd hh:mm:ss" required></datetimepicker>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">消息分类</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.type.code.$invalid}">
+      <select class="form-control input-sm"
+        ng-options="c.name for c in types track by c.code" ng-model="record.type" required></select>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">消息内容</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.userName.$invalid}">
+      <!-- 必选 required -->
+      <input name="content" type="text" class="form-control input-sm"
+        placeholder="消息内容, 必须!" ng-model="record.content" required>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="" class="col-sm-2 control-label input-sm font14">匹配路段</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.dept.$invalid}">
+      <select class="form-control input-sm"
+        ng-options="c.name for c in roads track by c.code" ng-model="record.road"></select>
+    </div>
+    <label for="" class="col-sm-2 control-label input-sm font14">路况</label>
+    <div class="col-sm-4"
+      ng-class="{'has-error': entityForm.dept.$invalid}">
+      <select class="form-control input-sm"
+        ng-options="c.name for c in trafficReports track by c.code" ng-model="record.trafficReport"></select>
+    </div>
+  </div>
+</form>

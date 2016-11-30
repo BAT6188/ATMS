@@ -1,0 +1,268 @@
+<div>
+<div class="row" style="font-size:16px;">
+    <div class="col-sm-12">
+        <div class="row">
+            <h4>
+                <a map-center map="map" geometry="data.geometry">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                </a>
+                {{data.attributes.NAME||'XXX'}}
+                <!-- <a tip-event event-name="'wechat:feature'" event-data="wechat">
+                  <span class="fa fa-weixin" style="width: 35px; height: 35px; cursor: pointer; color: #5cb85c;"></span>
+                </a> -->
+            </h4>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 dropdown">
+                <a class="dropdown-toggle">
+          <span class="label label-{{sta.cls}}">
+           {{sta.label}}
+          </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="sta in status" ng-click="changeStatus(sta);">
+                        <a>{{sta.label}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-2 dropdown">
+            <a class="dropdown-toggle">
+          <span class="label label-default">
+           {{overdueMinName || '持续时间'}}
+          </span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-click="overdueMinName='持续时间';overdueMin=5;changeStatus(sta);">
+                    <a>持续时间</a>
+                </li>
+                <li ng-click="overdueMinName='5分钟';overdueMin=5;changeStatus(sta);">
+                    <a>5分钟</a>
+                </li>
+                <li ng-click="overdueMinName='10分钟';overdueMin=10;changeStatus(sta);">
+                    <a>10分钟</a>
+                </li>
+                <li ng-click="overdueMinName='半小时';overdueMin=30;changeStatus(sta);">
+                    <a>半小时</a>
+                </li>
+                <li ng-click="overdueMinName='1小时';overdueMin=60;changeStatus(sta);">
+                    <a>1小时</a>
+                </li>
+                <li ng-click="overdueMinName='2小时';overdueMin=120;changeStatus(sta);">
+                    <a>2小时</a>
+                </li>
+                <li ng-click="overdueMinName='10小时';overdueMin=600;changeStatus(sta);">
+                    <a>10小时</a>
+                </li>
+                <li ng-click="overdueMinName='24小时';overdueMin=1440;changeStatus(sta);">
+                    <a>24小时</a>
+                </li>
+            </ul>
+        </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2 dropdown">
+                <a class="dropdown-toggle">
+          <span class="label label-default">
+           {{stayTimeName || '显示时长'}}
+          </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ng-click="stayTimeName='显示时长';stayTimeSec=5;changeStayTime(sta);">
+                        <a>显示时长</a>
+                    </li>
+                    <li ng-click="stayTimeName='5秒';stayTimeSec=5;changeStayTime(sta);">
+                        <a>5秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='10秒';stayTimeSec=10;changeStayTime(sta);">
+                        <a>10秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='30秒';stayTimeSec=30;changeStayTime(sta);">
+                        <a>30秒</a>
+                    </li>
+                    <li ng-click="stayTimeName='1分钟';stayTimeSec=60;changeStayTime(sta);">
+                        <a>1分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='2分钟';stayTimeSec=120;changeStayTime(sta);">
+                        <a>2分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='3分钟';stayTimeSec=180;changeStayTime(sta);">
+                        <a>3分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='4分钟';stayTimeSec=240;changeStayTime(sta);">
+                        <a>4分钟</a>
+                    </li>
+                    <li ng-click="stayTimeName='5分钟';stayTimeSec=256;changeStayTime(sta);">
+                        <a>5分钟</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--<div class="col-sm-1"></div>-->
+            <!--<div class="col-sm-2">-->
+                <!--<span class="label label-default">-->
+                   <!--显示时长：-->
+                <!--</span>-->
+            <!--</div>-->
+            <!--<div class="col-sm-2">-->
+                <!--<input type="text" class="form-control input-sm" ng-model="stayTime">-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        {{data.attributes.OBJECTID}} {{data.attributes.REGION_CODE}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-5">
+        <a class="pointer" ng-click="selection=''">
+            关联:
+        </a>
+        <a class="pointer" ng-click="selection='YouDao'">
+            诱导屏
+        </a>
+    </div>
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-4">
+        <!--<a ng-href="#LKYC.Plan/{{data.attributes.OBJECTID}}/{{data.attributes.NAME}}/List">路况预测</a>-->
+    </div>
+
+</div>
+<!-- <a>
+  |
+</a>
+<a class="pointer" ng-click="selection=''">
+  附近资源:
+</a>
+<a class="pointer" ng-click="selection='XinHao'">
+  信号机
+</a>
+<a class="pointer" ng-click="selection='Video'">
+  视频
+</a> -->
+<!-- 诱导屏 -->
+<div ng-switch on="selection">
+    <div class="row" style="padding-top:10px;" ng-switch-when="YouDao">
+      <span class="row">
+          <div class="col-sm-4" ng-show="youdao.length === 0">
+              <p>该路段无关联的诱导屏</p>
+          </div>
+          <div tabset>
+              <div  class="" ng-repeat="yd in youdao | paginator:page4y:size4y" ng-click="inityoudao($index)"
+                    tab heading="{{yd.name}}">
+                  <div id="{{yd.id}}"
+                       style="background: #f5f5f5; width: 150px; height: 150px; text-align: center;"></div>
+                  <p style="text-align:center;">
+                      <span class="label label-primary" style="cursor: pointer;" ng-click="release(yd);">发布 </span>
+                      <!-- <span class="label label-primary" style="cursor: pointer;" ng-click="download(yd);">下载 </span> -->
+                  </p>
+              </div>
+          </div>
+      </span>
+
+        <div class="row pull-right" style="padding-right: 10px;"
+             ng-show="youdao.length >= 1"
+             pagination
+             total-items="total4y"
+             items-per-page="size4y"
+             page="page4y"
+             max-size="maxSize4y"
+             class="pagination-sm pull-right"
+             boundary-links="true"
+             rotate="false"
+             previous-text="&lsaquo;"
+             next-text="&rsaquo;"
+             first-text="&laquo;"
+             last-text="&raquo;">
+        </div>
+        <!-- <img src="{{yd.picUrl?yd.picUrl.substring(yd.picUrl.indexOf('download')):''}}"
+          alt="..." class="img-thumbnail"> -->
+        <!-- <div id="jqscreen" style="position: absolute; top: -260px; left: 20px;"
+          atms-jq-screen
+          type="edit"
+          is-edit="progEditShow"
+          active-x="activeX"
+          data="data1"
+          ocx-width="500px"
+          ocx-height="230px"></div> -->
+    </div>
+
+    <!-- 信号机 -->
+    <div class="row" style="padding-top:10px;" ng-switch-when="XinHao">
+      <span class="row">
+          <div class="col-sm-4" ng-show="signals.length === 0">
+              <p>附近50米无信号机</p>
+          </div>
+          
+          <div class="col-sm-6" ng-repeat="signal in signals | paginator:page4s:size4s">
+              <!-- <img src="http://dummyimage.com/208x160/33ffcc/FFF.png&text=XinHao"
+                  alt="..." class="img-thumbnail"> -->
+              <div signal-map
+                   inter-id="signal.properties.ID"
+                   image-size="[200,200]"
+                   lane-width="20">
+              </div>
+
+              <p style="text-align:center;">
+                  <a map-center map="map" lng="signal.geometry.coordinates[0]" lat="signal.geometry.coordinates[1]">{{signal.properties.DEVICE_NAME}}</a>
+              </p>
+          </div>
+      </span>
+
+        <div class="row pull-right" style="padding-right: 10px;"
+             ng-show="signals.length >= 1"
+             pagination
+             total-items="total4s"
+             items-per-page="size4s"
+             page="page4s"
+             max-size="maxSize4s"
+             class="pagination-sm pull-right"
+             boundary-links="true"
+             rotate="false"
+             previous-text="&lsaquo;"
+             next-text="&rsaquo;"
+             first-text="&laquo;"
+             last-text="&raquo;">
+        </div>
+    </div>
+
+    <!-- 视频 -->
+    <div class="row" style="padding-top:10px;" ng-switch-when="Video">
+        <div class="col-sm-4" ng-show="videos.length === 0">
+            <p>附近50米无视频</p>
+        </div>
+        <div class="col-sm-12">
+            <div ng-show="videos.length >= 1">
+                <div atms-jq-video data="roadVideos" ocx-height='260px' style="height: 310px;"></div>
+            </div>
+        </div>
+        <div class="row pull-right" style="padding-right: 10px;"
+             ng-show="videos.length >= 1"
+             pagination
+             on-select-page="pageFunc4v(page)"
+             total-items="total4v"
+             items-per-page="size4v"
+             page="page4v"
+             max-size="maxSize4v"
+             class="pagination-sm pull-right"
+             boundary-links="true"
+             rotate="false"
+             previous-text="&lsaquo;"
+             next-text="&rsaquo;"
+             first-text="&laquo;"
+             last-text="&raquo;">
+        </div>
+    </div>
+</div>
+
+<div id="jqscreen" style="position: absolute; top: -240px; left: -530px;"
+     atms-jq-screen
+     type="edit"
+     is-edit="progEditShow"
+     active-x="activeX"
+     data="data2"
+     ocx-width="448px"
+     ocx-height="320px"></div>
+</div> 
